@@ -29,7 +29,7 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
   cards,
   backgroundColor = "bg-background",
   cardHeight = "60vh",
-  animationDuration = "0.5s",
+  animationDuration = "0.8s",
   sectionHeightMultiplier = 3,
   intersectionThreshold = 0.1,
   className = "",
@@ -45,7 +45,7 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
     height: cardHeight,
     maxHeight: "500px",
     borderRadius: "20px",
-    transition: `transform ${animationDuration} cubic-bezier(0.19, 1, 0.22, 1), opacity ${animationDuration} cubic-bezier(0.19, 1, 0.22, 1)`,
+    transition: `transform ${animationDuration} cubic-bezier(0.32, 0.72, 0, 1), opacity ${animationDuration} cubic-bezier(0.32, 0.72, 0, 1)`,
     willChange: "transform, opacity",
   };
 
@@ -105,7 +105,7 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
   const getCardTransform = (index: number) => {
     if (!isIntersecting) {
       return {
-        transform: `translateY(-50px) scale(0.8)`,
+        transform: "translateY(0px) scale(0.95)",
         opacity: 0,
         zIndex: 10 + (cardCount - index),
         pointerEvents: "none" as const,
@@ -117,18 +117,18 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
     if (stackIndex < 0) {
       // This card has been "dealt" and should be moved away.
       return {
-        transform: `translateY(-150px) scale(0.6)`,
+        transform: "translateY(-100px) scale(0.8)",
         opacity: 0,
         zIndex: 10 + (cardCount - index),
         pointerEvents: "none" as const,
       };
     }
 
-    const scale = 1 - stackIndex * 0.05;
-    const translateY = stackIndex * 40;
+    const scale = 1 - stackIndex * 0.04;
+    const translateY = stackIndex * 20;
     return {
       transform: `translateY(${translateY}px) scale(${scale})`,
-      opacity: stackIndex > 3 ? 0 : 1,
+      opacity: stackIndex > 2 ? 0 : 1,
       zIndex: 10 + (cardCount - index),
       pointerEvents: "auto" as const,
     };
