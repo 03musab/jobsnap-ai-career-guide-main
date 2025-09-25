@@ -1,0 +1,23 @@
+/* src/components/ComingSoonLink.css */
+
+.coming-soon {
+    /* Style to look disabled and non-interactive */
+    color: #6b7280; 
+    cursor: not-allowed;
+    
+    /* Animation properties for a professional, modern look */
+    position: relative;
+    animation: pulse-glow 2.5s infinite ease-in-out;
+}
+
+/* The keyframe animation creates a subtle pulsing glow effect */
+@keyframes pulse-glow {
+    0%, 100% {
+        opacity: 0.7;
+        text-shadow: 0 0 4px rgba(107, 114, 128, 0.3);
+    }
+    50% {
+        opacity: 1;
+        text-shadow: 0 0 12px rgba(156, 163, 175, 0.6);
+    }
+}
