@@ -24,12 +24,23 @@ export function EarlyAccessModal() {
   const [status, setStatus] = useState<"idle" | "submitting" | "success">("idle");
   const [error, setError] = useState<string | null>(null);
 
+  // This effect runs on page load to check if the user has returned from payment.
+  useEffect(() => {
+    const paymentAttempt = sessionStorage.getItem('payment_in_progress');
+    if (paymentAttempt === 'true') {
+      sessionStorage.removeItem('payment_in_progress'); // Clean up the flag
+      setOpen(true); // Re-open the modal
+      setStatus('idle');
+      setError('Payment failed as the transaction was not completed.');
+    }
+  }, []); // Empty dependency array ensures this runs only once on mount
+
   useEffect(() => {
     const handleVisibilityChange = () => {
       if (document.visibilityState === 'visible' && status === 'submitting') {
         // User has returned to the page from the payment gateway without completing.
         setStatus('idle');
-        setError('Payment was not completed. Please try again.');
+        setError('Payment failed as the transaction was not completed.');
       }
     };
 
@@ -59,6 +70,7 @@ export function EarlyAccessModal() {
     
     // Save email to localStorage so it can be used on the payment status page
     localStorage.setItem('earlyAccessData', JSON.stringify({ email }));
+    sessionStorage.setItem('payment_in_progress', 'true'); // Flag that we are leaving for payment
 
     // Since you are using a direct payment form, we can just redirect the user.
     // The email can be pre-filled in the URL if the form supports it.

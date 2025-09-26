@@ -3,9 +3,28 @@ import 'dotenv/config';
 import express from 'express';
 import cors from 'cors';
 import fetch from 'node-fetch';
+import helmet from 'helmet';
+import rateLimit from 'express-rate-limit';
 
 const app = express();
-app.use(cors()); // Enable CORS for all routes
+
+// --- Security Best Practices ---
+
+// 1. Use Helmet to set various security-related HTTP headers
+app.use(helmet());
+
+// 2. Configure CORS for your production frontend URL
+const allowedOrigins = ['https://aijobsnap.vercel.app', 'http://localhost:3000'];
+app.use(cors({
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  }
+}));
+
 app.use(express.json());
 
 const CASHFREE_API_URL = 'https://api.cashfree.com/pg'; // Use 'https://api.cashfree.com/pg' for production
@@ -13,6 +32,16 @@ const CASHFREE_APP_ID = process.env.CASHFREE_APP_ID;
 const CASHFREE_SECRET_KEY = process.env.CASHFREE_SECRET_KEY;
 
 // Endpoint to create a new order
+const apiLimiter = rateLimit({
+	windowMs: 15 * 60 * 1000, // 15 minutes
+	max: 100, // Limit each IP to 100 requests per window
+	standardHeaders: true,
+	legacyHeaders: false,
+});
+
+// Apply the rate limiting middleware to API calls
+app.use('/api/', apiLimiter);
+
 app.post('/api/cashfree-create-order', async (req, res) => {
   try {
     const { email } = req.body;
@@ -57,7 +86,12 @@ app.post('/api/cashfree-create-order', async (req, res) => {
 // Endpoint to verify payment
 app.post('/api/cashfree-verify', async (req, res) => {
   try {
-    const { orderId } = req.body;
+    const { orderId } = req.body; // This now correctly matches the frontend request
+
+    // Basic input validation
+    if (typeof orderId !== 'string' || !orderId.startsWith('order_')) {
+      return res.status(400).json({ message: 'Invalid Order ID format' });
+    }
 
     if (!orderId) {
       return res.status(400).json({ message: 'Order ID is required' });
@@ -82,11 +116,11 @@ app.post('/api/cashfree-verify', async (req, res) => {
 
     // Now, check the payment status
     if (orderData.order_status === 'PAID') {
-      res.json({ status: 'SUCCESS', email: email });
+      res.json({ status: 'SUCCESS', email: email }); // This is correct
     } else if (orderData.order_status === 'ACTIVE') {
       res.json({ status: 'PENDING', email: email });
     } else {
-      res.json({ status: 'FAILED', email: email });
+      res.json({ status: orderData.order_status || 'FAILED', email: email });
     }
   } catch (error) {
     console.error('Server Error:', error);
@@ -98,7 +132,12 @@ app.post('/api/cashfree-verify', async (req, res) => {
 // Endpoint to subscribe user after successful payment
 app.post('/api/subscribe', (req, res) => {
     const { email } = req.body;
-    console.log(`Subscribing  to the early access list.`);
+    // Basic email validation
+    if (!email || !/^\S+@\S+\.\S+$/.test(email)) {
+        return res.status(400).json({ message: 'Invalid email provided.' });
+    }
+
+    console.log(`Subscribing ${email} to the early access list.`);
     // Add your logic here to save the email to your database or mailing list
     res.status(200).json({ message: 'Successfully subscribed!' });
 });
