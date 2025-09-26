@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
 import { CheckCircle, XCircle, Clock, Loader2 } from 'lucide-react';
 
@@ -18,7 +18,7 @@ const PaymentStatusPage = () => {
         const orderId = searchParams.get('order_id');
 
         if (!orderId) {
-            setStatus(STATUS.FAILED);
+            setStatus('failed');
             setMessage('Payment failed. No order ID found. Please try again.');
             return;
         }
@@ -116,23 +116,10 @@ const PaymentStatusPage = () => {
                     {status === STATUS.VERIFYING && 'Verifying Payment'}
                 </h1>
                 <p className="text-gray-600 mb-6">{message}</p>
-                {status === STATUS.SUCCESS && (
-                    <p className="text-xs text-gray-500 mb-6 -mt-4">
-                        By completing this payment, you have strictly conformed to our terms of service.
-                    </p>
-                )}
-                {status === STATUS.VERIFYING ? (
-                    <button
-                        disabled
-                        className="bg-blue-400 text-white font-bold py-2 px-4 rounded-lg inline-flex items-center justify-center w-full sm:w-auto cursor-not-allowed transition duration-300"
-                    >
-                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                        Please wait...
-                    </button>
-                ) : (
+                {status !== STATUS.VERIFYING && (
                     <Link
                         to="/"
-                        className="bg-blue-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-700 transition duration-300 w-full sm:w-auto"
+                        className="bg-blue-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-700 transition duration-300"
                     >
                         Back to Home
                     </Link>

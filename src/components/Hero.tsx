@@ -1,8 +1,9 @@
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Bot, Zap, Sparkles } from "lucide-react";
+import { ArrowRight, ArrowDown, Bot, Zap, Sparkles } from "lucide-react";
 import { useAnimatedCounter } from "../../useAnimatedCounter";
 import { useOnScreen } from "../../useOnScreen";
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
+import { motion } from "framer-motion";
 import BlurText from "./BlurText";
 import ComingSoon from "./ComingSoonLink";
 import TextType from "./TextType";
@@ -10,6 +11,18 @@ import TrueFocus from "./TrueFocus";
 import { EarlyAccessModal } from "../../EarlyAccessModal";
 
 const Hero = () => {
+  const [highlightEarlyAccess, setHighlightEarlyAccess] = useState(false);
+
+  useEffect(() => {
+    const handleHighlight = () => {
+      setHighlightEarlyAccess(true);
+      setTimeout(() => setHighlightEarlyAccess(false), 3000); // Highlight for 3 seconds
+    };
+
+    window.addEventListener('highlightEarlyAccess', handleHighlight);
+    return () => window.removeEventListener('highlightEarlyAccess', handleHighlight);
+  }, []);
+
   return (
     <section id="home" className="relative min-h-[calc(100vh-4rem)] flex flex-col items-center justify-center overflow-hidden pt-24 pb-12">
       <div className="absolute top-20 left-10 w-72 h-72 bg-gradient-electric rounded-full blur-3xl opacity-20"></div>
@@ -60,7 +73,19 @@ const Hero = () => {
             </div>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <EarlyAccessModal />
+              <div className="relative">
+                {highlightEarlyAccess && (
+                  <motion.div
+                    initial={{ x: -300, opacity: 0 }}
+                    animate={{ x: -80, opacity: 1 }}
+                    transition={{ duration: 1 }}
+                    className="absolute left-2 top-0/1 -translate-y-1/1 z-20"
+                  >
+                    <ArrowRight className="text-white h-12 w-32 drop-shadow-lg" />
+                  </motion.div>
+                )}
+                <EarlyAccessModal />
+              </div>
               <ComingSoon asChild isComingSoon>
                 <Button variant="glass" size="xl" className="transition-spring">
                   <Zap className="h-5 w-5" />

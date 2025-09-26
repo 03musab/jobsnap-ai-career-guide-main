@@ -80,7 +80,16 @@ const HowItWorks = () => {
         </div>
 
         <div className="text-center mx-auto mt-auto opacity-100">
-          <Button variant="hero" size="xl" className="rounded-md">
+          <Button
+            variant="hero"
+            size="xl"
+            className="rounded-md"
+            onClick={() => {
+              document.getElementById('home')?.scrollIntoView({ behavior: 'smooth' });
+              // Dispatch event to highlight Early Access button
+              window.dispatchEvent(new CustomEvent('highlightEarlyAccess'));
+            }}
+          >
             <span>
               {"Get Started Now".split("").map((char, i) => (
                 <motion.span

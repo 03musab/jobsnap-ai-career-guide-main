@@ -17,19 +17,30 @@ import { Mail, Loader2, Check, ArrowRight } from "lucide-react";
 import TrialButton from "@/components/TrialButton";
 import ComingSoon from "@/components/ComingSoonLink";
 
-export function EarlyAccessModal() {
-  const [open, setOpen] = useState(false);
+interface EarlyAccessModalProps {
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
+  children?: React.ReactNode;
+}
+
+export function EarlyAccessModal({ open: openProp, onOpenChange: onOpenChangeProp, children }: EarlyAccessModalProps) {
+  const [internalOpen, setInternalOpen] = useState(false);
   const [email, setEmail] = useState("");
   const [agreed, setAgreed] = useState(false); // This can be removed if not needed for the form
   const [status, setStatus] = useState<"idle" | "submitting" | "success">("idle");
   const [error, setError] = useState<string | null>(null);
+  const isControlled = openProp !== undefined && onOpenChangeProp !== undefined;
 
   // This effect runs on page load to check if the user has returned from payment.
   useEffect(() => {
     const paymentAttempt = sessionStorage.getItem('payment_in_progress');
     if (paymentAttempt === 'true') {
       sessionStorage.removeItem('payment_in_progress'); // Clean up the flag
-      setOpen(true); // Re-open the modal
+      if (isControlled) {
+        onOpenChangeProp(true);
+      } else {
+        setInternalOpen(true);
+      }
       setStatus('idle');
       setError('Payment failed as the transaction was not completed.');
     }
@@ -82,7 +93,11 @@ export function EarlyAccessModal() {
   };
 
   const handleOpenChange = (isOpen: boolean) => {
-    setOpen(isOpen);
+    if (isControlled) {
+      onOpenChangeProp(isOpen);
+    } else {
+      setInternalOpen(isOpen);
+    }
     if (!isOpen) {
       // Reset state after close animation
       setTimeout(() => {
@@ -94,14 +109,17 @@ export function EarlyAccessModal() {
     }
   };
 
+  const open = isControlled ? openProp : internalOpen;
+
   return (
     <Dialog open={open} onOpenChange={handleOpenChange}>
-      <DialogTrigger asChild>
-        <TrialButton className="px-8 py-4 text-lg font-semibold">
-          Request Early Access
-          <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
-        </TrialButton>
-      </DialogTrigger>
+      {children ? (
+        <DialogTrigger asChild>{children}</DialogTrigger>
+      ) : (
+        <DialogTrigger asChild>
+          <TrialButton className="px-8 py-4 text-lg font-semibold">Request Early Access</TrialButton>
+        </DialogTrigger>
+      )}
       <DialogContent className="sm:max-w-[425px] bg-background/80 backdrop-blur-sm border-border shadow-glass">
         {status === "success" ? (
           <div className="flex flex-col items-center justify-center p-8 gap-4 text-center min-h-[260px]">
