@@ -56,29 +56,42 @@ app.post('/api/cashfree-create-order', async (req, res) => {
 
 // Endpoint to verify payment
 app.post('/api/cashfree-verify', async (req, res) => {
-    try {
-        const { orderId } = req.body;
+  try {
+    const { orderId } = req.body;
 
-        const response = await fetch(`${CASHFREE_API_URL}/orders/${orderId}/payments`, {
-            method: 'GET',
-            headers: {
-                'x-api-version': '2022-09-01',
-                'x-client-id': CASHFREE_APP_ID,
-                'x-client-secret': CASHFREE_SECRET_KEY,
-            },
-        });
-
-        const data = await response.json();
-
-        if (!response.ok) {
-            return res.status(response.status).json({ message: data.message || 'Failed to verify payment' });
-        }
-
-        res.json(data);
-    } catch (error) {
-        console.error('Server Error:', error);
-        res.status(500).json({ message: 'Internal Server Error' });
+    if (!orderId) {
+      return res.status(400).json({ message: 'Order ID is required' });
     }
+
+    // First, get the order details to find the customer's email
+    const orderResponse = await fetch(`${CASHFREE_API_URL}/orders/${orderId}`, {
+      method: 'GET',
+      headers: {
+        'x-api-version': '2022-09-01',
+        'x-client-id': CASHFREE_APP_ID,
+        'x-client-secret': CASHFREE_SECRET_KEY,
+      },
+    });
+
+    if (!orderResponse.ok) {
+      return res.status(orderResponse.status).json({ message: 'Failed to fetch order details' });
+    }
+
+    const orderData = await orderResponse.json();
+    const email = orderData.customer_details.customer_email;
+
+    // Now, check the payment status
+    if (orderData.order_status === 'PAID') {
+      res.json({ status: 'SUCCESS', email: email });
+    } else if (orderData.order_status === 'ACTIVE') {
+      res.json({ status: 'PENDING', email: email });
+    } else {
+      res.json({ status: 'FAILED', email: email });
+    }
+  } catch (error) {
+    console.error('Server Error:', error);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
 });
 
 
@@ -93,5 +106,5 @@ app.post('/api/subscribe', (req, res) => {
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
-  console.log(`Server running on port `);
+  console.log(`Server running on port ${PORT}`);
 });
