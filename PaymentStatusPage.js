@@ -116,6 +116,11 @@ const PaymentStatusPage = () => {
                     {status === STATUS.VERIFYING && 'Verifying Payment'}
                 </h1>
                 <p className="text-gray-600 mb-6">{message}</p>
+                {status === STATUS.SUCCESS && (
+                    <p className="text-xs text-gray-500 mb-6 -mt-4">
+                        By completing this payment, you have strictly conformed to our terms of service.
+                    </p>
+                )}
                 {status === STATUS.VERIFYING ? (
                     <button
                         disabled
