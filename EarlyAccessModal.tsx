@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import {
@@ -16,6 +16,9 @@ import { Input } from "@/components/ui/input";
 import { Mail, Loader2, Check, ArrowRight } from "lucide-react";
 import TrialButton from "@/components/TrialButton";
 import ComingSoon from "@/components/ComingSoonLink";
+import { load } from '@cashfreepayments/cashfree-js';
+
+let cashfree: any;
 
 export function EarlyAccessModal() {
   const [open, setOpen] = useState(false);
@@ -23,6 +26,13 @@ export function EarlyAccessModal() {
   const [agreed, setAgreed] = useState(false);
   const [status, setStatus] = useState<"idle" | "submitting" | "success">("idle");
   const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const initializeSDK = async () => {
+      cashfree = await load({ mode: "sandbox" });
+    };
+    initializeSDK();
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -41,24 +51,56 @@ export function EarlyAccessModal() {
     setStatus("submitting");
 
     try {
-      const response = await fetch('/api/subscribe', {
+      // 1. Create order and get payment session ID from your server
+      const orderRes = await fetch('/api/cashfree-create-order', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, source: 'Early Access Modal' }),
+        body: JSON.stringify({ email }),
       });
+      const orderData = await orderRes.json();
 
-      if (!response.ok) {
-        const res = await response.json();
-        throw new Error(res.error || 'An unknown error occurred.');
+      if (!orderRes.ok || !orderData.payment_session_id) {
+        throw new Error(orderData.message || 'Failed to create payment session.');
       }
 
-      // On success:
-      setStatus("success");
+      // 2. Launch Cashfree checkout
+      cashfree.checkout({
+        paymentSessionId: orderData.payment_session_id,
+        redirectTarget: "_modal",
+      }).then(async (result: any) => {
+        if (result.error) {
+          // User has closed the popup or there is some payment error
+          setError(result.error.message || "Payment cancelled or failed.");
+          setStatus("idle");
+          return;
+        }
+        if (result.paymentDetails) {
+          // Payment has been completed, now verify on the backend
+          try {
+            const verifyRes = await fetch('/api/cashfree-verify', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ orderId: result.paymentDetails.orderId }),
+            });
+            const verificationData = await verifyRes.json();
 
-      // Optional: Reset form and close modal after a delay
-      setTimeout(() => {
-        setOpen(false);
-      }, 2500);
+            if (Array.isArray(verificationData) && verificationData.some(transaction => transaction.payment_status === "SUCCESS")) {
+              await fetch('/api/subscribe', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, source: 'Early Access Modal (Paid)' }),
+              });
+              setStatus("success");
+            } else {
+              setError('Payment not completed or failed verification. Please try again.');
+              setStatus("idle");
+            }
+          } catch (err) {
+            setError((err as Error).message);
+            setStatus("idle");
+          }
+        }
+      });
     } catch (err) {
       setError((err as Error).message);
       setStatus("idle");
@@ -169,10 +211,10 @@ export function EarlyAccessModal() {
                   {status === 'submitting' ? (
                     <>
                       <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                      Submitting...
+                      Processing...
                     </>
                   ) : (
-                    'Get Early Access'
+                    'Pay and Get Early Access'
                   )}
                 </Button>
               </DialogFooter>

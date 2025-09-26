@@ -32,8 +32,12 @@ const Footer = () => {
       });
 
       if (!response.ok) {
-        const res = await response.json();
-        throw new Error(res.error || 'An unknown error occurred.');
+        let errorText = `An unknown error occurred. Status: ${response.status}`;
+        try {
+          const res = await response.json();
+          errorText = res.error || errorText;
+        } catch (e) { /* Response was not JSON, use default error */ }
+        throw new Error(errorText);
       }
 
       setNewsletterStatus("success");
