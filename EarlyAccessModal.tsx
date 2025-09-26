@@ -24,6 +24,23 @@ export function EarlyAccessModal() {
   const [status, setStatus] = useState<"idle" | "submitting" | "success">("idle");
   const [error, setError] = useState<string | null>(null);
 
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === 'visible' && status === 'submitting') {
+        // User has returned to the page from the payment gateway without completing.
+        setStatus('idle');
+        setError('Payment was not completed. Please try again.');
+      }
+    };
+
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+
+    // Cleanup the event listener when the component unmounts
+    return () => {
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+    };
+  }, [status]); // Rerun effect if status changes
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
@@ -40,6 +57,9 @@ export function EarlyAccessModal() {
     setError(null);
     setStatus("submitting");
     
+    // Save email to localStorage so it can be used on the payment status page
+    localStorage.setItem('earlyAccessData', JSON.stringify({ email }));
+
     // Since you are using a direct payment form, we can just redirect the user.
     // The email can be pre-filled in the URL if the form supports it.
     const formUrl = `https://payments.cashfree.com/forms/JobSnap?email=${encodeURIComponent(email)}`;
