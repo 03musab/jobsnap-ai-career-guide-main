@@ -16,23 +16,13 @@ import { Input } from "@/components/ui/input";
 import { Mail, Loader2, Check, ArrowRight } from "lucide-react";
 import TrialButton from "@/components/TrialButton";
 import ComingSoon from "@/components/ComingSoonLink";
-import { load } from '@cashfreepayments/cashfree-js';
-
-let cashfree: any;
 
 export function EarlyAccessModal() {
   const [open, setOpen] = useState(false);
   const [email, setEmail] = useState("");
-  const [agreed, setAgreed] = useState(false);
+  const [agreed, setAgreed] = useState(false); // This can be removed if not needed for the form
   const [status, setStatus] = useState<"idle" | "submitting" | "success">("idle");
   const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    const initializeSDK = async () => {
-      cashfree = await load({ mode: "sandbox" });
-    };
-    initializeSDK();
-  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -49,62 +39,14 @@ export function EarlyAccessModal() {
     }
     setError(null);
     setStatus("submitting");
+    
+    // Since you are using a direct payment form, we can just redirect the user.
+    // The email can be pre-filled in the URL if the form supports it.
+    const formUrl = `https://payments.cashfree.com/forms/JobSnap?email=${encodeURIComponent(email)}`;
+    window.location.href = formUrl;
 
-    try {
-      // 1. Create order and get payment session ID from your server
-      const orderRes = await fetch('/api/cashfree-create-order', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email }),
-      });
-      const orderData = await orderRes.json();
-
-      if (!orderRes.ok || !orderData.payment_session_id) {
-        throw new Error(orderData.message || 'Failed to create payment session.');
-      }
-
-      // 2. Launch Cashfree checkout
-      cashfree.checkout({
-        paymentSessionId: orderData.payment_session_id,
-        redirectTarget: "_modal",
-      }).then(async (result: any) => {
-        if (result.error) {
-          // User has closed the popup or there is some payment error
-          setError(result.error.message || "Payment cancelled or failed.");
-          setStatus("idle");
-          return;
-        }
-        if (result.paymentDetails) {
-          // Payment has been completed, now verify on the backend
-          try {
-            const verifyRes = await fetch('/api/cashfree-verify', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({ orderId: result.paymentDetails.orderId }),
-            });
-            const verificationData = await verifyRes.json();
-
-            if (Array.isArray(verificationData) && verificationData.some(transaction => transaction.payment_status === "SUCCESS")) {
-              await fetch('/api/subscribe', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ email, source: 'Early Access Modal (Paid)' }),
-              });
-              setStatus("success");
-            } else {
-              setError('Payment not completed or failed verification. Please try again.');
-              setStatus("idle");
-            }
-          } catch (err) {
-            setError((err as Error).message);
-            setStatus("idle");
-          }
-        }
-      });
-    } catch (err) {
-      setError((err as Error).message);
-      setStatus("idle");
-    }
+    // The page will redirect, but we can set status to success optimistically
+    // or handle post-payment logic via webhooks or a redirect URL from Cashfree.
   };
 
   const handleOpenChange = (isOpen: boolean) => {

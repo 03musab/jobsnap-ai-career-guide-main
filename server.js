@@ -8,7 +8,7 @@ const app = express();
 app.use(cors()); // Enable CORS for all routes
 app.use(express.json());
 
-const CASHFREE_API_URL = 'https://sandbox.cashfree.com/pg'; // Use 'https://api.cashfree.com/pg' for production
+const CASHFREE_API_URL = 'https://api.cashfree.com/pg'; // Use 'https://api.cashfree.com/pg' for production
 const CASHFREE_APP_ID = process.env.CASHFREE_APP_ID;
 const CASHFREE_SECRET_KEY = process.env.CASHFREE_SECRET_KEY;
 
@@ -18,7 +18,7 @@ app.post('/api/cashfree-create-order', async (req, res) => {
     const { email } = req.body;
     const orderId = `order_${Date.now()}`;
 
-    const response = await fetch(`/orders`, {
+    const response = await fetch(`${CASHFREE_API_URL}/orders`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -35,7 +35,7 @@ app.post('/api/cashfree-create-order', async (req, res) => {
           customer_email: email,
         },
         order_meta: {
-          return_url: `http://localhost:5173/payment-status?order_id={order_id}`, // Adjust URL as needed
+          return_url: `https://aijobsnap.vercel.app/payment-status?order_id={order_id}`, // Adjust URL as needed
         },
       }),
     });
@@ -59,7 +59,7 @@ app.post('/api/cashfree-verify', async (req, res) => {
     try {
         const { orderId } = req.body;
 
-        const response = await fetch(`/orders//payments`, {
+        const response = await fetch(`${CASHFREE_API_URL}/orders/${orderId}/payments`, {
             method: 'GET',
             headers: {
                 'x-api-version': '2022-09-01',
