@@ -96,16 +96,16 @@ const Header = () => {
 
         {/* Right: Auth buttons */}
         <div className="flex items-center gap-4">
-          <ComingSoon asChild href="#">
+          <a href="http://127.0.0.1:5000/login">
             <Button variant="ghost" size="sm" className="rounded-full">
               Login
             </Button>
-          </ComingSoon>
-          <ComingSoon asChild href="#">
+          </a>
+          <a href="http://127.0.0.1:5000/register">
             <Button variant="default" size="sm" className="rounded-full px-4">
               Sign Up
             </Button>
-          </ComingSoon>
+          </a>
         </div>
       </div>
     </header>
