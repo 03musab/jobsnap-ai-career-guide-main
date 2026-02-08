@@ -1,0 +1,193 @@
+/* Career Journey Section Styles
+   Scoped with 'cjs-' prefix to avoid conflicts with existing JobSnap styles
+*/
+
+/* Glassmorphism utilities */
+.cjs-glass {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+}
+
+.cjs-glass-light {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+}
+
+/* Glow effects */
+.cjs-glow-cyan {
+  box-shadow: 0 0 60px rgba(6, 182, 212, 0.3),
+    0 0 120px rgba(6, 182, 212, 0.1);
+}
+
+.cjs-glow-purple {
+  box-shadow: 0 0 60px rgba(168, 85, 247, 0.3),
+    0 0 120px rgba(168, 85, 247, 0.1);
+}
+
+.cjs-glow-blue {
+  box-shadow: 0 0 60px rgba(59, 130, 246, 0.3),
+    0 0 120px rgba(59, 130, 246, 0.1);
+}
+
+.cjs-text-glow {
+  text-shadow: 0 0 40px rgba(6, 182, 212, 0.5),
+    0 0 80px rgba(168, 85, 247, 0.3);
+}
+
+/* Floating particle animation */
+@keyframes cjs-float {
+  0%,
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-20px) rotate(5deg);
+  }
+}
+
+@keyframes cjs-pulse-glow {
+  0%,
+  100% {
+    opacity: 0.4;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.1);
+  }
+}
+
+@keyframes cjs-particle-drift {
+  0% {
+    transform: translateY(100vh) translateX(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100vh) translateX(100px);
+    opacity: 0;
+  }
+}
+
+/* Hexagon grid overlay */
+.cjs-hex-grid {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='49' viewBox='0 0 28 49'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.02'%3E%3Cpath d='M13.99 9.25l13 7.5v15l-13 7.5L1 31.75v-15l12.99-7.5zM3 17.9v12.7l10.99 6.34 11-6.35V17.9l-11-6.34L3 17.9zM0 15l12.98-7.5V0h-2v6.35L0 12.69v2.3zm0 18.5L12.98 41v8h-2v-6.85L0 35.81v-2.3zM15 0v7.5L27.99 15H28v-2.31h-.01L17 6.35V0h-2zm0 49v-8l12.99-7.5H28v2.31h-.01L17 42.15V49h-2z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Particle background */
+.cjs-particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: linear-gradient(135deg, #06b6d4, #a855f7);
+  border-radius: 50%;
+  animation: cjs-particle-drift 15s linear infinite;
+  opacity: 0.6;
+}
+
+/* Floating element base styles */
+.cjs-floating-element {
+  position: absolute;
+  will-change: transform, opacity;
+  transform-style: preserve-3d;
+}
+
+/* Gradient orbs */
+.cjs-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.4;
+  animation: cjs-pulse-glow 8s ease-in-out infinite;
+}
+
+.cjs-orb-cyan {
+  background: radial-gradient(circle, #06b6d4 0%, transparent 70%);
+}
+
+.cjs-orb-purple {
+  background: radial-gradient(circle, #a855f7 0%, transparent 70%);
+}
+
+.cjs-orb-blue {
+  background: radial-gradient(circle, #3b82f6 0%, transparent 70%);
+}
+
+/* Dashboard card styling */
+.cjs-dashboard-card {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  transition: all 0.3s ease;
+}
+
+.cjs-dashboard-card:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.15);
+  transform: translateY(-2px);
+}
+
+/* Progress ring */
+.cjs-progress-ring {
+  transform: rotate(-90deg);
+}
+
+.cjs-progress-ring__circle {
+  transition: stroke-dashoffset 0.5s ease;
+}
+
+/* Smooth scroll container */
+.cjs-scroll-container {
+  position: relative;
+  height: 200vh; /* Reduced from 350vh for section use */
+}
+
+.cjs-sticky-wrapper {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: hidden;
+  background: linear-gradient(180deg,
+      #0b1220 0%,
+      #111827 25%,
+      #1e1b4b 60%,
+      #312e81 100%);
+}
+
+/* Typography */
+.cjs-heading-display {
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.cjs-body-text {
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .cjs-particle,
+  .cjs-orb,
+  .cjs-floating-element {
+    animation: none !important;
+  }
+}
