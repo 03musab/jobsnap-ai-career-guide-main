@@ -1,0 +1,6 @@
+{
+  "name": "Intelligence Designed To Evolve",
+  "description": "Single-viewport, full-bleed video-background landing page for a modular evolutionary AI platform.",
+  "permissions": [],
+  "capabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
