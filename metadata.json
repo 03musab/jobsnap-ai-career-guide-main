@@ -1,6 +1,6 @@
 {
-  "name": "Intelligence Designed To Evolve",
-  "description": "Single-viewport, full-bleed video-background landing page for a modular evolutionary AI platform.",
+  "name": "AI JobSnap — Early Access",
+  "description": "Automate your job search with intelligent AI: multi-source scraping, relevance scoring, and application tracking. Free during early access.",
   "permissions": [],
   "capabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

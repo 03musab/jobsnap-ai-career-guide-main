@@ -3,29 +3,29 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Intelligence Designed To Evolve</title>
+    <title>AI JobSnap — Automate Your Job Hunt</title>
     <meta
       name="description"
-      content="Build applications that reason, adapt and collaborate using a modular AI platform designed for production."
+      content="AI JobSnap is an intelligent career automation platform designed to streamline your job search. Aggregates listings from multiple sources, scores them for relevance, and manages applications from discovery to offer."
     />
-    <meta property="og:title" content="Intelligence Designed To Evolve" />
+    <meta property="og:title" content="AI JobSnap — Automate Your Job Hunt" />
     <meta
       property="og:description"
-      content="Build applications that reason, adapt and collaborate using a modular AI platform designed for production."
+      content="AI JobSnap is an intelligent career automation platform designed to streamline your job search. Aggregates listings, scores for relevance, and tracks applications."
     />
     <meta property="og:type" content="website" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Intelligence Designed To Evolve" />
+    <meta name="twitter:title" content="AI JobSnap — Automate Your Job Hunt" />
     <meta
       name="twitter:description"
-      content="Build applications that reason, adapt and collaborate using a modular AI platform designed for production."
+      content="Automate your job search with intelligent AI: multi-source scraping, resume-aware relevance scoring, and automated tracking — 100% free while computing capacity lasts."
     />
 
-    <!-- Google Fonts: Inter (400, 500, 600) -->
+    <!-- Google Fonts: Inter (400, 500, 600, 700) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
 
@@ -48,7 +48,7 @@
     <link rel="stylesheet" href="/styles.css" />
   </head>
   <body>
-    <!-- Full-viewport cover background video -->
+    <!-- Full-viewport fixed background video -->
     <div class="bg">
       <video class="bg-video" autoplay muted loop playsinline>
         <source
@@ -58,22 +58,22 @@
       </video>
     </div>
 
-    <!-- Layout Container (one viewport, 3 vertical regions) -->
+    <!-- Layout Container - Full single page with smooth scroll -->
     <div class="page">
-      <!-- 1) Header (top, shrink 0) -->
+      <!-- 1) Header - Logo next to Home removed as requested -->
       <header class="site-header">
-        <a href="#" class="logo-btn" aria-label="Home">
-          <img src="assets/logo.webp" alt="" width="52" height="52" />
-        </a>
-
         <nav class="nav-pill" aria-label="Main Navigation">
+          <div class="nav-indicator" id="navIndicator" aria-hidden="true"></div>
           <a href="#home" class="nav-link active">Home</a>
-          <a href="#product" class="nav-link">Product</a>
-          <a href="#case-studies" class="nav-link">Case Studies</a>
-          <a href="#contact" class="nav-link">Contact</a>
+          <a href="#capacity" class="nav-link">Capacity</a>
+          <a href="#features" class="nav-link">Features</a>
+          <a href="#workflow" class="nav-link">Workflow</a>
+          <a href="#security" class="nav-link">Security & Privacy</a>
+          <a href="#faq" class="nav-link">FAQ</a>
+          <a href="#roadmap" class="nav-link">Roadmap</a>
         </nav>
 
-        <a href="#signin" class="sign-in-btn">Sign in</a>
+        <a href="#early-access" id="headerAccessBtn" class="sign-in-btn">Claim Free Spot</a>
 
         <button
           id="burgerBtn"
@@ -90,15 +90,18 @@
       <!-- Mobile Overlay & Sheet Menu -->
       <div id="mobileOverlay" class="mobile-overlay" hidden></div>
       <div id="mobileMenu" class="mobile-menu" hidden>
-        <a href="#home" class="mobile-nav-link active" style="animation-delay: 0.04s;">Home</a>
-        <a href="#product" class="mobile-nav-link" style="animation-delay: 0.07s;">Product</a>
-        <a href="#case-studies" class="mobile-nav-link" style="animation-delay: 0.1s;">Case Studies</a>
-        <a href="#contact" class="mobile-nav-link" style="animation-delay: 0.13s;">Contact</a>
-        <a href="#signin" class="mobile-sign-in">Sign in</a>
+        <a href="#home" class="mobile-nav-link active">Home</a>
+        <a href="#capacity" class="mobile-nav-link">Compute Capacity (8%)</a>
+        <a href="#features" class="mobile-nav-link">Free Features</a>
+        <a href="#workflow" class="mobile-nav-link">Workflow & Kanban</a>
+        <a href="#security" class="mobile-nav-link">Security & Privacy</a>
+        <a href="#faq" class="mobile-nav-link">Candidate FAQ</a>
+        <a href="#roadmap" class="mobile-nav-link">Future Roadmap</a>
+        <a href="#early-access" id="mobileActionBtn" class="mobile-sign-in">Claim Free Spot</a>
       </div>
 
-      <!-- 2) Hero (center, flex 1) -->
-      <main class="hero">
+      <!-- 2) Hero Section -->
+      <main id="home" class="hero">
         <!-- Trust row -->
         <div class="trust-row anim" style="--d: 0.05s;">
           <div class="trust-avatar" title="Microsoft">
@@ -117,68 +120,699 @@
             </div>
           </div>
           <div class="trust-pill">
-            <span class="trust-text">Trusted by 2000+ Enterprises</span>
+            <span class="trust-text"><strong style="color: #34d399;">100% Free Beta</strong> • 8% Capacity Allocated</span>
           </div>
         </div>
 
-        <!-- Headline -->
+        <!-- Headline (retro dot-matrix) -->
         <h1 class="headline anim">
-          <span class="headline-line">Intelligence</span>
-          <span class="headline-line">Designed To Evolve</span>
+          <span class="headline-line">AI JobSnap</span>
+          <span class="headline-line">Automate Your Job Hunt</span>
         </h1>
 
         <!-- Subhead -->
         <p class="subhead anim" style="--d: 0.28s;">
-          Build applications that reason, adapt and collaborate using a modular
-          AI platform designed for production.
+          A powerful web application designed to automate and streamline your job search.
+          Aggregates listings from multiple sources, scores them for relevance, and manages
+          your applications from discovery to offer — 100% free while computing capacity lasts.
         </p>
 
-        <!-- CTA Button -->
-        <a href="#get-started" class="cta-btn anim" style="--d: 0.4s;">
-          Get Started
-        </a>
+        <!-- Early Access Email Form -->
+        <div class="early-access-container anim" style="--d: 0.38s;">
+          <form id="heroEmailForm" class="early-access-form" novalidate>
+            <div class="input-wrap">
+              <i class="fa-regular fa-envelope input-icon"></i>
+              <input
+                type="email"
+                id="userEmailInput"
+                class="early-access-input"
+                placeholder="Enter your email for instant early access..."
+                autocomplete="email"
+                required
+              />
+            </div>
+            <button type="submit" id="submitBtn" class="cta-btn early-access-submit">
+              <span class="btn-text">Claim Free Access</span>
+              <i class="fa-solid fa-arrow-right btn-arrow"></i>
+            </button>
+          </form>
+
+          <div id="formFeedback" class="form-feedback" hidden></div>
+
+          <div class="hero-actions-row">
+            <a href="#features" class="features-trigger-btn">
+              <span class="free-pill-tag">Free in Beta</span>
+              <span>Explore All 11 Features</span>
+              <i class="fa-solid fa-arrow-down" style="font-size: 11px;"></i>
+            </a>
+            <span class="capacity-note">
+              <span class="capacity-pulse-dot"></span>
+              <span id="capacityStatusText">8% compute capacity allocated • 92% free slots available</span>
+            </span>
+          </div>
+        </div>
+
+        <!-- Stats Row -->
+        <div class="stats-footer">
+          <div class="stat-item anim" style="--d: 0.5s;">
+            <div class="stat-header">
+              <span class="stat-icon">&lt;</span>
+              <span class="stat-value-group">
+                <span class="stat-value" data-stat-target="100" data-stat-decimals="0">0</span>%
+              </span>
+            </div>
+            <span class="stat-label">Free While In Beta</span>
+          </div>
+
+          <div class="stat-item anim" style="--d: 0.58s;">
+            <div class="stat-header">
+              <span class="stat-icon">%</span>
+              <span class="stat-value-group">
+                <span class="stat-value" data-stat-target="94.8" data-stat-decimals="1">0.0</span>%
+              </span>
+            </div>
+            <span class="stat-label">Match Relevance</span>
+          </div>
+
+          <div class="stat-item anim" style="--d: 0.66s;">
+            <div class="stat-header">
+              <span class="stat-icon">*</span>
+              <span class="stat-value-group">
+                <span class="stat-value" data-stat-target="24" data-stat-decimals="0">0</span>/7
+              </span>
+            </div>
+            <span class="stat-label">Background Scraping</span>
+          </div>
+
+          <div class="stat-item anim" style="--d: 0.74s;">
+            <div class="stat-header">
+              <span class="stat-icon">#</span>
+              <span class="stat-value-group">
+                <span class="stat-value" data-stat-target="25" data-stat-decimals="0">0</span>K+
+              </span>
+            </div>
+            <span class="stat-label">Jobs Aggregated</span>
+          </div>
+        </div>
       </main>
 
-      <!-- 3) Stats footer (bottom, shrink 0) -->
-      <footer id="statsFooter" class="stats-footer">
-        <div class="stat-item anim" style="--d: 0.5s;">
-          <div class="stat-header">
-            <span class="stat-icon">&lt;</span>
-            <span class="stat-value-group">
-              <span class="stat-value" data-stat-target="120" data-stat-decimals="0">0</span>ms
-            </span>
-          </div>
-          <span class="stat-label">Inference Time</span>
+      <!-- Section: ⚡ Compute Capacity Tracker (8% Allocated) -->
+      <section id="capacity" class="content-section">
+        <div class="section-header">
+          <span class="section-tag"><i class="fa-solid fa-bolt"></i> Live Capacity Tracker</span>
+          <h2 class="section-title">Free Until Compute Limit Reached</h2>
+          <p class="section-desc">
+            We are opening our full platform with zero subscription paywalls for early access members.
+            All core features are 100% free until our cloud worker nodes and scraping clusters reach 100% capacity.
+          </p>
         </div>
 
-        <div class="stat-item anim" style="--d: 0.58s;">
-          <div class="stat-header">
-            <span class="stat-icon">%</span>
-            <span class="stat-value-group">
-              <span class="stat-value" data-stat-target="99.99" data-stat-decimals="2">0.00</span>%
-            </span>
+        <div class="capacity-card">
+          <div class="capacity-hero-row">
+            <div class="capacity-metric">
+              <div class="capacity-value-lg">8%</div>
+              <div class="capacity-label-lg">Total Compute Capacity Allocated</div>
+            </div>
+            <div class="capacity-slots-badge">
+              <i class="fa-solid fa-circle-check" style="color: #34d399;"></i>
+              <span>92% Free Early Access Spots Remaining</span>
+            </div>
           </div>
-          <span class="stat-label">Platform Uptime</span>
+
+          <!-- 8% Progress Bar -->
+          <div class="capacity-meter-track" role="progressbar" aria-valuenow="8" aria-valuemin="0" aria-valuemax="100">
+            <div class="capacity-meter-fill" style="width: 8%;"></div>
+          </div>
+
+          <div class="capacity-breakdown-grid">
+            <div class="capacity-node-card">
+              <span class="capacity-node-name">Scraping Worker Nodes</span>
+              <div class="capacity-node-val"><span>8% active</span> <i class="fa-solid fa-server" style="color: #10b981; font-size: 14px;"></i></div>
+            </div>
+            <div class="capacity-node-card">
+              <span class="capacity-node-name">AI Relevance Scoring Engine</span>
+              <div class="capacity-node-val"><span>8% load</span> <i class="fa-solid fa-brain" style="color: #10b981; font-size: 14px;"></i></div>
+            </div>
+            <div class="capacity-node-card">
+              <span class="capacity-node-name">Background Task Queue</span>
+              <div class="capacity-node-val"><span>6% utilization</span> <i class="fa-solid fa-layer-group" style="color: #10b981; font-size: 14px;"></i></div>
+            </div>
+            <div class="capacity-node-card">
+              <span class="capacity-node-name">Email & Report Dispatcher</span>
+              <div class="capacity-node-val"><span>11% capacity</span> <i class="fa-solid fa-envelope" style="color: #10b981; font-size: 14px;"></i></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section: ✨ Features Showcase (All 11 from README) -->
+      <section id="features" class="content-section">
+        <div class="section-header">
+          <span class="section-tag"><i class="fa-solid fa-sparkles"></i> Included Free In Early Access</span>
+          <h2 class="section-title">Everything You Need To Land Your Next Role</h2>
+          <p class="section-desc">
+            Explore the complete suite of automated hunting tools included in your free early access tier.
+          </p>
         </div>
 
-        <div class="stat-item anim" style="--d: 0.66s;">
-          <div class="stat-header">
-            <span class="stat-icon">*</span>
-            <span class="stat-value-group">
-              <span class="stat-value" data-stat-target="24" data-stat-decimals="0">0</span>/7
-            </span>
+        <div class="features-grid-full">
+          <!-- 1. Multi-Source Job Scraping -->
+          <div class="feature-card">
+            <div class="feature-card-top">
+              <div class="feature-icon-wrapper"><i class="fa-solid fa-globe"></i></div>
+              <span class="feature-status-tag">100% Free</span>
+            </div>
+            <h3 class="feature-heading">Multi-Source Job Scraping</h3>
+            <p class="feature-body">
+              Aggregates fresh job listings from major platforms like LinkedIn, Internshala, and leading employment boards into one synchronized feed.
+            </p>
           </div>
-          <span class="stat-label">Autonomous Runtime</span>
+
+          <!-- 2. AI-Powered Relevance Scoring -->
+          <div class="feature-card">
+            <div class="feature-card-top">
+              <div class="feature-icon-wrapper"><i class="fa-solid fa-brain"></i></div>
+              <span class="feature-status-tag">100% Free</span>
+            </div>
+            <h3 class="feature-heading">AI-Powered Relevance Scoring</h3>
+            <p class="feature-body">
+              Intelligently scores jobs based on configurable heuristics (keywords in title/description, skills, experience match) to surface the most relevant opportunities first.
+            </p>
+          </div>
+
+          <!-- 3. Saved Search Profiles -->
+          <div class="feature-card">
+            <div class="feature-card-top">
+              <div class="feature-icon-wrapper"><i class="fa-solid fa-sliders"></i></div>
+              <span class="feature-status-tag">100% Free</span>
+            </div>
+            <h3 class="feature-heading">Saved Search Profiles</h3>
+            <p class="feature-body">
+              Create and save multiple target search profiles (keywords, location, experience levels) to execute complex, scheduled job hunts with a single click.
+            </p>
+          </div>
+
+          <!-- 4. Job Management Dashboard -->
+          <div class="feature-card">
+            <div class="feature-card-top">
+              <div class="feature-icon-wrapper"><i class="fa-solid fa-table-columns"></i></div>
+              <span class="feature-status-tag">100% Free</span>
+            </div>
+            <h3 class="feature-heading">Job Management Dashboard</h3>
+            <p class="feature-body">
+              A central hub to view, filter, sort, and manage all discovered jobs. Update application status (New, Applied, Interview, Rejected, Offered) and append personal notes.
+            </p>
+          </div>
+
+          <!-- 5. Resume-Aware Intelligence -->
+          <div class="feature-card">
+            <div class="feature-card-top">
+              <div class="feature-icon-wrapper"><i class="fa-solid fa-file-invoice"></i></div>
+              <span class="feature-status-tag">100% Free</span>
+            </div>
+            <h3 class="feature-heading">Resume-Aware Intelligence</h3>
+            <p class="feature-body">
+              Upload your resume to enable deeper semantic job-to-resume matching, skill gap highlights, and candidate profile data for the assisted application filler.
+            </p>
+          </div>
+
+          <!-- 6. Automated Email Reports -->
+          <div class="feature-card">
+            <div class="feature-card-top">
+              <div class="feature-icon-wrapper"><i class="fa-solid fa-envelope-open-text"></i></div>
+              <span class="feature-status-tag">100% Free</span>
+            </div>
+            <h3 class="feature-heading">Automated Email Reports</h3>
+            <p class="feature-body">
+              Receive daily or scheduled email summaries of high-fit jobs, with an optional, beautifully formatted Excel report attachment via the Gmail API.
+            </p>
+          </div>
+
+          <!-- 7. Assisted Application Filling -->
+          <div class="feature-card">
+            <div class="feature-card-top">
+              <div class="feature-icon-wrapper"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+              <span class="feature-status-tag exp">Experimental</span>
+            </div>
+            <h3 class="feature-heading">Assisted Application Filling</h3>
+            <p class="feature-body">
+              Launches an automated browser session to assist in pre-filling application forms on common ATS (Applicant Tracking Systems) to 5x your application pace.
+            </p>
+          </div>
+
+          <!-- 8. Google Calendar Integration -->
+          <div class="feature-card">
+            <div class="feature-card-top">
+              <div class="feature-icon-wrapper"><i class="fa-solid fa-calendar-check"></i></div>
+              <span class="feature-status-tag">100% Free</span>
+            </div>
+            <h3 class="feature-heading">Google Calendar Integration</h3>
+            <p class="feature-body">
+              Seamlessly sync application deadlines, recruiter interviews, and follow-ups directly to your Google Calendar so you never miss an interview slot.
+            </p>
+          </div>
+
+          <!-- 9. Company Traffic Analytics -->
+          <div class="feature-card">
+            <div class="feature-card-top">
+              <div class="feature-icon-wrapper"><i class="fa-solid fa-chart-line"></i></div>
+              <span class="feature-status-tag exp">Experimental</span>
+            </div>
+            <h3 class="feature-heading">Company Traffic Analytics</h3>
+            <p class="feature-body">
+              View estimated web traffic data and company velocity stats for hiring businesses to gauge their market traction, scale, and hiring stability.
+            </p>
+          </div>
+
+          <!-- 10. Background Processing -->
+          <div class="feature-card">
+            <div class="feature-card-top">
+              <div class="feature-icon-wrapper"><i class="fa-solid fa-cloud-arrow-up"></i></div>
+              <span class="feature-status-tag">100% Free</span>
+            </div>
+            <h3 class="feature-heading">Continuous Cloud Processing</h3>
+            <p class="feature-body">
+              Runs non-blocking, scheduled automated crawls in the cloud 24/7 without slowing down your computer or requiring you to keep browser tabs open.
+            </p>
+          </div>
+
+          <!-- 11. User Authentication & Privacy -->
+          <div class="feature-card">
+            <div class="feature-card-top">
+              <div class="feature-icon-wrapper"><i class="fa-solid fa-shield-halved"></i></div>
+              <span class="feature-status-tag">100% Free</span>
+            </div>
+            <h3 class="feature-heading">User Authentication & Private Vault</h3>
+            <p class="feature-body">
+              Secure password-protected sessions with end-to-end credential isolation, keeping all your search parameters, resumes, and job records strictly private.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section: 💡 How It Works & Workflow -->
+      <section id="workflow" class="content-section">
+        <div class="section-header">
+          <span class="section-tag"><i class="fa-solid fa-route"></i> Product Workflow</span>
+          <h2 class="section-title">How AI JobSnap Works</h2>
+          <p class="section-desc">
+            From search profile configuration to offer negotiation — here is how your automated job hunting pipeline runs.
+          </p>
         </div>
 
-        <div class="stat-item anim" style="--d: 0.74s;">
-          <div class="stat-header">
-            <span class="stat-icon">#</span>
-            <span class="stat-value-group">
-              <span class="stat-value" data-stat-target="2.4" data-stat-decimals="1">0.0</span>M
-            </span>
+        <div class="workflow-grid">
+          <div class="workflow-card">
+            <span class="workflow-step-num">01</span>
+            <h3 class="workflow-title">Register & Profile Setup</h3>
+            <p class="workflow-text">Create your account and upload your resume. Fill in your target seniority, location preferences, and core tech competencies.</p>
           </div>
-          <span class="stat-label">Context Windows</span>
+          <div class="workflow-card">
+            <span class="workflow-step-num">02</span>
+            <h3 class="workflow-title">Define Search Profiles</h3>
+            <p class="workflow-text">Set query parameters (e.g., "Python Developer, Data Engineer", Remote, 3+ YOE). Save profiles for single-click re-runs.</p>
+          </div>
+          <div class="workflow-card">
+            <span class="workflow-step-num">03</span>
+            <h3 class="workflow-title">Autonomous Cloud Scraping</h3>
+            <p class="workflow-text">Automated cloud workers autonomously discover fresh postings from LinkedIn, Internshala, and top job boards without blocking your browser.</p>
+          </div>
+          <div class="workflow-card">
+            <span class="workflow-step-num">04</span>
+            <h3 class="workflow-title">AI Relevance Scoring</h3>
+            <p class="workflow-text">Heuristic algorithms compare job descriptions with your resume and keywords, assigning a 0–100% match score to prioritize top jobs.</p>
+          </div>
+          <div class="workflow-card">
+            <span class="workflow-step-num">05</span>
+            <h3 class="workflow-title">Kanban Application Pipeline</h3>
+            <p class="workflow-text">Move applications across stages: New → Applied → Interview → Offer. Add recruiter notes and interview dates.</p>
+          </div>
+          <div class="workflow-card">
+            <span class="workflow-step-num">06</span>
+            <h3 class="workflow-title">Daily Digests & Calendar Sync</h3>
+            <p class="workflow-text">Receive morning email summaries with formatted Excel sheets via Gmail API, and sync upcoming interview milestones directly to Google Calendar.</p>
+          </div>
+        </div>
+
+        <!-- Interactive Kanban Preview -->
+        <div class="kanban-board">
+          <div class="kanban-col">
+            <div class="kanban-col-header">
+              <span>NEW (DISCOVERED)</span>
+              <span class="kanban-count">14</span>
+            </div>
+            <div class="kanban-item">
+              <span class="kanban-score-tag">98% Match</span>
+              <span class="kanban-role">Senior Software Engineer</span>
+              <span class="kanban-company">Stripe • Remote</span>
+            </div>
+            <div class="kanban-item">
+              <span class="kanban-score-tag">92% Match</span>
+              <span class="kanban-role">AI Product Architect</span>
+              <span class="kanban-company">Anthropic • Hybrid</span>
+            </div>
+          </div>
+
+          <div class="kanban-col">
+            <div class="kanban-col-header">
+              <span>APPLIED</span>
+              <span class="kanban-count">8</span>
+            </div>
+            <div class="kanban-item">
+              <span class="kanban-score-tag">95% Match</span>
+              <span class="kanban-role">Full-Stack AI Developer</span>
+              <span class="kanban-company">OpenAI • SF</span>
+            </div>
+            <div class="kanban-item">
+              <span class="kanban-score-tag">89% Match</span>
+              <span class="kanban-role">Distributed Systems Eng</span>
+              <span class="kanban-company">Databricks • Remote</span>
+            </div>
+          </div>
+
+          <div class="kanban-col">
+            <div class="kanban-col-header">
+              <span>INTERVIEW</span>
+              <span class="kanban-count">3</span>
+            </div>
+            <div class="kanban-item" style="border-color: rgba(52, 211, 153, 0.4);">
+              <span class="kanban-score-tag">📅 Oct 24, 2:00 PM</span>
+              <span class="kanban-role">Senior Full-Stack Engineer</span>
+              <span class="kanban-company">Scale AI • Google Cal Synced</span>
+            </div>
+          </div>
+
+          <div class="kanban-col">
+            <div class="kanban-col-header">
+              <span>OFFERED</span>
+              <span class="kanban-count">2</span>
+            </div>
+            <div class="kanban-item" style="background: rgba(16, 185, 129, 0.15); border-color: #10b981;">
+              <span class="kanban-score-tag" style="background: #10b981; color: #000;">🎉 Offer Received</span>
+              <span class="kanban-role">Staff Software Engineer</span>
+              <span class="kanban-company">$190,000 + Equity</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section: 🛡️ Security & Candidate Privacy Guarantee -->
+      <section id="security" class="content-section">
+        <div class="section-header">
+          <span class="section-tag"><i class="fa-solid fa-shield-halved"></i> Privacy First</span>
+          <h2 class="section-title">Candidate Privacy & Security Guarantee</h2>
+          <p class="section-desc">
+            Your career search is confidential. AI JobSnap is built from the ground up with enterprise-grade isolation, stealth search guards, and zero recruiter spam.
+          </p>
+        </div>
+
+        <div class="security-grid">
+          <div class="security-card">
+            <div class="security-card-header">
+              <div class="security-icon-box"><i class="fa-solid fa-user-secret"></i></div>
+              <h3 class="security-card-title">100% Incognito Job Search</h3>
+            </div>
+            <p class="security-card-text">
+              Your current employer, coworkers, and third-party recruiting agencies can never view your active search status or profile activity. Searches are executed privately in isolated cloud containers.
+            </p>
+            <div class="security-badge-row">
+              <span class="security-badge"><i class="fa-solid fa-check"></i> Zero public profile leaks</span>
+              <span class="security-badge"><i class="fa-solid fa-check"></i> Stealth candidate mode</span>
+            </div>
+          </div>
+
+          <div class="security-card">
+            <div class="security-card-header">
+              <div class="security-icon-box"><i class="fa-solid fa-lock"></i></div>
+              <h3 class="security-card-title">Encrypted Resume & Notes Vault</h3>
+            </div>
+            <p class="security-card-text">
+              All uploaded resumes, interview talk-tracks, salary targets, and notes are encrypted at rest using AES-256 standards. Only you hold the decryption authorization for your documents.
+            </p>
+            <div class="security-badge-row">
+              <span class="security-badge"><i class="fa-solid fa-check"></i> AES-256 encryption</span>
+              <span class="security-badge"><i class="fa-solid fa-check"></i> Isolated document storage</span>
+            </div>
+          </div>
+
+          <div class="security-card">
+            <div class="security-card-header">
+              <div class="security-icon-box"><i class="fa-brands fa-google"></i></div>
+              <h3 class="security-card-title">Verified Google OAuth Security</h3>
+            </div>
+            <p class="security-card-text">
+              When syncing with Google Calendar or receiving automated Gmail reports, authorization happens strictly client-side via Google's official OAuth consent. We never view or store passwords.
+            </p>
+            <div class="security-badge-row">
+              <span class="security-badge"><i class="fa-solid fa-check"></i> Official Google OAuth</span>
+              <span class="security-badge"><i class="fa-solid fa-check"></i> Sandboxed scope permissions</span>
+            </div>
+          </div>
+
+          <div class="security-card">
+            <div class="security-card-header">
+              <div class="security-icon-box"><i class="fa-solid fa-ban"></i></div>
+              <h3 class="security-card-title">Zero Recruiter Spam Policy</h3>
+            </div>
+            <p class="security-card-text">
+              We never sell candidate leads, resumes, or email addresses to recruitment agencies or advertising data brokers. Your inbox stays 100% clean and free of unsolicited cold outreaches.
+            </p>
+            <div class="security-badge-row">
+              <span class="security-badge"><i class="fa-solid fa-check"></i> No lead broker partnerships</span>
+              <span class="security-badge"><i class="fa-solid fa-check"></i> Zero unsolicited spam</span>
+            </div>
+          </div>
+
+          <div class="security-card">
+            <div class="security-card-header">
+              <div class="security-icon-box"><i class="fa-solid fa-user-gear"></i></div>
+              <h3 class="security-card-title">Anti-Detection Account Safety</h3>
+            </div>
+            <p class="security-card-text">
+              Scraping and application assistants use human-velocity rate limiting and randomized jitter delays so your accounts on LinkedIn and other job portals remain completely safe and unflagged.
+            </p>
+            <div class="security-badge-row">
+              <span class="security-badge"><i class="fa-solid fa-check"></i> Rate-limit mitigation</span>
+              <span class="security-badge"><i class="fa-solid fa-check"></i> Safe portal sessions</span>
+            </div>
+          </div>
+
+          <div class="security-card">
+            <div class="security-card-header">
+              <div class="security-icon-box"><i class="fa-solid fa-database"></i></div>
+              <h3 class="security-card-title">Total Candidate Data Ownership</h3>
+            </div>
+            <p class="security-card-text">
+              You own every piece of your job search history. Export your comprehensive application log to formatted Excel or CSV anytime, or permanently wipe your account with a single click.
+            </p>
+            <div class="security-badge-row">
+              <span class="security-badge"><i class="fa-solid fa-check"></i> Instant 1-click export</span>
+              <span class="security-badge"><i class="fa-solid fa-check"></i> Permanent data purge</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section: ❓ Candidate FAQ -->
+      <section id="faq" class="content-section">
+        <div class="section-header">
+          <span class="section-tag"><i class="fa-solid fa-circle-question"></i> Questions & Answers</span>
+          <h2 class="section-title">Frequently Asked Questions</h2>
+          <p class="section-desc">
+            Everything you need to know about AI JobSnap early access, security, and career automation.
+          </p>
+        </div>
+
+        <div class="faq-grid">
+          <div class="faq-card">
+            <h3 class="faq-question">
+              <i class="fa-solid fa-circle-check"></i>
+              <span>Is AI JobSnap really 100% free right now?</span>
+            </h3>
+            <p class="faq-answer">
+              Yes! All 11 core features — including multi-source scraping, AI relevance scoring, Kanban application tracking, and automated email reports — are completely free during our public beta while compute capacity allows.
+            </p>
+          </div>
+
+          <div class="faq-card">
+            <h3 class="faq-question">
+              <i class="fa-solid fa-bullseye"></i>
+              <span>How does the AI relevance scoring work?</span>
+            </h3>
+            <p class="faq-answer">
+              Our intelligent heuristic engine analyzes job titles, required technical skills, years of experience, and role responsibilities against your profile and resume. Jobs receive an objective 0–100% match score so you focus on top opportunities first.
+            </p>
+          </div>
+
+          <div class="faq-card">
+            <h3 class="faq-question">
+              <i class="fa-solid fa-user-shield"></i>
+              <span>Will my current employer know I am job hunting?</span>
+            </h3>
+            <p class="faq-answer">
+              Never. AI JobSnap runs in stealth mode. We do not publish candidate directories or sell data to recruiters. Your target search profiles, saved companies, and application logs are accessible only to you.
+            </p>
+          </div>
+
+          <div class="faq-card">
+            <h3 class="faq-question">
+              <i class="fa-solid fa-wand-magic-sparkles"></i>
+              <span>What is the Assisted Application Filling feature?</span>
+            </h3>
+            <p class="faq-answer">
+              Our application assistant launches a dedicated browser session that automatically pre-populates repetitive fields (name, contact info, LinkedIn URL, work history) on standard ATS application portals, saving you hours of tedious manual typing.
+            </p>
+          </div>
+
+          <div class="faq-card">
+            <h3 class="faq-question">
+              <i class="fa-solid fa-file-excel"></i>
+              <span>How do daily email summaries and Excel sheets work?</span>
+            </h3>
+            <p class="faq-answer">
+              Every morning, AI JobSnap scans your target profiles for new listings. You can configure it to send a morning brief directly to your inbox with direct apply links and an attached, beautifully formatted Excel spreadsheet tracking all new opportunities.
+            </p>
+          </div>
+
+          <div class="faq-card">
+            <h3 class="faq-question">
+              <i class="fa-solid fa-calendar-days"></i>
+              <span>How does Google Calendar sync help me?</span>
+            </h3>
+            <p class="faq-answer">
+              When an employer schedules a screening call or interview, or when an application deadline approaches, AI JobSnap automatically syncs the event to your Google Calendar so you never miss an interview deadline or follow-up window.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section: 🔧 Future Scope & Roadmap -->
+      <section id="roadmap" class="content-section">
+        <div class="section-header">
+          <span class="section-tag"><i class="fa-solid fa-compass-drafting"></i> Future Scope</span>
+          <h2 class="section-title">Product Roadmap</h2>
+          <p class="section-desc">
+            Upcoming capabilities planned to supercharge your automated job hunting workflow.
+          </p>
+        </div>
+
+        <div class="roadmap-grid">
+          <div class="roadmap-card">
+            <div class="roadmap-card-top"><i class="fa-solid fa-pen-nib" style="color: #34d399;"></i> <span>AI Cover Letters</span></div>
+            <p class="roadmap-card-desc">AI-tailored cover letters and 1-click personalized variants customized per company role.</p>
+          </div>
+
+          <div class="roadmap-card">
+            <div class="roadmap-card-top"><i class="fa-solid fa-file-circle-check" style="color: #34d399;"></i> <span>Resume ATS Optimizer</span></div>
+            <p class="roadmap-card-desc">Actionable fixes and keyword gap analysis showing exact phrases to add for high ATS scores.</p>
+          </div>
+
+          <div class="roadmap-card">
+            <div class="roadmap-card-top"><i class="fa-solid fa-diagram-project" style="color: #34d399;"></i> <span>Contextual Semantic Match</span></div>
+            <p class="roadmap-card-desc">Deep semantic understanding matching your true project experience beyond strict keyword matches.</p>
+          </div>
+
+          <div class="roadmap-card">
+            <div class="roadmap-card-top"><i class="fa-solid fa-file-pdf" style="color: #34d399;"></i> <span>1-Click Tailored PDF Resumes</span></div>
+            <p class="roadmap-card-desc">Generates selective-edited, clean tailored resume PDFs customized for each individual opportunity.</p>
+          </div>
+
+          <div class="roadmap-card">
+            <div class="roadmap-card-top"><i class="fa-solid fa-robot" style="color: #34d399;"></i> <span>Smart ATS Pre-Filler</span></div>
+            <p class="roadmap-card-desc">Prepares auto-filled application forms with highlighted fields for rapid human-in-the-loop review.</p>
+          </div>
+
+          <div class="roadmap-card">
+            <div class="roadmap-card-top"><i class="fa-solid fa-briefcase" style="color: #34d399;"></i> <span>Interview Prep Cheat Sheets</span></div>
+            <p class="roadmap-card-desc">Auto-generates company culture questions, role talk-tracks, and tailored 30–60–90 day plans.</p>
+          </div>
+
+          <div class="roadmap-card">
+            <div class="roadmap-card-top"><i class="fa-solid fa-bell" style="color: #34d399;"></i> <span>Instant WhatsApp Alerts</span></div>
+            <p class="roadmap-card-desc">Receive instant notifications on WhatsApp or Telegram the moment a 90%+ match job goes live.</p>
+          </div>
+
+          <div class="roadmap-card">
+            <div class="roadmap-card-top"><i class="fa-solid fa-dollar-sign" style="color: #34d399;"></i> <span>Salary & Company Intel</span></div>
+            <p class="roadmap-card-desc">Integrates verified compensation bands, funding stage, and company growth stats directly into job cards.</p>
+          </div>
+
+          <div class="roadmap-card">
+            <div class="roadmap-card-top"><i class="fa-solid fa-arrows-spin" style="color: #34d399;"></i> <span>Adaptive Preference Learning</span></div>
+            <p class="roadmap-card-desc">Continuously learns your preferred tech stacks and company stages from your likes and bookmarks.</p>
+          </div>
+
+          <div class="roadmap-card">
+            <div class="roadmap-card-top"><i class="fa-solid fa-window-restore" style="color: #34d399;"></i> <span>Multi-Device Sync</span></div>
+            <p class="roadmap-card-desc">Seamlessly review jobs on mobile during transit and manage deep applications from your desktop.</p>
+          </div>
+
+          <div class="roadmap-card">
+            <div class="roadmap-card-top"><i class="fa-solid fa-vault" style="color: #34d399;"></i> <span>Encrypted Career Vault</span></div>
+            <p class="roadmap-card-desc">Safely store multiple resume versions, portfolio links, and reference letters in private encrypted cloud storage.</p>
+          </div>
+
+          <div class="roadmap-card">
+            <div class="roadmap-card-top"><i class="fa-solid fa-chart-pie" style="color: #34d399;"></i> <span>Application Velocity Insights</span></div>
+            <p class="roadmap-card-desc">Visual funnel analytics showing response rates, interview conversion velocity, and stage metrics.</p>
+          </div>
+
+          <div class="roadmap-card">
+            <div class="roadmap-card-top"><i class="fa-brands fa-chrome" style="color: #34d399;"></i> <span>Browser Extension Clipper</span></div>
+            <p class="roadmap-card-desc">Chrome and Edge extension to clip jobs from any career page into your JobSnap board with one click.</p>
+          </div>
+
+          <div class="roadmap-card">
+            <div class="roadmap-card-top"><i class="fa-solid fa-earth-americas" style="color: #34d399;"></i> <span>Global Portal Expansions</span></div>
+            <p class="roadmap-card-desc">Expanding automated discovery to Glassdoor, Indeed, Monster, and top regional tech boards.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section: ⚡ Final Early Access Reservation Card -->
+      <section id="early-access" class="final-cta-card">
+        <span class="section-tag" style="background: rgba(16, 185, 129, 0.2);"><i class="fa-solid fa-ticket"></i> Early Access</span>
+        <h2 class="section-title" style="margin-top: 10px;">Lock In Your 100% Free Pass</h2>
+        <p class="section-desc" style="margin-bottom: 24px;">
+          Only 8% compute capacity is currently allocated. Enter your email below to reserve your early access pass before capacity fills up.
+        </p>
+
+        <div class="early-access-container" style="margin: 0 auto;">
+          <form id="bottomEmailForm" class="early-access-form" novalidate>
+            <div class="input-wrap">
+              <i class="fa-regular fa-envelope input-icon"></i>
+              <input
+                type="email"
+                id="bottomEmailInput"
+                class="early-access-input"
+                placeholder="Enter your email to claim your free pass..."
+                autocomplete="email"
+                required
+              />
+            </div>
+            <button type="submit" id="bottomSubmitBtn" class="cta-btn early-access-submit">
+              <span class="btn-text">Claim Free Pass</span>
+              <i class="fa-solid fa-arrow-right btn-arrow"></i>
+            </button>
+          </form>
+
+          <div id="bottomFormFeedback" class="form-feedback" hidden></div>
+        </div>
+      </section>
+
+      <!-- Footer -->
+      <footer class="site-footer">
+        <div>
+          <strong>AI JobSnap</strong> — Intelligent Career Automation & Candidate Operating System. All rights reserved.
+        </div>
+        <div class="footer-links">
+          <a href="#home" class="footer-link">Home</a>
+          <a href="#capacity" class="footer-link">Capacity</a>
+          <a href="#features" class="footer-link">Features</a>
+          <a href="#workflow" class="footer-link">Workflow</a>
+          <a href="#security" class="footer-link">Security</a>
+          <a href="#faq" class="footer-link">FAQ</a>
+          <a href="#roadmap" class="footer-link">Roadmap</a>
+          <a href="#early-access" class="footer-link" style="color: #34d399; font-weight: 500;">Claim Free Spot</a>
         </div>
       </footer>
     </div>

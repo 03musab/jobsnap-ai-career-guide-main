@@ -1,4 +1,4 @@
-import MagicBento from '../../MagicBento';
+import MagicBento from './MagicBento';
 
 const Features = () => {
   return (
