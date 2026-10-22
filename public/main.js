@@ -1,4 +1,395 @@
 document.addEventListener("DOMContentLoaded", () => {
+  // --- Web Audio Procedural Sound Effects Engine ---
+  class SoundFXEngine {
+    constructor() {
+      this.ctx = null;
+      this.enabled = true;
+      this.lastHoverTime = 0;
+      this.lastCardHoverTime = 0;
+      this.lastTypingTime = 0;
+      this.pentatonicScale = [523.25, 587.33, 659.25, 783.99, 880.00, 1046.50, 1174.66]; // C5 to D6
+      this.loadState();
+    }
+
+    loadState() {
+      try {
+        const saved = localStorage.getItem("jobsnap_sound_enabled");
+        this.enabled = saved !== null ? saved === "true" : true;
+      } catch (e) {
+        this.enabled = true;
+      }
+    }
+
+    init() {
+      if (this.ctx && this.ctx.state !== "closed") {
+        if (this.ctx.state === "suspended") {
+          this.ctx.resume();
+        }
+        return;
+      }
+      try {
+        const AudioCtx = window.AudioContext || window.webkitAudioContext;
+        if (AudioCtx) {
+          this.ctx = new AudioCtx();
+        }
+      } catch (err) {
+        console.warn("[SoundFX] AudioContext init note:", err);
+      }
+    }
+
+    toggle() {
+      this.enabled = !this.enabled;
+      try {
+        localStorage.setItem("jobsnap_sound_enabled", this.enabled.toString());
+      } catch (e) {}
+      if (this.enabled) {
+        this.init();
+        this.playClick(1.2);
+      }
+      this.updateUI();
+      return this.enabled;
+    }
+
+    updateUI() {
+      const toggleBtn = document.getElementById("soundToggleBtn");
+      const mobileBtn = document.getElementById("mobileSoundBtn");
+      const mobileText = document.getElementById("mobileSoundText");
+
+      if (toggleBtn) {
+        toggleBtn.classList.toggle("muted", !this.enabled);
+        toggleBtn.setAttribute(
+          "title",
+          this.enabled ? "Sound Effects: ON (Click to mute)" : "Sound Effects: OFF (Click to unmute)"
+        );
+        const icon = toggleBtn.querySelector("i");
+        if (icon) {
+          icon.className = this.enabled ? "fa-solid fa-volume-high sound-icon" : "fa-solid fa-volume-xmark sound-icon";
+        }
+      }
+
+      if (mobileBtn) {
+        mobileBtn.classList.toggle("muted", !this.enabled);
+        const icon = mobileBtn.querySelector("i");
+        if (icon) {
+          icon.className = this.enabled ? "fa-solid fa-volume-high" : "fa-solid fa-volume-xmark";
+        }
+      }
+
+      if (mobileText) {
+        mobileText.textContent = this.enabled ? "Sound Effects: Active" : "Sound Effects: Muted";
+      }
+    }
+
+    // 1. Subtle Glass Tick (Buttons, Links, Badges)
+    playHoverTick(freq = 840, vol = 0.04) {
+      if (!this.enabled) return;
+      const now = performance.now();
+      if (now - this.lastHoverTime < 30) return;
+      this.lastHoverTime = now;
+
+      this.init();
+      if (!this.ctx) return;
+
+      const t = this.ctx.currentTime;
+      const osc = this.ctx.createOscillator();
+      const gain = this.ctx.createGain();
+      const filter = this.ctx.createBiquadFilter();
+
+      osc.type = "sine";
+      osc.frequency.setValueAtTime(freq, t);
+      osc.frequency.exponentialRampToValueAtTime(Math.max(200, freq * 0.72), t + 0.032);
+
+      filter.type = "lowpass";
+      filter.frequency.setValueAtTime(2200, t);
+
+      gain.gain.setValueAtTime(0.001, t);
+      gain.gain.linearRampToValueAtTime(vol, t + 0.002);
+      gain.gain.exponentialRampToValueAtTime(0.0001, t + 0.032);
+
+      osc.connect(filter);
+      filter.connect(gain);
+      gain.connect(this.ctx.destination);
+
+      osc.start(t);
+      osc.stop(t + 0.035);
+    }
+
+    // 2. Melodic Tab Glide (Nav Bar Segments)
+    playTabGlide(index = 0) {
+      if (!this.enabled) return;
+      const now = performance.now();
+      if (now - this.lastHoverTime < 25) return;
+      this.lastHoverTime = now;
+
+      this.init();
+      if (!this.ctx) return;
+
+      const t = this.ctx.currentTime;
+      const noteFreq = this.pentatonicScale[index % this.pentatonicScale.length] || 659.25;
+
+      const osc = this.ctx.createOscillator();
+      const osc2 = this.ctx.createOscillator();
+      const gain = this.ctx.createGain();
+
+      osc.type = "sine";
+      osc.frequency.setValueAtTime(noteFreq, t);
+
+      osc2.type = "triangle";
+      osc2.frequency.setValueAtTime(noteFreq * 2, t);
+
+      gain.gain.setValueAtTime(0.001, t);
+      gain.gain.linearRampToValueAtTime(0.038, t + 0.003);
+      gain.gain.exponentialRampToValueAtTime(0.0001, t + 0.05);
+
+      osc.connect(gain);
+      osc2.connect(gain);
+      gain.connect(this.ctx.destination);
+
+      osc.start(t);
+      osc2.start(t);
+      osc.stop(t + 0.055);
+      osc2.stop(t + 0.055);
+    }
+
+    // 3. Card Tactile Glass Thump
+    playCardHover() {
+      if (!this.enabled) return;
+      const now = performance.now();
+      if (now - this.lastCardHoverTime < 50) return;
+      this.lastCardHoverTime = now;
+
+      this.init();
+      if (!this.ctx) return;
+
+      const t = this.ctx.currentTime;
+
+      // Low tactile body
+      const oscLow = this.ctx.createOscillator();
+      const gainLow = this.ctx.createGain();
+      oscLow.type = "sine";
+      oscLow.frequency.setValueAtTime(145, t);
+      oscLow.frequency.exponentialRampToValueAtTime(50, t + 0.06);
+
+      gainLow.gain.setValueAtTime(0.001, t);
+      gainLow.gain.linearRampToValueAtTime(0.04, t + 0.003);
+      gainLow.gain.exponentialRampToValueAtTime(0.0001, t + 0.06);
+
+      oscLow.connect(gainLow);
+      gainLow.connect(this.ctx.destination);
+      oscLow.start(t);
+      oscLow.stop(t + 0.065);
+
+      // Micro glass sparkle
+      const oscHigh = this.ctx.createOscillator();
+      const gainHigh = this.ctx.createGain();
+      oscHigh.type = "sine";
+      oscHigh.frequency.setValueAtTime(1380, t);
+      oscHigh.frequency.exponentialRampToValueAtTime(800, t + 0.025);
+
+      gainHigh.gain.setValueAtTime(0.001, t);
+      gainHigh.gain.linearRampToValueAtTime(0.016, t + 0.002);
+      gainHigh.gain.exponentialRampToValueAtTime(0.0001, t + 0.025);
+
+      oscHigh.connect(gainHigh);
+      gainHigh.connect(this.ctx.destination);
+      oscHigh.start(t);
+      oscHigh.stop(t + 0.028);
+    }
+
+    // 4. Tactile Click / Tap (Apple Switch Style)
+    playClick(pitchMultiplier = 1) {
+      if (!this.enabled) return;
+      this.init();
+      if (!this.ctx) return;
+
+      const t = this.ctx.currentTime;
+
+      // Click transient
+      const osc = this.ctx.createOscillator();
+      const gain = this.ctx.createGain();
+
+      osc.type = "sine";
+      osc.frequency.setValueAtTime(960 * pitchMultiplier, t);
+      osc.frequency.exponentialRampToValueAtTime(260 * pitchMultiplier, t + 0.022);
+
+      gain.gain.setValueAtTime(0.001, t);
+      gain.gain.linearRampToValueAtTime(0.07, t + 0.002);
+      gain.gain.exponentialRampToValueAtTime(0.0001, t + 0.024);
+
+      osc.connect(gain);
+      gain.connect(this.ctx.destination);
+
+      osc.start(t);
+      osc.stop(t + 0.028);
+
+      // Body pop
+      const oscLow = this.ctx.createOscillator();
+      const gainLow = this.ctx.createGain();
+
+      oscLow.type = "triangle";
+      oscLow.frequency.setValueAtTime(280 * pitchMultiplier, t);
+      oscLow.frequency.exponentialRampToValueAtTime(90 * pitchMultiplier, t + 0.042);
+
+      gainLow.gain.setValueAtTime(0.001, t);
+      gainLow.gain.linearRampToValueAtTime(0.05, t + 0.002);
+      gainLow.gain.exponentialRampToValueAtTime(0.0001, t + 0.042);
+
+      oscLow.connect(gainLow);
+      gainLow.connect(this.ctx.destination);
+
+      oscLow.start(t);
+      oscLow.stop(t + 0.045);
+    }
+
+    // 5. Typing Micro-Tap
+    playKeyTap() {
+      if (!this.enabled) return;
+      const now = performance.now();
+      if (now - this.lastTypingTime < 35) return;
+      this.lastTypingTime = now;
+
+      this.init();
+      if (!this.ctx) return;
+
+      const t = this.ctx.currentTime;
+      const baseFreq = 400 + (Math.random() * 60 - 30);
+
+      const osc = this.ctx.createOscillator();
+      const gain = this.ctx.createGain();
+
+      osc.type = "sine";
+      osc.frequency.setValueAtTime(baseFreq, t);
+      osc.frequency.exponentialRampToValueAtTime(baseFreq * 0.5, t + 0.016);
+
+      gain.gain.setValueAtTime(0.001, t);
+      gain.gain.linearRampToValueAtTime(0.038, t + 0.001);
+      gain.gain.exponentialRampToValueAtTime(0.0001, t + 0.016);
+
+      osc.connect(gain);
+      gain.connect(this.ctx.destination);
+
+      osc.start(t);
+      osc.stop(t + 0.018);
+    }
+
+    // 6. Mobile Menu Swoosh
+    playMenuToggle(isOpen) {
+      if (!this.enabled) return;
+      this.init();
+      if (!this.ctx) return;
+
+      const t = this.ctx.currentTime;
+      const osc = this.ctx.createOscillator();
+      const gain = this.ctx.createGain();
+
+      osc.type = "sine";
+      if (isOpen) {
+        osc.frequency.setValueAtTime(360, t);
+        osc.frequency.exponentialRampToValueAtTime(780, t + 0.08);
+      } else {
+        osc.frequency.setValueAtTime(780, t);
+        osc.frequency.exponentialRampToValueAtTime(340, t + 0.08);
+      }
+
+      gain.gain.setValueAtTime(0.001, t);
+      gain.gain.linearRampToValueAtTime(0.055, t + 0.008);
+      gain.gain.exponentialRampToValueAtTime(0.0001, t + 0.085);
+
+      osc.connect(gain);
+      gain.connect(this.ctx.destination);
+
+      osc.start(t);
+      osc.stop(t + 0.09);
+    }
+
+    // 7. Dopamine Celebratory Success Chime
+    playSuccess() {
+      if (!this.enabled) return;
+      this.init();
+      if (!this.ctx) return;
+
+      const now = this.ctx.currentTime;
+      const chords = [
+        { f: 523.25, d: 0.00, dur: 0.35, v: 0.06 }, // C5
+        { f: 659.25, d: 0.07, dur: 0.35, v: 0.06 }, // E5
+        { f: 783.99, d: 0.14, dur: 0.40, v: 0.07 }, // G5
+        { f: 1046.5, d: 0.21, dur: 0.85, v: 0.09 }  // C6 (resonant bell)
+      ];
+
+      chords.forEach(({ f, d, dur, v }) => {
+        const t = now + d;
+        const osc = this.ctx.createOscillator();
+        const oscHarm = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+
+        osc.type = "sine";
+        osc.frequency.setValueAtTime(f, t);
+
+        oscHarm.type = "triangle";
+        oscHarm.frequency.setValueAtTime(f * 2, t);
+
+        gain.gain.setValueAtTime(0.0001, t);
+        gain.gain.linearRampToValueAtTime(v, t + 0.008);
+        gain.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+
+        osc.connect(gain);
+        oscHarm.connect(gain);
+        gain.connect(this.ctx.destination);
+
+        osc.start(t);
+        oscHarm.start(t);
+        osc.stop(t + dur + 0.02);
+        oscHarm.stop(t + dur + 0.02);
+      });
+
+      // Warm sub-bass foundation
+      const sub = this.ctx.createOscillator();
+      const subGain = this.ctx.createGain();
+      sub.type = "sine";
+      sub.frequency.setValueAtTime(130, now);
+      sub.frequency.exponentialRampToValueAtTime(70, now + 0.4);
+
+      subGain.gain.setValueAtTime(0.001, now);
+      subGain.gain.linearRampToValueAtTime(0.06, now + 0.02);
+      subGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.45);
+
+      sub.connect(subGain);
+      subGain.connect(this.ctx.destination);
+      sub.start(now);
+      sub.stop(now + 0.48);
+    }
+  }
+
+  const soundFX = new SoundFXEngine();
+  window.soundFX = soundFX;
+  soundFX.updateUI();
+
+  // Unlock AudioContext on first gesture
+  const unlockAudio = () => {
+    soundFX.init();
+    window.removeEventListener("pointerdown", unlockAudio);
+    window.removeEventListener("keydown", unlockAudio);
+    window.removeEventListener("touchstart", unlockAudio);
+  };
+  window.addEventListener("pointerdown", unlockAudio, { passive: true });
+  window.addEventListener("keydown", unlockAudio, { passive: true });
+  window.addEventListener("touchstart", unlockAudio, { passive: true });
+
+  // Sound Toggle Buttons
+  const soundToggleBtn = document.getElementById("soundToggleBtn");
+  if (soundToggleBtn) {
+    soundToggleBtn.addEventListener("click", () => {
+      soundFX.toggle();
+    });
+  }
+
+  const mobileSoundBtn = document.getElementById("mobileSoundBtn");
+  if (mobileSoundBtn) {
+    mobileSoundBtn.addEventListener("click", () => {
+      soundFX.toggle();
+    });
+  }
+
   // --- Mobile Menu Toggle ---
   const burgerBtn = document.getElementById("burgerBtn");
   const mobileMenu = document.getElementById("mobileMenu");
@@ -7,6 +398,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function openMenu() {
     document.body.classList.add("menu-open");
+    soundFX.playMenuToggle(true);
     if (burgerBtn) burgerBtn.setAttribute("aria-expanded", "true");
     if (mobileMenu) {
       mobileMenu.removeAttribute("hidden");
@@ -20,6 +412,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function closeMenu() {
     document.body.classList.remove("menu-open");
+    soundFX.playMenuToggle(false);
     if (burgerBtn) burgerBtn.setAttribute("aria-expanded", "false");
     if (mobileMenu) {
       mobileMenu.setAttribute("hidden", "");
@@ -32,6 +425,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function toggleMenu() {
+    soundFX.playClick(1.1);
     if (document.body.classList.contains("menu-open")) {
       closeMenu();
     } else {
@@ -44,6 +438,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   mobileNavLinks.forEach((link) => {
     link.addEventListener("click", () => {
+      soundFX.playClick(1.05);
       closeMenu();
     });
   });
@@ -109,10 +504,14 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }, 100);
 
-  // Smooth hover glide between links (Apple segmented control style)
-  desktopNavLinks.forEach((link) => {
+  // Smooth hover glide between links (Apple segmented control style) + audio feedback
+  desktopNavLinks.forEach((link, idx) => {
     link.addEventListener("mouseenter", () => {
       updateIndicator(link, true);
+      soundFX.playTabGlide(idx);
+    });
+    link.addEventListener("click", () => {
+      soundFX.playClick(1.05);
     });
   });
 
@@ -297,6 +696,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     if (!email || !emailRegex.test(email)) {
+      soundFX.playClick(0.65);
       showFeedbackElement(
         feedbackEl,
         "error",
@@ -329,6 +729,9 @@ document.addEventListener("DOMContentLoaded", () => {
       if (btnText) btnText.textContent = "Pass Claimed! 🎉";
       bottomSubmitBtn.style.boxShadow = "0 0 24px rgba(16, 185, 129, 0.6)";
     }
+
+    // Play triumphant celestial success chord!
+    soundFX.playSuccess();
 
     // 4. Show celebratory confirmation message
     const successHtml = `<div style="font-weight: 600; margin-bottom: 4px; display: flex; align-items: center; justify-content: center; gap: 8px;"><i class="fa-solid fa-circle-check" style="color: #10b981;"></i> Free Early Access Confirmed! Pass <strong>#${record.ticketId}</strong></div><div style="font-size: 13px; opacity: 0.95;">Welcome aboard! <strong>${record.email}</strong> is registered for 100% free compute access while capacity lasts.</div>`;
@@ -368,6 +771,55 @@ document.addEventListener("DOMContentLoaded", () => {
       handleSignup(email, "Final Callout Banner", bottomFormFeedback, bottomSubmitBtn, bottomEmailInput);
     });
   }
+
+  // --- Attach Interactive Sound Effects Across Elements ---
+  // 1. Feature Cards & Security Cards (tactile glass thump)
+  document.querySelectorAll(".feature-card, .security-card").forEach((card) => {
+    card.addEventListener("mouseenter", () => {
+      soundFX.playCardHover();
+    });
+  });
+
+  // 2. Roadmap, Capacity Nodes & Kanban Items (subtle glass ticks)
+  document.querySelectorAll(".roadmap-card, .capacity-node-card, .kanban-item").forEach((card) => {
+    card.addEventListener("mouseenter", () => {
+      soundFX.playHoverTick(720, 0.035);
+    });
+  });
+
+  // 3. FAQ Cards (hover tick + click pop)
+  document.querySelectorAll(".faq-card").forEach((card) => {
+    card.addEventListener("mouseenter", () => {
+      soundFX.playHoverTick(680, 0.038);
+    });
+    card.addEventListener("click", () => {
+      soundFX.playClick(0.92);
+    });
+  });
+
+  // 4. Buttons & Interactive Links (tactile clicks & glass hover)
+  document.querySelectorAll("button, .sign-in-btn, .cta-btn, .features-trigger-btn, .mobile-sign-in").forEach((btn) => {
+    btn.addEventListener("mouseenter", () => {
+      soundFX.playHoverTick(880, 0.045);
+    });
+    btn.addEventListener("click", () => {
+      soundFX.playClick(1.0);
+    });
+  });
+
+  // 5. Input keypress micro-taps & focus chime
+  [userEmailInput, bottomEmailInput].forEach((inp) => {
+    if (!inp) return;
+    inp.addEventListener("focus", () => {
+      soundFX.playHoverTick(920, 0.04);
+    });
+    inp.addEventListener("keydown", (e) => {
+      // Ignore navigation / modifier keys
+      if (!["Shift", "Control", "Alt", "Meta", "CapsLock", "Tab", "Escape", "ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].includes(e.key)) {
+        soundFX.playKeyTap();
+      }
+    });
+  });
 
   // --- Stats Counter with IntersectionObserver ---
   const statElements = document.querySelectorAll("[data-stat-target]");

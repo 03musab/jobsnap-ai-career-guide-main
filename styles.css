@@ -265,10 +265,56 @@ body {
               0 0 28px rgba(16, 185, 129, 0.35);
 }
 
-.sign-in-btn:active {
-  transform: scale(0.95);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4),
-              inset 0 1px 0 rgba(255, 255, 255, 0.2);
+/* Sound Toggle Button - iOS Liquid Glass */
+.sound-toggle-btn {
+  width: clamp(42px, 5.2vw, 48px);
+  height: clamp(42px, 5.2vw, 48px);
+  border-radius: 50%;
+  background: rgba(22, 22, 26, 0.65);
+  backdrop-filter: blur(28px) saturate(190%) contrast(105%);
+  -webkit-backdrop-filter: blur(28px) saturate(190%) contrast(105%);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  box-shadow: 0 10px 24px -4px rgba(0, 0, 0, 0.5),
+              inset 0 1px 0 rgba(255, 255, 255, 0.35);
+  color: #34d399;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14.5px;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              background-color 0.25s ease,
+              border-color 0.25s ease,
+              color 0.25s ease,
+              box-shadow 0.25s ease;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.sound-toggle-btn:hover {
+  color: #a7f3d0;
+  border-color: rgba(52, 211, 153, 0.6);
+  background: rgba(30, 30, 38, 0.85);
+  box-shadow: 0 12px 28px -4px rgba(0, 0, 0, 0.6),
+              inset 0 1px 0 rgba(255, 255, 255, 0.45),
+              0 0 16px rgba(16, 185, 129, 0.3);
+  transform: translateY(-1px) scale(1.04);
+}
+
+.sound-toggle-btn:active {
+  transform: scale(0.92);
+}
+
+.sound-toggle-btn.muted {
+  color: #8e8e93;
+  border-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
+}
+
+.sound-toggle-btn.muted:hover {
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.25);
 }
 
 /* Burger button for mobile - iOS Frosted Glass */
@@ -440,6 +486,36 @@ body.menu-open .burger-bar:nth-child(3) {
 
 .mobile-sign-in:active {
   transform: scale(0.96);
+}
+
+.mobile-sound-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 11px 16px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: #34d399;
+  font-family: var(--font-sans);
+  font-size: 13.5px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.mobile-sound-toggle:active {
+  transform: scale(0.97);
+}
+
+.mobile-sound-toggle.muted {
+  color: #9ca3af;
+  background: rgba(255, 255, 255, 0.03);
+  border-color: rgba(255, 255, 255, 0.08);
 }
 
 @keyframes linkIn {
@@ -1477,11 +1553,16 @@ body.menu-open .burger-bar:nth-child(3) {
   .site-header {
     justify-content: flex-end;
     max-width: 100%;
+    gap: 10px;
   }
 
   .nav-pill,
   .sign-in-btn {
     display: none;
+  }
+
+  .sound-toggle-btn {
+    display: inline-flex;
   }
 
   .burger-btn {
