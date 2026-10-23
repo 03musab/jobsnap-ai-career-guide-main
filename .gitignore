@@ -24,3 +24,5 @@ dist-ssr
 *.sw?
 .env.local
 .env
+data/temp_*.html
+token.pickle

@@ -129,17 +129,60 @@ app.post('/api/cashfree-verify', async (req, res) => {
 });
 
 
-// Endpoint to subscribe user after successful payment
-app.post('/api/subscribe', (req, res) => {
-    const { email } = req.body;
-    // Basic email validation
+import { dispatchSubscriptionEmail } from './services/emailDispatcher.js';
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const SUBSCRIBERS_JSON = path.join(__dirname, 'data', 'subscribers.json');
+
+// Endpoint to subscribe user and immediately dispatch the early access / founding pass email
+app.post('/api/subscribe', async (req, res) => {
+  try {
+    const { email, name, role, ticketId, source, templateType } = req.body;
+
+    // Email validation
     if (!email || !/^\S+@\S+\.\S+$/.test(email)) {
-        return res.status(400).json({ message: 'Invalid email provided.' });
+      return res.status(400).json({ error: 'A valid email address is required.' });
     }
 
-    console.log(`Subscribing ${email} to the early access list.`);
-    // Add your logic here to save the email to your database or mailing list
-    res.status(200).json({ message: 'Successfully subscribed!' });
+    // Dispatch the response email using templates from desktop ai_job_agent
+    const result = await dispatchSubscriptionEmail({
+      email: email.trim(),
+      name: name ? name.trim() : undefined,
+      role: role || 'Tech / Product',
+      ticketId: ticketId || `JS-${Math.floor(1000 + Math.random() * 9000)}`,
+      source: source || 'Landing Page Form',
+      templateType: templateType || '2' // Defaults to VIP Founding Pass (Template 2)
+    });
+
+    return res.status(200).json({
+      success: true,
+      message: 'Subscription successful and confirmation pass email dispatched!',
+      data: result
+    });
+  } catch (error) {
+    console.error('[API /subscribe] Error:', error);
+    return res.status(500).json({
+      error: 'Failed to process subscription and send email.',
+      details: error.message
+    });
+  }
+});
+
+// Endpoint to list recent subscribers (admin view)
+app.get('/api/subscribers', (req, res) => {
+  try {
+    if (fs.existsSync(SUBSCRIBERS_JSON)) {
+      const data = JSON.parse(fs.readFileSync(SUBSCRIBERS_JSON, 'utf-8'));
+      return res.json({ count: data.length, subscribers: data });
+    }
+    return res.json({ count: 0, subscribers: [] });
+  } catch (err) {
+    return res.status(500).json({ error: 'Failed to load subscribers' });
+  }
 });
 
 

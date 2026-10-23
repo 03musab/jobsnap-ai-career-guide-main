@@ -46,6 +46,16 @@
 
     <!-- Main Stylesheet -->
     <link rel="stylesheet" href="/styles.css" />
+
+    <!-- Prevent browser scroll restoration and ensure page always starts at absolute top (0, 0) -->
+    <script>
+      if ("scrollRestoration" in history) {
+        history.scrollRestoration = "manual";
+      }
+      window.scrollTo(0, 0);
+      document.documentElement.scrollTop = 0;
+      if (document.body) document.body.scrollTop = 0;
+    </script>
   </head>
   <body>
     <!-- Full-viewport fixed background video -->
@@ -709,74 +719,124 @@
         </div>
 
         <div class="roadmap-grid">
+          <!-- 1. AI Cover Letters (LIVE) -->
           <div class="roadmap-card">
-            <div class="roadmap-card-top"><i class="fa-solid fa-pen-nib" style="color: #34d399;"></i> <span>AI Cover Letters</span></div>
-            <p class="roadmap-card-desc">AI-tailored cover letters and 1-click personalized variants customized per company role.</p>
+            <div class="roadmap-card-top">
+              <i class="fa-solid fa-pen-nib" style="color: #34d399;"></i>
+              <span>AI Cover Letters</span>
+              <span class="roadmap-badge-live"><i class="fa-solid fa-circle-check"></i> Live in Agent</span>
+            </div>
+            <p class="roadmap-card-desc">AI-tailored executive cover letters generated on-the-fly using Gemini & Cerebras LLMs from your parsed resume.</p>
           </div>
 
+          <!-- 2. Contextual Semantic Match (LIVE) -->
           <div class="roadmap-card">
-            <div class="roadmap-card-top"><i class="fa-solid fa-file-circle-check" style="color: #34d399;"></i> <span>Resume ATS Optimizer</span></div>
-            <p class="roadmap-card-desc">Actionable fixes and keyword gap analysis showing exact phrases to add for high ATS scores.</p>
+            <div class="roadmap-card-top">
+              <i class="fa-solid fa-diagram-project" style="color: #34d399;"></i>
+              <span>Contextual Semantic Match</span>
+              <span class="roadmap-badge-live"><i class="fa-solid fa-circle-check"></i> Live in Agent</span>
+            </div>
+            <p class="roadmap-card-desc">Deep semantic intelligence matching your true technical experience and projects beyond strict keyword matching.</p>
           </div>
 
+          <!-- 3. Smart ATS Pre-Filler (LIVE) -->
           <div class="roadmap-card">
-            <div class="roadmap-card-top"><i class="fa-solid fa-diagram-project" style="color: #34d399;"></i> <span>Contextual Semantic Match</span></div>
-            <p class="roadmap-card-desc">Deep semantic understanding matching your true project experience beyond strict keyword matches.</p>
+            <div class="roadmap-card-top">
+              <i class="fa-solid fa-robot" style="color: #34d399;"></i>
+              <span>Smart ATS Pre-Filler</span>
+              <span class="roadmap-badge-live"><i class="fa-solid fa-circle-check"></i> Live in Agent</span>
+            </div>
+            <p class="roadmap-card-desc">Automated browser session pairing that pre-fills application forms across major ATS networks with 1 click.</p>
           </div>
 
+          <!-- 4. Skill Gap & Learning Curriculums (LIVE) -->
           <div class="roadmap-card">
-            <div class="roadmap-card-top"><i class="fa-solid fa-file-pdf" style="color: #34d399;"></i> <span>1-Click Tailored PDF Resumes</span></div>
-            <p class="roadmap-card-desc">Generates selective-edited, clean tailored resume PDFs customized for each individual opportunity.</p>
+            <div class="roadmap-card-top">
+              <i class="fa-solid fa-graduation-cap" style="color: #34d399;"></i>
+              <span>Skill Gap & Roadmaps</span>
+              <span class="roadmap-badge-live"><i class="fa-solid fa-circle-check"></i> Live in Agent</span>
+            </div>
+            <p class="roadmap-card-desc">Diagnoses missing competencies for target roles and creates personalized learning pathways with project guides.</p>
           </div>
 
+          <!-- 5. Application Funnel & Velocity Insights (LIVE) -->
           <div class="roadmap-card">
-            <div class="roadmap-card-top"><i class="fa-solid fa-robot" style="color: #34d399;"></i> <span>Smart ATS Pre-Filler</span></div>
-            <p class="roadmap-card-desc">Prepares auto-filled application forms with highlighted fields for rapid human-in-the-loop review.</p>
+            <div class="roadmap-card-top">
+              <i class="fa-solid fa-chart-pie" style="color: #34d399;"></i>
+              <span>Application Funnel Velocity</span>
+              <span class="roadmap-badge-live"><i class="fa-solid fa-circle-check"></i> Live in Agent</span>
+            </div>
+            <p class="roadmap-card-desc">Interactive pipeline tracking (New, Applied, Interview, Offer) with live response velocity and conversion analytics.</p>
           </div>
 
+          <!-- 6. Outreach Studio & Message Vault (LIVE) -->
           <div class="roadmap-card">
-            <div class="roadmap-card-top"><i class="fa-solid fa-briefcase" style="color: #34d399;"></i> <span>Interview Prep Cheat Sheets</span></div>
-            <p class="roadmap-card-desc">Auto-generates company culture questions, role talk-tracks, and tailored 30–60–90 day plans.</p>
+            <div class="roadmap-card-top">
+              <i class="fa-solid fa-vault" style="color: #34d399;"></i>
+              <span>Outreach Studio & Vault</span>
+              <span class="roadmap-badge-live"><i class="fa-solid fa-circle-check"></i> Live in Agent</span>
+            </div>
+            <p class="roadmap-card-desc">Discover recruiter contacts, verify emails, manage message templates, and dispatch outreach campaigns.</p>
           </div>
 
+          <!-- 7. Resume ATS Optimizer (PIPELINE) -->
           <div class="roadmap-card">
-            <div class="roadmap-card-top"><i class="fa-solid fa-bell" style="color: #34d399;"></i> <span>Instant WhatsApp Alerts</span></div>
-            <p class="roadmap-card-desc">Receive instant notifications on WhatsApp or Telegram the moment a 90%+ match job goes live.</p>
+            <div class="roadmap-card-top">
+              <i class="fa-solid fa-file-circle-check" style="color: #60a5fa;"></i>
+              <span>Resume ATS Optimizer</span>
+              <span class="roadmap-badge-planned"><i class="fa-solid fa-clock"></i> In Pipeline</span>
+            </div>
+            <p class="roadmap-card-desc">Actionable fixes and keyword density analysis showing exact phrases to add for 95%+ ATS scanner passes.</p>
           </div>
 
+          <!-- 8. 1-Click Tailored PDF Resumes (PIPELINE) -->
           <div class="roadmap-card">
-            <div class="roadmap-card-top"><i class="fa-solid fa-dollar-sign" style="color: #34d399;"></i> <span>Salary & Company Intel</span></div>
-            <p class="roadmap-card-desc">Integrates verified compensation bands, funding stage, and company growth stats directly into job cards.</p>
+            <div class="roadmap-card-top">
+              <i class="fa-solid fa-file-pdf" style="color: #60a5fa;"></i>
+              <span>Tailored PDF Resume Builder</span>
+              <span class="roadmap-badge-planned"><i class="fa-solid fa-clock"></i> In Pipeline</span>
+            </div>
+            <p class="roadmap-card-desc">Generates selective-edited, clean tailored resume PDFs customized for each individual job opportunity.</p>
           </div>
 
+          <!-- 9. Instant WhatsApp & Telegram Alerts (PIPELINE) -->
           <div class="roadmap-card">
-            <div class="roadmap-card-top"><i class="fa-solid fa-arrows-spin" style="color: #34d399;"></i> <span>Adaptive Preference Learning</span></div>
-            <p class="roadmap-card-desc">Continuously learns your preferred tech stacks and company stages from your likes and bookmarks.</p>
+            <div class="roadmap-card-top">
+              <i class="fa-solid fa-bell" style="color: #60a5fa;"></i>
+              <span>Instant WhatsApp Alerts</span>
+              <span class="roadmap-badge-planned"><i class="fa-solid fa-clock"></i> In Pipeline</span>
+            </div>
+            <p class="roadmap-card-desc">Receive real-time notifications on WhatsApp or Telegram the minute a 90%+ match role is scraped.</p>
           </div>
 
+          <!-- 10. Interview Prep Cheat Sheets (PIPELINE) -->
           <div class="roadmap-card">
-            <div class="roadmap-card-top"><i class="fa-solid fa-window-restore" style="color: #34d399;"></i> <span>Multi-Device Sync</span></div>
-            <p class="roadmap-card-desc">Seamlessly review jobs on mobile during transit and manage deep applications from your desktop.</p>
+            <div class="roadmap-card-top">
+              <i class="fa-solid fa-briefcase" style="color: #60a5fa;"></i>
+              <span>Interview Prep Cheat Sheets</span>
+              <span class="roadmap-badge-planned"><i class="fa-solid fa-clock"></i> In Pipeline</span>
+            </div>
+            <p class="roadmap-card-desc">Auto-generates company culture questions, role talk-tracks, and tailored 30–60–90 day impact plans.</p>
           </div>
 
+          <!-- 11. Browser Extension One-Click Clipper (PIPELINE) -->
           <div class="roadmap-card">
-            <div class="roadmap-card-top"><i class="fa-solid fa-vault" style="color: #34d399;"></i> <span>Encrypted Career Vault</span></div>
-            <p class="roadmap-card-desc">Safely store multiple resume versions, portfolio links, and reference letters in private encrypted cloud storage.</p>
+            <div class="roadmap-card-top">
+              <i class="fa-brands fa-chrome" style="color: #60a5fa;"></i>
+              <span>Browser Extension Clipper</span>
+              <span class="roadmap-badge-planned"><i class="fa-solid fa-clock"></i> In Pipeline</span>
+            </div>
+            <p class="roadmap-card-desc">Chrome and Edge extension to clip jobs from any company career portal directly into your board.</p>
           </div>
 
+          <!-- 12. Global Portal Expansions (PIPELINE) -->
           <div class="roadmap-card">
-            <div class="roadmap-card-top"><i class="fa-solid fa-chart-pie" style="color: #34d399;"></i> <span>Application Velocity Insights</span></div>
-            <p class="roadmap-card-desc">Visual funnel analytics showing response rates, interview conversion velocity, and stage metrics.</p>
-          </div>
-
-          <div class="roadmap-card">
-            <div class="roadmap-card-top"><i class="fa-brands fa-chrome" style="color: #34d399;"></i> <span>Browser Extension Clipper</span></div>
-            <p class="roadmap-card-desc">Chrome and Edge extension to clip jobs from any career page into your JobSnap board with one click.</p>
-          </div>
-
-          <div class="roadmap-card">
-            <div class="roadmap-card-top"><i class="fa-solid fa-earth-americas" style="color: #34d399;"></i> <span>Global Portal Expansions</span></div>
-            <p class="roadmap-card-desc">Expanding automated discovery to Glassdoor, Indeed, Monster, and top regional tech boards.</p>
+            <div class="roadmap-card-top">
+              <i class="fa-solid fa-earth-americas" style="color: #60a5fa;"></i>
+              <span>Global Portal Expansions</span>
+              <span class="roadmap-badge-planned"><i class="fa-solid fa-clock"></i> In Pipeline</span>
+            </div>
+            <p class="roadmap-card-desc">Expanding automated discovery to Glassdoor, Indeed, Monster, and top international tech portals.</p>
           </div>
         </div>
       </section>

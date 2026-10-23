@@ -1,4 +1,37 @@
+// --- Absolute Top Scroll Guard (ensures page loads exactly at 0px with no offset) ---
+if ("scrollRestoration" in history) {
+  history.scrollRestoration = "manual";
+}
+
+const lockToTop = () => {
+  window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+  if (document.documentElement) document.documentElement.scrollTop = 0;
+  if (document.body) document.body.scrollTop = 0;
+};
+
+// Execute immediately when script evaluates
+lockToTop();
+
+// Clear landing URL hash so browser cannot scroll or jump to a section on initial load
+if (window.location.hash) {
+  history.replaceState(null, "", window.location.pathname + window.location.search);
+}
+
+// Reset on pageshow (e.g. back/forward navigation from cache)
+window.addEventListener("pageshow", lockToTop);
+
+// Reset once all assets, images, fonts, and videos finish loading
+window.addEventListener("load", () => {
+  lockToTop();
+  requestAnimationFrame(lockToTop);
+  setTimeout(lockToTop, 50);
+  setTimeout(lockToTop, 150);
+});
+
 document.addEventListener("DOMContentLoaded", () => {
+  lockToTop();
+  requestAnimationFrame(lockToTop);
+  setTimeout(lockToTop, 30);
   // --- Web Audio Procedural Sound Effects Engine ---
   class SoundFXEngine {
     constructor() {
@@ -450,7 +483,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   window.addEventListener("resize", () => {
-    if (window.innerWidth > 720 && document.body.classList.contains("menu-open")) {
+    if (window.innerWidth > 880 && document.body.classList.contains("menu-open")) {
       closeMenu();
     }
   });
@@ -479,15 +512,14 @@ document.addEventListener("DOMContentLoaded", () => {
   function updateIndicator(targetLink, isAnimated = true) {
     if (!navIndicator || !targetLink || !navPill) return;
 
-    const linkRect = targetLink.getBoundingClientRect();
-    const pillRect = navPill.getBoundingClientRect();
-    const leftOffset = linkRect.left - pillRect.left;
-    const width = linkRect.width;
+    // Use precise offset relative to navPill container
+    const leftOffset = targetLink.offsetLeft;
+    const width = targetLink.offsetWidth;
 
     if (!isAnimated) {
       navIndicator.style.transition = "none";
     } else {
-      navIndicator.style.transition = "transform 0.38s cubic-bezier(0.16, 1, 0.3, 1), width 0.38s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease";
+      navIndicator.style.transition = "transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), width 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease";
     }
 
     navIndicator.style.transform = `translateX(${leftOffset}px)`;
@@ -512,6 +544,10 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     link.addEventListener("click", () => {
       soundFX.playClick(1.05);
+      desktopNavLinks.forEach((l) => l.classList.remove("active"));
+      link.classList.add("active");
+      currentActiveLink = link;
+      updateIndicator(link, true);
     });
   });
 
@@ -525,6 +561,19 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function highlightNavOnScroll() {
+    // If scrolled near bottom of page, reliably lock to Roadmap
+    const isBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 70;
+    if (isBottom) {
+      const lastLink = desktopNavLinks[desktopNavLinks.length - 1]; // Roadmap
+      if (lastLink && currentActiveLink !== lastLink) {
+        desktopNavLinks.forEach((l) => l.classList.remove("active"));
+        lastLink.classList.add("active");
+        currentActiveLink = lastLink;
+        updateIndicator(lastLink, true);
+      }
+      return;
+    }
+
     const scrollPos = window.scrollY + 160;
     sections.forEach((sec) => {
       const top = sec.offsetTop;
@@ -734,7 +783,7 @@ document.addEventListener("DOMContentLoaded", () => {
     soundFX.playSuccess();
 
     // 4. Show celebratory confirmation message
-    const successHtml = `<div style="font-weight: 600; margin-bottom: 4px; display: flex; align-items: center; justify-content: center; gap: 8px;"><i class="fa-solid fa-circle-check" style="color: #10b981;"></i> Free Early Access Confirmed! Pass <strong>#${record.ticketId}</strong></div><div style="font-size: 13px; opacity: 0.95;">Welcome aboard! <strong>${record.email}</strong> is registered for 100% free compute access while capacity lasts.</div>`;
+    const successHtml = `<div style="font-weight: 600; margin-bottom: 4px; display: flex; align-items: center; justify-content: center; gap: 8px;"><i class="fa-solid fa-circle-check" style="color: #10b981;"></i> Free Early Access Confirmed! Pass <strong>#${record.ticketId}</strong></div><div style="font-size: 13px; opacity: 0.95;">Welcome aboard! <strong>${record.email}</strong> is registered for 100% free compute access. Confirmation pass sent to your inbox! 📬</div>`;
 
     showFeedbackElement(formFeedback, "success", successHtml);
     showFeedbackElement(bottomFormFeedback, "success", successHtml);
@@ -745,12 +794,24 @@ document.addEventListener("DOMContentLoaded", () => {
       capacityStatusText.textContent = "8% compute capacity allocated • 92% free slots available";
     }
 
-    // 6. Non-blocking backend notification
+    // 6. Backend email dispatch
     fetch("/api/subscribe", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email: email, source: source })
-    }).catch(() => {});
+      body: JSON.stringify({
+        email: email,
+        source: source,
+        ticketId: record.ticketId,
+        templateType: "2"
+      })
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("[AI JobSnap] Email dispatch status:", data);
+      })
+      .catch((err) => {
+        console.warn("[AI JobSnap] Email dispatch notice:", err);
+      });
   }
 
   // Hero form listener
