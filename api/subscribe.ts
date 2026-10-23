@@ -132,8 +132,9 @@ export default async function handler(req: Request, res: Response) {
         ticketId: passId,
         email: email
       });
-    } catch (err: any) {
-      return res.status(500).json({ error: err.message });
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : 'Unknown error';
+      return res.status(500).json({ error: message });
     }
   }
 

@@ -833,9 +833,191 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  // --- Clean 3-Card Features Showcase & Detail Modal Logic ---
+  const featureCards = document.querySelectorAll(".feature-card-clean");
+  const oasisMoreBtns = document.querySelectorAll(".oasis-more-btn");
+  const oasisModal = document.getElementById("featureDetailModal");
+  const oasisModalCloseBtn = document.getElementById("oasisModalCloseBtn");
+  const modalKicker = document.getElementById("modalKicker");
+  const modalTitle = document.getElementById("modalTitle");
+  const modalDesc = document.getElementById("modalDesc");
+  const modalBody = document.getElementById("modalBody");
+  const modalClaimBtn = document.getElementById("modalClaimBtn");
+
+
+
+  const featureModalData = {
+    discovery: {
+      kicker: "FEATURE 01 · SMART JOB DISCOVERY",
+      title: "Keyword Scan Dashboard & Cross-Platform Engine",
+      desc: "An always-open smart discovery dashboard equipped with a permanent left-hand Scan button. Simply type your target keywords—like Python, Electrical, or Merchant Navy—and scan all major job boards simultaneously.",
+      items: [
+        {
+          title: "Always-Open Left-Hand Scan Button",
+          text: "Your dashboard features a permanent, 1-click Scan trigger on the left sidebar to crawl active job boards on demand."
+        },
+        {
+          title: "Keyword Search & Granular Filtering",
+          text: "Search for any specific field or role: write 'Python' for software positions, 'Electrical' for electrical engineering, or 'Merchant Navy' for maritime careers."
+        },
+        {
+          title: "Multi-Platform Deep Scraping",
+          text: "Simultaneously scans LinkedIn, Indeed, Glassdoor, maritime portals, and direct employer careers pages in parallel."
+        }
+      ],
+      demoNote: "Live Keyword Engine: Write 'Python', 'Electrical', or 'Merchant Navy' to filter results from 5+ platforms in under 3 seconds."
+    },
+    scoring: {
+      kicker: "FEATURE 02 · AI RESUME MATCHING",
+      title: "Skill Set Analysis, Relevance Score & Match Verdict",
+      desc: "Upload your resume and let our engine compare your verified skill set against every job scanned from different platforms. It calculates a calibrated Relevance Score and tells you unequivocally if each job is perfect for you or not.",
+      items: [
+        {
+          title: "Resume & Skill Set Extraction",
+          text: "Deeply inspects your technical skills, hands-on certifications, and domain expertise directly from your resume."
+        },
+        {
+          title: "Calibrated 0–100% Relevance Score",
+          text: "Calculates an objective match percentage based on the job's requirements, tools, seniority, and responsibilities."
+        },
+        {
+          title: "Instant 'Perfect For You' Verdict",
+          text: "Decisively tags matching roles as 'Perfect For You' (95%+ match) so you know exactly which openings to prioritize."
+        }
+      ],
+      demoNote: "Verified Decision: Jobs marked 'Perfect For You' boast a 4x higher callback rate and zero wasted applications."
+    },
+    hub: {
+      kicker: "FEATURE 03 · 1-CLICK APPLICATION HUB",
+      title: "Discovered vs Applied Jobs Management Portal",
+      desc: "A comprehensive application portal that organizes your job pipeline. New jobs scanned across platforms appear under 'Discovered', advance to 'Applied' with 1-click dispatch, and keep you organized from first search to offer letter.",
+      items: [
+        {
+          title: "Discovered & New Jobs Portal",
+          text: "Newly scanned listings from all platforms land in your Discovered column with instant relevance scores."
+        },
+        {
+          title: "Applied Jobs Tracking Column",
+          text: "Mark jobs as Applied, track submission dates, resume versions, and follow-up schedules in one clean pipeline."
+        },
+        {
+          title: "1-Click Application Automation",
+          text: "Auto-completes repetitive ATS portal fields and dispatches applications in a single click."
+        }
+      ],
+      demoNote: "Full Funnel: Track 100+ Discovered and Applied jobs without losing sight of any opportunity."
+    }
+  };
+
+  function openFeatureModal(featureKey) {
+    const data = featureModalData[featureKey] || featureModalData.discovery;
+    if (!oasisModal) return;
+
+    soundFX.playClick(1.15);
+
+    if (modalKicker) modalKicker.textContent = data.kicker;
+    if (modalTitle) modalTitle.textContent = data.title;
+    if (modalDesc) modalDesc.textContent = data.desc;
+
+    if (modalBody) {
+      modalBody.innerHTML = `
+        <div class="modal-feature-list">
+          ${data.items
+            .map(
+              (item) => `
+            <div class="modal-feature-item">
+              <i class="fa-solid fa-circle-check"></i>
+              <div>
+                <strong>${item.title}</strong>
+                <span>${item.text}</span>
+              </div>
+            </div>
+          `
+            )
+            .join("")}
+        </div>
+        <div class="modal-mini-demo">
+          <div class="modal-mini-demo-title">
+            <i class="fa-solid fa-sparkles"></i> Automated Intelligence
+          </div>
+          <div class="modal-mini-demo-content">
+            ${data.demoNote}
+          </div>
+        </div>
+      `;
+    }
+
+    oasisModal.hidden = false;
+    oasisModal.setAttribute("aria-hidden", "false");
+    requestAnimationFrame(() => {
+      oasisModal.classList.add("active");
+    });
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeFeatureModal() {
+    if (!oasisModal) return;
+    oasisModal.classList.remove("active");
+    setTimeout(() => {
+      oasisModal.hidden = true;
+      oasisModal.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+    }, 280);
+  }
+
+  oasisMoreBtns.forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const featureKey = btn.getAttribute("data-feature-modal") || "discovery";
+      openFeatureModal(featureKey);
+    });
+  });
+
+  if (oasisModalCloseBtn) {
+    oasisModalCloseBtn.addEventListener("click", () => {
+      soundFX.playHoverTick(700, 0.04);
+      closeFeatureModal();
+    });
+  }
+
+  if (oasisModal) {
+    oasisModal.addEventListener("click", (e) => {
+      if (e.target === oasisModal) {
+        closeFeatureModal();
+      }
+    });
+  }
+
+  window.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && oasisModal && !oasisModal.hidden) {
+      closeFeatureModal();
+    }
+  });
+
+  if (modalClaimBtn) {
+    modalClaimBtn.addEventListener("click", () => {
+      soundFX.playClick(1.2);
+      closeFeatureModal();
+      const heroForm = document.getElementById("heroEmailForm");
+      const emailInput = document.getElementById("userEmailInput");
+      if (heroForm && emailInput) {
+        heroForm.scrollIntoView({ behavior: "smooth", block: "center" });
+        setTimeout(() => {
+          emailInput.focus();
+          heroForm.style.borderColor = "rgba(16, 185, 129, 0.9)";
+          heroForm.style.boxShadow = "0 0 32px rgba(16, 185, 129, 0.5)";
+          setTimeout(() => {
+            heroForm.style.borderColor = "";
+            heroForm.style.boxShadow = "";
+          }, 1800);
+        }, 500);
+      }
+    });
+  }
+
   // --- Attach Interactive Sound Effects Across Elements ---
-  // 1. Feature Cards & Security Cards (tactile glass thump)
-  document.querySelectorAll(".feature-card, .security-card").forEach((card) => {
+  // 1. Security Cards (tactile glass thump)
+  document.querySelectorAll(".security-card").forEach((card) => {
     card.addEventListener("mouseenter", () => {
       soundFX.playCardHover();
     });

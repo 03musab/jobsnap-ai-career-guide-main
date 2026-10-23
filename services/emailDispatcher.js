@@ -36,6 +36,12 @@ export function recordSubscriber({ email, name, role, ticketId, source, status =
   };
 
   try {
+    // Ensure directory exists
+    const dataDir = path.dirname(SUBSCRIBERS_JSON);
+    if (!fs.existsSync(dataDir)) {
+      fs.mkdirSync(dataDir, { recursive: true });
+    }
+
     // 1. JSON
     let list = [];
     if (fs.existsSync(SUBSCRIBERS_JSON)) {
@@ -77,12 +83,22 @@ export function recordSubscriber({ email, name, role, ticketId, source, status =
  */
 function sendViaGmailPython({ to, subject, html }) {
   return new Promise((resolve, reject) => {
+    const tokenExists = fs.existsSync(path.join(ROOT_DIR, 'token.pickle'));
+    if (!tokenExists) {
+      return reject(new Error('Gmail token.pickle not found. Skipping Gmail dispatch.'));
+    }
+
+    const dataDir = path.join(ROOT_DIR, 'data');
+    if (!fs.existsSync(dataDir)) {
+      fs.mkdirSync(dataDir, { recursive: true });
+    }
+
     // Write temporary HTML file to avoid shell quoting issues
-    const tempHtmlFile = path.join(ROOT_DIR, 'data', `temp_email_${Date.now()}.html`);
+    const tempHtmlFile = path.join(dataDir, `temp_email_${Date.now()}.html`);
     fs.writeFileSync(tempHtmlFile, html, 'utf-8');
 
     const scriptPath = path.join(ROOT_DIR, 'send_email.py');
-    const pythonExe = PYTHON_CANDIDATES[0]; // desktop venv
+    const pythonExe = process.platform === 'win32' ? PYTHON_CANDIDATES[0] : 'python3';
 
     const proc = spawn(pythonExe, [
       scriptPath,
