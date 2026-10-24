@@ -492,7 +492,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const siteHeader = document.querySelector(".site-header");
   function handleHeaderScroll() {
     if (!siteHeader) return;
-    if (window.scrollY > 20) {
+    if (window.scrollY > 10) {
       siteHeader.classList.add("scrolled");
     } else {
       siteHeader.classList.remove("scrolled");
@@ -849,40 +849,40 @@ document.addEventListener("DOMContentLoaded", () => {
   const featureModalData = {
     discovery: {
       kicker: "FEATURE 01 · SMART JOB DISCOVERY",
-      title: "Keyword Scan Dashboard & Cross-Platform Engine",
-      desc: "An always-open smart discovery dashboard equipped with a permanent left-hand Scan button. Simply type your target keywords—like Python, Electrical, or Merchant Navy—and scan all major job boards simultaneously.",
+      title: "Enterprise Console & Dual-Speed Scan Engine",
+      desc: "Smart discovery console with Operator ID, Fast (~60s) and Deep (~3m) scans, custom keywords, and reusable search profiles.",
       items: [
         {
-          title: "Always-Open Left-Hand Scan Button",
-          text: "Your dashboard features a permanent, 1-click Scan trigger on the left sidebar to crawl active job boards on demand."
+          title: "Dual Scan Speed Modes",
+          text: "Fast Mode (~60s) for rapid checks; Deep Mode (~3m) for an exhaustive sweep across niche platforms."
         },
         {
-          title: "Keyword Search & Granular Filtering",
-          text: "Search for any specific field or role: write 'Python' for software positions, 'Electrical' for electrical engineering, or 'Merchant Navy' for maritime careers."
+          title: "Keyword & Domain Filtering",
+          text: "Filter by Python, Electrical, Merchant Navy, or custom specializations with saved profiles."
         },
         {
-          title: "Multi-Platform Deep Scraping",
-          text: "Simultaneously scans LinkedIn, Indeed, Glassdoor, maritime portals, and direct employer careers pages in parallel."
+          title: "Search Progress Bar & Profile Saving",
+          text: "Track real-time multi-board crawling with saved profile presets."
         }
       ],
-      demoNote: "Live Keyword Engine: Write 'Python', 'Electrical', or 'Merchant Navy' to filter results from 5+ platforms in under 3 seconds."
+      demoNote: "Live Console Engine: Filter by Python, Electrical, or Merchant Navy and launch Fast (~60s) or Deep (~3m) scans."
     },
     scoring: {
       kicker: "FEATURE 02 · AI RESUME MATCHING",
       title: "Skill Set Analysis, Relevance Score & Match Verdict",
-      desc: "Upload your resume and let our engine compare your verified skill set against every job scanned from different platforms. It calculates a calibrated Relevance Score and tells you unequivocally if each job is perfect for you or not.",
+      desc: "Parses your resume against scanned openings, generating a 0–100% Relevance Score with instant match verdicts.",
       items: [
         {
           title: "Resume & Skill Set Extraction",
-          text: "Deeply inspects your technical skills, hands-on certifications, and domain expertise directly from your resume."
+          text: "Extracts technical skills, certifications, and experience directly from your resume."
         },
         {
           title: "Calibrated 0–100% Relevance Score",
-          text: "Calculates an objective match percentage based on the job's requirements, tools, seniority, and responsibilities."
+          text: "Calculates an objective match percentage based on seniority, tools, and requirements."
         },
         {
           title: "Instant 'Perfect For You' Verdict",
-          text: "Decisively tags matching roles as 'Perfect For You' (95%+ match) so you know exactly which openings to prioritize."
+          text: "Decisively tags matching roles (95%+ match) to prioritize your applications."
         }
       ],
       demoNote: "Verified Decision: Jobs marked 'Perfect For You' boast a 4x higher callback rate and zero wasted applications."
@@ -890,22 +890,22 @@ document.addEventListener("DOMContentLoaded", () => {
     hub: {
       kicker: "FEATURE 03 · 1-CLICK APPLICATION HUB",
       title: "Discovered vs Applied Jobs Management Portal",
-      desc: "A comprehensive application portal that organizes your job pipeline. New jobs scanned across platforms appear under 'Discovered', advance to 'Applied' with 1-click dispatch, and keep you organized from first search to offer letter.",
+      desc: "Organize your job pipeline from Discovered to Applied, sync interview dates with Google Calendar, and receive Excel reports.",
       items: [
         {
           title: "Discovered & New Jobs Portal",
-          text: "Newly scanned listings from all platforms land in your Discovered column with instant relevance scores."
+          text: "Newly scanned listings land in your Discovered column with instant relevance scores."
         },
         {
-          title: "Applied Jobs Tracking Column",
-          text: "Mark jobs as Applied, track submission dates, resume versions, and follow-up schedules in one clean pipeline."
+          title: "Google Calendar & Email Sync",
+          text: "Sync interview deadlines with any Google account and receive automated Excel scan attachments."
         },
         {
           title: "1-Click Application Automation",
-          text: "Auto-completes repetitive ATS portal fields and dispatches applications in a single click."
+          text: "Auto-completes repetitive application fields and dispatches applications in 1 click."
         }
       ],
-      demoNote: "Full Funnel: Track 100+ Discovered and Applied jobs without losing sight of any opportunity."
+      demoNote: "Full Funnel: Track Discovered, Applied, and Calendar-synced interviews with automated Excel report dispatch."
     }
   };
 
@@ -1024,7 +1024,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // 2. Roadmap, Capacity Nodes & Kanban Items (subtle glass ticks)
-  document.querySelectorAll(".roadmap-card, .capacity-node-card, .kanban-item").forEach((card) => {
+  document.querySelectorAll(".roadmap-card, .capacity-node-card, .kanban-item, .studio-card").forEach((card) => {
     card.addEventListener("mouseenter", () => {
       soundFX.playHoverTick(720, 0.035);
     });
@@ -1041,7 +1041,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // 4. Buttons & Interactive Links (tactile clicks & glass hover)
-  document.querySelectorAll("button, .sign-in-btn, .cta-btn, .features-trigger-btn, .mobile-sign-in").forEach((btn) => {
+  document.querySelectorAll("button, .sign-in-btn, .cta-btn, .features-trigger-btn, .mobile-sign-in, .operator-pill-btn").forEach((btn) => {
     btn.addEventListener("mouseenter", () => {
       soundFX.playHoverTick(880, 0.045);
     });
@@ -1057,7 +1057,6 @@ document.addEventListener("DOMContentLoaded", () => {
       soundFX.playHoverTick(920, 0.04);
     });
     inp.addEventListener("keydown", (e) => {
-      // Ignore navigation / modifier keys
       if (!["Shift", "Control", "Alt", "Meta", "CapsLock", "Tab", "Escape", "ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].includes(e.key)) {
         soundFX.playKeyTap();
       }
@@ -1125,6 +1124,330 @@ document.addEventListener("DOMContentLoaded", () => {
   } else {
     statElements.forEach((el, index) => {
       animateStat(el, index);
+    });
+  }
+
+  // =========================================================================
+  // JobSnap Live Console, Dashboard & Modal Interactive Controller
+  // =========================================================================
+  const loginModal = document.getElementById("loginModal");
+  const loginModalCloseBtn = document.getElementById("loginModalCloseBtn");
+  const operatorLoginBtn = document.getElementById("operatorLoginBtn");
+  const mobileOperatorLoginBtn = document.getElementById("mobileOperatorLoginBtn");
+  const dashSwitchAccountBtn = document.getElementById("dashSwitchAccountBtn");
+  const loginForm = document.getElementById("loginForm");
+  const loginUsername = document.getElementById("loginUsername");
+  const roleJobSeekerBtn = document.getElementById("roleJobSeekerBtn");
+  const roleRecruiterBtn = document.getElementById("roleRecruiterBtn");
+
+  const headerOperatorLabel = document.getElementById("headerOperatorLabel");
+  const dashOperatorName = document.getElementById("dashOperatorName");
+  const dashAvatar = document.getElementById("dashAvatar");
+  const dashRoleLabel = document.getElementById("dashRoleLabel");
+  const consoleOperatorTag = document.getElementById("consoleOperatorTag");
+
+  let activeRole = "Job Seeker";
+
+  function openLoginModal() {
+    if (!loginModal) return;
+    soundFX.playClick(1.1);
+    loginModal.hidden = false;
+    loginModal.setAttribute("aria-hidden", "false");
+    requestAnimationFrame(() => loginModal.classList.add("active"));
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeLoginModal() {
+    if (!loginModal) return;
+    loginModal.classList.remove("active");
+    setTimeout(() => {
+      loginModal.hidden = true;
+      loginModal.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+    }, 280);
+  }
+
+  [operatorLoginBtn, mobileOperatorLoginBtn, dashSwitchAccountBtn].forEach((btn) => {
+    if (btn) btn.addEventListener("click", openLoginModal);
+  });
+
+  if (loginModalCloseBtn) {
+    loginModalCloseBtn.addEventListener("click", closeLoginModal);
+  }
+
+  if (loginModal) {
+    loginModal.addEventListener("click", (e) => {
+      if (e.target === loginModal) closeLoginModal();
+    });
+  }
+
+  // Role switching
+  if (roleJobSeekerBtn && roleRecruiterBtn) {
+    roleJobSeekerBtn.addEventListener("click", () => {
+      soundFX.playHoverTick(740, 0.04);
+      roleJobSeekerBtn.classList.add("active");
+      roleRecruiterBtn.classList.remove("active");
+      activeRole = "Job Seeker";
+    });
+
+    roleRecruiterBtn.addEventListener("click", () => {
+      soundFX.playHoverTick(740, 0.04);
+      roleRecruiterBtn.classList.add("active");
+      roleJobSeekerBtn.classList.remove("active");
+      activeRole = "Recruiter / Enterprise";
+    });
+  }
+
+  if (loginForm) {
+    loginForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const username = (loginUsername?.value || "musabimp").trim();
+      const initial = username.charAt(0).toUpperCase() || "M";
+
+      if (headerOperatorLabel) headerOperatorLabel.textContent = username;
+      if (dashOperatorName) dashOperatorName.textContent = username;
+      if (dashAvatar) dashAvatar.textContent = initial;
+      if (consoleOperatorTag) consoleOperatorTag.textContent = `Operator: ${username}`;
+      if (dashRoleLabel) dashRoleLabel.innerHTML = `<i class="fa-solid fa-circle-check"></i> ${activeRole} Operator`;
+
+      soundFX.playClick(1.25);
+      closeLoginModal();
+
+      const dashSec = document.getElementById("dashboard-preview");
+      if (dashSec) {
+        dashSec.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    });
+  }
+
+  // Scan Mode: Fast (~60s) vs Deep (~3m)
+  const modeFastBtn = document.getElementById("modeFastBtn");
+  const modeDeepBtn = document.getElementById("modeDeepBtn");
+
+  if (modeFastBtn && modeDeepBtn) {
+    modeFastBtn.addEventListener("click", () => {
+      soundFX.playClick(1.05);
+      modeFastBtn.classList.add("active");
+      modeDeepBtn.classList.remove("active");
+      const progressLabel = document.getElementById("progressLabel");
+      if (progressLabel) progressLabel.textContent = "Fast Scan Mode (~60s)";
+    });
+
+    modeDeepBtn.addEventListener("click", () => {
+      soundFX.playClick(1.05);
+      modeDeepBtn.classList.add("active");
+      modeFastBtn.classList.remove("active");
+      const progressLabel = document.getElementById("progressLabel");
+      if (progressLabel) progressLabel.textContent = "Deep Scan Mode (~3m)";
+    });
+  }
+
+  // Keyword Chips & Interactive Filtering of Job Picks
+  const keywordChips = document.querySelectorAll(".keyword-chip");
+  const consoleKeywordInput = document.getElementById("consoleKeywordInput");
+  const jobPickCards = document.querySelectorAll(".job-pick-card");
+  const picksCounterBadge = document.getElementById("picksCounterBadge");
+  const kpiNewJobs = document.getElementById("kpiNewJobs");
+
+  keywordChips.forEach((chip) => {
+    chip.addEventListener("click", () => {
+      soundFX.playClick(1.1);
+      keywordChips.forEach((c) => c.classList.remove("active"));
+      chip.classList.add("active");
+
+      const kw = chip.getAttribute("data-kw") || "Python";
+      if (consoleKeywordInput) consoleKeywordInput.value = `${kw}, High-Growth`;
+
+      let visibleCount = 0;
+      jobPickCards.forEach((card) => {
+        const domain = card.getAttribute("data-domain") || "";
+        if (kw === "Full-Stack" || domain.includes(kw)) {
+          card.style.display = "flex";
+          visibleCount++;
+        } else {
+          card.style.display = "none";
+        }
+      });
+
+      if (picksCounterBadge) {
+        picksCounterBadge.textContent = `${visibleCount} jobs matching '${kw}'`;
+      }
+      if (kpiNewJobs) {
+        kpiNewJobs.textContent = String(visibleCount * 6 + 6);
+      }
+    });
+  });
+
+  // Start Search Button & Dynamic Progress Bar
+  const startSearchBtn = document.getElementById("startSearchBtn");
+  const searchProgressFill = document.getElementById("searchProgressFill");
+  const progressStatusText = document.getElementById("progressStatusText");
+
+  if (startSearchBtn) {
+    startSearchBtn.addEventListener("click", () => {
+      soundFX.playClick(1.2);
+      startSearchBtn.disabled = true;
+      startSearchBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Scanning...`;
+
+      if (progressStatusText) progressStatusText.textContent = "Pending scrape...";
+      if (searchProgressFill) searchProgressFill.style.width = "0%";
+
+      setTimeout(() => {
+        if (progressStatusText) progressStatusText.textContent = "Crawling LinkedIn, Indeed & Maritime...";
+        if (searchProgressFill) searchProgressFill.style.width = "45%";
+        soundFX.playHoverTick(800, 0.05);
+      }, 700);
+
+      setTimeout(() => {
+        if (progressStatusText) progressStatusText.textContent = "Scoring Resume Relevance...";
+        if (searchProgressFill) searchProgressFill.style.width = "82%";
+        soundFX.playHoverTick(900, 0.05);
+      }, 1500);
+
+      setTimeout(() => {
+        if (progressStatusText) progressStatusText.textContent = "Complete (30 fresh jobs loaded)";
+        if (searchProgressFill) searchProgressFill.style.width = "100%";
+        startSearchBtn.disabled = false;
+        startSearchBtn.innerHTML = `<i class="fa-solid fa-radar"></i> Start Search`;
+
+        if (kpiNewJobs) kpiNewJobs.textContent = "30";
+        jobPickCards.forEach((card) => (card.style.display = "flex"));
+        soundFX.playClick(1.3);
+      }, 2300);
+    });
+  }
+
+  // Save Profile Button
+  const saveProfileBtn = document.getElementById("saveProfileBtn");
+  if (saveProfileBtn) {
+    saveProfileBtn.addEventListener("click", () => {
+      soundFX.playClick(1.15);
+      const originalText = saveProfileBtn.innerHTML;
+      saveProfileBtn.innerHTML = `<i class="fa-solid fa-circle-check" style="color: #34d399;"></i> Profile Saved!`;
+      setTimeout(() => {
+        saveProfileBtn.innerHTML = originalText;
+      }, 1800);
+    });
+  }
+
+  // Google Calendar Test & Sync
+  const testCalendarBtn = document.getElementById("testCalendarBtn");
+  const syncCalendarBtn = document.getElementById("syncCalendarBtn");
+  const calStatusBadge = document.getElementById("calStatusBadge");
+  const calEventDisplay = document.getElementById("calEventDisplay");
+  const refreshEventsBtn = document.getElementById("refreshEventsBtn");
+
+  if (testCalendarBtn) {
+    testCalendarBtn.addEventListener("click", () => {
+      soundFX.playHoverTick(850, 0.05);
+      testCalendarBtn.textContent = "Testing...";
+      setTimeout(() => {
+        soundFX.playClick(1.2);
+        testCalendarBtn.innerHTML = `<i class="fa-solid fa-circle-check" style="color: #34d399;"></i> Verified (42ms)`;
+        if (calStatusBadge) calStatusBadge.innerHTML = `<i class="fa-solid fa-circle-check"></i> Connected & Ready`;
+        setTimeout(() => {
+          testCalendarBtn.innerHTML = `<i class="fa-solid fa-plug"></i> Test Connection`;
+        }, 2000);
+      }, 800);
+    });
+  }
+
+  if (syncCalendarBtn) {
+    syncCalendarBtn.addEventListener("click", () => {
+      soundFX.playHoverTick(900, 0.05);
+      syncCalendarBtn.textContent = "Syncing...";
+      setTimeout(() => {
+        soundFX.playClick(1.25);
+        syncCalendarBtn.innerHTML = `<i class="fa-solid fa-circle-check" style="color: #34d399;"></i> 3 Events Synced`;
+        if (calEventDisplay) {
+          calEventDisplay.innerHTML = `<span>📅 Oct 26, 11:00 AM — Maersk Tech Panel (Synced)</span><button type="button" id="refreshEventsBtn" title="Refresh Events" style="background: none; border: none; color: #94a3b8; cursor: pointer; font-size: 11px;"><i class="fa-solid fa-arrow-rotate-right"></i></button>`;
+        }
+        setTimeout(() => {
+          syncCalendarBtn.innerHTML = `<i class="fa-solid fa-rotate"></i> Sync Jobs`;
+        }, 2200);
+      }, 900);
+    });
+  }
+
+  if (refreshEventsBtn) {
+    refreshEventsBtn.addEventListener("click", () => {
+      soundFX.playHoverTick(920, 0.04);
+      if (calEventDisplay) {
+        calEventDisplay.style.opacity = "0.4";
+        setTimeout(() => {
+          calEventDisplay.style.opacity = "1";
+        }, 300);
+      }
+    });
+  }
+
+  // Send Excel Report Test
+  const sendExcelTestBtn = document.getElementById("sendExcelTestBtn");
+  const emailRecipientsInput = document.getElementById("emailRecipientsInput");
+  if (sendExcelTestBtn) {
+    sendExcelTestBtn.addEventListener("click", () => {
+      soundFX.playClick(1.15);
+      const email = emailRecipientsInput?.value || "musabimp.0@gmail.com";
+      sendExcelTestBtn.textContent = "Dispatched!";
+      sendExcelTestBtn.style.color = "#ffffff";
+      setTimeout(() => {
+        sendExcelTestBtn.textContent = "Send Test";
+        sendExcelTestBtn.style.color = "#34d399";
+      }, 2000);
+    });
+  }
+
+  // Outreach Studio Message Triggers
+  document.querySelectorAll(".demo-outreach-btn").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      soundFX.playClick(1.2);
+      const name = btn.getAttribute("data-recruiter") || "Recruiter";
+      const original = btn.innerHTML;
+      btn.innerHTML = `<i class="fa-solid fa-circle-check"></i> Sent!`;
+      setTimeout(() => {
+        btn.innerHTML = original;
+      }, 1600);
+    });
+  });
+
+  // Message Wall Template Switching
+  const templatePills = document.querySelectorAll(".template-pill");
+  templatePills.forEach((pill) => {
+    pill.addEventListener("click", () => {
+      soundFX.playHoverTick(760, 0.04);
+      templatePills.forEach((p) => p.classList.remove("active"));
+      pill.classList.add("active");
+    });
+  });
+
+  // 1-Click Apply Buttons in Dashboard
+  document.querySelectorAll(".demo-apply-trigger").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      soundFX.playClick(1.3);
+      const jobName = btn.getAttribute("data-job") || "Position";
+      const original = btn.innerHTML;
+      btn.innerHTML = `<i class="fa-solid fa-circle-check"></i> Applied!`;
+      btn.style.background = "#10b981";
+      setTimeout(() => {
+        btn.innerHTML = original;
+        btn.style.background = "";
+      }, 2000);
+    });
+  });
+
+  // PDF Export Roadmap Button
+  const demoPdfDownloadBtn = document.getElementById("demoPdfDownloadBtn");
+  if (demoPdfDownloadBtn) {
+    demoPdfDownloadBtn.addEventListener("click", () => {
+      soundFX.playClick(1.2);
+      const original = demoPdfDownloadBtn.innerHTML;
+      demoPdfDownloadBtn.innerHTML = `<i class="fa-solid fa-circle-check" style="color: #34d399;"></i> Generating PDF...`;
+      setTimeout(() => {
+        demoPdfDownloadBtn.innerHTML = `<i class="fa-solid fa-download"></i> Download Ready`;
+        setTimeout(() => {
+          demoPdfDownloadBtn.innerHTML = original;
+        }, 1800);
+      }, 800);
     });
   }
 });

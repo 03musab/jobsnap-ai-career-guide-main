@@ -92,6 +92,11 @@
           <i class="fa-solid fa-volume-high sound-icon"></i>
         </button>
 
+        <button id="operatorLoginBtn" class="operator-pill-btn" aria-label="Sign In as Operator">
+          <i class="fa-solid fa-user-lock"></i>
+          <span id="headerOperatorLabel">Sign In</span>
+        </button>
+
         <a href="#early-access" id="headerAccessBtn" class="sign-in-btn">Claim Free Spot</a>
 
         <button
@@ -112,10 +117,14 @@
         <a href="#home" class="mobile-nav-link active">Home</a>
         <a href="#capacity" class="mobile-nav-link">Compute Capacity (8%)</a>
         <a href="#features" class="mobile-nav-link">Free Features</a>
-        <a href="#workflow" class="mobile-nav-link">Workflow & Kanban</a>
+        <a href="#workflow" class="mobile-nav-link">Workflow & Steps</a>
         <a href="#security" class="mobile-nav-link">Security & Privacy</a>
         <a href="#faq" class="mobile-nav-link">Candidate FAQ</a>
-        <a href="#roadmap" class="mobile-nav-link">Future Roadmap</a>
+        <a href="#roadmap" class="mobile-nav-link">Roadmap</a>
+        <button id="mobileOperatorLoginBtn" class="operator-pill-btn" style="width: 100%; justify-content: center; margin-top: 8px;">
+          <i class="fa-solid fa-user-lock"></i>
+          <span>Operator Sign In</span>
+        </button>
         <button id="mobileSoundBtn" class="mobile-sound-toggle" aria-label="Toggle UI sound effects">
           <i class="fa-solid fa-volume-high"></i>
           <span id="mobileSoundText">Sound Effects: Active</span>
@@ -155,9 +164,7 @@
 
         <!-- Subhead -->
         <p class="subhead anim" style="--d: 0.28s;">
-          A powerful web application designed to automate and streamline your job search.
-          Aggregates listings from multiple sources, scores them for relevance, and manages
-          your applications from discovery to offer — 100% free while computing capacity lasts.
+          Your autonomous AI job agent: dual-speed scanning (Fast ~60s & Deep ~3m), 0–100% resume match scoring, Google Calendar syncing, and direct HR outreach.
         </p>
 
         <!-- Early Access Email Form -->
@@ -245,8 +252,7 @@
           <span class="section-tag"><i class="fa-solid fa-bolt"></i> Live Capacity Tracker</span>
           <h2 class="section-title">Free Until Compute Limit Reached</h2>
           <p class="section-desc">
-            We are opening our full platform with zero subscription paywalls for early access members.
-            All core features are 100% free until our cloud worker nodes and scraping clusters reach 100% capacity.
+            100% free during early access. Reserve your spot before worker node capacity reaches 100%.
           </p>
         </div>
 
@@ -410,7 +416,7 @@
 
               <h3 class="feature-card-title">Smart Job Discovery</h3>
               <p class="feature-card-desc">
-                Always-open scan dashboard: filter by keywords like Python, Electrical, or Merchant Navy and hit Scan to crawl all major job platforms.
+                Operator console with Fast (60s) and Deep (3m) scanning, custom keywords, and reusable search profiles.
               </p>
             </div>
 
@@ -524,7 +530,7 @@
 
               <h3 class="feature-card-title">AI Resume Matching</h3>
               <p class="feature-card-desc">
-                Evaluates your resume and skill set against scanned listings, generating a precise Relevance Score to tell you if a job is perfect for you.
+                Scores your resume against live openings from 0–100% with instant "Perfect For You" verdicts.
               </p>
             </div>
 
@@ -629,7 +635,7 @@
 
               <h3 class="feature-card-title">1-Click Application Hub</h3>
               <p class="feature-card-desc">
-                A central portal where new jobs are discovered, organized into Discovered or Applied columns, and submitted with 1-click speed.
+                Manage discovered and applied jobs, sync milestones to Google Calendar, and receive Excel email reports.
               </p>
             </div>
           </div>
@@ -666,102 +672,450 @@
       <section id="workflow" class="content-section">
         <div class="section-header">
           <span class="section-tag"><i class="fa-solid fa-route"></i> Product Workflow</span>
-          <h2 class="section-title">How AI JobSnap Works</h2>
+          <h2 class="section-title">How JobSnap Operates</h2>
           <p class="section-desc">
-            From search profile configuration to offer negotiation — here is how your automated job hunting pipeline runs.
+            From encrypted role sign-in and dual-speed scanning to calendar sync and recruiter outreach.
           </p>
         </div>
 
         <div class="workflow-grid">
           <div class="workflow-card">
             <span class="workflow-step-num">01</span>
-            <h3 class="workflow-title">Register & Profile Setup</h3>
-            <p class="workflow-text">Create your account and upload your resume. Fill in your target seniority, location preferences, and core tech competencies.</p>
+            <h3 class="workflow-title">Encrypted Role-Based Sign-In</h3>
+            <p class="workflow-text">Select <strong>Job Seeker</strong> or <strong>Recruiter / Enterprise</strong> for secure, encrypted session access.</p>
           </div>
           <div class="workflow-card">
             <span class="workflow-step-num">02</span>
-            <h3 class="workflow-title">Define Search Profiles</h3>
-            <p class="workflow-text">Set query parameters (e.g., "Python Developer, Data Engineer", Remote, 3+ YOE). Save profiles for single-click re-runs.</p>
+            <h3 class="workflow-title">Enterprise Console & Dual Scan</h3>
+            <p class="workflow-text">Select <strong>Fast (~60s)</strong> or <strong>Deep (~3m)</strong> mode, set target keywords (Python, Electrical, etc.), and save your profile.</p>
           </div>
           <div class="workflow-card">
             <span class="workflow-step-num">03</span>
-            <h3 class="workflow-title">Autonomous Cloud Scraping</h3>
-            <p class="workflow-text">Automated cloud workers autonomously discover fresh postings from LinkedIn, Internshala, and top job boards without blocking your browser.</p>
+            <h3 class="workflow-title">Real-Time Search & Relevance Score</h3>
+            <p class="workflow-text">Trigger multi-board crawling with live progress and get 0–100% match scores tailored to your resume.</p>
           </div>
           <div class="workflow-card">
             <span class="workflow-step-num">04</span>
-            <h3 class="workflow-title">AI Relevance Scoring</h3>
-            <p class="workflow-text">Heuristic algorithms compare job descriptions with your resume and keywords, assigning a 0–100% match score to prioritize top jobs.</p>
+            <h3 class="workflow-title">Live Dashboard & Market Intel</h3>
+            <p class="workflow-text">Monitor active pipeline metrics, real-time market trends, and daily motivational signals.</p>
           </div>
           <div class="workflow-card">
             <span class="workflow-step-num">05</span>
-            <h3 class="workflow-title">Kanban Application Pipeline</h3>
-            <p class="workflow-text">Move applications across stages: New → Applied → Interview → Offer. Add recruiter notes and interview dates.</p>
+            <h3 class="workflow-title">Google Calendar Sync & Email Reports</h3>
+            <p class="workflow-text">Connect Google Calendar to track interview milestones and auto-email Excel job reports.</p>
           </div>
           <div class="workflow-card">
             <span class="workflow-step-num">06</span>
-            <h3 class="workflow-title">Daily Digests & Calendar Sync</h3>
-            <p class="workflow-text">Receive morning email summaries with formatted Excel sheets via Gmail API, and sync upcoming interview milestones directly to Google Calendar.</p>
+            <h3 class="workflow-title">Outreach Studio & Skill Gap Roadmaps</h3>
+            <p class="workflow-text">Search verified HR leads, message via 3 saved templates, and follow step-by-step skill roadmaps.</p>
           </div>
         </div>
+      </section>
 
-        <!-- Interactive Kanban Preview -->
-        <div class="kanban-board">
-          <div class="kanban-col">
-            <div class="kanban-col-header">
-              <span>NEW (DISCOVERED)</span>
-              <span class="kanban-count">14</span>
+      <!-- Section: 🖥️ Interactive AI Jobs Dashboard & Enterprise Console Preview -->
+      <section id="dashboard-preview" class="content-section">
+        <div class="section-header">
+          <span class="section-tag"><i class="fa-solid fa-desktop"></i> Live Application Console</span>
+          <h2 class="section-title">AI Jobs Dashboard & Enterprise Console</h2>
+          <p class="section-desc">
+            Preview the live console: dual scan speeds, keyword chips, Google Calendar sync, and top job picks.
+          </p>
+        </div>
+
+        <div class="dashboard-preview-card">
+          <!-- Dashboard Top Bar -->
+          <div class="dashboard-topbar">
+            <div class="dashboard-user-badge">
+              <div class="dashboard-avatar" id="dashAvatar">M</div>
+              <div class="dashboard-operator-info">
+                <span class="dashboard-operator-name" id="dashOperatorName">musabimp</span>
+                <span class="dashboard-operator-role" id="dashRoleLabel"><i class="fa-solid fa-circle-check"></i> Job Seeker Operator</span>
+              </div>
             </div>
-            <div class="kanban-item">
-              <span class="kanban-score-tag">98% Match</span>
-              <span class="kanban-role">Senior Software Engineer</span>
-              <span class="kanban-company">Stripe • Remote</span>
-            </div>
-            <div class="kanban-item">
-              <span class="kanban-score-tag">92% Match</span>
-              <span class="kanban-role">AI Product Architect</span>
-              <span class="kanban-company">Anthropic • Hybrid</span>
+
+            <div class="dashboard-topbar-controls">
+              <div class="dashboard-theme-toggle" id="dashThemeIndicator">
+                <i class="fa-solid fa-moon"></i>
+                <span>Dark Theme</span>
+              </div>
+              <button class="operator-pill-btn" id="dashSwitchAccountBtn" style="padding: 6px 14px; font-size: 11.5px;">
+                <i class="fa-solid fa-user-pen"></i> Switch Role / Operator
+              </button>
             </div>
           </div>
 
-          <div class="kanban-col">
-            <div class="kanban-col-header">
-              <span>APPLIED</span>
-              <span class="kanban-count">8</span>
+          <!-- Daily Signal & Motivational Quote -->
+          <div class="dashboard-daily-quote">
+            <div class="quote-left">
+              <i class="fa-solid fa-quote-left"></i>
+              <span class="quote-text" id="dailyQuoteText">"Opportunities don't happen, you create them. Your skills match 18 new roles today."</span>
             </div>
-            <div class="kanban-item">
-              <span class="kanban-score-tag">95% Match</span>
-              <span class="kanban-role">Full-Stack AI Developer</span>
-              <span class="kanban-company">OpenAI • SF</span>
+            <span class="quote-tag"><i class="fa-solid fa-bolt"></i> Daily Signal</span>
+          </div>
+
+          <!-- KPI Metric Cards Row -->
+          <div class="dashboard-metrics-grid">
+            <div class="dash-metric-card">
+              <span class="dash-metric-title">New Jobs <i class="fa-solid fa-sparkles" style="color: #34d399;"></i></span>
+              <span class="dash-metric-val" id="kpiNewJobs">24</span>
+              <span class="dash-metric-sub">+6 added in last scan</span>
             </div>
-            <div class="kanban-item">
-              <span class="kanban-score-tag">89% Match</span>
-              <span class="kanban-role">Distributed Systems Eng</span>
-              <span class="kanban-company">Databricks • Remote</span>
+            <div class="dash-metric-card">
+              <span class="dash-metric-title">Pipeline <i class="fa-solid fa-bars-progress" style="color: #38bdf8;"></i></span>
+              <span class="dash-metric-val">8</span>
+              <span class="dash-metric-sub">Active in review</span>
+            </div>
+            <div class="dash-metric-card">
+              <span class="dash-metric-title">Offers <i class="fa-solid fa-trophy" style="color: #fbbf24;"></i></span>
+              <span class="dash-metric-val">2</span>
+              <span class="dash-metric-sub">Interview stage cleared</span>
+            </div>
+            <div class="dash-metric-card">
+              <span class="dash-metric-title">Market Intel <i class="fa-solid fa-arrow-trend-up" style="color: #10b981;"></i></span>
+              <span class="dash-metric-val" style="font-size: 16px; margin-top: 4px;">Tech +14%</span>
+              <span class="dash-metric-sub">Maritime & Electrical high demand</span>
             </div>
           </div>
 
-          <div class="kanban-col">
-            <div class="kanban-col-header">
-              <span>INTERVIEW</span>
-              <span class="kanban-count">3</span>
+          <!-- Main Layout: Left Enterprise Console + Right Job Picks -->
+          <div class="console-dashboard-layout">
+            <!-- Left Console Panel -->
+            <div class="enterprise-console-panel">
+              <div class="console-panel-header">
+                <span class="console-title"><i class="fa-solid fa-sliders"></i> Enterprise Console</span>
+                <span class="console-operator-tag" id="consoleOperatorTag">Operator: musabimp</span>
+              </div>
+
+              <!-- Scan Mode: Fast vs Deep -->
+              <div class="scan-mode-group">
+                <span class="console-label">Scan Speed Mode</span>
+                <div class="scan-mode-toggles">
+                  <button type="button" class="scan-mode-btn active" id="modeFastBtn">
+                    <span>⚡ Fast Mode</span>
+                    <span class="mode-time">~60s quick scan</span>
+                  </button>
+                  <button type="button" class="scan-mode-btn" id="modeDeepBtn">
+                    <span>🔬 Deep Mode</span>
+                    <span class="mode-time">~3m comprehensive</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Keywords Section with Instant Switcher -->
+              <div class="keyword-input-wrap">
+                <span class="console-label">Target Keywords</span>
+                <div class="keyword-chips-row">
+                  <button type="button" class="keyword-chip active" data-kw="Python">Python</button>
+                  <button type="button" class="keyword-chip" data-kw="Electrical">Electrical</button>
+                  <button type="button" class="keyword-chip" data-kw="Merchant Navy">Merchant Navy</button>
+                  <button type="button" class="keyword-chip" data-kw="Full-Stack">Full-Stack</button>
+                </div>
+                <input type="text" id="consoleKeywordInput" class="console-input" value="Python, Systems" placeholder="e.g. Python, Electrical, Merchant Navy..." />
+              </div>
+
+              <!-- Location, Experience, Job Type Filters -->
+              <div class="console-filter-row">
+                <div>
+                  <span class="console-label" style="display: block; margin-bottom: 4px;">Location</span>
+                  <select id="consoleLocation" class="console-select">
+                    <option value="Remote">Remote & Worldwide</option>
+                    <option value="Hybrid">Hybrid</option>
+                    <option value="On-site">On-site / Maritime Port</option>
+                  </select>
+                </div>
+                <div>
+                  <span class="console-label" style="display: block; margin-bottom: 4px;">Experience</span>
+                  <select id="consoleExp" class="console-select">
+                    <option value="Mid">Mid-Level (2–5 YOE)</option>
+                    <option value="Senior">Senior (5+ YOE)</option>
+                    <option value="Junior">Junior / Entry</option>
+                    <option value="Lead">Lead / Chief Officer</option>
+                  </select>
+                </div>
+              </div>
+
+              <div>
+                <span class="console-label" style="display: block; margin-bottom: 4px;">Job Type</span>
+                <select id="consoleJobType" class="console-select">
+                  <option value="full-time">Full-time</option>
+                  <option value="part-time">Part-time</option>
+                  <option value="contract">Contract</option>
+                  <option value="internship">Internship</option>
+                </select>
+              </div>
+
+              <!-- Console Action Buttons -->
+              <div class="console-actions-group">
+                <button type="button" id="saveProfileBtn" class="save-profile-btn">
+                  <i class="fa-solid fa-floppy-disk"></i> Save Profile
+                </button>
+                <button type="button" id="startSearchBtn" class="start-search-btn">
+                  <i class="fa-solid fa-radar"></i> Start Search
+                </button>
+              </div>
+
+              <!-- Search Progress Bar -->
+              <div class="console-progress-box">
+                <div class="progress-header">
+                  <span id="progressLabel">Search Status</span>
+                  <span class="progress-status" id="progressStatusText">Complete (24 found)</span>
+                </div>
+                <div class="progress-track">
+                  <div class="progress-fill" id="searchProgressFill" style="width: 100%;"></div>
+                </div>
+              </div>
+
+              <!-- Email Settings & Excel Dispatch Widget -->
+              <div class="console-subwidget">
+                <div class="widget-title">
+                  <span><i class="fa-solid fa-file-excel"></i> Email Excel Report</span>
+                  <span style="font-size: 10px; color: #10b981;">Automated</span>
+                </div>
+                <input type="email" id="emailRecipientsInput" class="console-input" value="musabimp.0@gmail.com" placeholder="Recipient email address..." style="font-size: 11px; padding: 6px 10px;" />
+                <div style="font-size: 10.5px; color: #94a3b8; display: flex; align-items: center; justify-content: space-between;">
+                  <span>Excel sheet attachment attached on scan</span>
+                  <button type="button" id="sendExcelTestBtn" style="background: none; border: none; color: #34d399; font-size: 11px; cursor: pointer; text-decoration: underline; font-family: inherit;">Send Test</button>
+                </div>
+              </div>
+
+              <!-- Google Calendar Widget -->
+              <div class="console-subwidget">
+                <div class="widget-title">
+                  <span><i class="fa-brands fa-google"></i> Google Calendar</span>
+                  <span style="font-size: 10px; color: #34d399;" id="calStatusBadge"><i class="fa-solid fa-circle-check"></i> Connected</span>
+                </div>
+                <div class="calendar-action-row">
+                  <button type="button" class="cal-tiny-btn" id="testCalendarBtn">
+                    <i class="fa-solid fa-plug"></i> Test Connection
+                  </button>
+                  <button type="button" class="cal-tiny-btn" id="syncCalendarBtn">
+                    <i class="fa-solid fa-rotate"></i> Sync Jobs
+                  </button>
+                </div>
+                <!-- In-page calendar event viewer -->
+                <div class="cal-event-pill" id="calEventDisplay">
+                  <span>📅 Oct 25, 2:00 PM — Scale AI Screening</span>
+                  <button type="button" id="refreshEventsBtn" title="Refresh Events" style="background: none; border: none; color: #94a3b8; cursor: pointer; font-size: 11px;"><i class="fa-solid fa-arrow-rotate-right"></i></button>
+                </div>
+              </div>
             </div>
-            <div class="kanban-item" style="border-color: rgba(52, 211, 153, 0.4);">
-              <span class="kanban-score-tag">📅 Oct 24, 2:00 PM</span>
-              <span class="kanban-role">Senior Full-Stack Engineer</span>
-              <span class="kanban-company">Scale AI • Google Cal Synced</span>
+
+            <!-- Right Dashboard Viewport: Top Job Picks For You -->
+            <div class="right-dashboard-viewport">
+              <div class="viewport-section-header">
+                <div class="viewport-title">
+                  <i class="fa-solid fa-bullseye" style="color: #34d399;"></i>
+                  <span>Top Job Picks For You</span>
+                </div>
+                <span class="viewport-kicker" id="picksCounterBadge">Matched by Skills & Resume</span>
+              </div>
+
+              <!-- Job Picks Grid (Populated dynamically or updated by keyword clicks) -->
+              <div class="job-picks-grid" id="jobPicksContainer">
+                <!-- Card 1: Python -->
+                <div class="job-pick-card" data-domain="Python">
+                  <div class="job-pick-left">
+                    <div class="job-header-row">
+                      <span class="job-role-title">Senior Python Systems Engineer</span>
+                      <span class="relevance-score-badge">98% Match</span>
+                      <span class="verdict-perfect"><i class="fa-solid fa-star"></i> Perfect For You</span>
+                    </div>
+                    <div class="job-meta-row">
+                      <span>Scale AI · Remote</span>
+                      <span>·</span>
+                      <span>Full-Time · $165,000 – $190,000</span>
+                      <span>·</span>
+                      <span style="color: #34d399;"><i class="fa-brands fa-python"></i> Python, Fast-API, Docker</span>
+                    </div>
+                  </div>
+                  <div class="job-pick-right">
+                    <button type="button" class="job-apply-btn demo-apply-trigger" data-job="Senior Python Systems Engineer">
+                      <i class="fa-solid fa-bolt"></i> 1-Click Apply
+                    </button>
+                    <button type="button" class="job-save-btn" title="Save Job"><i class="fa-regular fa-bookmark"></i></button>
+                  </div>
+                </div>
+
+                <!-- Card 2: Electrical -->
+                <div class="job-pick-card" data-domain="Electrical">
+                  <div class="job-pick-left">
+                    <div class="job-header-row">
+                      <span class="job-role-title">Marine Electrical & Automation Engineer</span>
+                      <span class="relevance-score-badge">95% Match</span>
+                      <span class="verdict-perfect"><i class="fa-solid fa-star"></i> Perfect For You</span>
+                    </div>
+                    <div class="job-meta-row">
+                      <span>Maersk Group · Global Maritime / Hybrid</span>
+                      <span>·</span>
+                      <span>Full-Time · $145,000 – $175,000</span>
+                      <span>·</span>
+                      <span style="color: #38bdf8;"><i class="fa-solid fa-bolt"></i> Electrical CAD, PLC, High Voltage</span>
+                    </div>
+                  </div>
+                  <div class="job-pick-right">
+                    <button type="button" class="job-apply-btn demo-apply-trigger" data-job="Marine Electrical & Automation Engineer">
+                      <i class="fa-solid fa-bolt"></i> 1-Click Apply
+                    </button>
+                    <button type="button" class="job-save-btn" title="Save Job"><i class="fa-regular fa-bookmark"></i></button>
+                  </div>
+                </div>
+
+                <!-- Card 3: Merchant Navy -->
+                <div class="job-pick-card" data-domain="Merchant Navy">
+                  <div class="job-pick-left">
+                    <div class="job-header-row">
+                      <span class="job-role-title">Merchant Navy Electro-Technical Officer (ETO)</span>
+                      <span class="relevance-score-badge">93% Match</span>
+                      <span class="verdict-perfect"><i class="fa-solid fa-star"></i> Perfect For You</span>
+                    </div>
+                    <div class="job-meta-row">
+                      <span>Bernhard Schulte Shipmanagement · Offshore Fleet</span>
+                      <span>·</span>
+                      <span>Contract · Rotational Voyage</span>
+                      <span>·</span>
+                      <span style="color: #34d399;"><i class="fa-solid fa-anchor"></i> Maritime Navigation, Power Dist</span>
+                    </div>
+                  </div>
+                  <div class="job-pick-right">
+                    <button type="button" class="job-apply-btn demo-apply-trigger" data-job="Merchant Navy Electro-Technical Officer (ETO)">
+                      <i class="fa-solid fa-bolt"></i> 1-Click Apply
+                    </button>
+                    <button type="button" class="job-save-btn" title="Save Job"><i class="fa-regular fa-bookmark"></i></button>
+                  </div>
+                </div>
+
+                <!-- Card 4: Python Data -->
+                <div class="job-pick-card" data-domain="Python">
+                  <div class="job-pick-left">
+                    <div class="job-header-row">
+                      <span class="job-role-title">Autonomous Agent Infrastructure Lead</span>
+                      <span class="relevance-score-badge">91% Match</span>
+                      <span class="verdict-perfect"><i class="fa-solid fa-star"></i> Perfect For You</span>
+                    </div>
+                    <div class="job-meta-row">
+                      <span>Anthropic · SF / Hybrid</span>
+                      <span>·</span>
+                      <span>Full-Time · $180,000 – $220,000</span>
+                      <span>·</span>
+                      <span style="color: #38bdf8;"><i class="fa-solid fa-brain"></i> Python, PyTorch, Kubernetes</span>
+                    </div>
+                  </div>
+                  <div class="job-pick-right">
+                    <button type="button" class="job-apply-btn demo-apply-trigger" data-job="Autonomous Agent Infrastructure Lead">
+                      <i class="fa-solid fa-bolt"></i> 1-Click Apply
+                    </button>
+                    <button type="button" class="job-save-btn" title="Save Job"><i class="fa-regular fa-bookmark"></i></button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section: 🚀 Specialized Studios (Outreach Studio & Skill Gap Roadmap) -->
+      <section id="studios" class="content-section">
+        <div class="section-header">
+          <span class="section-tag"><i class="fa-solid fa-cubes-stacked"></i> Specialized Studios</span>
+          <h2 class="section-title">Outreach Studio & Skill Gap Roadmaps</h2>
+          <p class="section-desc">
+            Connect with verified HR decision-makers and bridge skill gaps with tailored learning roadmaps.
+          </p>
+        </div>
+
+        <div class="studios-showcase-grid">
+          <!-- STUDIO 1: Outreach Studio & Message Wall -->
+          <div class="studio-card">
+            <div class="studio-card-header">
+              <div class="studio-icon-box"><i class="fa-solid fa-paper-plane"></i></div>
+              <div>
+                <h3 class="studio-card-title">Outreach Studio</h3>
+                <span class="studio-card-subtitle">AI Recruiter Discovery & Message Wall</span>
+              </div>
+            </div>
+
+            <p style="font-size: 13px; color: #cbd5e1; line-height: 1.55;">
+              Find verified recruiters and engineering leads, then reach out instantly with 3 pre-built message templates.
+            </p>
+
+            <div class="studio-preview-box">
+              <div class="studio-search-bar">
+                <i class="fa-solid fa-magnifying-glass" style="color: #34d399;"></i>
+                <span>AI Discovery: "Tech Recruiter, Python Lead, Maritime HR"</span>
+              </div>
+
+              <!-- Recruiter Contacts List -->
+              <div class="studio-contact-item">
+                <div class="contact-name-role">
+                  <strong>Sarah Jenkins · Senior Technical Recruiter</strong>
+                  <span>Scale AI · Verified Direct Email</span>
+                </div>
+                <button type="button" class="contact-msg-btn demo-outreach-btn" data-recruiter="Sarah Jenkins"><i class="fa-regular fa-envelope"></i> Message</button>
+              </div>
+
+              <div class="studio-contact-item">
+                <div class="contact-name-role">
+                  <strong>Capt. Henrik Nielsen · Maritime Crewing Lead</strong>
+                  <span>Maersk Operations · Verified Direct Contact</span>
+                </div>
+                <button type="button" class="contact-msg-btn demo-outreach-btn" data-recruiter="Capt. Henrik Nielsen"><i class="fa-regular fa-envelope"></i> Message</button>
+              </div>
+
+              <!-- Message Wall Templates -->
+              <div>
+                <span class="console-label" style="display: block; margin-bottom: 6px;">Message Wall (3 Saved Templates)</span>
+                <div class="template-wall-row">
+                  <span class="template-pill active" title="Direct Value Pitch">01. Direct Value Pitch</span>
+                  <span class="template-pill" title="Post-Application Follow-Up">02. Application Follow-Up</span>
+                  <span class="template-pill" title="Warm Networking">03. Networking Chat</span>
+                  <span class="template-pill" style="border-style: dashed;"><i class="fa-solid fa-plus"></i> Custom</span>
+                </div>
+              </div>
             </div>
           </div>
 
-          <div class="kanban-col">
-            <div class="kanban-col-header">
-              <span>OFFERED</span>
-              <span class="kanban-count">2</span>
+          <!-- STUDIO 2: Skill Gap & Learning Roadmap -->
+          <div class="studio-card">
+            <div class="studio-card-header">
+              <div class="studio-icon-box" style="background: rgba(56, 189, 248, 0.15); border-color: rgba(56, 189, 248, 0.3); color: #38bdf8;"><i class="fa-solid fa-chart-line"></i></div>
+              <div>
+                <h3 class="studio-card-title">Skill Gap & Roadmap Studio</h3>
+                <span class="studio-card-subtitle">Resume Benchmarking & Actionable Tasks</span>
+              </div>
             </div>
-            <div class="kanban-item" style="background: rgba(16, 185, 129, 0.15); border-color: #10b981;">
-              <span class="kanban-score-tag" style="background: #10b981; color: #000;">🎉 Offer Received</span>
-              <span class="kanban-role">Staff Software Engineer</span>
-              <span class="kanban-company">$190,000 + Equity</span>
+
+            <p style="font-size: 13px; color: #cbd5e1; line-height: 1.55;">
+              Benchmarks your resume against target roles and generates step-by-step project roadmaps with AI study guides.
+            </p>
+
+            <div class="studio-preview-box">
+              <div style="display: flex; justify-content: space-between; align-items: center; font-size: 12px;">
+                <span style="color: #ffffff; font-weight: 600;">Diagnosed Target: Lead Engineer (Python / Electrical)</span>
+                <span style="color: #38bdf8; font-weight: 700;">88% Benchmark</span>
+              </div>
+
+              <div class="roadmap-step-item">
+                <span class="step-badge">TASK 1</span>
+                <div class="step-details">
+                  <strong>Distributed Async Queue Architecture</strong>
+                  <span>Implement Celery + Redis worker pool for high-throughput job ingestion.</span>
+                </div>
+              </div>
+
+              <div class="roadmap-step-item">
+                <span class="step-badge" style="background: #38bdf8; color: #082f49;">TASK 2</span>
+                <div class="step-details">
+                  <strong>High-Voltage Safety & Maritime PLC Protocols</strong>
+                  <span>Review IEC 61850 substation standards and SCADA bus integration.</span>
+                </div>
+              </div>
+
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 4px;">
+                <span style="font-size: 11px; color: #94a3b8;"><i class="fa-solid fa-file-pdf" style="color: #f43f5e;"></i> In-page AI Answers & PDF Export Available</span>
+                <button type="button" class="cal-tiny-btn" id="demoPdfDownloadBtn" style="flex: 0 0 auto; padding: 4px 10px;">
+                  <i class="fa-solid fa-download"></i> Export PDF
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -773,7 +1127,7 @@
           <span class="section-tag"><i class="fa-solid fa-shield-halved"></i> Privacy First</span>
           <h2 class="section-title">Candidate Privacy & Security Guarantee</h2>
           <p class="section-desc">
-            Your career search is confidential. AI JobSnap is built from the ground up with enterprise-grade isolation, stealth search guards, and zero recruiter spam.
+            Confidential job searching with isolated cloud sessions, AES-256 encryption, and zero spam.
           </p>
         </div>
 
@@ -784,7 +1138,7 @@
               <h3 class="security-card-title">100% Incognito Job Search</h3>
             </div>
             <p class="security-card-text">
-              Your current employer, coworkers, and third-party recruiting agencies can never view your active search status or profile activity. Searches are executed privately in isolated cloud containers.
+              Current employers and third parties cannot view your activity. All searches run in isolated cloud containers.
             </p>
             <div class="security-badge-row">
               <span class="security-badge"><i class="fa-solid fa-check"></i> Zero public profile leaks</span>
@@ -798,7 +1152,7 @@
               <h3 class="security-card-title">Encrypted Resume & Notes Vault</h3>
             </div>
             <p class="security-card-text">
-              All uploaded resumes, interview talk-tracks, salary targets, and notes are encrypted at rest using AES-256 standards. Only you hold the decryption authorization for your documents.
+              Resumes, salary targets, and notes are encrypted with AES-256. Only you hold decryption keys.
             </p>
             <div class="security-badge-row">
               <span class="security-badge"><i class="fa-solid fa-check"></i> AES-256 encryption</span>
@@ -812,7 +1166,7 @@
               <h3 class="security-card-title">Verified Google OAuth Security</h3>
             </div>
             <p class="security-card-text">
-              When syncing with Google Calendar or receiving automated Gmail reports, authorization happens strictly client-side via Google's official OAuth consent. We never view or store passwords.
+              Calendar and email sync use official Google OAuth client-side. We never view or store passwords.
             </p>
             <div class="security-badge-row">
               <span class="security-badge"><i class="fa-solid fa-check"></i> Official Google OAuth</span>
@@ -826,7 +1180,7 @@
               <h3 class="security-card-title">Zero Recruiter Spam Policy</h3>
             </div>
             <p class="security-card-text">
-              We never sell candidate leads, resumes, or email addresses to recruitment agencies or advertising data brokers. Your inbox stays 100% clean and free of unsolicited cold outreaches.
+              We never sell candidate data to recruitment agencies or brokers. Zero cold spam.
             </p>
             <div class="security-badge-row">
               <span class="security-badge"><i class="fa-solid fa-check"></i> No lead broker partnerships</span>
@@ -840,7 +1194,7 @@
               <h3 class="security-card-title">Anti-Detection Account Safety</h3>
             </div>
             <p class="security-card-text">
-              Scraping and application assistants use human-velocity rate limiting and randomized jitter delays so your accounts on LinkedIn and other job portals remain completely safe and unflagged.
+              Human-velocity pacing and randomized jitter keep your job portal accounts safe and unflagged.
             </p>
             <div class="security-badge-row">
               <span class="security-badge"><i class="fa-solid fa-check"></i> Rate-limit mitigation</span>
@@ -854,7 +1208,7 @@
               <h3 class="security-card-title">Total Candidate Data Ownership</h3>
             </div>
             <p class="security-card-text">
-              You own every piece of your job search history. Export your comprehensive application log to formatted Excel or CSV anytime, or permanently wipe your account with a single click.
+              Export your entire application log to Excel/CSV anytime, or permanently delete your data in one click.
             </p>
             <div class="security-badge-row">
               <span class="security-badge"><i class="fa-solid fa-check"></i> Instant 1-click export</span>
@@ -877,61 +1231,81 @@
         <div class="faq-grid">
           <div class="faq-card">
             <h3 class="faq-question">
-              <i class="fa-solid fa-circle-check"></i>
-              <span>Is AI JobSnap really 100% free right now?</span>
+              <i class="fa-solid fa-users"></i>
+              <span>What are the two account roles in JobSnap?</span>
             </h3>
             <p class="faq-answer">
-              Yes! All 11 core features — including multi-source scraping, AI relevance scoring, Kanban application tracking, and automated email reports — are completely free during our public beta while compute capacity allows.
+              Choose <strong>Job Seeker</strong> for job matching and roadmaps, or <strong>Recruiter & Enterprise</strong> for sourcing. Both access encrypted, role-specific consoles.
+            </p>
+          </div>
+
+          <div class="faq-card">
+            <h3 class="faq-question">
+              <i class="fa-solid fa-gauge-high"></i>
+              <span>How do Fast Mode (~60s) and Deep Mode (~3m) scans differ?</span>
+            </h3>
+            <p class="faq-answer">
+              <strong>Fast Mode</strong> completes in ~60 seconds across primary boards. <strong>Deep Mode</strong> scans for ~3 minutes across niche and maritime portals.
+            </p>
+          </div>
+
+          <div class="faq-card">
+            <h3 class="faq-question">
+              <i class="fa-solid fa-sliders"></i>
+              <span>Can I search specific domains like Python, Electrical, or Merchant Navy?</span>
+            </h3>
+            <p class="faq-answer">
+              Yes. Enter any keyword—such as Python, Electrical, or Merchant Navy—filter by location and job type, and save your profile for 1-click re-runs.
             </p>
           </div>
 
           <div class="faq-card">
             <h3 class="faq-question">
               <i class="fa-solid fa-bullseye"></i>
-              <span>How does the AI relevance scoring work?</span>
+              <span>How does the AI Relevance Score calculate if a job is 'Perfect For You'?</span>
             </h3>
             <p class="faq-answer">
-              Our intelligent heuristic engine analyzes job titles, required technical skills, years of experience, and role responsibilities against your profile and resume. Jobs receive an objective 0–100% match score so you focus on top opportunities first.
+              JobSnap compares your parsed skills and experience with job requirements, outputting a 0–100% score and highlighting top fits as "Perfect For You".
             </p>
           </div>
 
           <div class="faq-card">
             <h3 class="faq-question">
-              <i class="fa-solid fa-user-shield"></i>
-              <span>Will my current employer know I am job hunting?</span>
+              <i class="fa-brands fa-google"></i>
+              <span>Can I connect a separate Google account for Calendar syncing?</span>
             </h3>
             <p class="faq-answer">
-              Never. AI JobSnap runs in stealth mode. We do not publish candidate directories or sell data to recruiters. Your target search profiles, saved companies, and application logs are accessible only to you.
-            </p>
-          </div>
-
-          <div class="faq-card">
-            <h3 class="faq-question">
-              <i class="fa-solid fa-wand-magic-sparkles"></i>
-              <span>What is the Assisted Application Filling feature?</span>
-            </h3>
-            <p class="faq-answer">
-              Our application assistant launches a dedicated browser session that automatically pre-populates repetitive fields (name, contact info, LinkedIn URL, work history) on standard ATS application portals, saving you hours of tedious manual typing.
+              Yes. You can connect any Google account to sync application deadlines and refresh calendar events directly on page.
             </p>
           </div>
 
           <div class="faq-card">
             <h3 class="faq-question">
               <i class="fa-solid fa-file-excel"></i>
-              <span>How do daily email summaries and Excel sheets work?</span>
+              <span>How does Email Reporting and Excel dispatch work?</span>
             </h3>
             <p class="faq-answer">
-              Every morning, AI JobSnap scans your target profiles for new listings. You can configure it to send a morning brief directly to your inbox with direct apply links and an attached, beautifully formatted Excel spreadsheet tracking all new opportunities.
+              Add recipient emails in console settings to automatically receive a formatted Excel sheet of all discovered jobs and match scores after each scan.
             </p>
           </div>
 
           <div class="faq-card">
             <h3 class="faq-question">
-              <i class="fa-solid fa-calendar-days"></i>
-              <span>How does Google Calendar sync help me?</span>
+              <i class="fa-solid fa-paper-plane"></i>
+              <span>What is the Outreach Studio & Message Wall?</span>
             </h3>
             <p class="faq-answer">
-              When an employer schedules a screening call or interview, or when an application deadline approaches, AI JobSnap automatically syncs the event to your Google Calendar so you never miss an interview deadline or follow-up window.
+              Search verified recruiter contacts (Tech, HR, Maritime, Founders) and send personalized messages using 3 built-in templates or custom copy.
+            </p>
+          </div>
+
+          <div class="faq-card">
+            <h3 class="faq-question">
+              <i class="fa-solid fa-road"></i>
+              <span>How does the Skill Gap & Roadmap section accelerate my career?</span>
+            </h3>
+            <p class="faq-answer">
+              It diagnoses missing skills against industry benchmarks and creates step-by-step project tasks with in-page AI answers and PDF export.
             </p>
           </div>
         </div>
@@ -1075,7 +1449,7 @@
         <span class="section-tag" style="background: rgba(16, 185, 129, 0.2);"><i class="fa-solid fa-ticket"></i> Early Access</span>
         <h2 class="section-title" style="margin-top: 10px;">Lock In Your 100% Free Pass</h2>
         <p class="section-desc" style="margin-bottom: 24px;">
-          Only 8% compute capacity is currently allocated. Enter your email below to reserve your early access pass before capacity fills up.
+          8% compute capacity allocated. Claim your free beta pass before slots fill up.
         </p>
 
         <div class="early-access-container" style="margin: 0 auto;">
@@ -1117,6 +1491,57 @@
           <a href="#early-access" class="footer-link" style="color: #34d399; font-weight: 500;">Claim Free Spot</a>
         </div>
       </footer>
+      <!-- Interactive Operator Login Modal -->
+      <div id="loginModal" class="auth-modal-overlay" hidden aria-hidden="true" role="dialog" aria-modal="true">
+        <div class="auth-modal-card">
+          <button type="button" class="auth-modal-close" id="loginModalCloseBtn" aria-label="Close modal">&times;</button>
+          
+          <div class="auth-modal-kicker">SECURE AUTHENTICATION</div>
+          <h3 class="auth-modal-title">Sign In to JobSnap</h3>
+          <p class="auth-modal-sub">Select your account role to access your personalized Enterprise Console and dashboard.</p>
+
+          <!-- Account Role Selection -->
+          <div class="auth-role-selector">
+            <button type="button" class="auth-role-btn active" id="roleJobSeekerBtn" data-role="Job Seeker">
+              <i class="fa-solid fa-user-tie"></i>
+              <span>Job Seeker</span>
+            </button>
+            <button type="button" class="auth-role-btn" id="roleRecruiterBtn" data-role="Recruiter / Enterprise">
+              <i class="fa-solid fa-building-user"></i>
+              <span>Recruiter or Enterprise</span>
+            </button>
+          </div>
+
+          <!-- Credentials -->
+          <form id="loginForm" novalidate>
+            <div class="auth-input-group">
+              <label for="loginUsername" class="auth-input-label">Operator Username</label>
+              <div class="auth-input-wrap">
+                <i class="fa-regular fa-user"></i>
+                <input type="text" id="loginUsername" class="auth-text-input" value="musabimp" placeholder="Enter username..." required />
+              </div>
+            </div>
+
+            <div class="auth-input-group">
+              <label for="loginPassword" class="auth-input-label">Password</label>
+              <div class="auth-input-wrap">
+                <i class="fa-solid fa-key"></i>
+                <input type="password" id="loginPassword" class="auth-text-input" value="••••••••••••" placeholder="Enter password..." required />
+              </div>
+            </div>
+
+            <div class="auth-security-badge">
+              <i class="fa-solid fa-shield-halved"></i>
+              <span>Encrypted Session · AES-256 Protected Vault</span>
+            </div>
+
+            <button type="submit" id="loginSubmitBtn" class="auth-submit-btn">
+              <span>Launch Operator Console</span>
+              <i class="fa-solid fa-arrow-right"></i>
+            </button>
+          </form>
+        </div>
+      </div>
     </div>
 
     <!-- Main JavaScript -->

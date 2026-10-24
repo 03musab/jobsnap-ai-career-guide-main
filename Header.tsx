@@ -64,17 +64,9 @@ const Header = () => {
   return (
     <header 
       ref={headerRef} 
-      className={cn(
-        "sticky z-50 w-full opacity-0 transition-all duration-300 ease-in-out px-4",
-        isScrolled ? 'top-4' : 'top-0'
-      )}
+      className="sticky top-0 z-50 w-full opacity-0 transition-all duration-300 ease-in-out px-4"
     >
-      <div className={cn(
-        "relative flex items-center justify-between transition-all duration-300 ease-in-out",
-        isScrolled 
-          ? 'max-w-6xl mx-auto rounded-full bg-neutral-900/30 backdrop-blur-2xl border border-white/10 shadow-lg px-4 py-1' 
-          : 'w-full px-2 py-4'
-      )}>
+      <div className="relative flex items-center justify-between w-full max-w-6xl mx-auto px-2 py-3">
         {/* Left: Logo */}
         <a href="#home" className="text-lg font-bold tracking-tight text-foreground pl-2">
           JobSnap
@@ -83,7 +75,7 @@ const Header = () => {
         {/* Center: Navigation */}
         <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
           <PillNav
-            isScrolled={false} // The parent div now handles the scrolled appearance
+            isScrolled={isScrolled}
             items={navItems}
             activeHref={activeHref}
             ease="power3.out"
@@ -95,14 +87,14 @@ const Header = () => {
         </div>
 
         {/* Right: Auth buttons */}
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-3">
           <a href="http://127.0.0.1:5000/login">
-            <Button variant="ghost" size="sm" className="rounded-full">
-              Login
+            <Button variant="ghost" size="sm">
+              Sign In
             </Button>
           </a>
           <a href="http://127.0.0.1:5000/register">
-            <Button variant="default" size="sm" className="rounded-full px-4">
+            <Button variant="default" size="sm">
               Sign Up
             </Button>
           </a>
