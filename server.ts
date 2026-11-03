@@ -2,6 +2,7 @@ import 'dotenv/config';
 import express, { Request, Response } from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
+import compression from 'compression';
 import rateLimit from 'express-rate-limit';
 import fs from 'fs';
 import path from 'path';
@@ -16,6 +17,17 @@ const SUBSCRIBERS_JSON = path.join(ROOT_DIR, 'data', 'subscribers.json');
 
 const app = express();
 
+// High Load Performance: Enable Gzip / Deflate compression for all responses
+app.use(compression());
+
+// High Load Performance: Caching headers for static assets
+app.use((req, res, next) => {
+  if (req.url.match(/\.(css|js|woff2|png|jpg|jpeg|svg|webp|ico|mp4)$/)) {
+    res.setHeader('Cache-Control', 'public, max-age=86400, stale-while-revalidate=604800');
+  }
+  next();
+});
+
 // Security: Helmet with relaxed CSP for fonts, cdn, and videos
 app.use(
   helmet({
@@ -26,7 +38,7 @@ app.use(
 
 // Enable CORS for all incoming origins in dev and preview environments
 app.use(cors());
-app.use(express.json());
+app.use(express.json({ limit: '1mb' }));
 
 // Cashfree Configuration
 const CASHFREE_API_URL = 'https://api.cashfree.com/pg';
@@ -153,18 +165,25 @@ app.post('/api/subscribe', async (req: Request, res: Response) => {
       return res.status(400).json({ error: 'A valid email address is required.' });
     }
 
+    const trimmedEmail = email.trim();
+    const assignedTicketId = ticketId || `JS-${Math.floor(1000 + Math.random() * 9000)}`;
+
+    // Dispatch records the subscriber before attempting delivery.
     const result = await dispatchSubscriptionEmail({
-      email: email.trim(),
+      email: trimmedEmail,
       name: name ? name.trim() : undefined,
       role: role || 'Tech / Product',
-      ticketId: ticketId || `JS-${Math.floor(1000 + Math.random() * 9000)}`,
+      ticketId: assignedTicketId,
       source: source || 'Landing Page Form',
       templateType: templateType || '2',
     });
 
     return res.status(200).json({
       success: true,
-      message: 'Subscription successful and confirmation pass email dispatched!',
+      emailSent: result.provider === 'gmail' || result.provider === 'resend',
+      message: result.provider === 'stored'
+        ? 'Subscription saved, but the confirmation email could not be sent.'
+        : 'Subscription successful and early access pass emailed!',
       data: result,
     });
   } catch (error: unknown) {
@@ -177,11 +196,12 @@ app.post('/api/subscribe', async (req: Request, res: Response) => {
   }
 });
 
-// Endpoint: List subscribers (admin view)
-app.get('/api/subscribers', (_req: Request, res: Response) => {
+// Endpoint: List subscribers (admin view, non-blocking)
+app.get('/api/subscribers', async (_req: Request, res: Response) => {
   try {
     if (fs.existsSync(SUBSCRIBERS_JSON)) {
-      const data = JSON.parse(fs.readFileSync(SUBSCRIBERS_JSON, 'utf-8'));
+      const raw = await fs.promises.readFile(SUBSCRIBERS_JSON, 'utf-8');
+      const data = JSON.parse(raw);
       return res.json({ count: data.length, subscribers: data });
     }
     return res.json({ count: 0, subscribers: [] });

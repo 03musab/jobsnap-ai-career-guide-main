@@ -81,8 +81,8 @@ export default async function handler(
 
     const fromText = isNewsletter ? 'JobSnap Newsletter' : 'JobSnap Waitlist';
     const subject = isNewsletter
-      ? '🚀 New Newsletter Subscriber for JobSnap!'
-      : '✨ New Waitlist Subscriber for JobSnap!';
+      ? 'New Newsletter Subscriber for JobSnap'
+      : 'New Waitlist Subscriber for JobSnap';
     const title = isNewsletter ? 'New Newsletter Subscriber' : 'New Waitlist Subscriber';
     const introText = isNewsletter
       ? 'A new user has subscribed to the newsletter from your website footer.'

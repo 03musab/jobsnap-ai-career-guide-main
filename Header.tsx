@@ -86,16 +86,16 @@ const Header = () => {
           />
         </div>
 
-        {/* Right: Auth buttons */}
-        <div className="flex items-center gap-3">
-          <a href="http://127.0.0.1:5000/login">
-            <Button variant="ghost" size="sm">
-              Sign In
+        {/* Right: Auth buttons (Sign Up and Log In beneath that) */}
+        <div className="flex flex-col items-end gap-1.5">
+          <a href="http://127.0.0.1:5000/dashboard">
+            <Button variant="default" size="sm" className="h-8 px-4 text-xs font-semibold rounded-full bg-emerald-500 hover:bg-emerald-600 text-white shadow-md">
+              Sign Up
             </Button>
           </a>
-          <a href="http://127.0.0.1:5000/register">
-            <Button variant="default" size="sm">
-              Sign Up
+          <a href="http://127.0.0.1:5000/dashboard">
+            <Button variant="ghost" size="sm" className="h-7 px-3 text-xs text-neutral-300 hover:text-white hover:bg-white/10 rounded-full">
+              Log In
             </Button>
           </a>
         </div>

@@ -16,5 +16,149 @@
     "source": "Landing Page Form",
     "status": "subscribed",
     "timestamp": "2026-10-23T14:13:44.639Z"
+  },
+  {
+    "email": "03.musab.1@gmail.com",
+    "name": "03 Musab 1",
+    "role": "Tech / Product",
+    "ticketId": "JS-5976",
+    "source": "Final Callout Banner",
+    "status": "subscribed",
+    "timestamp": "2026-10-26T16:46:57.074Z"
+  },
+  {
+    "email": "test_verification@example.com",
+    "name": "Test Verification",
+    "role": "Tech / Product",
+    "ticketId": "JS-3824",
+    "source": "Verification Test",
+    "status": "subscribed",
+    "timestamp": "2026-10-25T13:55:47.461Z"
+  },
+  {
+    "email": "frontend_test@jobsnap.ai",
+    "name": "Frontend Test",
+    "role": "Tech / Product",
+    "ticketId": "JS-3876",
+    "source": "Landing Page Hero",
+    "status": "subscribed",
+    "timestamp": "2026-10-25T13:57:48.418Z"
+  },
+  {
+    "email": "test0@example.com",
+    "name": "Test0",
+    "role": "Tech / Product",
+    "ticketId": "JS-8943",
+    "source": "Batch Test",
+    "status": "subscribed",
+    "timestamp": "2026-10-25T16:08:11.462Z"
+  },
+  {
+    "email": "test1@example.com",
+    "name": "Test1",
+    "role": "Tech / Product",
+    "ticketId": "JS-3503",
+    "source": "Batch Test",
+    "status": "subscribed",
+    "timestamp": "2026-10-25T16:08:11.487Z"
+  },
+  {
+    "email": "test2@example.com",
+    "name": "Test2",
+    "role": "Tech / Product",
+    "ticketId": "JS-8516",
+    "source": "Batch Test",
+    "status": "subscribed",
+    "timestamp": "2026-10-25T16:08:11.501Z"
+  },
+  {
+    "email": "test3@example.com",
+    "name": "Test3",
+    "role": "Tech / Product",
+    "ticketId": "JS-3423",
+    "source": "Batch Test",
+    "status": "subscribed",
+    "timestamp": "2026-10-25T16:08:11.514Z"
+  },
+  {
+    "email": "test4@example.com",
+    "name": "Test4",
+    "role": "Tech / Product",
+    "ticketId": "JS-7575",
+    "source": "Batch Test",
+    "status": "subscribed",
+    "timestamp": "2026-10-25T16:08:11.528Z"
+  },
+  {
+    "email": "test5@example.com",
+    "name": "Test5",
+    "role": "Tech / Product",
+    "ticketId": "JS-7813",
+    "source": "Batch Test",
+    "status": "subscribed",
+    "timestamp": "2026-10-25T16:08:11.542Z"
+  },
+  {
+    "email": "test6@example.com",
+    "name": "Test6",
+    "role": "Tech / Product",
+    "ticketId": "JS-9448",
+    "source": "Batch Test",
+    "status": "subscribed",
+    "timestamp": "2026-10-25T16:08:11.556Z"
+  },
+  {
+    "email": "test7@example.com",
+    "name": "Test7",
+    "role": "Tech / Product",
+    "ticketId": "JS-8117",
+    "source": "Batch Test",
+    "status": "subscribed",
+    "timestamp": "2026-10-25T16:08:11.570Z"
+  },
+  {
+    "email": "test8@example.com",
+    "name": "Test8",
+    "role": "Tech / Product",
+    "ticketId": "JS-8658",
+    "source": "Batch Test",
+    "status": "subscribed",
+    "timestamp": "2026-10-25T16:08:11.584Z"
+  },
+  {
+    "email": "test9@example.com",
+    "name": "Test9",
+    "role": "Tech / Product",
+    "ticketId": "JS-7538",
+    "source": "Batch Test",
+    "status": "subscribed",
+    "timestamp": "2026-10-25T16:08:11.598Z"
+  },
+  {
+    "email": "binmusab123a@gmail.com",
+    "name": "Binmusab123a",
+    "role": "Tech / Product",
+    "ticketId": "JS-1189",
+    "source": "Landing Page Hero",
+    "status": "subscribed",
+    "timestamp": "2026-11-03T16:28:04.517Z"
+  },
+  {
+    "email": "binmusab123@gmail.com",
+    "name": "Binmusab123",
+    "role": "Tech / Product",
+    "ticketId": "JS-6920",
+    "source": "Landing Page Hero",
+    "status": "subscribed",
+    "timestamp": "2026-10-26T16:53:37.421Z"
+  },
+  {
+    "email": "test@example.com",
+    "name": "Test",
+    "role": "Tech / Product",
+    "ticketId": "JS-2562",
+    "source": "Final Callout Banner",
+    "status": "subscribed",
+    "timestamp": "2026-10-26T17:48:03.191Z"
   }
 ]

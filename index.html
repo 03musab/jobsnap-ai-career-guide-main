@@ -1,1550 +1,1638 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>AI JobSnap — Early Access</title>
-    <meta
-      name="description"
-      content="Automate your job search with intelligent AI: multi-source scraping, relevance scoring, and application tracking. Free during early access."
-    />
-    <meta property="og:title" content="AI JobSnap — Early Access" />
-    <meta
-      property="og:description"
-      content="Automate your job search with intelligent AI: multi-source scraping, relevance scoring, and application tracking. Free during early access."
-    />
-    <meta property="og:type" content="website" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="AI JobSnap — Early Access" />
-    <meta
-      name="twitter:description"
-      content="Automate your job search with intelligent AI: multi-source scraping, relevance scoring, and application tracking. Free during early access."
-    />
 
-    <!-- Google Fonts: Inter (400, 500, 600, 700) -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI JobSnap - Early Access</title>
+  <meta name="description"
+    content="Automate your job search with intelligent AI: multi-source scraping, relevance scoring, and application tracking. Free during early access." />
+  <meta property="og:title" content="AI JobSnap — Early Access" />
+  <meta property="og:description"
+    content="Automate your job search with intelligent AI: multi-source scraping, relevance scoring, and application tracking. Free during early access." />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="AI JobSnap — Early Access" />
+  <meta name="twitter:description"
+    content="Automate your job search with intelligent AI: multi-source scraping, relevance scoring, and application tracking. Free during early access." />
 
-    <!-- OnlineWebFonts: BubbledotICG-FinePos -->
-    <link
-      href="https://db.onlinewebfonts.com/c/8cb707a9b8a73f8a7403336b861c3074?family=BubbledotICG-FinePos"
-      rel="stylesheet"
-    />
+  <!-- Google Fonts: Inter (400, 500, 600, 700) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
-    <!-- Font Awesome 6.5.2 -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-      integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
+  <!-- Preconnect to CDNs for fastest video and icon asset delivery -->
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin />
+  <link rel="preconnect" href="https://d8j0ntlcm91z4.cloudfront.net" crossorigin />
 
-    <!-- Main Stylesheet -->
-    <link rel="stylesheet" href="/styles.css" />
+  <!-- Font Awesome 6.5.2 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-    <!-- Prevent browser scroll restoration and ensure page always starts at absolute top (0, 0) -->
-    <script>
-      if ("scrollRestoration" in history) {
-        history.scrollRestoration = "manual";
-      }
-      window.scrollTo(0, 0);
-      document.documentElement.scrollTop = 0;
-      if (document.body) document.body.scrollTop = 0;
-    </script>
-  </head>
-  <body>
-    <!-- Full-viewport fixed background video -->
-    <div class="bg">
-      <video class="bg-video" autoplay muted loop playsinline>
-        <source
-          src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260809_012548_ef22562c-c0ae-4816-ad9d-f8922af4e6a7.mp4"
-          type="video/mp4"
-        />
-      </video>
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="/styles.css" />
+
+  <!-- Prevent browser scroll restoration and ensure page always starts at absolute top (0, 0) -->
+  <script>
+    if ("scrollRestoration" in history) {
+      history.scrollRestoration = "manual";
+    }
+    window.scrollTo(0, 0);
+    document.documentElement.scrollTop = 0;
+    if (document.body) document.body.scrollTop = 0;
+  </script>
+</head>
+
+<body>
+  <!-- Full-viewport fixed background video -->
+  <div class="bg">
+    <video class="bg-video" autoplay muted loop playsinline>
+      <source
+        src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260809_012548_ef22562c-c0ae-4816-ad9d-f8922af4e6a7.mp4"
+        type="video/mp4" />
+    </video>
+  </div>
+
+  <!-- Layout Container - Full single page with smooth scroll -->
+  <div class="page">
+    <!-- 1) Header - Logo next to Home removed as requested -->
+    <header class="site-header">
+      <nav class="nav-pill" aria-label="Main Navigation">
+        <div class="nav-indicator" id="navIndicator" aria-hidden="true"></div>
+        <a href="#home" class="nav-link active">Home</a>
+        <a href="#capacity" class="nav-link">Capacity</a>
+        <a href="#features" class="nav-link">Features</a>
+        <a href="#workflow" class="nav-link">Workflow</a>
+        <a href="#security" class="nav-link">Security & Privacy</a>
+        <a href="#faq" class="nav-link">FAQ</a>
+      </nav>
+
+      <button id="soundToggleBtn" class="sound-toggle-btn" aria-label="Toggle UI Sound Effects"
+        title="Sound Effects: ON (Click to mute)">
+        <i class="fa-solid fa-volume-high sound-icon"></i>
+      </button>
+
+      <button id="operatorLoginBtn" class="operator-pill-btn" aria-label="Sign In as Operator">
+        <i class="fa-solid fa-user-lock"></i>
+        <span id="headerOperatorLabel">Sign In</span>
+      </button>
+
+      <a href="#early-access" id="headerAccessBtn" class="sign-in-btn">Claim Free Spot</a>
+
+      <button id="burgerBtn" class="burger-btn" aria-label="Toggle navigation menu" aria-expanded="false">
+        <span class="burger-bar"></span>
+        <span class="burger-bar"></span>
+        <span class="burger-bar"></span>
+      </button>
+    </header>
+
+    <!-- Very Right Hand Side Quick Auth: Signup & Login beneath that -->
+    <div class="fixed-corner-auth" id="fixedCornerAuth" aria-label="Account Access">
+      <a href="http://127.0.0.1:5000/register" class="corner-auth-btn corner-signup-btn" id="cornerSignupBtn"
+        title="Sign up for AI JobSnap">
+        <i class="fa-solid fa-user-plus"></i>
+        <span>Sign Up</span>
+      </a>
+      <a href="http://127.0.0.1:5000/login" class="corner-auth-btn corner-login-btn" id="cornerLoginBtn"
+        title="Log into your dashboard">
+        <i class="fa-solid fa-arrow-right-to-bracket"></i>
+        <span>Log In</span>
+      </a>
     </div>
 
-    <!-- Layout Container - Full single page with smooth scroll -->
-    <div class="page">
-      <!-- 1) Header - Logo next to Home removed as requested -->
-      <header class="site-header">
-        <nav class="nav-pill" aria-label="Main Navigation">
-          <div class="nav-indicator" id="navIndicator" aria-hidden="true"></div>
-          <a href="#home" class="nav-link active">Home</a>
-          <a href="#capacity" class="nav-link">Capacity</a>
-          <a href="#features" class="nav-link">Features</a>
-          <a href="#workflow" class="nav-link">Workflow</a>
-          <a href="#security" class="nav-link">Security & Privacy</a>
-          <a href="#faq" class="nav-link">FAQ</a>
-          <a href="#roadmap" class="nav-link">Roadmap</a>
-        </nav>
+    <!-- Mobile Overlay & Sheet Menu -->
+    <div id="mobileOverlay" class="mobile-overlay" hidden></div>
+    <div id="mobileMenu" class="mobile-menu" hidden>
+      <a href="#home" class="mobile-nav-link active">Home</a>
+      <a href="#capacity" class="mobile-nav-link">Compute Capacity (8%)</a>
+      <a href="#features" class="mobile-nav-link">Free Features</a>
+      <a href="#workflow" class="mobile-nav-link">Workflow & Steps</a>
+      <a href="#security" class="mobile-nav-link">Security & Privacy</a>
+      <a href="#faq" class="mobile-nav-link">Candidate FAQ</a>
+      <button id="mobileOperatorLoginBtn" class="operator-pill-btn"
+        style="width: 100%; justify-content: center; margin-top: 8px;">
+        <i class="fa-solid fa-user-lock"></i>
+        <span>Operator Sign In</span>
+      </button>
+      <button id="mobileSoundBtn" class="mobile-sound-toggle" aria-label="Toggle UI sound effects">
+        <i class="fa-solid fa-volume-high"></i>
+        <span id="mobileSoundText">Sound Effects: Active</span>
+      </button>
+      <a href="#early-access" id="mobileActionBtn" class="mobile-sign-in">Claim Free Spot</a>
 
-        <button
-          id="soundToggleBtn"
-          class="sound-toggle-btn"
-          aria-label="Toggle UI Sound Effects"
-          title="Sound Effects: ON (Click to mute)"
-        >
-          <i class="fa-solid fa-volume-high sound-icon"></i>
-        </button>
+      <!-- Mobile Signup & Login -->
+      <div class="mobile-auth-corner-group">
+        <a href="http://127.0.0.1:5000/dashboard" class="mobile-corner-btn mobile-corner-signup">
+          <i class="fa-solid fa-user-plus"></i>
+          <span>Sign Up</span>
+        </a>
+        <a href="http://127.0.0.1:5000/dashboard" class="mobile-corner-btn mobile-corner-login">
+          <i class="fa-solid fa-arrow-right-to-bracket"></i>
+          <span>Log In</span>
+        </a>
+      </div>
+    </div>
 
-        <button id="operatorLoginBtn" class="operator-pill-btn" aria-label="Sign In as Operator">
-          <i class="fa-solid fa-user-lock"></i>
-          <span id="headerOperatorLabel">Sign In</span>
-        </button>
-
-        <a href="#early-access" id="headerAccessBtn" class="sign-in-btn">Claim Free Spot</a>
-
-        <button
-          id="burgerBtn"
-          class="burger-btn"
-          aria-label="Toggle navigation menu"
-          aria-expanded="false"
-        >
-          <span class="burger-bar"></span>
-          <span class="burger-bar"></span>
-          <span class="burger-bar"></span>
-        </button>
-      </header>
-
-      <!-- Mobile Overlay & Sheet Menu -->
-      <div id="mobileOverlay" class="mobile-overlay" hidden></div>
-      <div id="mobileMenu" class="mobile-menu" hidden>
-        <a href="#home" class="mobile-nav-link active">Home</a>
-        <a href="#capacity" class="mobile-nav-link">Compute Capacity (8%)</a>
-        <a href="#features" class="mobile-nav-link">Free Features</a>
-        <a href="#workflow" class="mobile-nav-link">Workflow & Steps</a>
-        <a href="#security" class="mobile-nav-link">Security & Privacy</a>
-        <a href="#faq" class="mobile-nav-link">Candidate FAQ</a>
-        <a href="#roadmap" class="mobile-nav-link">Roadmap</a>
-        <button id="mobileOperatorLoginBtn" class="operator-pill-btn" style="width: 100%; justify-content: center; margin-top: 8px;">
-          <i class="fa-solid fa-user-lock"></i>
-          <span>Operator Sign In</span>
-        </button>
-        <button id="mobileSoundBtn" class="mobile-sound-toggle" aria-label="Toggle UI sound effects">
-          <i class="fa-solid fa-volume-high"></i>
-          <span id="mobileSoundText">Sound Effects: Active</span>
-        </button>
-        <a href="#early-access" id="mobileActionBtn" class="mobile-sign-in">Claim Free Spot</a>
+    <!-- 2) Hero Section -->
+    <main id="home" class="hero">
+      <!-- Trust row -->
+      <div class="trust-row anim" style="--d: 0.05s;">
+        <div class="trust-avatar" title="Microsoft">
+          <div class="trust-inner-circle">
+            <i class="fa-brands fa-microsoft"></i>
+          </div>
+        </div>
+        <div class="trust-avatar" title="Amazon">
+          <div class="trust-inner-circle">
+            <i class="fa-brands fa-amazon"></i>
+          </div>
+        </div>
+        <div class="trust-avatar" title="Google">
+          <div class="trust-inner-circle">
+            <i class="fa-brands fa-google"></i>
+          </div>
+        </div>
+        <div class="trust-pill">
+          <span class="trust-text"><strong style="color: #34d399;">100% Free Beta</strong> • 8% Capacity
+            Allocated</span>
+        </div>
       </div>
 
-      <!-- 2) Hero Section -->
-      <main id="home" class="hero">
-        <!-- Trust row -->
-        <div class="trust-row anim" style="--d: 0.05s;">
-          <div class="trust-avatar" title="Microsoft">
-            <div class="trust-inner-circle">
-              <i class="fa-brands fa-microsoft"></i>
-            </div>
+      <!-- Headline (retro dot-matrix) -->
+      <h1 class="headline anim">
+        <span class="headline-line">AI JobSnap</span>
+        <span class="headline-line">Automate Your Job Hunt</span>
+      </h1>
+
+      <!-- Subhead -->
+      <p class="subhead anim" style="--d: 0.28s;">
+        Your autonomous AI job agent: dual-speed scanning (Fast ~60s & Deep ~3m), 0–100% resume match scoring, Google
+        Calendar syncing, and direct HR outreach.
+      </p>
+
+      <!-- Early Access Email Form -->
+      <div class="early-access-container anim" style="--d: 0.38s;">
+        <form id="heroEmailForm" class="early-access-form" novalidate>
+          <div class="input-wrap">
+            <i class="fa-regular fa-envelope input-icon"></i>
+            <input type="email" id="userEmailInput" class="early-access-input"
+              placeholder="Enter your email for instant early access..." autocomplete="email" required />
           </div>
-          <div class="trust-avatar" title="Amazon">
-            <div class="trust-inner-circle">
-              <i class="fa-brands fa-amazon"></i>
-            </div>
-          </div>
-          <div class="trust-avatar" title="Google">
-            <div class="trust-inner-circle">
-              <i class="fa-brands fa-google"></i>
-            </div>
-          </div>
-          <div class="trust-pill">
-            <span class="trust-text"><strong style="color: #34d399;">100% Free Beta</strong> • 8% Capacity Allocated</span>
-          </div>
+          <button type="button" id="submitBtn" class="cta-btn early-access-submit">
+            <span class="btn-text">Claim Free Access</span>
+            <i class="fa-solid fa-arrow-right btn-arrow"></i>
+          </button>
+        </form>
+
+        <div id="formFeedback" class="form-feedback" hidden></div>
+
+        <div class="hero-actions-row">
+          <a href="#features" class="features-trigger-btn">
+            <span class="free-pill-tag">Free in Beta</span>
+            <span>Explore All 11 Features</span>
+            <i class="fa-solid fa-arrow-down" style="font-size: 11px;"></i>
+          </a>
+          <span class="capacity-note">
+            <span class="capacity-pulse-dot"></span>
+            <span id="capacityStatusText">8% compute capacity allocated • 92% free slots available</span>
+          </span>
         </div>
+      </div>
 
-        <!-- Headline (retro dot-matrix) -->
-        <h1 class="headline anim">
-          <span class="headline-line">AI JobSnap</span>
-          <span class="headline-line">Automate Your Job Hunt</span>
-        </h1>
-
-        <!-- Subhead -->
-        <p class="subhead anim" style="--d: 0.28s;">
-          Your autonomous AI job agent: dual-speed scanning (Fast ~60s & Deep ~3m), 0–100% resume match scoring, Google Calendar syncing, and direct HR outreach.
-        </p>
-
-        <!-- Early Access Email Form -->
-        <div class="early-access-container anim" style="--d: 0.38s;">
-          <form id="heroEmailForm" class="early-access-form" novalidate>
-            <div class="input-wrap">
-              <i class="fa-regular fa-envelope input-icon"></i>
-              <input
-                type="email"
-                id="userEmailInput"
-                class="early-access-input"
-                placeholder="Enter your email for instant early access..."
-                autocomplete="email"
-                required
-              />
-            </div>
-            <button type="submit" id="submitBtn" class="cta-btn early-access-submit">
-              <span class="btn-text">Claim Free Access</span>
-              <i class="fa-solid fa-arrow-right btn-arrow"></i>
-            </button>
-          </form>
-
-          <div id="formFeedback" class="form-feedback" hidden></div>
-
-          <div class="hero-actions-row">
-            <a href="#features" class="features-trigger-btn">
-              <span class="free-pill-tag">Free in Beta</span>
-              <span>Explore All 11 Features</span>
-              <i class="fa-solid fa-arrow-down" style="font-size: 11px;"></i>
-            </a>
-            <span class="capacity-note">
-              <span class="capacity-pulse-dot"></span>
-              <span id="capacityStatusText">8% compute capacity allocated • 92% free slots available</span>
+      <!-- Stats Row -->
+      <div class="stats-footer">
+        <div class="stat-item anim" style="--d: 0.5s;">
+          <div class="stat-header">
+            <span class="stat-icon">&lt;</span>
+            <span class="stat-value-group">
+              <span class="stat-value" data-stat-target="100" data-stat-decimals="0">0</span>%
             </span>
           </div>
+          <span class="stat-label">Free While In Beta</span>
         </div>
 
-        <!-- Stats Row -->
-        <div class="stats-footer">
-          <div class="stat-item anim" style="--d: 0.5s;">
-            <div class="stat-header">
-              <span class="stat-icon">&lt;</span>
-              <span class="stat-value-group">
-                <span class="stat-value" data-stat-target="100" data-stat-decimals="0">0</span>%
-              </span>
-            </div>
-            <span class="stat-label">Free While In Beta</span>
+        <div class="stat-item anim" style="--d: 0.58s;">
+          <div class="stat-header">
+            <span class="stat-icon">%</span>
+            <span class="stat-value-group">
+              <span class="stat-value" data-stat-target="94.8" data-stat-decimals="1">0.0</span>%
+            </span>
           </div>
+          <span class="stat-label">Match Relevance</span>
+        </div>
 
-          <div class="stat-item anim" style="--d: 0.58s;">
-            <div class="stat-header">
-              <span class="stat-icon">%</span>
-              <span class="stat-value-group">
-                <span class="stat-value" data-stat-target="94.8" data-stat-decimals="1">0.0</span>%
-              </span>
-            </div>
-            <span class="stat-label">Match Relevance</span>
+        <div class="stat-item anim" style="--d: 0.66s;">
+          <div class="stat-header">
+            <span class="stat-icon">*</span>
+            <span class="stat-value-group">
+              <span class="stat-value" data-stat-target="24" data-stat-decimals="0">0</span>/7
+            </span>
           </div>
+          <span class="stat-label">Background Scraping</span>
+        </div>
 
-          <div class="stat-item anim" style="--d: 0.66s;">
-            <div class="stat-header">
-              <span class="stat-icon">*</span>
-              <span class="stat-value-group">
-                <span class="stat-value" data-stat-target="24" data-stat-decimals="0">0</span>/7
-              </span>
-            </div>
-            <span class="stat-label">Background Scraping</span>
+        <div class="stat-item anim" style="--d: 0.74s;">
+          <div class="stat-header">
+            <span class="stat-icon">#</span>
+            <span class="stat-value-group">
+              <span class="stat-value" data-stat-target="25" data-stat-decimals="0">0</span>K+
+            </span>
           </div>
+          <span class="stat-label">Jobs Aggregated</span>
+        </div>
+      </div>
+    </main>
 
-          <div class="stat-item anim" style="--d: 0.74s;">
-            <div class="stat-header">
-              <span class="stat-icon">#</span>
-              <span class="stat-value-group">
-                <span class="stat-value" data-stat-target="25" data-stat-decimals="0">0</span>K+
-              </span>
-            </div>
-            <span class="stat-label">Jobs Aggregated</span>
+    <!-- Section: Compute Capacity Tracker (8% Allocated) -->
+    <section id="capacity" class="content-section">
+      <div class="section-header">
+        <span class="section-tag"><i class="fa-solid fa-bolt"></i> Live Capacity Tracker</span>
+        <h2 class="section-title">Free Until Compute Limit Reached</h2>
+        <p class="section-desc">
+          100% free during early access. Reserve your spot before worker node capacity reaches 100%.
+        </p>
+      </div>
+
+      <div class="capacity-card">
+        <div class="capacity-hero-row">
+          <div class="capacity-metric">
+            <div class="capacity-value-lg">8%</div>
+            <div class="capacity-label-lg">Total Compute Capacity Allocated</div>
+          </div>
+          <div class="capacity-slots-badge">
+            <i class="fa-solid fa-circle-check" style="color: #34d399;"></i>
+            <span>92% Free Early Access Spots Remaining</span>
           </div>
         </div>
-      </main>
 
-      <!-- Section: ⚡ Compute Capacity Tracker (8% Allocated) -->
-      <section id="capacity" class="content-section">
-        <div class="section-header">
-          <span class="section-tag"><i class="fa-solid fa-bolt"></i> Live Capacity Tracker</span>
-          <h2 class="section-title">Free Until Compute Limit Reached</h2>
-          <p class="section-desc">
-            100% free during early access. Reserve your spot before worker node capacity reaches 100%.
+        <!-- 8% Progress Bar -->
+        <div class="capacity-meter-track" role="progressbar" aria-valuenow="8" aria-valuemin="0" aria-valuemax="100">
+          <div class="capacity-meter-fill" style="width: 8%;"></div>
+        </div>
+
+        <div class="capacity-breakdown-grid">
+          <div class="capacity-node-card">
+            <span class="capacity-node-name">Scraping Worker Nodes</span>
+            <div class="capacity-node-val"><span>8% active</span> <i class="fa-solid fa-server"
+                style="color: #10b981; font-size: 14px;"></i></div>
+          </div>
+          <div class="capacity-node-card">
+            <span class="capacity-node-name">AI Relevance Scoring Engine</span>
+            <div class="capacity-node-val"><span>8% load</span> <i class="fa-solid fa-brain"
+                style="color: #10b981; font-size: 14px;"></i></div>
+          </div>
+          <div class="capacity-node-card">
+            <span class="capacity-node-name">Background Task Queue</span>
+            <div class="capacity-node-val"><span>6% utilization</span> <i class="fa-solid fa-layer-group"
+                style="color: #10b981; font-size: 14px;"></i></div>
+          </div>
+          <div class="capacity-node-card">
+            <span class="capacity-node-name">Email & Report Dispatcher</span>
+            <div class="capacity-node-val"><span>11% capacity</span> <i class="fa-solid fa-envelope"
+                style="color: #10b981; font-size: 14px;"></i></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section: Clean 3-Card Features & Services Deck (User Reference Style) -->
+    <section id="features" class="content-section features-oasis-section">
+      <div class="features-oasis-inner">
+        <div class="features-oasis-header">
+          <span class="features-oasis-kicker">FEATURES</span>
+          <h2 class="features-oasis-title">Our Features & Services.</h2>
+          <p class="features-oasis-desc">
+            Intelligent career automation made simple. Discover matching jobs, score your resume, and track applications
+            with zero hassle.
           </p>
         </div>
 
-        <div class="capacity-card">
-          <div class="capacity-hero-row">
-            <div class="capacity-metric">
-              <div class="capacity-value-lg">8%</div>
-              <div class="capacity-label-lg">Total Compute Capacity Allocated</div>
-            </div>
-            <div class="capacity-slots-badge">
-              <i class="fa-solid fa-circle-check" style="color: #34d399;"></i>
-              <span>92% Free Early Access Spots Remaining</span>
-            </div>
-          </div>
+        <div class="features-clean-grid">
+          <!-- CARD 1: Smart Job Discovery (Keywords & Left Scan Dashboard) -->
+          <div class="feature-card-clean" data-feature="discovery">
+            <div class="feature-card-illus">
+              <svg viewBox="0 0 320 220" class="feature-svg"
+                aria-label="Smart Job Discovery illustration with communication bubbles and active candidate researchers">
+                <defs>
+                  <linearGradient id="bubbleGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#10b981" />
+                    <stop offset="100%" stop-color="#059669" />
+                  </linearGradient>
+                  <linearGradient id="bubbleGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#34d399" />
+                    <stop offset="100%" stop-color="#0d9488" />
+                  </linearGradient>
+                  <filter id="softGlow1" x="-20%" y="-20%" width="140%" height="140%">
+                    <feDropShadow dx="0" dy="6" stdDeviation="10" flood-color="rgba(16, 185, 129, 0.3)" />
+                  </filter>
+                </defs>
 
-          <!-- 8% Progress Bar -->
-          <div class="capacity-meter-track" role="progressbar" aria-valuenow="8" aria-valuemin="0" aria-valuemax="100">
-            <div class="capacity-meter-fill" style="width: 8%;"></div>
-          </div>
+                <!-- Ambient background glow -->
+                <circle cx="160" cy="110" r="85" fill="rgba(16, 185, 129, 0.08)" />
 
-          <div class="capacity-breakdown-grid">
-            <div class="capacity-node-card">
-              <span class="capacity-node-name">Scraping Worker Nodes</span>
-              <div class="capacity-node-val"><span>8% active</span> <i class="fa-solid fa-server" style="color: #10b981; font-size: 14px;"></i></div>
-            </div>
-            <div class="capacity-node-card">
-              <span class="capacity-node-name">AI Relevance Scoring Engine</span>
-              <div class="capacity-node-val"><span>8% load</span> <i class="fa-solid fa-brain" style="color: #10b981; font-size: 14px;"></i></div>
-            </div>
-            <div class="capacity-node-card">
-              <span class="capacity-node-name">Background Task Queue</span>
-              <div class="capacity-node-val"><span>6% utilization</span> <i class="fa-solid fa-layer-group" style="color: #10b981; font-size: 14px;"></i></div>
-            </div>
-            <div class="capacity-node-card">
-              <span class="capacity-node-name">Email & Report Dispatcher</span>
-              <div class="capacity-node-val"><span>11% capacity</span> <i class="fa-solid fa-envelope" style="color: #10b981; font-size: 14px;"></i></div>
-            </div>
-          </div>
-        </div>
-      </section>
+                <!-- Back speech bubble (Lower right) -->
+                <g filter="url(#softGlow1)">
+                  <rect x="110" y="70" width="125" height="72" rx="12" fill="url(#bubbleGrad2)" />
+                  <path d="M 125 142 L 115 160 L 140 142 Z" fill="#0d9488" />
+                  <!-- Text placeholder lines -->
+                  <rect x="125" y="86" width="70" height="5" rx="2.5" fill="rgba(255, 255, 255, 0.85)" />
+                  <rect x="125" y="98" width="90" height="5" rx="2.5" fill="rgba(255, 255, 255, 0.85)" />
+                  <rect x="125" y="110" width="55" height="5" rx="2.5" fill="rgba(255, 255, 255, 0.85)" />
+                </g>
 
-      <!-- Section: 🌿 Clean 3-Card Features & Services Deck (User Reference Style) -->
-      <section id="features" class="content-section features-oasis-section">
-        <div class="features-oasis-inner">
-          <div class="features-oasis-header">
-            <span class="features-oasis-kicker">FEATURES</span>
-            <h2 class="features-oasis-title">Our Features & Services.</h2>
-            <p class="features-oasis-desc">
-              Intelligent career automation made simple. Discover matching jobs, score your resume, and track applications with zero hassle.
+                <!-- Front speech bubble (Upper left) -->
+                <g filter="url(#softGlow1)">
+                  <rect x="75" y="44" width="115" height="60" rx="12" fill="url(#bubbleGrad1)" />
+                  <path d="M 88 104 L 78 120 L 102 104 Z" fill="#059669" />
+                  <!-- Text placeholder lines -->
+                  <rect x="90" y="58" width="60" height="5" rx="2.5" fill="#ffffff" />
+                  <rect x="90" y="70" width="85" height="5" rx="2.5" fill="#ffffff" />
+                  <rect x="90" y="82" width="45" height="5" rx="2.5" fill="#ffffff" />
+                </g>
+
+                <!-- Floating Reaction Badges -->
+                <!-- Heart badge top right -->
+                <g transform="translate(235, 34)">
+                  <circle cx="10" cy="10" r="10" fill="#f43f5e" />
+                  <path
+                    d="M 10 14.5 L 6.5 11 C 5 9.5 5 7 6.5 5.5 C 8 4 10 5.5 10 5.5 C 10 5.5 12 4 13.5 5.5 C 15 7 15 9.5 13.5 11 Z"
+                    fill="#ffffff" />
+                </g>
+                <!-- Hashtag badge upper left -->
+                <g transform="translate(62, 28)">
+                  <rect x="0" y="0" width="18" height="18" rx="5" fill="#38bdf8" />
+                  <text x="9" y="13" font-size="12" font-weight="900" fill="#ffffff" text-anchor="middle">#</text>
+                </g>
+                <!-- Small speech bubble lower right -->
+                <g transform="translate(230, 116)">
+                  <rect x="0" y="0" width="20" height="15" rx="4" fill="#94a3b8" opacity="0.6" />
+                  <path d="M 4 15 L 2 19 L 9 15 Z" fill="#94a3b8" opacity="0.6" />
+                </g>
+
+                <!-- Seated Girl on Front Bubble (Upper Right) -->
+                <g transform="translate(190, 48)">
+                  <!-- Hair -->
+                  <path d="M 16 0 C 10 0 4 6 4 15 C 4 24 10 28 16 28 C 22 28 27 24 27 15 C 27 6 22 0 16 0 Z"
+                    fill="#3e2723" />
+                  <path d="M 18 10 C 23 15 25 24 24 35 C 22 36 19 32 18 26 Z" fill="#3e2723" />
+                  <!-- Head / Face -->
+                  <circle cx="15" cy="12" r="7" fill="#fed7aa" />
+                  <!-- Torso / White Blouse -->
+                  <path d="M 10 20 L 22 20 L 24 38 L 8 38 Z" fill="#ffffff" />
+                  <path d="M 10 20 L 6 28 L 10 32 Z" fill="#fed7aa" />
+                  <!-- Red smartphone in hand -->
+                  <rect x="22" y="22" width="6" height="10" rx="1.5" fill="#f43f5e" />
+                  <!-- Arms reaching to phone -->
+                  <path d="M 21 24 L 23 27 L 19 30" stroke="#fed7aa" stroke-width="2.5" fill="none"
+                    stroke-linecap="round" />
+                  <!-- Seated Legs (Dark navy pants) -->
+                  <path d="M 9 38 L 24 38 L 29 48 L 36 50 L 37 54 L 26 53 L 20 46 L 9 46 Z" fill="#1e293b" />
+                  <path d="M 13 46 L 16 64 L 20 64 L 18 46 Z" fill="#0f172a" />
+                  <!-- Shoes -->
+                  <ellipse cx="37" cy="54" rx="3.5" ry="2" fill="#e2e8f0" />
+                  <ellipse cx="18" cy="65" rx="3.5" ry="2" fill="#e2e8f0" />
+                </g>
+
+                <!-- Standing Guy in Yellow Shirt (Left) -->
+                <g transform="translate(86, 92)">
+                  <!-- Shadow -->
+                  <ellipse cx="12" cy="108" rx="16" ry="4" fill="rgba(0, 0, 0, 0.45)" />
+                  <!-- Head / Hair -->
+                  <path d="M 6 4 C 6 -2 16 -4 18 2 C 20 4 19 8 18 10 L 8 10 Z" fill="#0f172a" />
+                  <circle cx="12" cy="8" r="6" fill="#fed7aa" />
+                  <!-- Yellow T-Shirt -->
+                  <path d="M 4 16 L 20 16 L 22 38 L 2 38 Z" rx="2" fill="#fbbf24" />
+                  <!-- Arms holding phone -->
+                  <path d="M 4 18 L -1 26 L 6 30" stroke="#fbbf24" stroke-width="3" stroke-linecap="round"
+                    fill="none" />
+                  <path d="M 20 18 L 24 26 L 14 30" stroke="#fbbf24" stroke-width="3" stroke-linecap="round"
+                    fill="none" />
+                  <circle cx="8" cy="30" r="2" fill="#fed7aa" />
+                  <circle cx="12" cy="30" r="2" fill="#fed7aa" />
+                  <!-- Smartphone -->
+                  <rect x="7" y="24" width="7" height="11" rx="1.5" fill="#f43f5e" />
+                  <rect x="8.5" y="25.5" width="4" height="7" rx="0.5" fill="#ffffff" />
+                  <!-- Dark Navy Pants -->
+                  <path d="M 3 38 L 21 38 L 20 74 L 14 74 L 13 48 L 11 48 L 10 74 L 4 74 Z" fill="#1e293b" />
+                  <path d="M 4 74 L 3 102 L 9 102 L 10 74 Z" fill="#1e293b" />
+                  <path d="M 14 74 L 15 102 L 21 102 L 20 74 Z" fill="#1e293b" />
+                  <!-- White Sneakers -->
+                  <path d="M 2 102 L 10 102 C 10 105 5 106 2 106 Z" fill="#ffffff" />
+                  <path d="M 15 102 L 23 102 C 23 105 18 106 15 106 Z" fill="#ffffff" />
+                </g>
+              </svg>
+            </div>
+
+            <h3 class="feature-card-title">Smart Job Discovery</h3>
+            <p class="feature-card-desc">
+              Operator console with Fast (60s) and Deep (3m) scanning, custom keywords, and reusable search profiles.
             </p>
           </div>
 
-          <div class="features-clean-grid">
-            <!-- CARD 1: Smart Job Discovery (Keywords & Left Scan Dashboard) -->
-            <div class="feature-card-clean" data-feature="discovery">
-              <div class="feature-card-illus">
-                <svg viewBox="0 0 320 220" class="feature-svg" aria-label="Smart Job Discovery illustration with communication bubbles and active candidate researchers">
-                  <defs>
-                    <linearGradient id="bubbleGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
-                      <stop offset="0%" stop-color="#10b981" />
-                      <stop offset="100%" stop-color="#059669" />
-                    </linearGradient>
-                    <linearGradient id="bubbleGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
-                      <stop offset="0%" stop-color="#34d399" />
-                      <stop offset="100%" stop-color="#0d9488" />
-                    </linearGradient>
-                    <filter id="softGlow1" x="-20%" y="-20%" width="140%" height="140%">
-                      <feDropShadow dx="0" dy="6" stdDeviation="10" flood-color="rgba(16, 185, 129, 0.3)" />
-                    </filter>
-                  </defs>
+          <!-- CARD 2: AI Resume Matching (Relevance Score & Match Verdict) -->
+          <div class="feature-card-clean" data-feature="scoring">
+            <div class="feature-card-illus">
+              <svg viewBox="0 0 320 220" class="feature-svg"
+                aria-label="AI Resume Matching illustration with candidate analyzing credentials on document sheet">
+                <defs>
+                  <linearGradient id="docHeaderGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#1e293b" />
+                    <stop offset="100%" stop-color="#0f172a" />
+                  </linearGradient>
+                  <filter id="softGlow2" x="-20%" y="-20%" width="140%" height="140%">
+                    <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="rgba(16, 185, 129, 0.25)" />
+                  </filter>
+                </defs>
 
-                  <!-- Ambient background glow -->
-                  <circle cx="160" cy="110" r="85" fill="rgba(16, 185, 129, 0.08)" />
+                <!-- Ambient background glow -->
+                <circle cx="160" cy="110" r="85" fill="rgba(16, 185, 129, 0.08)" />
 
-                  <!-- Back speech bubble (Lower right) -->
-                  <g filter="url(#softGlow1)">
-                    <rect x="110" y="70" width="125" height="72" rx="12" fill="url(#bubbleGrad2)" />
-                    <path d="M 125 142 L 115 160 L 140 142 Z" fill="#0d9488" />
-                    <!-- Text placeholder lines -->
-                    <rect x="125" y="86" width="70" height="5" rx="2.5" fill="rgba(255, 255, 255, 0.85)" />
-                    <rect x="125" y="98" width="90" height="5" rx="2.5" fill="rgba(255, 255, 255, 0.85)" />
-                    <rect x="125" y="110" width="55" height="5" rx="2.5" fill="rgba(255, 255, 255, 0.85)" />
-                  </g>
+                <!-- Document Sheet Stand / Pedestal -->
+                <ellipse cx="160" cy="186" rx="60" ry="8" fill="#0284c7" opacity="0.6" />
 
-                  <!-- Front speech bubble (Upper left) -->
-                  <g filter="url(#softGlow1)">
-                    <rect x="75" y="44" width="115" height="60" rx="12" fill="url(#bubbleGrad1)" />
-                    <path d="M 88 104 L 78 120 L 102 104 Z" fill="#059669" />
-                    <!-- Text placeholder lines -->
-                    <rect x="90" y="58" width="60" height="5" rx="2.5" fill="#ffffff" />
-                    <rect x="90" y="70" width="85" height="5" rx="2.5" fill="#ffffff" />
-                    <rect x="90" y="82" width="45" height="5" rx="2.5" fill="#ffffff" />
-                  </g>
+                <!-- Document / Webpage Sheet Frame -->
+                <g filter="url(#softGlow2)">
+                  <!-- Sheet background -->
+                  <rect x="95" y="32" width="130" height="152" rx="10" fill="#f8fafc" stroke="rgba(255,255,255,0.2)"
+                    stroke-width="1" />
+                  <!-- Sheet Header Bar -->
+                  <rect x="95" y="32" width="130" height="22" rx="10 10 0 0" fill="#0f172a" />
+                  <circle cx="106" cy="43" r="3" fill="#f43f5e" />
+                  <circle cx="114" cy="43" r="3" fill="#f59e0b" />
+                  <circle cx="122" cy="43" r="3" fill="#10b981" />
 
-                  <!-- Floating Reaction Badges -->
-                  <!-- Heart badge top right -->
-                  <g transform="translate(235, 34)">
-                    <circle cx="10" cy="10" r="10" fill="#f43f5e" />
-                    <path d="M 10 14.5 L 6.5 11 C 5 9.5 5 7 6.5 5.5 C 8 4 10 5.5 10 5.5 C 10 5.5 12 4 13.5 5.5 C 15 7 15 9.5 13.5 11 Z" fill="#ffffff" />
-                  </g>
-                  <!-- Hashtag badge upper left -->
-                  <g transform="translate(62, 28)">
-                    <rect x="0" y="0" width="18" height="18" rx="5" fill="#38bdf8" />
-                    <text x="9" y="13" font-size="12" font-weight="900" fill="#ffffff" text-anchor="middle">#</text>
-                  </g>
-                  <!-- Small speech bubble lower right -->
-                  <g transform="translate(230, 116)">
-                    <rect x="0" y="0" width="20" height="15" rx="4" fill="#94a3b8" opacity="0.6" />
-                    <path d="M 4 15 L 2 19 L 9 15 Z" fill="#94a3b8" opacity="0.6" />
-                  </g>
+                  <!-- Yellow Sticky Note / Match Tag in upper right -->
+                  <rect x="156" y="60" width="56" height="26" rx="4" fill="#fbbf24"
+                    filter="drop-shadow(0 2px 4px rgba(0,0,0,0.15))" />
+                  <text x="184" y="72" font-size="7.5" font-weight="900" fill="#78350f"
+                    text-anchor="middle">RELEVANCE</text>
+                  <text x="184" y="81" font-size="8" font-weight="900" fill="#1e293b" text-anchor="middle">98%
+                    MATCH</text>
 
-                  <!-- Seated Girl on Front Bubble (Upper Right) -->
-                  <g transform="translate(190, 48)">
-                    <!-- Hair -->
-                    <path d="M 16 0 C 10 0 4 6 4 15 C 4 24 10 28 16 28 C 22 28 27 24 27 15 C 27 6 22 0 16 0 Z" fill="#3e2723" />
-                    <path d="M 18 10 C 23 15 25 24 24 35 C 22 36 19 32 18 26 Z" fill="#3e2723" />
-                    <!-- Head / Face -->
-                    <circle cx="15" cy="12" r="7" fill="#fed7aa" />
-                    <!-- Torso / White Blouse -->
-                    <path d="M 10 20 L 22 20 L 24 38 L 8 38 Z" fill="#ffffff" />
-                    <path d="M 10 20 L 6 28 L 10 32 Z" fill="#fed7aa" />
-                    <!-- Red smartphone in hand -->
-                    <rect x="22" y="22" width="6" height="10" rx="1.5" fill="#f43f5e" />
-                    <!-- Arms reaching to phone -->
-                    <path d="M 21 24 L 23 27 L 19 30" stroke="#fed7aa" stroke-width="2.5" fill="none" stroke-linecap="round" />
-                    <!-- Seated Legs (Dark navy pants) -->
-                    <path d="M 9 38 L 24 38 L 29 48 L 36 50 L 37 54 L 26 53 L 20 46 L 9 46 Z" fill="#1e293b" />
-                    <path d="M 13 46 L 16 64 L 20 64 L 18 46 Z" fill="#0f172a" />
-                    <!-- Shoes -->
-                    <ellipse cx="37" cy="54" rx="3.5" ry="2" fill="#e2e8f0" />
-                    <ellipse cx="18" cy="65" rx="3.5" ry="2" fill="#e2e8f0" />
-                  </g>
+                  <!-- Document Lines -->
+                  <rect x="108" y="62" width="38" height="6" rx="3" fill="#cbd5e1" />
+                  <rect x="108" y="74" width="38" height="4" rx="2" fill="#e2e8f0" />
+                  <rect x="108" y="82" width="30" height="4" rx="2" fill="#e2e8f0" />
 
-                  <!-- Standing Guy in Yellow Shirt (Left) -->
-                  <g transform="translate(86, 92)">
-                    <!-- Shadow -->
-                    <ellipse cx="12" cy="108" rx="16" ry="4" fill="rgba(0, 0, 0, 0.45)" />
-                    <!-- Head / Hair -->
-                    <path d="M 6 4 C 6 -2 16 -4 18 2 C 20 4 19 8 18 10 L 8 10 Z" fill="#0f172a" />
-                    <circle cx="12" cy="8" r="6" fill="#fed7aa" />
-                    <!-- Yellow T-Shirt -->
-                    <path d="M 4 16 L 20 16 L 22 38 L 2 38 Z" rx="2" fill="#fbbf24" />
-                    <!-- Arms holding phone -->
-                    <path d="M 4 18 L -1 26 L 6 30" stroke="#fbbf24" stroke-width="3" stroke-linecap="round" fill="none" />
-                    <path d="M 20 18 L 24 26 L 14 30" stroke="#fbbf24" stroke-width="3" stroke-linecap="round" fill="none" />
-                    <circle cx="8" cy="30" r="2" fill="#fed7aa" />
-                    <circle cx="12" cy="30" r="2" fill="#fed7aa" />
-                    <!-- Smartphone -->
-                    <rect x="7" y="24" width="7" height="11" rx="1.5" fill="#f43f5e" />
-                    <rect x="8.5" y="25.5" width="4" height="7" rx="0.5" fill="#ffffff" />
-                    <!-- Dark Navy Pants -->
-                    <path d="M 3 38 L 21 38 L 20 74 L 14 74 L 13 48 L 11 48 L 10 74 L 4 74 Z" fill="#1e293b" />
-                    <path d="M 4 74 L 3 102 L 9 102 L 10 74 Z" fill="#1e293b" />
-                    <path d="M 14 74 L 15 102 L 21 102 L 20 74 Z" fill="#1e293b" />
-                    <!-- White Sneakers -->
-                    <path d="M 2 102 L 10 102 C 10 105 5 106 2 106 Z" fill="#ffffff" />
-                    <path d="M 15 102 L 23 102 C 23 105 18 106 15 106 Z" fill="#ffffff" />
-                  </g>
-                </svg>
-              </div>
+                  <rect x="108" y="96" width="104" height="4" rx="2" fill="#e2e8f0" />
+                  <rect x="108" y="104" width="96" height="4" rx="2" fill="#e2e8f0" />
+                  <rect x="108" y="112" width="70" height="4" rx="2" fill="#e2e8f0" />
+                  <rect x="108" y="120" width="88" height="4" rx="2" fill="#e2e8f0" />
+                  <rect x="108" y="128" width="60" height="4" rx="2" fill="#e2e8f0" />
+                  <rect x="108" y="136" width="78" height="4" rx="2" fill="#e2e8f0" />
+                </g>
 
-              <h3 class="feature-card-title">Smart Job Discovery</h3>
-              <p class="feature-card-desc">
-                Operator console with Fast (60s) and Deep (3m) scanning, custom keywords, and reusable search profiles.
-              </p>
+                <!-- Floating badges around document -->
+                <!-- Left hashtag badge -->
+                <g transform="translate(68, 62)">
+                  <rect x="0" y="0" width="20" height="20" rx="5" fill="#38bdf8" />
+                  <text x="10" y="15" font-size="13" font-weight="900" fill="#ffffff" text-anchor="middle">#</text>
+                </g>
+                <!-- Right hashtag badge -->
+                <g transform="translate(232, 42)">
+                  <rect x="0" y="0" width="18" height="18" rx="4" fill="#38bdf8" />
+                  <text x="9" y="13" font-size="11" font-weight="900" fill="#ffffff" text-anchor="middle">#</text>
+                </g>
+                <!-- Top heart badge -->
+                <g transform="translate(148, 14)">
+                  <circle cx="10" cy="10" r="10" fill="#f43f5e" />
+                  <path
+                    d="M 10 14.5 L 6.5 11 C 5 9.5 5 7 6.5 5.5 C 8 4 10 5.5 10 5.5 C 10 5.5 12 4 13.5 5.5 C 15 7 15 9.5 13.5 11 Z"
+                    fill="#ffffff" />
+                </g>
+                <!-- Bottom left heart badge -->
+                <g transform="translate(62, 128)">
+                  <circle cx="9" cy="9" r="9" fill="#f43f5e" />
+                  <path
+                    d="M 9 13.5 L 5.5 10.2 C 4 8.8 4 6.5 5.5 5.1 C 7 3.8 9 5.1 9 5.1 C 9 5.1 11 3.8 12.5 5.1 C 14 6.5 14 8.8 12.5 10.2 Z"
+                    fill="#ffffff" />
+                </g>
+                <!-- Small speech bubble right -->
+                <g transform="translate(236, 114)">
+                  <rect x="0" y="0" width="18" height="14" rx="3" fill="#cbd5e1" opacity="0.7" />
+                  <path d="M 3 14 L 1 17 L 7 14 Z" fill="#cbd5e1" opacity="0.7" />
+                </g>
+
+                <!-- Girl Seen From Behind Reaching Up (Center) -->
+                <g transform="translate(142, 80)">
+                  <!-- Shadow under feet -->
+                  <ellipse cx="20" cy="126" rx="20" ry="4" fill="rgba(0, 0, 0, 0.4)" />
+
+                  <!-- Long Dark Hair Flowing Down Back -->
+                  <path d="M 14 6 C 14 0 26 0 26 6 C 28 14 28 26 25 36 C 24 39 16 39 15 36 C 12 26 12 14 14 6 Z"
+                    fill="#3e2723" />
+
+                  <!-- Teal Long-Sleeve Blouse / Torso -->
+                  <path d="M 11 26 L 29 26 L 31 56 L 9 56 Z" fill="#10b981" />
+
+                  <!-- Left Arm Resting Down -->
+                  <path d="M 11 28 L 6 44 L 9 54" stroke="#10b981" stroke-width="4.5" stroke-linecap="round"
+                    stroke-linejoin="round" fill="none" />
+                  <circle cx="9" cy="56" r="2.5" fill="#fed7aa" />
+
+                  <!-- Right Arm Raised Reaching Up to the Sticky Note -->
+                  <path d="M 28 28 L 38 18 L 44 2" stroke="#10b981" stroke-width="4.5" stroke-linecap="round"
+                    stroke-linejoin="round" fill="none" />
+                  <!-- Hand pointing / sticking note -->
+                  <circle cx="45" cy="0" r="3" fill="#fed7aa" />
+
+                  <!-- Dark Navy/Slate Trousers -->
+                  <path d="M 9 56 L 31 56 L 33 88 L 22 88 L 20 62 L 18 62 L 16 88 L 7 88 Z" fill="#1e293b" />
+                  <!-- Lower legs -->
+                  <path d="M 9 88 L 12 120 L 16 120 L 15 88 Z" fill="#0f172a" />
+                  <path d="M 24 88 L 25 120 L 29 120 L 31 88 Z" fill="#0f172a" />
+
+                  <!-- Shoes -->
+                  <path d="M 10 120 L 18 120 C 18 123 13 124 10 124 Z" fill="#e2e8f0" />
+                  <path d="M 24 120 L 32 120 C 32 123 27 124 24 124 Z" fill="#e2e8f0" />
+                </g>
+              </svg>
             </div>
 
-            <!-- CARD 2: AI Resume Matching (Relevance Score & Match Verdict) -->
-            <div class="feature-card-clean" data-feature="scoring">
-              <div class="feature-card-illus">
-                <svg viewBox="0 0 320 220" class="feature-svg" aria-label="AI Resume Matching illustration with candidate analyzing credentials on document sheet">
-                  <defs>
-                    <linearGradient id="docHeaderGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                      <stop offset="0%" stop-color="#1e293b" />
-                      <stop offset="100%" stop-color="#0f172a" />
-                    </linearGradient>
-                    <filter id="softGlow2" x="-20%" y="-20%" width="140%" height="140%">
-                      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="rgba(16, 185, 129, 0.25)" />
-                    </filter>
-                  </defs>
-
-                  <!-- Ambient background glow -->
-                  <circle cx="160" cy="110" r="85" fill="rgba(16, 185, 129, 0.08)" />
-
-                  <!-- Document Sheet Stand / Pedestal -->
-                  <ellipse cx="160" cy="186" rx="60" ry="8" fill="#0284c7" opacity="0.6" />
-
-                  <!-- Document / Webpage Sheet Frame -->
-                  <g filter="url(#softGlow2)">
-                    <!-- Sheet background -->
-                    <rect x="95" y="32" width="130" height="152" rx="10" fill="#f8fafc" stroke="rgba(255,255,255,0.2)" stroke-width="1" />
-                    <!-- Sheet Header Bar -->
-                    <rect x="95" y="32" width="130" height="22" rx="10 10 0 0" fill="#0f172a" />
-                    <circle cx="106" cy="43" r="3" fill="#f43f5e" />
-                    <circle cx="114" cy="43" r="3" fill="#f59e0b" />
-                    <circle cx="122" cy="43" r="3" fill="#10b981" />
-
-                    <!-- Yellow Sticky Note / Match Tag in upper right -->
-                    <rect x="156" y="60" width="56" height="26" rx="4" fill="#fbbf24" filter="drop-shadow(0 2px 4px rgba(0,0,0,0.15))" />
-                    <text x="184" y="72" font-size="7.5" font-weight="900" fill="#78350f" text-anchor="middle">RELEVANCE</text>
-                    <text x="184" y="81" font-size="8" font-weight="900" fill="#1e293b" text-anchor="middle">98% MATCH</text>
-
-                    <!-- Document Lines -->
-                    <rect x="108" y="62" width="38" height="6" rx="3" fill="#cbd5e1" />
-                    <rect x="108" y="74" width="38" height="4" rx="2" fill="#e2e8f0" />
-                    <rect x="108" y="82" width="30" height="4" rx="2" fill="#e2e8f0" />
-
-                    <rect x="108" y="96" width="104" height="4" rx="2" fill="#e2e8f0" />
-                    <rect x="108" y="104" width="96" height="4" rx="2" fill="#e2e8f0" />
-                    <rect x="108" y="112" width="70" height="4" rx="2" fill="#e2e8f0" />
-                    <rect x="108" y="120" width="88" height="4" rx="2" fill="#e2e8f0" />
-                    <rect x="108" y="128" width="60" height="4" rx="2" fill="#e2e8f0" />
-                    <rect x="108" y="136" width="78" height="4" rx="2" fill="#e2e8f0" />
-                  </g>
-
-                  <!-- Floating badges around document -->
-                  <!-- Left hashtag badge -->
-                  <g transform="translate(68, 62)">
-                    <rect x="0" y="0" width="20" height="20" rx="5" fill="#38bdf8" />
-                    <text x="10" y="15" font-size="13" font-weight="900" fill="#ffffff" text-anchor="middle">#</text>
-                  </g>
-                  <!-- Right hashtag badge -->
-                  <g transform="translate(232, 42)">
-                    <rect x="0" y="0" width="18" height="18" rx="4" fill="#38bdf8" />
-                    <text x="9" y="13" font-size="11" font-weight="900" fill="#ffffff" text-anchor="middle">#</text>
-                  </g>
-                  <!-- Top heart badge -->
-                  <g transform="translate(148, 14)">
-                    <circle cx="10" cy="10" r="10" fill="#f43f5e" />
-                    <path d="M 10 14.5 L 6.5 11 C 5 9.5 5 7 6.5 5.5 C 8 4 10 5.5 10 5.5 C 10 5.5 12 4 13.5 5.5 C 15 7 15 9.5 13.5 11 Z" fill="#ffffff" />
-                  </g>
-                  <!-- Bottom left heart badge -->
-                  <g transform="translate(62, 128)">
-                    <circle cx="9" cy="9" r="9" fill="#f43f5e" />
-                    <path d="M 9 13.5 L 5.5 10.2 C 4 8.8 4 6.5 5.5 5.1 C 7 3.8 9 5.1 9 5.1 C 9 5.1 11 3.8 12.5 5.1 C 14 6.5 14 8.8 12.5 10.2 Z" fill="#ffffff" />
-                  </g>
-                  <!-- Small speech bubble right -->
-                  <g transform="translate(236, 114)">
-                    <rect x="0" y="0" width="18" height="14" rx="3" fill="#cbd5e1" opacity="0.7" />
-                    <path d="M 3 14 L 1 17 L 7 14 Z" fill="#cbd5e1" opacity="0.7" />
-                  </g>
-
-                  <!-- Girl Seen From Behind Reaching Up (Center) -->
-                  <g transform="translate(142, 80)">
-                    <!-- Shadow under feet -->
-                    <ellipse cx="20" cy="126" rx="20" ry="4" fill="rgba(0, 0, 0, 0.4)" />
-
-                    <!-- Long Dark Hair Flowing Down Back -->
-                    <path d="M 14 6 C 14 0 26 0 26 6 C 28 14 28 26 25 36 C 24 39 16 39 15 36 C 12 26 12 14 14 6 Z" fill="#3e2723" />
-
-                    <!-- Teal Long-Sleeve Blouse / Torso -->
-                    <path d="M 11 26 L 29 26 L 31 56 L 9 56 Z" fill="#10b981" />
-
-                    <!-- Left Arm Resting Down -->
-                    <path d="M 11 28 L 6 44 L 9 54" stroke="#10b981" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" fill="none" />
-                    <circle cx="9" cy="56" r="2.5" fill="#fed7aa" />
-
-                    <!-- Right Arm Raised Reaching Up to the Sticky Note -->
-                    <path d="M 28 28 L 38 18 L 44 2" stroke="#10b981" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" fill="none" />
-                    <!-- Hand pointing / sticking note -->
-                    <circle cx="45" cy="0" r="3" fill="#fed7aa" />
-
-                    <!-- Dark Navy/Slate Trousers -->
-                    <path d="M 9 56 L 31 56 L 33 88 L 22 88 L 20 62 L 18 62 L 16 88 L 7 88 Z" fill="#1e293b" />
-                    <!-- Lower legs -->
-                    <path d="M 9 88 L 12 120 L 16 120 L 15 88 Z" fill="#0f172a" />
-                    <path d="M 24 88 L 25 120 L 29 120 L 31 88 Z" fill="#0f172a" />
-
-                    <!-- Shoes -->
-                    <path d="M 10 120 L 18 120 C 18 123 13 124 10 124 Z" fill="#e2e8f0" />
-                    <path d="M 24 120 L 32 120 C 32 123 27 124 24 124 Z" fill="#e2e8f0" />
-                  </g>
-                </svg>
-              </div>
-
-              <h3 class="feature-card-title">AI Resume Matching</h3>
-              <p class="feature-card-desc">
-                Scores your resume against live openings from 0–100% with instant "Perfect For You" verdicts.
-              </p>
-            </div>
-
-            <!-- CARD 3: 1-Click Application Hub (Discovered vs Applied Portal) -->
-            <div class="feature-card-clean" data-feature="hub">
-              <div class="feature-card-illus">
-                <svg viewBox="0 0 320 220" class="feature-svg" aria-label="1-Click Application Hub illustration with candidate submitting applications via laptop and flying dispatch plane">
-                  <defs>
-                    <linearGradient id="laptopGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                      <stop offset="0%" stop-color="#1e293b" />
-                      <stop offset="100%" stop-color="#0f172a" />
-                    </linearGradient>
-                    <filter id="softGlow3" x="-20%" y="-20%" width="140%" height="140%">
-                      <feDropShadow dx="0" dy="6" stdDeviation="10" flood-color="rgba(16, 185, 129, 0.25)" />
-                    </filter>
-                  </defs>
-
-                  <!-- Ambient background glow -->
-                  <circle cx="160" cy="110" r="85" fill="rgba(16, 185, 129, 0.08)" />
-
-                  <!-- Dotted Curved Trajectory of Paper Plane -->
-                  <path d="M 120 75 Q 165 40 215 50" fill="none" stroke="#f59e0b" stroke-width="1.8" stroke-dasharray="3 3" opacity="0.85" />
-
-                  <!-- Coral Paper Plane -->
-                  <g transform="translate(208, 42) rotate(15)">
-                    <polygon points="0,10 24,0 16,16" fill="#f43f5e" />
-                    <polygon points="16,16 24,0 8,11" fill="#e11d48" />
-                  </g>
-
-                  <!-- Top Right Heart Badge in Circle -->
-                  <g transform="translate(242, 38)">
-                    <circle cx="16" cy="16" r="16" fill="rgba(244, 63, 94, 0.15)" stroke="#f43f5e" stroke-width="1.2" />
-                    <circle cx="16" cy="16" r="12" fill="#f43f5e" />
-                    <path d="M 16 20.5 L 12.5 17 C 11 15.5 11 13 12.5 11.5 C 14 10 16 11.5 16 11.5 C 16 11.5 18 10 19.5 11.5 C 21 13 21 15.5 19.5 17 Z" fill="#ffffff" />
-                  </g>
-
-                  <!-- Left Floating Chat Cards -->
-                  <!-- Top Pink Dialog Card -->
-                  <g transform="translate(56, 52)" filter="url(#softGlow3)">
-                    <rect x="0" y="0" width="72" height="24" rx="6" fill="#e11d48" />
-                    <!-- Avatar -->
-                    <circle cx="12" cy="12" r="7" fill="#ffffff" opacity="0.9" />
-                    <circle cx="12" cy="10" r="3" fill="#e11d48" />
-                    <path d="M 7 17 C 7 14 17 14 17 17 Z" fill="#e11d48" />
-                    <!-- Text Lines -->
-                    <rect x="24" y="8" width="38" height="3" rx="1.5" fill="#ffffff" />
-                    <rect x="24" y="14" width="26" height="3" rx="1.5" fill="#ffffff" opacity="0.8" />
-                  </g>
-
-                  <!-- Lower Yellow Dialog Card -->
-                  <g transform="translate(76, 84)" filter="url(#softGlow3)">
-                    <rect x="0" y="0" width="68" height="24" rx="6" fill="#f59e0b" />
-                    <!-- Avatar -->
-                    <circle cx="12" cy="12" r="7" fill="#ffffff" opacity="0.9" />
-                    <circle cx="12" cy="10" r="3" fill="#f59e0b" />
-                    <path d="M 7 17 C 7 14 17 14 17 17 Z" fill="#f59e0b" />
-                    <!-- Text Lines -->
-                    <rect x="24" y="8" width="34" height="3" rx="1.5" fill="#ffffff" />
-                    <rect x="24" y="14" width="22" height="3" rx="1.5" fill="#ffffff" opacity="0.8" />
-                  </g>
-
-                  <!-- Candidate Seated with Laptop (Right / Center) -->
-                  <g transform="translate(196, 78)">
-                    <!-- Shadow under desk/candidate -->
-                    <ellipse cx="28" cy="128" rx="42" ry="6" fill="rgba(0, 0, 0, 0.4)" />
-
-                    <!-- Head & Hair -->
-                    <!-- Dark neat hair -->
-                    <path d="M 16 8 C 16 -2 36 -2 38 8 C 40 10 39 16 38 18 L 18 18 Z" fill="#0f172a" />
-                    <!-- Face -->
-                    <circle cx="28" cy="16" r="10" fill="#fed7aa" />
-                    <!-- Friendly eyes and smile -->
-                    <circle cx="25" cy="15" r="1" fill="#0f172a" />
-                    <circle cx="31" cy="15" r="1" fill="#0f172a" />
-                    <path d="M 26 19 Q 28 22 30 19" stroke="#0f172a" stroke-width="1" fill="none" stroke-linecap="round" />
-
-                    <!-- Torso / Teal Sweater -->
-                    <path d="M 12 28 C 12 26 44 26 44 28 L 52 74 C 52 82 4 82 4 74 Z" fill="#10b981" />
-                    <!-- Collar -->
-                    <path d="M 23 28 Q 28 32 33 28" stroke="#047857" stroke-width="2" fill="none" />
-
-                    <!-- Arms on laptop -->
-                    <path d="M 12 36 L -6 68 L 10 74" stroke="#10b981" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none" />
-                    <circle cx="10" cy="74" r="3" fill="#fed7aa" />
-
-                    <path d="M 44 36 L 24 68 L 18 72" stroke="#10b981" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none" />
-                    <circle cx="18" cy="72" r="3" fill="#fed7aa" />
-
-                    <!-- Modern Dark Laptop -->
-                    <g transform="translate(-24, 62)">
-                      <!-- Laptop Screen Back (Facing viewer) -->
-                      <polygon points="4,28 28,0 48,0 24,28" fill="#1e293b" />
-                      <polygon points="6,26 27,2 45,2 24,26" fill="#0f172a" stroke="rgba(255,255,255,0.15)" stroke-width="0.8" />
-                      <!-- Subtle Screen Glow -->
-                      <polygon points="12,24 28,6 40,6 24,24" fill="#38bdf8" opacity="0.3" />
-                      <!-- Laptop Base / Keyboard Surface -->
-                      <polygon points="0,28 26,28 42,24 16,24" fill="#334155" />
-                    </g>
-                  </g>
-                </svg>
-              </div>
-
-              <h3 class="feature-card-title">1-Click Application Hub</h3>
-              <p class="feature-card-desc">
-                Manage discovered and applied jobs, sync milestones to Google Calendar, and receive Excel email reports.
-              </p>
-            </div>
+            <h3 class="feature-card-title">AI Resume Matching</h3>
+            <p class="feature-card-desc">
+              Scores your resume against live openings from 0–100% with instant "Perfect For You" verdicts.
+            </p>
           </div>
 
-          <div class="features-oasis-footnote">
-            100% Free Public Beta · No Credit Card Required · Built for Job Seekers
+          <!-- CARD 3: 1-Click Application Hub (Discovered vs Applied Portal) -->
+          <div class="feature-card-clean" data-feature="hub">
+            <div class="feature-card-illus">
+              <svg viewBox="0 0 320 220" class="feature-svg"
+                aria-label="1-Click Application Hub illustration with candidate submitting applications via laptop and flying dispatch plane">
+                <defs>
+                  <linearGradient id="laptopGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#1e293b" />
+                    <stop offset="100%" stop-color="#0f172a" />
+                  </linearGradient>
+                  <filter id="softGlow3" x="-20%" y="-20%" width="140%" height="140%">
+                    <feDropShadow dx="0" dy="6" stdDeviation="10" flood-color="rgba(16, 185, 129, 0.25)" />
+                  </filter>
+                </defs>
+
+                <!-- Ambient background glow -->
+                <circle cx="160" cy="110" r="85" fill="rgba(16, 185, 129, 0.08)" />
+
+                <!-- Dotted Curved Trajectory of Paper Plane -->
+                <path d="M 120 75 Q 165 40 215 50" fill="none" stroke="#f59e0b" stroke-width="1.8"
+                  stroke-dasharray="3 3" opacity="0.85" />
+
+                <!-- Coral Paper Plane -->
+                <g transform="translate(208, 42) rotate(15)">
+                  <polygon points="0,10 24,0 16,16" fill="#f43f5e" />
+                  <polygon points="16,16 24,0 8,11" fill="#e11d48" />
+                </g>
+
+                <!-- Top Right Heart Badge in Circle -->
+                <g transform="translate(242, 38)">
+                  <circle cx="16" cy="16" r="16" fill="rgba(244, 63, 94, 0.15)" stroke="#f43f5e" stroke-width="1.2" />
+                  <circle cx="16" cy="16" r="12" fill="#f43f5e" />
+                  <path
+                    d="M 16 20.5 L 12.5 17 C 11 15.5 11 13 12.5 11.5 C 14 10 16 11.5 16 11.5 C 16 11.5 18 10 19.5 11.5 C 21 13 21 15.5 19.5 17 Z"
+                    fill="#ffffff" />
+                </g>
+
+                <!-- Left Floating Chat Cards -->
+                <!-- Top Pink Dialog Card -->
+                <g transform="translate(56, 52)" filter="url(#softGlow3)">
+                  <rect x="0" y="0" width="72" height="24" rx="6" fill="#e11d48" />
+                  <!-- Avatar -->
+                  <circle cx="12" cy="12" r="7" fill="#ffffff" opacity="0.9" />
+                  <circle cx="12" cy="10" r="3" fill="#e11d48" />
+                  <path d="M 7 17 C 7 14 17 14 17 17 Z" fill="#e11d48" />
+                  <!-- Text Lines -->
+                  <rect x="24" y="8" width="38" height="3" rx="1.5" fill="#ffffff" />
+                  <rect x="24" y="14" width="26" height="3" rx="1.5" fill="#ffffff" opacity="0.8" />
+                </g>
+
+                <!-- Lower Yellow Dialog Card -->
+                <g transform="translate(76, 84)" filter="url(#softGlow3)">
+                  <rect x="0" y="0" width="68" height="24" rx="6" fill="#f59e0b" />
+                  <!-- Avatar -->
+                  <circle cx="12" cy="12" r="7" fill="#ffffff" opacity="0.9" />
+                  <circle cx="12" cy="10" r="3" fill="#f59e0b" />
+                  <path d="M 7 17 C 7 14 17 14 17 17 Z" fill="#f59e0b" />
+                  <!-- Text Lines -->
+                  <rect x="24" y="8" width="34" height="3" rx="1.5" fill="#ffffff" />
+                  <rect x="24" y="14" width="22" height="3" rx="1.5" fill="#ffffff" opacity="0.8" />
+                </g>
+
+                <!-- Candidate Seated with Laptop (Right / Center) -->
+                <g transform="translate(196, 78)">
+                  <!-- Shadow under desk/candidate -->
+                  <ellipse cx="28" cy="128" rx="42" ry="6" fill="rgba(0, 0, 0, 0.4)" />
+
+                  <!-- Head & Hair -->
+                  <!-- Dark neat hair -->
+                  <path d="M 16 8 C 16 -2 36 -2 38 8 C 40 10 39 16 38 18 L 18 18 Z" fill="#0f172a" />
+                  <!-- Face -->
+                  <circle cx="28" cy="16" r="10" fill="#fed7aa" />
+                  <!-- Friendly eyes and smile -->
+                  <circle cx="25" cy="15" r="1" fill="#0f172a" />
+                  <circle cx="31" cy="15" r="1" fill="#0f172a" />
+                  <path d="M 26 19 Q 28 22 30 19" stroke="#0f172a" stroke-width="1" fill="none"
+                    stroke-linecap="round" />
+
+                  <!-- Torso / Teal Sweater -->
+                  <path d="M 12 28 C 12 26 44 26 44 28 L 52 74 C 52 82 4 82 4 74 Z" fill="#10b981" />
+                  <!-- Collar -->
+                  <path d="M 23 28 Q 28 32 33 28" stroke="#047857" stroke-width="2" fill="none" />
+
+                  <!-- Arms on laptop -->
+                  <path d="M 12 36 L -6 68 L 10 74" stroke="#10b981" stroke-width="6" stroke-linecap="round"
+                    stroke-linejoin="round" fill="none" />
+                  <circle cx="10" cy="74" r="3" fill="#fed7aa" />
+
+                  <path d="M 44 36 L 24 68 L 18 72" stroke="#10b981" stroke-width="6" stroke-linecap="round"
+                    stroke-linejoin="round" fill="none" />
+                  <circle cx="18" cy="72" r="3" fill="#fed7aa" />
+
+                  <!-- Modern Dark Laptop -->
+                  <g transform="translate(-24, 62)">
+                    <!-- Laptop Screen Back (Facing viewer) -->
+                    <polygon points="4,28 28,0 48,0 24,28" fill="#1e293b" />
+                    <polygon points="6,26 27,2 45,2 24,26" fill="#0f172a" stroke="rgba(255,255,255,0.15)"
+                      stroke-width="0.8" />
+                    <!-- Subtle Screen Glow -->
+                    <polygon points="12,24 28,6 40,6 24,24" fill="#38bdf8" opacity="0.3" />
+                    <!-- Laptop Base / Keyboard Surface -->
+                    <polygon points="0,28 26,28 42,24 16,24" fill="#334155" />
+                  </g>
+                </g>
+              </svg>
+            </div>
+
+            <h3 class="feature-card-title">1-Click Application Hub</h3>
+            <p class="feature-card-desc">
+              Manage discovered and applied jobs, sync milestones to Google Calendar, and receive Excel email reports.
+            </p>
           </div>
         </div>
-      </section>
 
-      <!-- Interactive Feature Detail Modal -->
-      <div id="featureDetailModal" class="oasis-modal-overlay" hidden aria-hidden="true" role="dialog" aria-modal="true">
-        <div class="oasis-modal-container">
-          <button type="button" class="oasis-modal-close" id="oasisModalCloseBtn" aria-label="Close modal">&times;</button>
-          
-          <div class="oasis-modal-badge" id="modalKicker">FEATURE BREAKDOWN</div>
-          <h3 class="oasis-modal-title" id="modalTitle">Feature Details</h3>
-          <p class="oasis-modal-desc" id="modalDesc">Clear, simple explanations of how this automation saves you hours.</p>
+        <div class="features-oasis-footnote">
+          100% Free Public Beta · No Credit Card Required · Built for Job Seekers
+        </div>
+      </div>
+    </section>
 
-          <div class="oasis-modal-body" id="modalBody">
-            <!-- Dynamic content injected here -->
+    <!-- Interactive Feature Detail Modal -->
+    <div id="featureDetailModal" class="oasis-modal-overlay" hidden aria-hidden="true" role="dialog" aria-modal="true">
+      <div class="oasis-modal-container">
+        <button type="button" class="oasis-modal-close" id="oasisModalCloseBtn"
+          aria-label="Close modal">&times;</button>
+
+        <div class="oasis-modal-badge" id="modalKicker">FEATURE BREAKDOWN</div>
+        <h3 class="oasis-modal-title" id="modalTitle">Feature Details</h3>
+        <p class="oasis-modal-desc" id="modalDesc">Clear, simple explanations of how this automation saves you hours.
+        </p>
+
+        <div class="oasis-modal-body" id="modalBody">
+          <!-- Dynamic content injected here -->
+        </div>
+
+        <div class="oasis-modal-actions">
+          <button type="button" class="oasis-modal-action-btn" id="modalClaimBtn">
+            <span>Claim Free Pass</span>
+            <i class="fa-solid fa-arrow-right"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section: How It Works & Workflow -->
+    <section id="workflow" class="content-section">
+      <div class="section-header">
+        <span class="section-tag"><i class="fa-solid fa-route"></i> Product Workflow</span>
+        <h2 class="section-title">How JobSnap Operates</h2>
+        <p class="section-desc">
+          From encrypted role sign-in and dual-speed scanning to calendar sync and recruiter outreach.
+        </p>
+      </div>
+
+      <div class="workflow-grid">
+        <div class="workflow-card">
+          <span class="workflow-step-num">01</span>
+          <h3 class="workflow-title">Encrypted Role-Based Sign-In</h3>
+          <p class="workflow-text">Select <strong>Job Seeker</strong> or <strong>Recruiter / Enterprise</strong> for
+            secure, encrypted session access.</p>
+        </div>
+        <div class="workflow-card">
+          <span class="workflow-step-num">02</span>
+          <h3 class="workflow-title">Enterprise Console & Dual Scan</h3>
+          <p class="workflow-text">Select <strong>Fast (~60s)</strong> or <strong>Deep (~3m)</strong> mode, set target
+            keywords (Python, Electrical, etc.), and save your profile.</p>
+        </div>
+        <div class="workflow-card">
+          <span class="workflow-step-num">03</span>
+          <h3 class="workflow-title">Real-Time Search & Relevance Score</h3>
+          <p class="workflow-text">Trigger multi-board crawling with live progress and get 0–100% match scores tailored
+            to your resume.</p>
+        </div>
+        <div class="workflow-card">
+          <span class="workflow-step-num">04</span>
+          <h3 class="workflow-title">Live Dashboard & Market Intel</h3>
+          <p class="workflow-text">Monitor active pipeline metrics, real-time market trends, and daily motivational
+            signals.</p>
+        </div>
+        <div class="workflow-card">
+          <span class="workflow-step-num">05</span>
+          <h3 class="workflow-title">Google Calendar Sync & Email Reports</h3>
+          <p class="workflow-text">Connect Google Calendar to track interview milestones and auto-email Excel job
+            reports.</p>
+        </div>
+        <div class="workflow-card">
+          <span class="workflow-step-num">06</span>
+          <h3 class="workflow-title">Outreach Studio & Skill Roadmaps</h3>
+          <p class="workflow-text">Find verified hiring managers, say hello with ready-made friendly messages, and follow a simple learning roadmap.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section: Interactive AI Jobs Dashboard & Enterprise Console Preview -->
+    <section id="dashboard-preview" class="content-section">
+      <div class="section-header">
+        <span class="section-tag"><i class="fa-solid fa-desktop"></i> Live Application Console</span>
+        <h2 class="section-title">AI Jobs Dashboard & Enterprise Console</h2>
+        <p class="section-desc">
+          Preview the live console: dual scan speeds, keyword chips, Google Calendar sync, and top job picks.
+        </p>
+      </div>
+
+      <div class="dashboard-preview-card">
+        <!-- Dashboard Top Bar -->
+        <div class="dashboard-topbar">
+          <div class="dashboard-user-badge">
+            <div class="dashboard-avatar" id="dashAvatar">M</div>
+            <div class="dashboard-operator-info">
+              <span class="dashboard-operator-name" id="dashOperatorName">musabimp</span>
+              <span class="dashboard-operator-role" id="dashRoleLabel"><i class="fa-solid fa-circle-check"></i> Job
+                Seeker Operator</span>
+            </div>
           </div>
 
-          <div class="oasis-modal-actions">
-            <button type="button" class="oasis-modal-action-btn" id="modalClaimBtn">
-              <span>Claim Free Pass</span>
-              <i class="fa-solid fa-arrow-right"></i>
+          <div class="dashboard-topbar-controls">
+            <div class="dashboard-theme-toggle" id="dashThemeIndicator">
+              <i class="fa-solid fa-moon"></i>
+              <span>Dark Theme</span>
+            </div>
+            <button class="operator-pill-btn" id="dashSwitchAccountBtn" style="padding: 6px 14px; font-size: 11.5px;">
+              <i class="fa-solid fa-user-pen"></i> Switch Role / Operator
             </button>
           </div>
         </div>
-      </div>
 
-      <!-- Section: 💡 How It Works & Workflow -->
-      <section id="workflow" class="content-section">
-        <div class="section-header">
-          <span class="section-tag"><i class="fa-solid fa-route"></i> Product Workflow</span>
-          <h2 class="section-title">How JobSnap Operates</h2>
-          <p class="section-desc">
-            From encrypted role sign-in and dual-speed scanning to calendar sync and recruiter outreach.
-          </p>
+        <!-- Daily Signal & Motivational Quote -->
+        <div class="dashboard-daily-quote">
+          <div class="quote-left">
+            <i class="fa-solid fa-quote-left"></i>
+            <span class="quote-text" id="dailyQuoteText">"Opportunities don't happen, you create them. Your skills match
+              18 new roles today."</span>
+          </div>
+          <span class="quote-tag"><i class="fa-solid fa-bolt"></i> Daily Signal</span>
         </div>
 
-        <div class="workflow-grid">
-          <div class="workflow-card">
-            <span class="workflow-step-num">01</span>
-            <h3 class="workflow-title">Encrypted Role-Based Sign-In</h3>
-            <p class="workflow-text">Select <strong>Job Seeker</strong> or <strong>Recruiter / Enterprise</strong> for secure, encrypted session access.</p>
+        <!-- KPI Metric Cards Row -->
+        <div class="dashboard-metrics-grid">
+          <div class="dash-metric-card">
+            <span class="dash-metric-title">New Jobs <i class="fa-solid fa-sparkles" style="color: #34d399;"></i></span>
+            <span class="dash-metric-val" id="kpiNewJobs">24</span>
+            <span class="dash-metric-sub">+6 added in last scan</span>
           </div>
-          <div class="workflow-card">
-            <span class="workflow-step-num">02</span>
-            <h3 class="workflow-title">Enterprise Console & Dual Scan</h3>
-            <p class="workflow-text">Select <strong>Fast (~60s)</strong> or <strong>Deep (~3m)</strong> mode, set target keywords (Python, Electrical, etc.), and save your profile.</p>
+          <div class="dash-metric-card">
+            <span class="dash-metric-title">Pipeline <i class="fa-solid fa-bars-progress"
+                style="color: #38bdf8;"></i></span>
+            <span class="dash-metric-val">8</span>
+            <span class="dash-metric-sub">Active in review</span>
           </div>
-          <div class="workflow-card">
-            <span class="workflow-step-num">03</span>
-            <h3 class="workflow-title">Real-Time Search & Relevance Score</h3>
-            <p class="workflow-text">Trigger multi-board crawling with live progress and get 0–100% match scores tailored to your resume.</p>
+          <div class="dash-metric-card">
+            <span class="dash-metric-title">Offers <i class="fa-solid fa-trophy" style="color: #fbbf24;"></i></span>
+            <span class="dash-metric-val">2</span>
+            <span class="dash-metric-sub">Interview stage cleared</span>
           </div>
-          <div class="workflow-card">
-            <span class="workflow-step-num">04</span>
-            <h3 class="workflow-title">Live Dashboard & Market Intel</h3>
-            <p class="workflow-text">Monitor active pipeline metrics, real-time market trends, and daily motivational signals.</p>
-          </div>
-          <div class="workflow-card">
-            <span class="workflow-step-num">05</span>
-            <h3 class="workflow-title">Google Calendar Sync & Email Reports</h3>
-            <p class="workflow-text">Connect Google Calendar to track interview milestones and auto-email Excel job reports.</p>
-          </div>
-          <div class="workflow-card">
-            <span class="workflow-step-num">06</span>
-            <h3 class="workflow-title">Outreach Studio & Skill Gap Roadmaps</h3>
-            <p class="workflow-text">Search verified HR leads, message via 3 saved templates, and follow step-by-step skill roadmaps.</p>
+          <div class="dash-metric-card">
+            <span class="dash-metric-title">Market Intel <i class="fa-solid fa-arrow-trend-up"
+                style="color: #10b981;"></i></span>
+            <span class="dash-metric-val" style="font-size: 16px; margin-top: 4px;">Tech +14%</span>
+            <span class="dash-metric-sub">Maritime & Electrical high demand</span>
           </div>
         </div>
-      </section>
 
-      <!-- Section: 🖥️ Interactive AI Jobs Dashboard & Enterprise Console Preview -->
-      <section id="dashboard-preview" class="content-section">
-        <div class="section-header">
-          <span class="section-tag"><i class="fa-solid fa-desktop"></i> Live Application Console</span>
-          <h2 class="section-title">AI Jobs Dashboard & Enterprise Console</h2>
-          <p class="section-desc">
-            Preview the live console: dual scan speeds, keyword chips, Google Calendar sync, and top job picks.
-          </p>
-        </div>
+        <!-- Main Layout: Left Enterprise Console + Right Job Picks -->
+        <div class="console-dashboard-layout">
+          <!-- Left Console Panel -->
+          <div class="enterprise-console-panel">
+            <div class="console-panel-header">
+              <span class="console-title"><i class="fa-solid fa-sliders"></i> Enterprise Console</span>
+              <span class="console-operator-tag" id="consoleOperatorTag">Operator: musabimp</span>
+            </div>
 
-        <div class="dashboard-preview-card">
-          <!-- Dashboard Top Bar -->
-          <div class="dashboard-topbar">
-            <div class="dashboard-user-badge">
-              <div class="dashboard-avatar" id="dashAvatar">M</div>
-              <div class="dashboard-operator-info">
-                <span class="dashboard-operator-name" id="dashOperatorName">musabimp</span>
-                <span class="dashboard-operator-role" id="dashRoleLabel"><i class="fa-solid fa-circle-check"></i> Job Seeker Operator</span>
+            <!-- Scan Mode: Fast vs Deep -->
+            <div class="scan-mode-group">
+              <span class="console-label">Scan Speed Mode</span>
+              <div class="scan-mode-toggles">
+                <button type="button" class="scan-mode-btn active" id="modeFastBtn">
+                  <span style="display: inline-flex; align-items: center; gap: 5px;">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+                    Fast Mode
+                  </span>
+                  <span class="mode-time">~60s quick scan</span>
+                </button>
+                <button type="button" class="scan-mode-btn" id="modeDeepBtn">
+                  <span style="display: inline-flex; align-items: center; gap: 5px;">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                    Deep Mode
+                  </span>
+                  <span class="mode-time">~3m comprehensive</span>
+                </button>
               </div>
             </div>
 
-            <div class="dashboard-topbar-controls">
-              <div class="dashboard-theme-toggle" id="dashThemeIndicator">
-                <i class="fa-solid fa-moon"></i>
-                <span>Dark Theme</span>
+            <!-- Keywords Section with Instant Switcher -->
+            <div class="keyword-input-wrap">
+              <span class="console-label">Target Keywords</span>
+              <div class="keyword-chips-row">
+                <button type="button" class="keyword-chip active" data-kw="Python">Python</button>
+                <button type="button" class="keyword-chip" data-kw="Electrical">Electrical</button>
+                <button type="button" class="keyword-chip" data-kw="Merchant Navy">Merchant Navy</button>
+                <button type="button" class="keyword-chip" data-kw="Full-Stack">Full-Stack</button>
               </div>
-              <button class="operator-pill-btn" id="dashSwitchAccountBtn" style="padding: 6px 14px; font-size: 11.5px;">
-                <i class="fa-solid fa-user-pen"></i> Switch Role / Operator
+              <input type="text" id="consoleKeywordInput" class="console-input" value="Python, Systems"
+                placeholder="e.g. Python, Electrical, Merchant Navy..." />
+            </div>
+
+            <!-- Location, Experience, Job Type Filters -->
+            <div class="console-filter-row">
+              <div>
+                <span class="console-label" style="display: block; margin-bottom: 4px;">Location</span>
+                <select id="consoleLocation" class="console-select">
+                  <option value="Remote">Remote & Worldwide</option>
+                  <option value="Hybrid">Hybrid</option>
+                  <option value="On-site">On-site / Maritime Port</option>
+                </select>
+              </div>
+              <div>
+                <span class="console-label" style="display: block; margin-bottom: 4px;">Experience</span>
+                <select id="consoleExp" class="console-select">
+                  <option value="Mid">Mid-Level (2–5 YOE)</option>
+                  <option value="Senior">Senior (5+ YOE)</option>
+                  <option value="Junior">Junior / Entry</option>
+                  <option value="Lead">Lead / Chief Officer</option>
+                </select>
+              </div>
+            </div>
+
+            <div>
+              <span class="console-label" style="display: block; margin-bottom: 4px;">Job Type</span>
+              <select id="consoleJobType" class="console-select">
+                <option value="full-time">Full-time</option>
+                <option value="part-time">Part-time</option>
+                <option value="contract">Contract</option>
+                <option value="internship">Internship</option>
+              </select>
+            </div>
+
+            <!-- Console Action Buttons -->
+            <div class="console-actions-group">
+              <button type="button" id="saveProfileBtn" class="save-profile-btn">
+                <i class="fa-solid fa-floppy-disk"></i> Save Profile
+              </button>
+              <button type="button" id="startSearchBtn" class="start-search-btn">
+                <i class="fa-solid fa-radar"></i> Start Search
+              </button>
+            </div>
+
+            <!-- Search Progress Bar -->
+            <div class="console-progress-box">
+              <div class="progress-header">
+                <span id="progressLabel">Search Status</span>
+                <span class="progress-status" id="progressStatusText">Complete (24 found)</span>
+              </div>
+              <div class="progress-track">
+                <div class="progress-fill" id="searchProgressFill" style="width: 100%;"></div>
+              </div>
+            </div>
+
+            <!-- Email Settings & Excel Dispatch Widget -->
+            <div class="console-subwidget">
+              <div class="widget-title">
+                <span><i class="fa-solid fa-file-excel"></i> Email Excel Report</span>
+                <span style="font-size: 10px; color: #10b981;">Automated</span>
+              </div>
+              <input type="email" id="emailRecipientsInput" class="console-input" value="musabimp.0@gmail.com"
+                placeholder="Recipient email address..." style="font-size: 11px; padding: 6px 10px;" />
+              <div
+                style="font-size: 10.5px; color: #94a3b8; display: flex; align-items: center; justify-content: space-between;">
+                <span>Excel sheet attachment attached on scan</span>
+                <button type="button" id="sendExcelTestBtn"
+                  style="background: none; border: none; color: #34d399; font-size: 11px; cursor: pointer; text-decoration: underline; font-family: inherit;">Send
+                  Test</button>
+              </div>
+            </div>
+
+            <!-- Google Calendar Widget -->
+            <div class="console-subwidget">
+              <div class="widget-title">
+                <span><i class="fa-brands fa-google"></i> Google Calendar</span>
+                <span style="font-size: 10px; color: #34d399;" id="calStatusBadge"><i
+                    class="fa-solid fa-circle-check"></i> Connected</span>
+              </div>
+              <div class="calendar-action-row">
+                <button type="button" class="cal-tiny-btn" id="testCalendarBtn">
+                  <i class="fa-solid fa-plug"></i> Test Connection
+                </button>
+                <button type="button" class="cal-tiny-btn" id="syncCalendarBtn">
+                  <i class="fa-solid fa-rotate"></i> Sync Jobs
+                </button>
+              </div>
+              <!-- In-page calendar event viewer -->
+              <div class="cal-event-pill" id="calEventDisplay">
+                <span style="display: inline-flex; align-items: center; gap: 5px;">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                  Oct 25, 2:00 PM — Scale AI Screening
+                </span>
+                <button type="button" id="refreshEventsBtn" title="Refresh Events"
+                  style="background: none; border: none; color: #94a3b8; cursor: pointer; font-size: 11px;"><i
+                    class="fa-solid fa-arrow-rotate-right"></i></button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Dashboard Viewport: Top Job Picks For You -->
+          <div class="right-dashboard-viewport">
+            <div class="viewport-section-header">
+              <div class="viewport-title">
+                <i class="fa-solid fa-bullseye" style="color: #34d399;"></i>
+                <span>Top Job Picks For You</span>
+              </div>
+              <span class="viewport-kicker" id="picksCounterBadge">Matched by Skills & Resume</span>
+            </div>
+
+            <!-- Job Picks Grid (Populated dynamically or updated by keyword clicks) -->
+            <div class="job-picks-grid" id="jobPicksContainer">
+              <!-- Card 1: Python -->
+              <div class="job-pick-card" data-domain="Python">
+                <div class="job-pick-left">
+                  <div class="job-header-row">
+                    <span class="job-role-title">Senior Python Systems Engineer</span>
+                    <span class="relevance-score-badge">98% Match</span>
+                    <span class="verdict-perfect"><i class="fa-solid fa-star"></i> Perfect For You</span>
+                  </div>
+                  <div class="job-meta-row">
+                    <span>Scale AI · Remote</span>
+                    <span>·</span>
+                    <span>Full-Time · $165,000 – $190,000</span>
+                    <span>·</span>
+                    <span style="color: #34d399;"><i class="fa-brands fa-python"></i> Python, Fast-API, Docker</span>
+                  </div>
+                </div>
+                <div class="job-pick-right">
+                  <button type="button" class="job-apply-btn demo-apply-trigger"
+                    data-job="Senior Python Systems Engineer">
+                    <i class="fa-solid fa-bolt"></i> 1-Click Apply
+                  </button>
+                  <button type="button" class="job-save-btn" title="Save Job"><i
+                      class="fa-regular fa-bookmark"></i></button>
+                </div>
+              </div>
+
+              <!-- Card 2: Electrical -->
+              <div class="job-pick-card" data-domain="Electrical">
+                <div class="job-pick-left">
+                  <div class="job-header-row">
+                    <span class="job-role-title">Marine Electrical & Automation Engineer</span>
+                    <span class="relevance-score-badge">95% Match</span>
+                    <span class="verdict-perfect"><i class="fa-solid fa-star"></i> Perfect For You</span>
+                  </div>
+                  <div class="job-meta-row">
+                    <span>Maersk Group · Global Maritime / Hybrid</span>
+                    <span>·</span>
+                    <span>Full-Time · $145,000 – $175,000</span>
+                    <span>·</span>
+                    <span style="color: #38bdf8;"><i class="fa-solid fa-bolt"></i> Electrical CAD, PLC, High
+                      Voltage</span>
+                  </div>
+                </div>
+                <div class="job-pick-right">
+                  <button type="button" class="job-apply-btn demo-apply-trigger"
+                    data-job="Marine Electrical & Automation Engineer">
+                    <i class="fa-solid fa-bolt"></i> 1-Click Apply
+                  </button>
+                  <button type="button" class="job-save-btn" title="Save Job"><i
+                      class="fa-regular fa-bookmark"></i></button>
+                </div>
+              </div>
+
+              <!-- Card 3: Merchant Navy -->
+              <div class="job-pick-card" data-domain="Merchant Navy">
+                <div class="job-pick-left">
+                  <div class="job-header-row">
+                    <span class="job-role-title">Merchant Navy Electro-Technical Officer (ETO)</span>
+                    <span class="relevance-score-badge">93% Match</span>
+                    <span class="verdict-perfect"><i class="fa-solid fa-star"></i> Perfect For You</span>
+                  </div>
+                  <div class="job-meta-row">
+                    <span>Bernhard Schulte Shipmanagement · Offshore Fleet</span>
+                    <span>·</span>
+                    <span>Contract · Rotational Voyage</span>
+                    <span>·</span>
+                    <span style="color: #34d399;"><i class="fa-solid fa-anchor"></i> Maritime Navigation, Power
+                      Dist</span>
+                  </div>
+                </div>
+                <div class="job-pick-right">
+                  <button type="button" class="job-apply-btn demo-apply-trigger"
+                    data-job="Merchant Navy Electro-Technical Officer (ETO)">
+                    <i class="fa-solid fa-bolt"></i> 1-Click Apply
+                  </button>
+                  <button type="button" class="job-save-btn" title="Save Job"><i
+                      class="fa-regular fa-bookmark"></i></button>
+                </div>
+              </div>
+
+              <!-- Card 4: Python Data -->
+              <div class="job-pick-card" data-domain="Python">
+                <div class="job-pick-left">
+                  <div class="job-header-row">
+                    <span class="job-role-title">Autonomous Agent Infrastructure Lead</span>
+                    <span class="relevance-score-badge">91% Match</span>
+                    <span class="verdict-perfect"><i class="fa-solid fa-star"></i> Perfect For You</span>
+                  </div>
+                  <div class="job-meta-row">
+                    <span>Anthropic · SF / Hybrid</span>
+                    <span>·</span>
+                    <span>Full-Time · $180,000 – $220,000</span>
+                    <span>·</span>
+                    <span style="color: #38bdf8;"><i class="fa-solid fa-brain"></i> Python, PyTorch, Kubernetes</span>
+                  </div>
+                </div>
+                <div class="job-pick-right">
+                  <button type="button" class="job-apply-btn demo-apply-trigger"
+                    data-job="Autonomous Agent Infrastructure Lead">
+                    <i class="fa-solid fa-bolt"></i> 1-Click Apply
+                  </button>
+                  <button type="button" class="job-save-btn" title="Save Job"><i
+                      class="fa-regular fa-bookmark"></i></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section: Specialized Studios (Outreach Studio & Skill Gap Roadmap) -->
+    <section id="studios" class="content-section">
+      <div class="section-header">
+        <span class="section-tag"><i class="fa-solid fa-cubes-stacked"></i> Specialized Studios</span>
+        <h2 class="section-title">Outreach Studio & Skill Gap Roadmaps</h2>
+        <p class="section-desc">
+          Connect with verified HR decision-makers and bridge skill gaps with tailored learning roadmaps.
+        </p>
+      </div>
+
+      <div class="studios-showcase-grid">
+        <!-- STUDIO 1: Outreach Studio & Message Wall -->
+        <div class="studio-card">
+          <div class="studio-card-header">
+            <div class="studio-icon-box"><i class="fa-solid fa-paper-plane"></i></div>
+            <div>
+              <h3 class="studio-card-title">Outreach Studio</h3>
+              <span class="studio-card-subtitle">Connect Directly with Hiring Managers & Recruiters</span>
+            </div>
+          </div>
+
+          <p style="font-size: 13px; color: #cbd5e1; line-height: 1.55;">
+            Skip the crowded job portals! Search for verified recruiters and hiring managers, view their direct work emails, and send a warm, friendly introduction in one click.
+          </p>
+
+          <div class="studio-preview-box">
+            <div class="studio-search-bar">
+              <i class="fa-solid fa-magnifying-glass" style="color: #34d399;"></i>
+              <span>Search recruiters: e.g. "Tech Recruiter", "HR Manager", "Startup Founder"</span>
+            </div>
+
+            <!-- Recruiter Contacts List -->
+            <div class="studio-contact-item">
+              <div class="contact-name-role">
+                <strong>Sarah Jenkins · Senior Technical Recruiter</strong>
+                <span>Scale AI · <span style="color: #34d399; display: inline-flex; align-items: center; gap: 4px;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Direct Work Email Verified</span></span>
+              </div>
+              <button type="button" class="contact-msg-btn demo-outreach-btn" data-recruiter="Sarah Jenkins"><i
+                  class="fa-regular fa-paper-plane"></i> Say Hello</button>
+            </div>
+
+            <div class="studio-contact-item">
+              <div class="contact-name-role">
+                <strong>Capt. Henrik Nielsen · Maritime Crewing Lead</strong>
+                <span>Maersk Operations · <span style="color: #34d399; display: inline-flex; align-items: center; gap: 4px;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Direct Work Email Verified</span></span>
+              </div>
+              <button type="button" class="contact-msg-btn demo-outreach-btn" data-recruiter="Capt. Henrik Nielsen"><i
+                  class="fa-regular fa-paper-plane"></i> Say Hello</button>
+            </div>
+
+            <!-- Friendly Message Templates -->
+            <div>
+              <span class="console-label" style="display: block; margin-bottom: 6px;">Choose a Friendly Message (Ready to Send):</span>
+              <div class="template-wall-row">
+                <span class="template-pill active" title="Say hello and share your background warmly" style="display: inline-flex; align-items: center; gap: 5px;">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+                  1. Friendly Intro
+                </span>
+                <span class="template-pill" title="Politely follow up on a recent application" style="display: inline-flex; align-items: center; gap: 5px;">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
+                  2. Application Follow-Up
+                </span>
+                <span class="template-pill" title="Ask for a short 10-minute informal chat" style="display: inline-flex; align-items: center; gap: 5px;">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"></path><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path><line x1="6" y1="1" x2="6" y2="4"></line><line x1="10" y1="1" x2="10" y2="4"></line><line x1="14" y1="1" x2="14" y2="4"></line></svg>
+                  3. Quick Coffee Chat
+                </span>
+                <span class="template-pill" style="border-style: dashed;"><i class="fa-solid fa-plus"></i> Custom</span>
+              </div>
+            </div>
+
+            <!-- Friendly Tip Box -->
+            <div style="display: flex; align-items: center; gap: 8px; font-size: 11.5px; color: #a7f3d0; background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 8px; padding: 7px 11px; margin-top: 2px;">
+              <i class="fa-solid fa-lightbulb" style="color: #34d399; font-size: 13px;"></i>
+              <span><strong>Friendly Tip:</strong> Reaching out directly to recruiters gets up to 3x more responses than waiting on job boards!</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- STUDIO 2: Skill Gap & Learning Roadmap -->
+        <div class="studio-card">
+          <div class="studio-card-header">
+            <div class="studio-icon-box"
+              style="background: rgba(56, 189, 248, 0.15); border-color: rgba(56, 189, 248, 0.3); color: #38bdf8;"><i
+                class="fa-solid fa-chart-line"></i></div>
+            <div>
+              <h3 class="studio-card-title">Skill Gap & Roadmap Studio</h3>
+              <span class="studio-card-subtitle">Resume Benchmarking & Actionable Tasks</span>
+            </div>
+          </div>
+
+          <p style="font-size: 13px; color: #cbd5e1; line-height: 1.55;">
+            Benchmarks your resume against target roles and generates step-by-step project roadmaps with AI study
+            guides.
+          </p>
+
+          <div class="studio-preview-box">
+            <div style="display: flex; justify-content: space-between; align-items: center; font-size: 12px;">
+              <span style="color: #ffffff; font-weight: 600;">Diagnosed Target: Lead Engineer (Python /
+                Electrical)</span>
+              <span style="color: #38bdf8; font-weight: 700;">88% Benchmark</span>
+            </div>
+
+            <div class="roadmap-step-item">
+              <span class="step-badge">TASK1</span>
+              <div class="step-details">
+                <strong>Distributed Async Queue Architecture</strong>
+                <span>Implement Celery + Redis worker pool for high-throughput job ingestion.</span>
+              </div>
+            </div>
+
+            <div class="roadmap-step-item">
+              <span class="step-badge" style="background: #38bdf8; color: #082f49;">TASK2</span>
+              <div class="step-details">
+                <strong>High-Voltage Safety & Maritime PLC Protocols</strong>
+                <span>Review IEC 61850 substation standards and SCADA bus integration.</span>
+              </div>
+            </div>
+
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 4px;">
+              <span style="font-size: 11px; color: #94a3b8;"><i class="fa-solid fa-file-pdf"
+                  style="color: #f43f5e;"></i> In-page AI Answers & PDF Export Available</span>
+              <button type="button" class="cal-tiny-btn" id="demoPdfDownloadBtn"
+                style="flex: 0 0 auto; padding: 4px 10px;">
+                <i class="fa-solid fa-download"></i> Export PDF
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section: Security & Candidate Privacy Guarantee -->
+    <section id="security" class="content-section">
+      <div class="section-header">
+        <span class="section-tag"><i class="fa-solid fa-shield-halved"></i> Privacy First</span>
+        <h2 class="section-title">Candidate Privacy & Security Guarantee</h2>
+        <p class="section-desc">
+          Confidential job searching with isolated cloud sessions, AES-256 encryption, and zero spam.
+        </p>
+      </div>
+
+      <div class="security-grid">
+        <div class="security-card">
+          <div class="security-card-header">
+            <div class="security-icon-box"><i class="fa-solid fa-user-secret"></i></div>
+            <h3 class="security-card-title">100% Incognito Job Search</h3>
+          </div>
+          <p class="security-card-text">
+            Current employers and third parties cannot view your activity. All searches run in isolated cloud
+            containers.
+          </p>
+          <div class="security-badge-row">
+            <span class="security-badge"><i class="fa-solid fa-check"></i> Zero public profile leaks</span>
+            <span class="security-badge"><i class="fa-solid fa-check"></i> Stealth candidate mode</span>
+          </div>
+        </div>
+
+        <div class="security-card">
+          <div class="security-card-header">
+            <div class="security-icon-box"><i class="fa-solid fa-lock"></i></div>
+            <h3 class="security-card-title">Encrypted Resume & Notes Vault</h3>
+          </div>
+          <p class="security-card-text">
+            Resumes, salary targets, and notes are encrypted with AES-256. Only you hold decryption keys.
+          </p>
+          <div class="security-badge-row">
+            <span class="security-badge"><i class="fa-solid fa-check"></i> AES-256 encryption</span>
+            <span class="security-badge"><i class="fa-solid fa-check"></i> Isolated document storage</span>
+          </div>
+        </div>
+
+        <div class="security-card">
+          <div class="security-card-header">
+            <div class="security-icon-box"><i class="fa-brands fa-google"></i></div>
+            <h3 class="security-card-title">Verified Google OAuth Security</h3>
+          </div>
+          <p class="security-card-text">
+            Calendar and email sync use official Google OAuth client-side. We never view or store passwords.
+          </p>
+          <div class="security-badge-row">
+            <span class="security-badge"><i class="fa-solid fa-check"></i> Official Google OAuth</span>
+            <span class="security-badge"><i class="fa-solid fa-check"></i> Sandboxed scope permissions</span>
+          </div>
+        </div>
+
+        <div class="security-card">
+          <div class="security-card-header">
+            <div class="security-icon-box"><i class="fa-solid fa-ban"></i></div>
+            <h3 class="security-card-title">Zero Recruiter Spam Policy</h3>
+          </div>
+          <p class="security-card-text">
+            We never sell candidate data to recruitment agencies or brokers. Zero cold spam.
+          </p>
+          <div class="security-badge-row">
+            <span class="security-badge"><i class="fa-solid fa-check"></i> No lead broker partnerships</span>
+            <span class="security-badge"><i class="fa-solid fa-check"></i> Zero unsolicited spam</span>
+          </div>
+        </div>
+
+        <div class="security-card">
+          <div class="security-card-header">
+            <div class="security-icon-box"><i class="fa-solid fa-user-gear"></i></div>
+            <h3 class="security-card-title">Anti-Detection Account Safety</h3>
+          </div>
+          <p class="security-card-text">
+            Human-velocity pacing and randomized jitter keep your job portal accounts safe and unflagged.
+          </p>
+          <div class="security-badge-row">
+            <span class="security-badge"><i class="fa-solid fa-check"></i> Rate-limit mitigation</span>
+            <span class="security-badge"><i class="fa-solid fa-check"></i> Safe portal sessions</span>
+          </div>
+        </div>
+
+        <div class="security-card">
+          <div class="security-card-header">
+            <div class="security-icon-box"><i class="fa-solid fa-database"></i></div>
+            <h3 class="security-card-title">Total Candidate Data Ownership</h3>
+          </div>
+          <p class="security-card-text">
+            Export your entire application log to Excel/CSV anytime, or permanently delete your data in one click.
+          </p>
+          <div class="security-badge-row">
+            <span class="security-badge"><i class="fa-solid fa-check"></i> Instant 1-click export</span>
+            <span class="security-badge"><i class="fa-solid fa-check"></i> Permanent data purge</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section: Candidate FAQ -->
+    <section id="faq" class="content-section">
+      <div class="section-header">
+        <span class="section-tag"><i class="fa-solid fa-circle-question"></i> Questions & Answers</span>
+        <h2 class="section-title">Frequently Asked Questions</h2>
+        <p class="section-desc">
+          Everything you need to know about AI JobSnap early access, security, and career automation.
+        </p>
+      </div>
+
+      <div class="faq-grid">
+        <div class="faq-card">
+          <h3 class="faq-question">
+            <i class="fa-solid fa-users"></i>
+            <span>What are the two account roles in JobSnap?</span>
+          </h3>
+          <p class="faq-answer">
+            Choose <strong>Job Seeker</strong> for job matching and roadmaps, or <strong>Recruiter & Enterprise</strong>
+            for sourcing. Both access encrypted, role-specific consoles.
+          </p>
+        </div>
+
+        <div class="faq-card">
+          <h3 class="faq-question">
+            <i class="fa-solid fa-gauge-high"></i>
+            <span>How do Fast Mode (~60s) and Deep Mode (~3m) scans differ?</span>
+          </h3>
+          <p class="faq-answer">
+            <strong>Fast Mode</strong> completes in ~60 seconds across primary boards. <strong>Deep Mode</strong> scans
+            for ~3 minutes across niche and maritime portals.
+          </p>
+        </div>
+
+        <div class="faq-card">
+          <h3 class="faq-question">
+            <i class="fa-solid fa-sliders"></i>
+            <span>Can I search specific domains like Python, Electrical, or Merchant Navy?</span>
+          </h3>
+          <p class="faq-answer">
+            Yes. Enter any keyword—such as Python, Electrical, or Merchant Navy—filter by location and job type, and
+            save your profile for 1-click re-runs.
+          </p>
+        </div>
+
+        <div class="faq-card">
+          <h3 class="faq-question">
+            <i class="fa-solid fa-bullseye"></i>
+            <span>How does the AI Relevance Score calculate if a job is 'Perfect For You'?</span>
+          </h3>
+          <p class="faq-answer">
+            JobSnap compares your parsed skills and experience with job requirements, outputting a 0–100% score and
+            highlighting top fits as "Perfect For You".
+          </p>
+        </div>
+
+        <div class="faq-card">
+          <h3 class="faq-question">
+            <i class="fa-brands fa-google"></i>
+            <span>Can I connect a separate Google account for Calendar syncing?</span>
+          </h3>
+          <p class="faq-answer">
+            Yes. You can connect any Google account to sync application deadlines and refresh calendar events directly
+            on page.
+          </p>
+        </div>
+
+        <div class="faq-card">
+          <h3 class="faq-question">
+            <i class="fa-solid fa-file-excel"></i>
+            <span>How does Email Reporting and Excel dispatch work?</span>
+          </h3>
+          <p class="faq-answer">
+            Add recipient emails in console settings to automatically receive a formatted Excel sheet of all discovered
+            jobs and match scores after each scan.
+          </p>
+        </div>
+
+        <div class="faq-card">
+          <h3 class="faq-question">
+            <i class="fa-solid fa-paper-plane"></i>
+            <span>What is the Outreach Studio?</span>
+          </h3>
+          <p class="faq-answer">
+            It's your friendly shortcut to real hiring teams! Instead of waiting weeks on crowded job boards, you can quickly find verified recruiters and managers, choose a warm, polite message template, and reach out directly with one click.
+          </p>
+        </div>
+
+        <div class="faq-card">
+          <h3 class="faq-question">
+            <i class="fa-solid fa-road"></i>
+            <span>How does the Skill Gap & Roadmap section accelerate my career?</span>
+          </h3>
+          <p class="faq-answer">
+            It diagnoses missing skills against industry benchmarks and creates step-by-step project tasks with in-page
+            AI answers and PDF export.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section: Final Early Access Reservation Card -->
+    <section id="early-access" class="final-cta-card">
+      <span class="section-tag" style="background: rgba(16, 185, 129, 0.2);"><i class="fa-solid fa-ticket"></i> Early
+        Access</span>
+      <h2 class="section-title" style="margin-top: 10px;">Lock In Your 100% Free Pass</h2>
+      <p class="section-desc" style="margin-bottom: 24px;">
+        8% compute capacity allocated. Claim your free beta pass before slots fill up.
+      </p>
+
+      <div class="early-access-container" style="margin: 0 auto;">
+        <form id="bottomEmailForm" class="early-access-form" novalidate>
+          <div class="input-wrap">
+            <i class="fa-regular fa-envelope input-icon"></i>
+            <input type="email" id="bottomEmailInput" class="early-access-input"
+              placeholder="Enter your email to claim your free pass..." autocomplete="email" required />
+          </div>
+          <button type="button" id="bottomSubmitBtn" class="cta-btn early-access-submit">
+            <span class="btn-text">Claim Free Pass</span>
+            <i class="fa-solid fa-arrow-right btn-arrow"></i>
+          </button>
+        </form>
+
+        <div id="bottomFormFeedback" class="form-feedback" hidden></div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+      <div class="footer-copy">
+        <strong>AI JobSnap</strong> — Intelligent Career Automation & Candidate Operating System. All rights reserved.
+      </div>
+      <div class="footer-links">
+        <a href="#home" class="footer-link">Home</a>
+        <a href="#capacity" class="footer-link">Capacity</a>
+        <a href="#features" class="footer-link">Features</a>
+        <a href="#workflow" class="footer-link">Workflow</a>
+        <a href="#security" class="footer-link">Security</a>
+        <a href="#faq" class="footer-link">FAQ</a>
+        <a href="#early-access" class="footer-link" style="color: #34d399; font-weight: 500;">Claim Free Spot</a>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Circular Green Tick Micro-Pop (Non-cheap, Apple/Stripe-Style Indicator) -->
+  <div id="greenTickPop" class="green-tick-pop-overlay" aria-hidden="true" hidden>
+    <div class="green-tick-circle-wrap">
+      <svg class="green-tick-svg" viewBox="0 0 52 52">
+        <circle class="green-tick-circle" cx="26" cy="26" r="23" fill="none" />
+        <path class="green-tick-check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
+      </svg>
+    </div>
+  </div>
+
+  <!-- Ultra-Professional Spot Reserved / Founding VIP Pass Modal -->
+    <div id="spotReservedModal" class="vip-pass-modal-overlay" hidden aria-hidden="true" role="dialog" aria-modal="true">
+      <div class="vip-pass-modal-backdrop" id="vipModalBackdrop"></div>
+      
+      <!-- Ambient Glow Orbs -->
+      <div class="vip-modal-ambient-glow glow-emerald"></div>
+      <div class="vip-modal-ambient-glow glow-cyan"></div>
+      
+      <div class="vip-pass-card-container">
+        <!-- Canvas for micro particle explosion on reveal -->
+        <canvas id="vipConfettiCanvas" class="vip-confetti-canvas"></canvas>
+
+        <div class="vip-pass-card">
+          <!-- Iridescent laser border sweep -->
+          <div class="vip-laser-sweep"></div>
+
+          <!-- Card Header -->
+          <div class="vip-card-header">
+            <div class="vip-brand-col">
+              <div class="vip-brand-title">
+                <span>JobSnap</span>
+                <span class="vip-pass-badge">
+                  <span class="vip-pulse-dot"></span>
+                  VIP USER · SPOT RESERVED
+                </span>
+              </div>
+              <div class="vip-brand-sub">Private Founding Member Pass</div>
+            </div>
+            <button type="button" class="vip-modal-close" id="vipModalCloseBtn" aria-label="Close pass modal">&times;</button>
+          </div>
+
+          <!-- Holographic Pass Code Vault -->
+          <div class="vip-pass-vault">
+            <div class="vip-vault-label">
+              <span>INVITE PASS CODE</span>
+              <span class="vip-vault-tier">100% FREE LIFETIME TIER</span>
+            </div>
+            <div class="vip-code-row">
+              <span id="vipModalPassCode" class="vip-code-text">JS-2645</span>
+              <button type="button" id="vipCopyCodeBtn" class="vip-copy-btn" title="Copy Pass Code">
+                <i class="fa-regular fa-copy"></i>
+                <span class="copy-text">Copy Code</span>
               </button>
             </div>
           </div>
 
-          <!-- Daily Signal & Motivational Quote -->
-          <div class="dashboard-daily-quote">
-            <div class="quote-left">
-              <i class="fa-solid fa-quote-left"></i>
-              <span class="quote-text" id="dailyQuoteText">"Opportunities don't happen, you create them. Your skills match 18 new roles today."</span>
+          <!-- Member Details Matrix -->
+          <div class="vip-details-matrix">
+            <div class="vip-matrix-item">
+              <span class="matrix-label"><i class="fa-regular fa-envelope"></i> REGISTERED EMAIL</span>
+              <strong id="vipModalEmail" class="matrix-value">musab@example.com</strong>
             </div>
-            <span class="quote-tag"><i class="fa-solid fa-bolt"></i> Daily Signal</span>
-          </div>
-
-          <!-- KPI Metric Cards Row -->
-          <div class="dashboard-metrics-grid">
-            <div class="dash-metric-card">
-              <span class="dash-metric-title">New Jobs <i class="fa-solid fa-sparkles" style="color: #34d399;"></i></span>
-              <span class="dash-metric-val" id="kpiNewJobs">24</span>
-              <span class="dash-metric-sub">+6 added in last scan</span>
+            <div class="vip-matrix-item">
+              <span class="matrix-label"><i class="fa-solid fa-briefcase"></i> ROLE FOCUS</span>
+              <strong id="vipModalRole" class="matrix-value">Tech / Product</strong>
             </div>
-            <div class="dash-metric-card">
-              <span class="dash-metric-title">Pipeline <i class="fa-solid fa-bars-progress" style="color: #38bdf8;"></i></span>
-              <span class="dash-metric-val">8</span>
-              <span class="dash-metric-sub">Active in review</span>
+            <div class="vip-matrix-item">
+              <span class="matrix-label"><i class="fa-solid fa-server"></i> COMPUTE ALLOCATION</span>
+              <strong class="matrix-value" style="color: #34d399;">8% Priority Cluster (Locked)</strong>
             </div>
-            <div class="dash-metric-card">
-              <span class="dash-metric-title">Offers <i class="fa-solid fa-trophy" style="color: #fbbf24;"></i></span>
-              <span class="dash-metric-val">2</span>
-              <span class="dash-metric-sub">Interview stage cleared</span>
-            </div>
-            <div class="dash-metric-card">
-              <span class="dash-metric-title">Market Intel <i class="fa-solid fa-arrow-trend-up" style="color: #10b981;"></i></span>
-              <span class="dash-metric-val" style="font-size: 16px; margin-top: 4px;">Tech +14%</span>
-              <span class="dash-metric-sub">Maritime & Electrical high demand</span>
+            <div class="vip-matrix-item">
+              <span class="matrix-label"><i class="fa-solid fa-shield-halved"></i> ACCESS STATUS</span>
+              <strong class="matrix-value" style="color: #38bdf8;">Pre-Launch VIP Confirmed</strong>
             </div>
           </div>
 
-          <!-- Main Layout: Left Enterprise Console + Right Job Picks -->
-          <div class="console-dashboard-layout">
-            <!-- Left Console Panel -->
-            <div class="enterprise-console-panel">
-              <div class="console-panel-header">
-                <span class="console-title"><i class="fa-solid fa-sliders"></i> Enterprise Console</span>
-                <span class="console-operator-tag" id="consoleOperatorTag">Operator: musabimp</span>
-              </div>
-
-              <!-- Scan Mode: Fast vs Deep -->
-              <div class="scan-mode-group">
-                <span class="console-label">Scan Speed Mode</span>
-                <div class="scan-mode-toggles">
-                  <button type="button" class="scan-mode-btn active" id="modeFastBtn">
-                    <span>⚡ Fast Mode</span>
-                    <span class="mode-time">~60s quick scan</span>
-                  </button>
-                  <button type="button" class="scan-mode-btn" id="modeDeepBtn">
-                    <span>🔬 Deep Mode</span>
-                    <span class="mode-time">~3m comprehensive</span>
-                  </button>
-                </div>
-              </div>
-
-              <!-- Keywords Section with Instant Switcher -->
-              <div class="keyword-input-wrap">
-                <span class="console-label">Target Keywords</span>
-                <div class="keyword-chips-row">
-                  <button type="button" class="keyword-chip active" data-kw="Python">Python</button>
-                  <button type="button" class="keyword-chip" data-kw="Electrical">Electrical</button>
-                  <button type="button" class="keyword-chip" data-kw="Merchant Navy">Merchant Navy</button>
-                  <button type="button" class="keyword-chip" data-kw="Full-Stack">Full-Stack</button>
-                </div>
-                <input type="text" id="consoleKeywordInput" class="console-input" value="Python, Systems" placeholder="e.g. Python, Electrical, Merchant Navy..." />
-              </div>
-
-              <!-- Location, Experience, Job Type Filters -->
-              <div class="console-filter-row">
-                <div>
-                  <span class="console-label" style="display: block; margin-bottom: 4px;">Location</span>
-                  <select id="consoleLocation" class="console-select">
-                    <option value="Remote">Remote & Worldwide</option>
-                    <option value="Hybrid">Hybrid</option>
-                    <option value="On-site">On-site / Maritime Port</option>
-                  </select>
-                </div>
-                <div>
-                  <span class="console-label" style="display: block; margin-bottom: 4px;">Experience</span>
-                  <select id="consoleExp" class="console-select">
-                    <option value="Mid">Mid-Level (2–5 YOE)</option>
-                    <option value="Senior">Senior (5+ YOE)</option>
-                    <option value="Junior">Junior / Entry</option>
-                    <option value="Lead">Lead / Chief Officer</option>
-                  </select>
-                </div>
-              </div>
-
-              <div>
-                <span class="console-label" style="display: block; margin-bottom: 4px;">Job Type</span>
-                <select id="consoleJobType" class="console-select">
-                  <option value="full-time">Full-time</option>
-                  <option value="part-time">Part-time</option>
-                  <option value="contract">Contract</option>
-                  <option value="internship">Internship</option>
-                </select>
-              </div>
-
-              <!-- Console Action Buttons -->
-              <div class="console-actions-group">
-                <button type="button" id="saveProfileBtn" class="save-profile-btn">
-                  <i class="fa-solid fa-floppy-disk"></i> Save Profile
-                </button>
-                <button type="button" id="startSearchBtn" class="start-search-btn">
-                  <i class="fa-solid fa-radar"></i> Start Search
-                </button>
-              </div>
-
-              <!-- Search Progress Bar -->
-              <div class="console-progress-box">
-                <div class="progress-header">
-                  <span id="progressLabel">Search Status</span>
-                  <span class="progress-status" id="progressStatusText">Complete (24 found)</span>
-                </div>
-                <div class="progress-track">
-                  <div class="progress-fill" id="searchProgressFill" style="width: 100%;"></div>
-                </div>
-              </div>
-
-              <!-- Email Settings & Excel Dispatch Widget -->
-              <div class="console-subwidget">
-                <div class="widget-title">
-                  <span><i class="fa-solid fa-file-excel"></i> Email Excel Report</span>
-                  <span style="font-size: 10px; color: #10b981;">Automated</span>
-                </div>
-                <input type="email" id="emailRecipientsInput" class="console-input" value="musabimp.0@gmail.com" placeholder="Recipient email address..." style="font-size: 11px; padding: 6px 10px;" />
-                <div style="font-size: 10.5px; color: #94a3b8; display: flex; align-items: center; justify-content: space-between;">
-                  <span>Excel sheet attachment attached on scan</span>
-                  <button type="button" id="sendExcelTestBtn" style="background: none; border: none; color: #34d399; font-size: 11px; cursor: pointer; text-decoration: underline; font-family: inherit;">Send Test</button>
-                </div>
-              </div>
-
-              <!-- Google Calendar Widget -->
-              <div class="console-subwidget">
-                <div class="widget-title">
-                  <span><i class="fa-brands fa-google"></i> Google Calendar</span>
-                  <span style="font-size: 10px; color: #34d399;" id="calStatusBadge"><i class="fa-solid fa-circle-check"></i> Connected</span>
-                </div>
-                <div class="calendar-action-row">
-                  <button type="button" class="cal-tiny-btn" id="testCalendarBtn">
-                    <i class="fa-solid fa-plug"></i> Test Connection
-                  </button>
-                  <button type="button" class="cal-tiny-btn" id="syncCalendarBtn">
-                    <i class="fa-solid fa-rotate"></i> Sync Jobs
-                  </button>
-                </div>
-                <!-- In-page calendar event viewer -->
-                <div class="cal-event-pill" id="calEventDisplay">
-                  <span>📅 Oct 25, 2:00 PM — Scale AI Screening</span>
-                  <button type="button" id="refreshEventsBtn" title="Refresh Events" style="background: none; border: none; color: #94a3b8; cursor: pointer; font-size: 11px;"><i class="fa-solid fa-arrow-rotate-right"></i></button>
-                </div>
-              </div>
+          <!-- Progress Roadmap ("What Happens Next") -->
+          <div class="vip-timeline-box">
+            <div class="vip-timeline-title">
+              <i class="fa-solid fa-route"></i> WHAT HAPPENS NEXT
             </div>
-
-            <!-- Right Dashboard Viewport: Top Job Picks For You -->
-            <div class="right-dashboard-viewport">
-              <div class="viewport-section-header">
-                <div class="viewport-title">
-                  <i class="fa-solid fa-bullseye" style="color: #34d399;"></i>
-                  <span>Top Job Picks For You</span>
+            <div class="vip-timeline-steps">
+              <div class="timeline-step step-complete">
+                <div class="step-marker"><i class="fa-solid fa-check"></i></div>
+                <div class="step-info">
+                  <strong>VIP Spot Reserved</strong>
+                  <span>Free lifetime founding pass locked in under your email.</span>
                 </div>
-                <span class="viewport-kicker" id="picksCounterBadge">Matched by Skills & Resume</span>
               </div>
-
-              <!-- Job Picks Grid (Populated dynamically or updated by keyword clicks) -->
-              <div class="job-picks-grid" id="jobPicksContainer">
-                <!-- Card 1: Python -->
-                <div class="job-pick-card" data-domain="Python">
-                  <div class="job-pick-left">
-                    <div class="job-header-row">
-                      <span class="job-role-title">Senior Python Systems Engineer</span>
-                      <span class="relevance-score-badge">98% Match</span>
-                      <span class="verdict-perfect"><i class="fa-solid fa-star"></i> Perfect For You</span>
-                    </div>
-                    <div class="job-meta-row">
-                      <span>Scale AI · Remote</span>
-                      <span>·</span>
-                      <span>Full-Time · $165,000 – $190,000</span>
-                      <span>·</span>
-                      <span style="color: #34d399;"><i class="fa-brands fa-python"></i> Python, Fast-API, Docker</span>
-                    </div>
-                  </div>
-                  <div class="job-pick-right">
-                    <button type="button" class="job-apply-btn demo-apply-trigger" data-job="Senior Python Systems Engineer">
-                      <i class="fa-solid fa-bolt"></i> 1-Click Apply
-                    </button>
-                    <button type="button" class="job-save-btn" title="Save Job"><i class="fa-regular fa-bookmark"></i></button>
-                  </div>
+              <div class="timeline-step step-active">
+                <div class="step-marker"><span class="step-pulse"></span></div>
+                <div class="step-info">
+                  <strong>Private Beta Rollout</strong>
+                  <span>Platform in final polish. Rolling out in small, prioritized batches.</span>
                 </div>
-
-                <!-- Card 2: Electrical -->
-                <div class="job-pick-card" data-domain="Electrical">
-                  <div class="job-pick-left">
-                    <div class="job-header-row">
-                      <span class="job-role-title">Marine Electrical & Automation Engineer</span>
-                      <span class="relevance-score-badge">95% Match</span>
-                      <span class="verdict-perfect"><i class="fa-solid fa-star"></i> Perfect For You</span>
-                    </div>
-                    <div class="job-meta-row">
-                      <span>Maersk Group · Global Maritime / Hybrid</span>
-                      <span>·</span>
-                      <span>Full-Time · $145,000 – $175,000</span>
-                      <span>·</span>
-                      <span style="color: #38bdf8;"><i class="fa-solid fa-bolt"></i> Electrical CAD, PLC, High Voltage</span>
-                    </div>
-                  </div>
-                  <div class="job-pick-right">
-                    <button type="button" class="job-apply-btn demo-apply-trigger" data-job="Marine Electrical & Automation Engineer">
-                      <i class="fa-solid fa-bolt"></i> 1-Click Apply
-                    </button>
-                    <button type="button" class="job-save-btn" title="Save Job"><i class="fa-regular fa-bookmark"></i></button>
-                  </div>
-                </div>
-
-                <!-- Card 3: Merchant Navy -->
-                <div class="job-pick-card" data-domain="Merchant Navy">
-                  <div class="job-pick-left">
-                    <div class="job-header-row">
-                      <span class="job-role-title">Merchant Navy Electro-Technical Officer (ETO)</span>
-                      <span class="relevance-score-badge">93% Match</span>
-                      <span class="verdict-perfect"><i class="fa-solid fa-star"></i> Perfect For You</span>
-                    </div>
-                    <div class="job-meta-row">
-                      <span>Bernhard Schulte Shipmanagement · Offshore Fleet</span>
-                      <span>·</span>
-                      <span>Contract · Rotational Voyage</span>
-                      <span>·</span>
-                      <span style="color: #34d399;"><i class="fa-solid fa-anchor"></i> Maritime Navigation, Power Dist</span>
-                    </div>
-                  </div>
-                  <div class="job-pick-right">
-                    <button type="button" class="job-apply-btn demo-apply-trigger" data-job="Merchant Navy Electro-Technical Officer (ETO)">
-                      <i class="fa-solid fa-bolt"></i> 1-Click Apply
-                    </button>
-                    <button type="button" class="job-save-btn" title="Save Job"><i class="fa-regular fa-bookmark"></i></button>
-                  </div>
-                </div>
-
-                <!-- Card 4: Python Data -->
-                <div class="job-pick-card" data-domain="Python">
-                  <div class="job-pick-left">
-                    <div class="job-header-row">
-                      <span class="job-role-title">Autonomous Agent Infrastructure Lead</span>
-                      <span class="relevance-score-badge">91% Match</span>
-                      <span class="verdict-perfect"><i class="fa-solid fa-star"></i> Perfect For You</span>
-                    </div>
-                    <div class="job-meta-row">
-                      <span>Anthropic · SF / Hybrid</span>
-                      <span>·</span>
-                      <span>Full-Time · $180,000 – $220,000</span>
-                      <span>·</span>
-                      <span style="color: #38bdf8;"><i class="fa-solid fa-brain"></i> Python, PyTorch, Kubernetes</span>
-                    </div>
-                  </div>
-                  <div class="job-pick-right">
-                    <button type="button" class="job-apply-btn demo-apply-trigger" data-job="Autonomous Agent Infrastructure Lead">
-                      <i class="fa-solid fa-bolt"></i> 1-Click Apply
-                    </button>
-                    <button type="button" class="job-save-btn" title="Save Job"><i class="fa-regular fa-bookmark"></i></button>
-                  </div>
+              </div>
+              <div class="timeline-step step-pending">
+                <div class="step-marker"><i class="fa-regular fa-paper-plane"></i></div>
+                <div class="step-info">
+                  <strong>Direct Access Link via Email</strong>
+                  <span>You'll get your private portal link the moment your batch opens.</span>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </section>
 
-      <!-- Section: 🚀 Specialized Studios (Outreach Studio & Skill Gap Roadmap) -->
-      <section id="studios" class="content-section">
-        <div class="section-header">
-          <span class="section-tag"><i class="fa-solid fa-cubes-stacked"></i> Specialized Studios</span>
-          <h2 class="section-title">Outreach Studio & Skill Gap Roadmaps</h2>
-          <p class="section-desc">
-            Connect with verified HR decision-makers and bridge skill gaps with tailored learning roadmaps.
-          </p>
-        </div>
-
-        <div class="studios-showcase-grid">
-          <!-- STUDIO 1: Outreach Studio & Message Wall -->
-          <div class="studio-card">
-            <div class="studio-card-header">
-              <div class="studio-icon-box"><i class="fa-solid fa-paper-plane"></i></div>
-              <div>
-                <h3 class="studio-card-title">Outreach Studio</h3>
-                <span class="studio-card-subtitle">AI Recruiter Discovery & Message Wall</span>
-              </div>
-            </div>
-
-            <p style="font-size: 13px; color: #cbd5e1; line-height: 1.55;">
-              Find verified recruiters and engineering leads, then reach out instantly with 3 pre-built message templates.
+          <!-- Note & Actions -->
+          <div class="vip-card-footer">
+            <p class="vip-founder-note">
+              <i class="fa-regular fa-comment-dots"></i>
+              Have feature requests or target roles? Musab reads every reply personally.
             </p>
-
-            <div class="studio-preview-box">
-              <div class="studio-search-bar">
-                <i class="fa-solid fa-magnifying-glass" style="color: #34d399;"></i>
-                <span>AI Discovery: "Tech Recruiter, Python Lead, Maritime HR"</span>
-              </div>
-
-              <!-- Recruiter Contacts List -->
-              <div class="studio-contact-item">
-                <div class="contact-name-role">
-                  <strong>Sarah Jenkins · Senior Technical Recruiter</strong>
-                  <span>Scale AI · Verified Direct Email</span>
-                </div>
-                <button type="button" class="contact-msg-btn demo-outreach-btn" data-recruiter="Sarah Jenkins"><i class="fa-regular fa-envelope"></i> Message</button>
-              </div>
-
-              <div class="studio-contact-item">
-                <div class="contact-name-role">
-                  <strong>Capt. Henrik Nielsen · Maritime Crewing Lead</strong>
-                  <span>Maersk Operations · Verified Direct Contact</span>
-                </div>
-                <button type="button" class="contact-msg-btn demo-outreach-btn" data-recruiter="Capt. Henrik Nielsen"><i class="fa-regular fa-envelope"></i> Message</button>
-              </div>
-
-              <!-- Message Wall Templates -->
-              <div>
-                <span class="console-label" style="display: block; margin-bottom: 6px;">Message Wall (3 Saved Templates)</span>
-                <div class="template-wall-row">
-                  <span class="template-pill active" title="Direct Value Pitch">01. Direct Value Pitch</span>
-                  <span class="template-pill" title="Post-Application Follow-Up">02. Application Follow-Up</span>
-                  <span class="template-pill" title="Warm Networking">03. Networking Chat</span>
-                  <span class="template-pill" style="border-style: dashed;"><i class="fa-solid fa-plus"></i> Custom</span>
-                </div>
-              </div>
+            <div class="vip-actions-row">
+              <button type="button" id="vipModalDoneBtn" class="vip-primary-btn">
+                <span>Keep Pass Active & Continue</span>
+                <i class="fa-solid fa-arrow-right"></i>
+              </button>
             </div>
           </div>
-
-          <!-- STUDIO 2: Skill Gap & Learning Roadmap -->
-          <div class="studio-card">
-            <div class="studio-card-header">
-              <div class="studio-icon-box" style="background: rgba(56, 189, 248, 0.15); border-color: rgba(56, 189, 248, 0.3); color: #38bdf8;"><i class="fa-solid fa-chart-line"></i></div>
-              <div>
-                <h3 class="studio-card-title">Skill Gap & Roadmap Studio</h3>
-                <span class="studio-card-subtitle">Resume Benchmarking & Actionable Tasks</span>
-              </div>
-            </div>
-
-            <p style="font-size: 13px; color: #cbd5e1; line-height: 1.55;">
-              Benchmarks your resume against target roles and generates step-by-step project roadmaps with AI study guides.
-            </p>
-
-            <div class="studio-preview-box">
-              <div style="display: flex; justify-content: space-between; align-items: center; font-size: 12px;">
-                <span style="color: #ffffff; font-weight: 600;">Diagnosed Target: Lead Engineer (Python / Electrical)</span>
-                <span style="color: #38bdf8; font-weight: 700;">88% Benchmark</span>
-              </div>
-
-              <div class="roadmap-step-item">
-                <span class="step-badge">TASK 1</span>
-                <div class="step-details">
-                  <strong>Distributed Async Queue Architecture</strong>
-                  <span>Implement Celery + Redis worker pool for high-throughput job ingestion.</span>
-                </div>
-              </div>
-
-              <div class="roadmap-step-item">
-                <span class="step-badge" style="background: #38bdf8; color: #082f49;">TASK 2</span>
-                <div class="step-details">
-                  <strong>High-Voltage Safety & Maritime PLC Protocols</strong>
-                  <span>Review IEC 61850 substation standards and SCADA bus integration.</span>
-                </div>
-              </div>
-
-              <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 4px;">
-                <span style="font-size: 11px; color: #94a3b8;"><i class="fa-solid fa-file-pdf" style="color: #f43f5e;"></i> In-page AI Answers & PDF Export Available</span>
-                <button type="button" class="cal-tiny-btn" id="demoPdfDownloadBtn" style="flex: 0 0 auto; padding: 4px 10px;">
-                  <i class="fa-solid fa-download"></i> Export PDF
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Section: 🛡️ Security & Candidate Privacy Guarantee -->
-      <section id="security" class="content-section">
-        <div class="section-header">
-          <span class="section-tag"><i class="fa-solid fa-shield-halved"></i> Privacy First</span>
-          <h2 class="section-title">Candidate Privacy & Security Guarantee</h2>
-          <p class="section-desc">
-            Confidential job searching with isolated cloud sessions, AES-256 encryption, and zero spam.
-          </p>
-        </div>
-
-        <div class="security-grid">
-          <div class="security-card">
-            <div class="security-card-header">
-              <div class="security-icon-box"><i class="fa-solid fa-user-secret"></i></div>
-              <h3 class="security-card-title">100% Incognito Job Search</h3>
-            </div>
-            <p class="security-card-text">
-              Current employers and third parties cannot view your activity. All searches run in isolated cloud containers.
-            </p>
-            <div class="security-badge-row">
-              <span class="security-badge"><i class="fa-solid fa-check"></i> Zero public profile leaks</span>
-              <span class="security-badge"><i class="fa-solid fa-check"></i> Stealth candidate mode</span>
-            </div>
-          </div>
-
-          <div class="security-card">
-            <div class="security-card-header">
-              <div class="security-icon-box"><i class="fa-solid fa-lock"></i></div>
-              <h3 class="security-card-title">Encrypted Resume & Notes Vault</h3>
-            </div>
-            <p class="security-card-text">
-              Resumes, salary targets, and notes are encrypted with AES-256. Only you hold decryption keys.
-            </p>
-            <div class="security-badge-row">
-              <span class="security-badge"><i class="fa-solid fa-check"></i> AES-256 encryption</span>
-              <span class="security-badge"><i class="fa-solid fa-check"></i> Isolated document storage</span>
-            </div>
-          </div>
-
-          <div class="security-card">
-            <div class="security-card-header">
-              <div class="security-icon-box"><i class="fa-brands fa-google"></i></div>
-              <h3 class="security-card-title">Verified Google OAuth Security</h3>
-            </div>
-            <p class="security-card-text">
-              Calendar and email sync use official Google OAuth client-side. We never view or store passwords.
-            </p>
-            <div class="security-badge-row">
-              <span class="security-badge"><i class="fa-solid fa-check"></i> Official Google OAuth</span>
-              <span class="security-badge"><i class="fa-solid fa-check"></i> Sandboxed scope permissions</span>
-            </div>
-          </div>
-
-          <div class="security-card">
-            <div class="security-card-header">
-              <div class="security-icon-box"><i class="fa-solid fa-ban"></i></div>
-              <h3 class="security-card-title">Zero Recruiter Spam Policy</h3>
-            </div>
-            <p class="security-card-text">
-              We never sell candidate data to recruitment agencies or brokers. Zero cold spam.
-            </p>
-            <div class="security-badge-row">
-              <span class="security-badge"><i class="fa-solid fa-check"></i> No lead broker partnerships</span>
-              <span class="security-badge"><i class="fa-solid fa-check"></i> Zero unsolicited spam</span>
-            </div>
-          </div>
-
-          <div class="security-card">
-            <div class="security-card-header">
-              <div class="security-icon-box"><i class="fa-solid fa-user-gear"></i></div>
-              <h3 class="security-card-title">Anti-Detection Account Safety</h3>
-            </div>
-            <p class="security-card-text">
-              Human-velocity pacing and randomized jitter keep your job portal accounts safe and unflagged.
-            </p>
-            <div class="security-badge-row">
-              <span class="security-badge"><i class="fa-solid fa-check"></i> Rate-limit mitigation</span>
-              <span class="security-badge"><i class="fa-solid fa-check"></i> Safe portal sessions</span>
-            </div>
-          </div>
-
-          <div class="security-card">
-            <div class="security-card-header">
-              <div class="security-icon-box"><i class="fa-solid fa-database"></i></div>
-              <h3 class="security-card-title">Total Candidate Data Ownership</h3>
-            </div>
-            <p class="security-card-text">
-              Export your entire application log to Excel/CSV anytime, or permanently delete your data in one click.
-            </p>
-            <div class="security-badge-row">
-              <span class="security-badge"><i class="fa-solid fa-check"></i> Instant 1-click export</span>
-              <span class="security-badge"><i class="fa-solid fa-check"></i> Permanent data purge</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Section: ❓ Candidate FAQ -->
-      <section id="faq" class="content-section">
-        <div class="section-header">
-          <span class="section-tag"><i class="fa-solid fa-circle-question"></i> Questions & Answers</span>
-          <h2 class="section-title">Frequently Asked Questions</h2>
-          <p class="section-desc">
-            Everything you need to know about AI JobSnap early access, security, and career automation.
-          </p>
-        </div>
-
-        <div class="faq-grid">
-          <div class="faq-card">
-            <h3 class="faq-question">
-              <i class="fa-solid fa-users"></i>
-              <span>What are the two account roles in JobSnap?</span>
-            </h3>
-            <p class="faq-answer">
-              Choose <strong>Job Seeker</strong> for job matching and roadmaps, or <strong>Recruiter & Enterprise</strong> for sourcing. Both access encrypted, role-specific consoles.
-            </p>
-          </div>
-
-          <div class="faq-card">
-            <h3 class="faq-question">
-              <i class="fa-solid fa-gauge-high"></i>
-              <span>How do Fast Mode (~60s) and Deep Mode (~3m) scans differ?</span>
-            </h3>
-            <p class="faq-answer">
-              <strong>Fast Mode</strong> completes in ~60 seconds across primary boards. <strong>Deep Mode</strong> scans for ~3 minutes across niche and maritime portals.
-            </p>
-          </div>
-
-          <div class="faq-card">
-            <h3 class="faq-question">
-              <i class="fa-solid fa-sliders"></i>
-              <span>Can I search specific domains like Python, Electrical, or Merchant Navy?</span>
-            </h3>
-            <p class="faq-answer">
-              Yes. Enter any keyword—such as Python, Electrical, or Merchant Navy—filter by location and job type, and save your profile for 1-click re-runs.
-            </p>
-          </div>
-
-          <div class="faq-card">
-            <h3 class="faq-question">
-              <i class="fa-solid fa-bullseye"></i>
-              <span>How does the AI Relevance Score calculate if a job is 'Perfect For You'?</span>
-            </h3>
-            <p class="faq-answer">
-              JobSnap compares your parsed skills and experience with job requirements, outputting a 0–100% score and highlighting top fits as "Perfect For You".
-            </p>
-          </div>
-
-          <div class="faq-card">
-            <h3 class="faq-question">
-              <i class="fa-brands fa-google"></i>
-              <span>Can I connect a separate Google account for Calendar syncing?</span>
-            </h3>
-            <p class="faq-answer">
-              Yes. You can connect any Google account to sync application deadlines and refresh calendar events directly on page.
-            </p>
-          </div>
-
-          <div class="faq-card">
-            <h3 class="faq-question">
-              <i class="fa-solid fa-file-excel"></i>
-              <span>How does Email Reporting and Excel dispatch work?</span>
-            </h3>
-            <p class="faq-answer">
-              Add recipient emails in console settings to automatically receive a formatted Excel sheet of all discovered jobs and match scores after each scan.
-            </p>
-          </div>
-
-          <div class="faq-card">
-            <h3 class="faq-question">
-              <i class="fa-solid fa-paper-plane"></i>
-              <span>What is the Outreach Studio & Message Wall?</span>
-            </h3>
-            <p class="faq-answer">
-              Search verified recruiter contacts (Tech, HR, Maritime, Founders) and send personalized messages using 3 built-in templates or custom copy.
-            </p>
-          </div>
-
-          <div class="faq-card">
-            <h3 class="faq-question">
-              <i class="fa-solid fa-road"></i>
-              <span>How does the Skill Gap & Roadmap section accelerate my career?</span>
-            </h3>
-            <p class="faq-answer">
-              It diagnoses missing skills against industry benchmarks and creates step-by-step project tasks with in-page AI answers and PDF export.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <!-- Section: 🔧 Future Scope & Roadmap -->
-      <section id="roadmap" class="content-section">
-        <div class="section-header">
-          <span class="section-tag"><i class="fa-solid fa-compass-drafting"></i> Future Scope</span>
-          <h2 class="section-title">Product Roadmap</h2>
-          <p class="section-desc">
-            Upcoming capabilities planned to supercharge your automated job hunting workflow.
-          </p>
-        </div>
-
-        <div class="roadmap-grid">
-          <!-- 1. AI Cover Letters (LIVE) -->
-          <div class="roadmap-card">
-            <div class="roadmap-card-top">
-              <i class="fa-solid fa-pen-nib" style="color: #34d399;"></i>
-              <span>AI Cover Letters</span>
-              <span class="roadmap-badge-live"><i class="fa-solid fa-circle-check"></i> Live in Agent</span>
-            </div>
-            <p class="roadmap-card-desc">AI-tailored executive cover letters generated on-the-fly using Gemini & Cerebras LLMs from your parsed resume.</p>
-          </div>
-
-          <!-- 2. Contextual Semantic Match (LIVE) -->
-          <div class="roadmap-card">
-            <div class="roadmap-card-top">
-              <i class="fa-solid fa-diagram-project" style="color: #34d399;"></i>
-              <span>Contextual Semantic Match</span>
-              <span class="roadmap-badge-live"><i class="fa-solid fa-circle-check"></i> Live in Agent</span>
-            </div>
-            <p class="roadmap-card-desc">Deep semantic intelligence matching your true technical experience and projects beyond strict keyword matching.</p>
-          </div>
-
-          <!-- 3. Smart ATS Pre-Filler (LIVE) -->
-          <div class="roadmap-card">
-            <div class="roadmap-card-top">
-              <i class="fa-solid fa-robot" style="color: #34d399;"></i>
-              <span>Smart ATS Pre-Filler</span>
-              <span class="roadmap-badge-live"><i class="fa-solid fa-circle-check"></i> Live in Agent</span>
-            </div>
-            <p class="roadmap-card-desc">Automated browser session pairing that pre-fills application forms across major ATS networks with 1 click.</p>
-          </div>
-
-          <!-- 4. Skill Gap & Learning Curriculums (LIVE) -->
-          <div class="roadmap-card">
-            <div class="roadmap-card-top">
-              <i class="fa-solid fa-graduation-cap" style="color: #34d399;"></i>
-              <span>Skill Gap & Roadmaps</span>
-              <span class="roadmap-badge-live"><i class="fa-solid fa-circle-check"></i> Live in Agent</span>
-            </div>
-            <p class="roadmap-card-desc">Diagnoses missing competencies for target roles and creates personalized learning pathways with project guides.</p>
-          </div>
-
-          <!-- 5. Application Funnel & Velocity Insights (LIVE) -->
-          <div class="roadmap-card">
-            <div class="roadmap-card-top">
-              <i class="fa-solid fa-chart-pie" style="color: #34d399;"></i>
-              <span>Application Funnel Velocity</span>
-              <span class="roadmap-badge-live"><i class="fa-solid fa-circle-check"></i> Live in Agent</span>
-            </div>
-            <p class="roadmap-card-desc">Interactive pipeline tracking (New, Applied, Interview, Offer) with live response velocity and conversion analytics.</p>
-          </div>
-
-          <!-- 6. Outreach Studio & Message Vault (LIVE) -->
-          <div class="roadmap-card">
-            <div class="roadmap-card-top">
-              <i class="fa-solid fa-vault" style="color: #34d399;"></i>
-              <span>Outreach Studio & Vault</span>
-              <span class="roadmap-badge-live"><i class="fa-solid fa-circle-check"></i> Live in Agent</span>
-            </div>
-            <p class="roadmap-card-desc">Discover recruiter contacts, verify emails, manage message templates, and dispatch outreach campaigns.</p>
-          </div>
-
-          <!-- 7. Resume ATS Optimizer (PIPELINE) -->
-          <div class="roadmap-card">
-            <div class="roadmap-card-top">
-              <i class="fa-solid fa-file-circle-check" style="color: #60a5fa;"></i>
-              <span>Resume ATS Optimizer</span>
-              <span class="roadmap-badge-planned"><i class="fa-solid fa-clock"></i> In Pipeline</span>
-            </div>
-            <p class="roadmap-card-desc">Actionable fixes and keyword density analysis showing exact phrases to add for 95%+ ATS scanner passes.</p>
-          </div>
-
-          <!-- 8. 1-Click Tailored PDF Resumes (PIPELINE) -->
-          <div class="roadmap-card">
-            <div class="roadmap-card-top">
-              <i class="fa-solid fa-file-pdf" style="color: #60a5fa;"></i>
-              <span>Tailored PDF Resume Builder</span>
-              <span class="roadmap-badge-planned"><i class="fa-solid fa-clock"></i> In Pipeline</span>
-            </div>
-            <p class="roadmap-card-desc">Generates selective-edited, clean tailored resume PDFs customized for each individual job opportunity.</p>
-          </div>
-
-          <!-- 9. Instant WhatsApp & Telegram Alerts (PIPELINE) -->
-          <div class="roadmap-card">
-            <div class="roadmap-card-top">
-              <i class="fa-solid fa-bell" style="color: #60a5fa;"></i>
-              <span>Instant WhatsApp Alerts</span>
-              <span class="roadmap-badge-planned"><i class="fa-solid fa-clock"></i> In Pipeline</span>
-            </div>
-            <p class="roadmap-card-desc">Receive real-time notifications on WhatsApp or Telegram the minute a 90%+ match role is scraped.</p>
-          </div>
-
-          <!-- 10. Interview Prep Cheat Sheets (PIPELINE) -->
-          <div class="roadmap-card">
-            <div class="roadmap-card-top">
-              <i class="fa-solid fa-briefcase" style="color: #60a5fa;"></i>
-              <span>Interview Prep Cheat Sheets</span>
-              <span class="roadmap-badge-planned"><i class="fa-solid fa-clock"></i> In Pipeline</span>
-            </div>
-            <p class="roadmap-card-desc">Auto-generates company culture questions, role talk-tracks, and tailored 30–60–90 day impact plans.</p>
-          </div>
-
-          <!-- 11. Browser Extension One-Click Clipper (PIPELINE) -->
-          <div class="roadmap-card">
-            <div class="roadmap-card-top">
-              <i class="fa-brands fa-chrome" style="color: #60a5fa;"></i>
-              <span>Browser Extension Clipper</span>
-              <span class="roadmap-badge-planned"><i class="fa-solid fa-clock"></i> In Pipeline</span>
-            </div>
-            <p class="roadmap-card-desc">Chrome and Edge extension to clip jobs from any company career portal directly into your board.</p>
-          </div>
-
-          <!-- 12. Global Portal Expansions (PIPELINE) -->
-          <div class="roadmap-card">
-            <div class="roadmap-card-top">
-              <i class="fa-solid fa-earth-americas" style="color: #60a5fa;"></i>
-              <span>Global Portal Expansions</span>
-              <span class="roadmap-badge-planned"><i class="fa-solid fa-clock"></i> In Pipeline</span>
-            </div>
-            <p class="roadmap-card-desc">Expanding automated discovery to Glassdoor, Indeed, Monster, and top international tech portals.</p>
-          </div>
-        </div>
-      </section>
-
-      <!-- Section: ⚡ Final Early Access Reservation Card -->
-      <section id="early-access" class="final-cta-card">
-        <span class="section-tag" style="background: rgba(16, 185, 129, 0.2);"><i class="fa-solid fa-ticket"></i> Early Access</span>
-        <h2 class="section-title" style="margin-top: 10px;">Lock In Your 100% Free Pass</h2>
-        <p class="section-desc" style="margin-bottom: 24px;">
-          8% compute capacity allocated. Claim your free beta pass before slots fill up.
-        </p>
-
-        <div class="early-access-container" style="margin: 0 auto;">
-          <form id="bottomEmailForm" class="early-access-form" novalidate>
-            <div class="input-wrap">
-              <i class="fa-regular fa-envelope input-icon"></i>
-              <input
-                type="email"
-                id="bottomEmailInput"
-                class="early-access-input"
-                placeholder="Enter your email to claim your free pass..."
-                autocomplete="email"
-                required
-              />
-            </div>
-            <button type="submit" id="bottomSubmitBtn" class="cta-btn early-access-submit">
-              <span class="btn-text">Claim Free Pass</span>
-              <i class="fa-solid fa-arrow-right btn-arrow"></i>
-            </button>
-          </form>
-
-          <div id="bottomFormFeedback" class="form-feedback" hidden></div>
-        </div>
-      </section>
-
-      <!-- Footer -->
-      <footer class="site-footer">
-        <div>
-          <strong>AI JobSnap</strong> — Intelligent Career Automation & Candidate Operating System. All rights reserved.
-        </div>
-        <div class="footer-links">
-          <a href="#home" class="footer-link">Home</a>
-          <a href="#capacity" class="footer-link">Capacity</a>
-          <a href="#features" class="footer-link">Features</a>
-          <a href="#workflow" class="footer-link">Workflow</a>
-          <a href="#security" class="footer-link">Security</a>
-          <a href="#faq" class="footer-link">FAQ</a>
-          <a href="#roadmap" class="footer-link">Roadmap</a>
-          <a href="#early-access" class="footer-link" style="color: #34d399; font-weight: 500;">Claim Free Spot</a>
-        </div>
-      </footer>
-      <!-- Interactive Operator Login Modal -->
-      <div id="loginModal" class="auth-modal-overlay" hidden aria-hidden="true" role="dialog" aria-modal="true">
-        <div class="auth-modal-card">
-          <button type="button" class="auth-modal-close" id="loginModalCloseBtn" aria-label="Close modal">&times;</button>
-          
-          <div class="auth-modal-kicker">SECURE AUTHENTICATION</div>
-          <h3 class="auth-modal-title">Sign In to JobSnap</h3>
-          <p class="auth-modal-sub">Select your account role to access your personalized Enterprise Console and dashboard.</p>
-
-          <!-- Account Role Selection -->
-          <div class="auth-role-selector">
-            <button type="button" class="auth-role-btn active" id="roleJobSeekerBtn" data-role="Job Seeker">
-              <i class="fa-solid fa-user-tie"></i>
-              <span>Job Seeker</span>
-            </button>
-            <button type="button" class="auth-role-btn" id="roleRecruiterBtn" data-role="Recruiter / Enterprise">
-              <i class="fa-solid fa-building-user"></i>
-              <span>Recruiter or Enterprise</span>
-            </button>
-          </div>
-
-          <!-- Credentials -->
-          <form id="loginForm" novalidate>
-            <div class="auth-input-group">
-              <label for="loginUsername" class="auth-input-label">Operator Username</label>
-              <div class="auth-input-wrap">
-                <i class="fa-regular fa-user"></i>
-                <input type="text" id="loginUsername" class="auth-text-input" value="musabimp" placeholder="Enter username..." required />
-              </div>
-            </div>
-
-            <div class="auth-input-group">
-              <label for="loginPassword" class="auth-input-label">Password</label>
-              <div class="auth-input-wrap">
-                <i class="fa-solid fa-key"></i>
-                <input type="password" id="loginPassword" class="auth-text-input" value="••••••••••••" placeholder="Enter password..." required />
-              </div>
-            </div>
-
-            <div class="auth-security-badge">
-              <i class="fa-solid fa-shield-halved"></i>
-              <span>Encrypted Session · AES-256 Protected Vault</span>
-            </div>
-
-            <button type="submit" id="loginSubmitBtn" class="auth-submit-btn">
-              <span>Launch Operator Console</span>
-              <i class="fa-solid fa-arrow-right"></i>
-            </button>
-          </form>
         </div>
       </div>
     </div>
 
-    <!-- Main JavaScript -->
-    <script type="module" src="/main.js"></script>
-  </body>
+    <!-- Interactive Operator Login Modal -->
+    <div id="loginModal" class="auth-modal-overlay" hidden aria-hidden="true" role="dialog" aria-modal="true">
+      <div class="auth-modal-card">
+        <button type="button" class="auth-modal-close" id="loginModalCloseBtn" aria-label="Close modal">&times;</button>
+
+        <div class="auth-modal-kicker">SECURE AUTHENTICATION</div>
+        <h3 class="auth-modal-title">Sign In to JobSnap</h3>
+        <p class="auth-modal-sub">Select your account role to access your personalized Enterprise Console and dashboard.
+        </p>
+
+        <!-- Account Role Selection -->
+        <div class="auth-role-selector">
+          <button type="button" class="auth-role-btn active" id="roleJobSeekerBtn" data-role="Job Seeker">
+            <i class="fa-solid fa-user-tie"></i>
+            <span>Job Seeker</span>
+          </button>
+          <button type="button" class="auth-role-btn" id="roleRecruiterBtn" data-role="Recruiter / Enterprise">
+            <i class="fa-solid fa-building-user"></i>
+            <span>Recruiter or Enterprise</span>
+          </button>
+        </div>
+
+        <!-- Credentials -->
+        <form id="loginForm" novalidate>
+          <div class="auth-input-group">
+            <label for="loginUsername" class="auth-input-label">Operator Username</label>
+            <div class="auth-input-wrap">
+              <i class="fa-regular fa-user"></i>
+              <input type="text" id="loginUsername" class="auth-text-input" value="musabimp"
+                placeholder="Enter username..." required />
+            </div>
+          </div>
+
+          <div class="auth-input-group">
+            <label for="loginPassword" class="auth-input-label">Password</label>
+            <div class="auth-input-wrap">
+              <i class="fa-solid fa-key"></i>
+              <input type="password" id="loginPassword" class="auth-text-input" value="••••••••••••"
+                placeholder="Enter password..." required />
+            </div>
+          </div>
+
+          <div class="auth-security-badge">
+            <i class="fa-solid fa-shield-halved"></i>
+            <span>Encrypted Session · AES-256 Protected Vault</span>
+          </div>
+
+          <button type="submit" id="loginSubmitBtn" class="auth-submit-btn">
+            <span>Launch Operator Console</span>
+            <i class="fa-solid fa-arrow-right"></i>
+          </button>
+        </form>
+      </div>
+    </div>
+
+  <!-- Main JavaScript -->
+  <script type="module" src="/main.js"></script>
+</body>
+
 </html>

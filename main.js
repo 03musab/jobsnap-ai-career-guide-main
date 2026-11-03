@@ -1,4 +1,4 @@
-// --- Absolute Top Scroll Guard (ensures page loads exactly at 0px with no offset) ---
+// --- Absolute Top Scroll Guard (ensures page loads cleanly at 0px with no offset) ---
 if ("scrollRestoration" in history) {
   history.scrollRestoration = "manual";
 }
@@ -18,20 +18,9 @@ if (window.location.hash) {
 }
 
 // Reset on pageshow (e.g. back/forward navigation from cache)
-window.addEventListener("pageshow", lockToTop);
-
-// Reset once all assets, images, fonts, and videos finish loading
-window.addEventListener("load", () => {
-  lockToTop();
-  requestAnimationFrame(lockToTop);
-  setTimeout(lockToTop, 50);
-  setTimeout(lockToTop, 150);
-});
+window.addEventListener("pageshow", lockToTop, { passive: true });
 
 document.addEventListener("DOMContentLoaded", () => {
-  lockToTop();
-  requestAnimationFrame(lockToTop);
-  setTimeout(lockToTop, 30);
   // --- Web Audio Procedural Sound Effects Engine ---
   class SoundFXEngine {
     constructor() {
@@ -488,20 +477,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // --- Header Scrolled State (iOS Dynamic Blur) ---
+  // --- Header Scrolled State (iOS Dynamic Blur) & Active Nav Link Highlight ---
   const siteHeader = document.querySelector(".site-header");
-  function handleHeaderScroll() {
-    if (!siteHeader) return;
-    if (window.scrollY > 10) {
-      siteHeader.classList.add("scrolled");
-    } else {
-      siteHeader.classList.remove("scrolled");
-    }
-  }
-  window.addEventListener("scroll", handleHeaderScroll, { passive: true });
-  handleHeaderScroll();
-
-  // --- Active Nav Link Highlight & iOS Sliding Capsule Indicator ---
   const sections = document.querySelectorAll("main[id], section[id]");
   const desktopNavLinks = document.querySelectorAll(".nav-pill .nav-link");
   const mobileNavLinksList = document.querySelectorAll(".mobile-menu .mobile-nav-link");
@@ -511,8 +488,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function updateIndicator(targetLink, isAnimated = true) {
     if (!navIndicator || !targetLink || !navPill) return;
-
-    // Use precise offset relative to navPill container
     const leftOffset = targetLink.offsetLeft;
     const width = targetLink.offsetWidth;
 
@@ -527,8 +502,20 @@ document.addEventListener("DOMContentLoaded", () => {
     navIndicator.style.opacity = "1";
   }
 
+  // Pre-calculate and cache section offsets to prevent layout thrashing on scroll
+  let cachedSections = [];
+  function updateSectionOffsets() {
+    cachedSections = Array.from(sections).map((sec) => ({
+      id: sec.getAttribute("id"),
+      top: sec.offsetTop,
+      bottom: sec.offsetTop + sec.offsetHeight
+    }));
+  }
+  updateSectionOffsets();
+
   // Initialize indicator
   setTimeout(() => {
+    updateSectionOffsets();
     const active = document.querySelector(".nav-pill .nav-link.active") || desktopNavLinks[0];
     if (active) {
       currentActiveLink = active;
@@ -560,11 +547,19 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  function handleHeaderScroll() {
+    if (!siteHeader) return;
+    if (window.scrollY > 10) {
+      siteHeader.classList.add("scrolled");
+    } else {
+      siteHeader.classList.remove("scrolled");
+    }
+  }
+
   function highlightNavOnScroll() {
-    // If scrolled near bottom of page, reliably lock to Roadmap
     const isBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 70;
     if (isBottom) {
-      const lastLink = desktopNavLinks[desktopNavLinks.length - 1]; // Roadmap
+      const lastLink = desktopNavLinks[desktopNavLinks.length - 1];
       if (lastLink && currentActiveLink !== lastLink) {
         desktopNavLinks.forEach((l) => l.classList.remove("active"));
         lastLink.classList.add("active");
@@ -575,16 +570,13 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     const scrollPos = window.scrollY + 160;
-    sections.forEach((sec) => {
-      const top = sec.offsetTop;
-      const height = sec.offsetHeight;
-      const id = sec.getAttribute("id");
-
-      if (scrollPos >= top && scrollPos < top + height) {
+    for (let i = 0; i < cachedSections.length; i++) {
+      const sec = cachedSections[i];
+      if (scrollPos >= sec.top && scrollPos < sec.bottom) {
         let matchedDesktop = null;
         desktopNavLinks.forEach((l) => {
           l.classList.remove("active");
-          if (l.getAttribute("href") === `#${id}`) {
+          if (l.getAttribute("href") === `#${sec.id}`) {
             l.classList.add("active");
             matchedDesktop = l;
           }
@@ -592,7 +584,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         mobileNavLinksList.forEach((ml) => {
           ml.classList.remove("active");
-          if (ml.getAttribute("href") === `#${id}`) {
+          if (ml.getAttribute("href") === `#${sec.id}`) {
             ml.classList.add("active");
           }
         });
@@ -601,38 +593,42 @@ document.addEventListener("DOMContentLoaded", () => {
           currentActiveLink = matchedDesktop;
           updateIndicator(matchedDesktop, true);
         }
+        break;
       }
-    });
+    }
   }
 
-  window.addEventListener("scroll", highlightNavOnScroll, { passive: true });
+  // Unified high-performance rAF-throttled scroll handler
+  let scrollTicking = false;
+  window.addEventListener("scroll", () => {
+    if (!scrollTicking) {
+      scrollTicking = true;
+      requestAnimationFrame(() => {
+        handleHeaderScroll();
+        highlightNavOnScroll();
+        scrollTicking = false;
+      });
+    }
+  }, { passive: true });
+  handleHeaderScroll();
 
   window.addEventListener("resize", () => {
+    updateSectionOffsets();
     const active = document.querySelector(".nav-pill .nav-link.active") || currentActiveLink;
     if (active) updateIndicator(active, false);
   }, { passive: true });
 
-  // --- Header "Claim Free Spot" Button Handler ---
-  const headerAccessBtn = document.getElementById("headerAccessBtn");
-  const userEmailInput = document.getElementById("userEmailInput");
-  const heroEmailForm = document.getElementById("heroEmailForm");
 
-  if (headerAccessBtn) {
-    headerAccessBtn.addEventListener("click", (e) => {
-      e.preventDefault();
-      closeMenu();
-      if (userEmailInput && heroEmailForm) {
-        heroEmailForm.scrollIntoView({ behavior: "smooth", block: "center" });
-        userEmailInput.focus();
-        heroEmailForm.style.borderColor = "rgba(16, 185, 129, 0.9)";
-        heroEmailForm.style.boxShadow = "0 0 32px rgba(16, 185, 129, 0.5)";
-        setTimeout(() => {
-          heroEmailForm.style.borderColor = "";
-          heroEmailForm.style.boxShadow = "";
-        }, 1800);
-      }
+  // --- Corner Auth Sound Effects ---
+  const cornerAuthBtns = document.querySelectorAll(".corner-auth-btn, .mobile-corner-btn");
+  cornerAuthBtns.forEach((btn) => {
+    btn.addEventListener("mouseenter", () => {
+      soundFX.playHoverTick(780, 0.04);
     });
-  }
+    btn.addEventListener("click", () => {
+      soundFX.playClick(1.2);
+    });
+  });
 
   // --- Early Access State Management ---
   const earlyAccessState = {
@@ -657,7 +653,7 @@ document.addEventListener("DOMContentLoaded", () => {
       this.latestSignup = record;
       this.status = "success";
 
-      console.group("[AI JobSnap] 🚀 New Early Access Signup");
+      console.group("[AI JobSnap] New Early Access Signup");
       console.log("Email:", record.email);
       console.log("Ticket Pass:", record.ticketId);
       console.log("Capacity Status:", "8% allocated (Free tier confirmed)");
@@ -713,31 +709,431 @@ document.addEventListener("DOMContentLoaded", () => {
     targetEl.innerHTML = "";
   }
 
-  // Pre-fill existing submission if found
+  // --- Pass card morphs into the JobSnap mark without blocking the page ---
+  function showPassCelebration(record, targetButton) {
+    document.getElementById("passCelebration")?.remove();
+
+    const celebration = document.createElement("div");
+    celebration.id = "passCelebration";
+    celebration.className = "pass-celebration";
+    celebration.setAttribute("role", "status");
+    celebration.setAttribute("aria-live", "polite");
+    celebration.innerHTML = `
+      <div class="pass-celebration-card">
+        <div class="pass-celebration-content">
+          <div class="pass-celebration-heading">
+            <span class="pass-celebration-dot"></span>
+            FOUNDING PASS RESERVED
+          </div>
+          <div class="pass-celebration-code"></div>
+          <div class="pass-celebration-caption">Your JobSnap journey starts here</div>
+        </div>
+        <div class="pass-celebration-mark" aria-hidden="true">
+          <i class="fa-solid fa-bolt"></i>
+        </div>
+      </div>
+    `;
+    celebration.querySelector(".pass-celebration-code").textContent = record.ticketId;
+    document.body.appendChild(celebration);
+    soundFX.playSuccess();
+
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const target = targetButton || submitBtn || headerAccessBtn;
+    if (target) {
+      const bounds = target.getBoundingClientRect();
+      celebration.style.setProperty("--fly-x", `${bounds.left + bounds.width / 2 - window.innerWidth / 2}px`);
+      celebration.style.setProperty("--fly-y", `${bounds.top + bounds.height / 2 - window.innerHeight / 2}px`);
+    }
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => celebration.classList.add("is-visible"));
+    });
+
+    setTimeout(() => celebration.classList.add("is-morphing"), reducedMotion ? 80 : 1050);
+    setTimeout(() => celebration.classList.add("is-flying"), reducedMotion ? 160 : 1580);
+    setTimeout(() => celebration.remove(), reducedMotion ? 360 : 2350);
+  }
+
+  // --- Ultra-Professional Spot Reserved / VIP Founding Pass Modal Logic ---
+  const spotReservedModal = document.getElementById("spotReservedModal");
+  const vipModalBackdrop = document.getElementById("vipModalBackdrop");
+  const vipModalCloseBtn = document.getElementById("vipModalCloseBtn");
+  const vipModalDoneBtn = document.getElementById("vipModalDoneBtn");
+  const vipCopyCodeBtn = document.getElementById("vipCopyCodeBtn");
+  const vipModalPassCode = document.getElementById("vipModalPassCode");
+  const vipModalEmail = document.getElementById("vipModalEmail");
+  const vipModalRole = document.getElementById("vipModalRole");
+  const vipConfettiCanvas = document.getElementById("vipConfettiCanvas");
+
+  let confettiAnimationId = null;
+
+  function runConfettiBurst() {
+    if (!vipConfettiCanvas) return;
+    const ctx = vipConfettiCanvas.getContext("2d");
+    if (!ctx) return;
+
+    const width = (vipConfettiCanvas.width = vipConfettiCanvas.offsetWidth || 500);
+    const height = (vipConfettiCanvas.height = vipConfettiCanvas.offsetHeight || 500);
+
+    const colors = ["#10b981", "#34d399", "#38bdf8", "#0284c7", "#fbbf24", "#ffffff"];
+    const particles = [];
+    const count = 55;
+
+    for (let i = 0; i < count; i++) {
+      const angle = Math.random() * Math.PI * 2;
+      const speed = 3 + Math.random() * 7;
+      particles.push({
+        x: width / 2,
+        y: height / 2 - 20,
+        vx: Math.cos(angle) * speed,
+        vy: Math.sin(angle) * speed - 1.5,
+        size: 3 + Math.random() * 5,
+        color: colors[Math.floor(Math.random() * colors.length)],
+        alpha: 1,
+        rotation: Math.random() * 360,
+        rotSpeed: (Math.random() - 0.5) * 12,
+        decay: 0.012 + Math.random() * 0.015,
+        shape: Math.random() > 0.4 ? "rect" : "circle"
+      });
+    }
+
+    if (confettiAnimationId) cancelAnimationFrame(confettiAnimationId);
+
+    const startTime = performance.now();
+    function animate(now) {
+      ctx.clearRect(0, 0, width, height);
+      let alive = 0;
+
+      for (let p of particles) {
+        p.x += p.vx;
+        p.y += p.vy;
+        p.vy += 0.12;
+        p.vx *= 0.98;
+        p.rotation += p.rotSpeed;
+        p.alpha -= p.decay;
+
+        if (p.alpha > 0) {
+          alive++;
+          ctx.save();
+          ctx.translate(p.x, p.y);
+          ctx.rotate((p.rotation * Math.PI) / 180);
+          ctx.globalAlpha = Math.max(0, p.alpha);
+          ctx.fillStyle = p.color;
+
+          if (p.shape === "circle") {
+            ctx.beginPath();
+            ctx.arc(0, 0, p.size / 2, 0, Math.PI * 2);
+            ctx.fill();
+          } else {
+            ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size * 1.3);
+          }
+          ctx.restore();
+        }
+      }
+
+      if (alive > 0 && now - startTime < 1600) {
+        confettiAnimationId = requestAnimationFrame(animate);
+      } else {
+        ctx.clearRect(0, 0, width, height);
+      }
+    }
+
+    confettiAnimationId = requestAnimationFrame(animate);
+  }
+
+  function openSpotReservedModal(record) {
+    const modal = document.getElementById("spotReservedModal") || spotReservedModal;
+    if (!modal) return;
+    const pass = record || earlyAccessState.latestSignup || {
+      ticketId: "JS-2645",
+      email: (document.getElementById("userEmailInput") && document.getElementById("userEmailInput").value) || "founder@example.com",
+      role: "Tech / Product"
+    };
+
+    const passCodeEl = document.getElementById("vipModalPassCode") || vipModalPassCode;
+    const emailEl = document.getElementById("vipModalEmail") || vipModalEmail;
+    const roleEl = document.getElementById("vipModalRole") || vipModalRole;
+
+    if (passCodeEl) passCodeEl.textContent = pass.ticketId;
+    if (emailEl) emailEl.textContent = pass.email;
+    if (roleEl) roleEl.textContent = pass.role || "Tech / Product";
+
+    modal.removeAttribute("hidden");
+    modal.style.display = "flex";
+    void modal.offsetWidth; // Force CSS reflow
+    modal.classList.add("active");
+    modal.setAttribute("aria-hidden", "false");
+
+    soundFX.playSuccess();
+    runConfettiBurst();
+  }
+
+  function closeSpotReservedModal() {
+    const modal = document.getElementById("spotReservedModal") || spotReservedModal;
+    if (!modal) return;
+    modal.classList.remove("active");
+    modal.setAttribute("aria-hidden", "true");
+    soundFX.playClick(0.9);
+    setTimeout(() => {
+      modal.setAttribute("hidden", "");
+      modal.style.display = "none";
+    }, 360);
+  }
+
+  if (vipModalCloseBtn) vipModalCloseBtn.addEventListener("click", closeSpotReservedModal);
+  if (vipModalDoneBtn) vipModalDoneBtn.addEventListener("click", closeSpotReservedModal);
+  if (vipModalBackdrop) vipModalBackdrop.addEventListener("click", closeSpotReservedModal);
+
+  // Copy Pass Code Button
+  if (vipCopyCodeBtn) {
+    vipCopyCodeBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      const code = vipModalPassCode ? vipModalPassCode.textContent.trim() : "";
+      if (!code) return;
+
+      const copyTextEl = vipCopyCodeBtn.querySelector(".copy-text");
+      const origText = copyTextEl ? copyTextEl.textContent : "Copy Code";
+
+      const doSuccessFeedback = () => {
+        soundFX.playClick(1.4);
+        vipCopyCodeBtn.classList.add("copied");
+        if (copyTextEl) copyTextEl.innerHTML = '<i class="fa-solid fa-check"></i> Copied!';
+        setTimeout(() => {
+          vipCopyCodeBtn.classList.remove("copied");
+          if (copyTextEl) copyTextEl.textContent = origText;
+        }, 2200);
+      };
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(code).then(doSuccessFeedback).catch(() => {
+          fallbackCopyText(code);
+          doSuccessFeedback();
+        });
+      } else {
+        fallbackCopyText(code);
+        doSuccessFeedback();
+      }
+    });
+  }
+
+  function fallbackCopyText(text) {
+    const tempInput = document.createElement("input");
+    tempInput.value = text;
+    document.body.appendChild(tempInput);
+    tempInput.select();
+    try { document.execCommand("copy"); } catch (e) {}
+    document.body.removeChild(tempInput);
+  }
+
+  // --- Compact Glassmorphism Pass Chip (slides in bottom-right, no page reload/dimming) ---
+  function buildPassChip(record) {
+    // Remove any old chip
+    const old = document.getElementById("passChip");
+    if (old) old.remove();
+
+    const chip = document.createElement("div");
+    chip.id = "passChip";
+    chip.className = "pass-chip";
+    chip.setAttribute("role", "status");
+    chip.setAttribute("aria-live", "polite");
+
+    const email = record.email || "";
+    const ticketId = record.ticketId || "JS-0000";
+    const joinDate = record.joinDate
+      ? new Date(record.joinDate).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })
+      : new Date().toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
+
+    chip.innerHTML = `
+      <div class="pass-chip-header">
+        <div class="pass-chip-brand">
+          <div class="pass-chip-title">
+            <span class="vip-pulse-dot" style="display:inline-block;vertical-align:middle;"></span>
+            VIP Founding Pass Active
+          </div>
+          <div class="pass-chip-sub">PRIVATE BETA · LIFETIME TIER · SPOT SECURED</div>
+        </div>
+        <button type="button" class="pass-chip-close" aria-label="Dismiss">×</button>
+      </div>
+
+      <div class="pass-chip-code-row">
+        <div>
+          <div class="pass-chip-code-label">Invite Pass Code</div>
+          <div class="pass-chip-code-value" id="passChipCode">${ticketId}</div>
+        </div>
+        <button type="button" class="pass-chip-copy-btn" id="passChipCopyBtn">
+          <i class="fa-regular fa-copy"></i>
+          <span class="copy-txt">Copy</span>
+        </button>
+      </div>
+
+      <div class="pass-chip-details">
+        <div class="pass-chip-detail">
+          <div class="pass-chip-detail-label"><i class="fa-regular fa-envelope"></i> Registered</div>
+          <div class="pass-chip-detail-value" title="${email}">${email}</div>
+        </div>
+        <div class="pass-chip-detail">
+          <div class="pass-chip-detail-label"><i class="fa-solid fa-calendar-check"></i> Joined</div>
+          <div class="pass-chip-detail-value">${joinDate}</div>
+        </div>
+        <div class="pass-chip-detail">
+          <div class="pass-chip-detail-label"><i class="fa-solid fa-server"></i> Compute</div>
+          <div class="pass-chip-detail-value" style="color:#34d399;">8% Priority</div>
+        </div>
+        <div class="pass-chip-detail">
+          <div class="pass-chip-detail-label"><i class="fa-solid fa-shield-halved"></i> Status</div>
+          <div class="pass-chip-detail-value" style="color:#38bdf8;">VIP Confirmed</div>
+        </div>
+      </div>
+
+      <button type="button" class="pass-chip-view-btn" id="passChipViewBtn">
+        <i class="fa-solid fa-id-card"></i>
+        View Full Founding Pass
+        <i class="fa-solid fa-chevron-right" style="font-size:10px;"></i>
+      </button>
+    `;
+
+    document.body.appendChild(chip);
+
+    // Wire close
+    chip.querySelector(".pass-chip-close").addEventListener("click", (e) => {
+      e.stopPropagation();
+      hidePassChip();
+    });
+
+    // Wire copy
+    const copyBtn = chip.querySelector("#passChipCopyBtn");
+    if (copyBtn) {
+      copyBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        const code = ticketId;
+        const copyTxt = copyBtn.querySelector(".copy-txt");
+        const doFeedback = () => {
+          soundFX.playClick(1.4);
+          copyBtn.classList.add("copied");
+          if (copyTxt) copyTxt.innerHTML = '<i class="fa-solid fa-check"></i> Copied!';
+          setTimeout(() => {
+            copyBtn.classList.remove("copied");
+            if (copyTxt) copyTxt.textContent = "Copy";
+          }, 2200);
+        };
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(code).then(doFeedback).catch(() => {
+            fallbackCopyText(code);
+            doFeedback();
+          });
+        } else {
+          fallbackCopyText(code);
+          doFeedback();
+        }
+      });
+    }
+
+    // Wire view full pass
+    const viewBtn = chip.querySelector("#passChipViewBtn");
+    if (viewBtn) {
+      viewBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        hidePassChip();
+        openSpotReservedModal(record);
+      });
+    }
+
+    return chip;
+  }
+
+  function showPassChip(record) {
+    const chip = buildPassChip(record);
+    // Trigger slide-in on next frame
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        chip.classList.add("visible");
+      });
+    });
+  }
+
+  function hidePassChip() {
+    const chip = document.getElementById("passChip");
+    if (!chip) return;
+    chip.classList.add("hiding");
+    chip.classList.remove("visible");
+    setTimeout(() => chip.remove(), 600);
+  }
+
+  // --- Form Elements & State Sync ---
+  const heroEmailForm = document.getElementById("heroEmailForm");
+  const userEmailInput = document.getElementById("userEmailInput");
   const formFeedback = document.getElementById("formFeedback");
   const submitBtn = document.getElementById("submitBtn");
+  const bottomEmailForm = document.getElementById("bottomEmailForm");
   const bottomEmailInput = document.getElementById("bottomEmailInput");
   const bottomFormFeedback = document.getElementById("bottomFormFeedback");
   const bottomSubmitBtn = document.getElementById("bottomSubmitBtn");
+  const headerAccessBtn = document.getElementById("headerAccessBtn");
+  const mobileActionBtn = document.getElementById("mobileActionBtn");
+  const capacityStatusText = document.getElementById("capacityStatusText");
 
+  function updateUIForActivePass(record) {
+    if (!record) return;
+
+    if (userEmailInput) userEmailInput.value = record.email;
+    if (bottomEmailInput) bottomEmailInput.value = record.email;
+
+    const applyActiveBtnStyle = (btn) => {
+      if (!btn) return;
+      btn.classList.add("vip-active-btn");
+      btn.setAttribute("title", "Click to view your reserved VIP Founding Pass");
+      const btnText = btn.querySelector(".btn-text");
+      if (btnText) {
+        btnText.innerHTML = `<span class="vip-pulse-dot" style="display: inline-block; vertical-align: middle; margin-right: 6px;"></span> Pass Active · #${record.ticketId}`;
+      }
+      btn.style.boxShadow = "0 0 24px rgba(16, 185, 129, 0.55)";
+      btn.onclick = (e) => {
+        if (e) {
+          e.preventDefault();
+          e.stopPropagation();
+        }
+        soundFX.playClick(1.1);
+        openSpotReservedModal(record);
+      };
+    };
+
+    applyActiveBtnStyle(submitBtn);
+    applyActiveBtnStyle(bottomSubmitBtn);
+
+    if (headerAccessBtn) {
+      headerAccessBtn.innerHTML = `<span class="vip-pulse-dot" style="display: inline-block; vertical-align: middle; margin-right: 6px;"></span> VIP Pass Active`;
+      headerAccessBtn.classList.add("header-vip-badge");
+      headerAccessBtn.onclick = (e) => {
+        if (e) {
+          e.preventDefault();
+          e.stopPropagation();
+        }
+        soundFX.playClick(1.1);
+        openSpotReservedModal(record);
+      };
+    }
+
+    if (mobileActionBtn) {
+      mobileActionBtn.innerHTML = `<span class="vip-pulse-dot" style="display: inline-block; vertical-align: middle; margin-right: 6px;"></span> VIP Pass Active`;
+      mobileActionBtn.classList.add("header-vip-badge");
+      mobileActionBtn.onclick = (e) => {
+        if (e) {
+          e.preventDefault();
+          e.stopPropagation();
+        }
+        closeMenu();
+        soundFX.playClick(1.1);
+        openSpotReservedModal(record);
+      };
+    }
+
+    clearFeedbackElement(formFeedback);
+    clearFeedbackElement(bottomFormFeedback);
+  }
+
+  // Pre-fill existing submission if found in storage
   if (earlyAccessState.latestSignup) {
-    const activePass = earlyAccessState.latestSignup;
-    if (userEmailInput) userEmailInput.value = activePass.email;
-    if (bottomEmailInput) bottomEmailInput.value = activePass.email;
-
-    const existingMsg = `<div style="font-weight: 600; margin-bottom: 3px; display: flex; align-items: center; justify-content: center; gap: 8px;"><i class="fa-solid fa-circle-check" style="color: #10b981;"></i> Spot Reserved! Pass <strong>#${activePass.ticketId}</strong></div><div style="font-size: 13px; opacity: 0.95;"><strong>${activePass.email}</strong> is registered for 100% free compute access (8% cluster allocation).</div>`;
-
-    showFeedbackElement(formFeedback, "success", existingMsg);
-    showFeedbackElement(bottomFormFeedback, "success", existingMsg);
-
-    if (submitBtn) {
-      const btnText = submitBtn.querySelector(".btn-text");
-      if (btnText) btnText.textContent = "Pass Active";
-    }
-    if (bottomSubmitBtn) {
-      const btnText = bottomSubmitBtn.querySelector(".btn-text");
-      if (btnText) btnText.textContent = "Pass Active";
-    }
+    updateUIForActivePass(earlyAccessState.latestSignup);
   }
 
   // Unified registration handler
@@ -763,38 +1159,19 @@ document.addEventListener("DOMContentLoaded", () => {
       ? earlyAccessState.latestSignup
       : earlyAccessState.addSubscriber(email, source);
 
-    // 2. Synchronize inputs across forms
-    if (userEmailInput) userEmailInput.value = record.email;
-    if (bottomEmailInput) bottomEmailInput.value = record.email;
+    // 2. Update all UI live (buttons, header, etc.) — no reload needed
+    updateUIForActivePass(record);
 
-    // 3. Update buttons immediately
-    if (submitBtn) {
-      const btnText = submitBtn.querySelector(".btn-text");
-      if (btnText) btnText.textContent = "Pass Claimed! 🎉";
-      submitBtn.style.boxShadow = "0 0 24px rgba(16, 185, 129, 0.6)";
-    }
-    if (bottomSubmitBtn) {
-      const btnText = bottomSubmitBtn.querySelector(".btn-text");
-      if (btnText) btnText.textContent = "Pass Claimed! 🎉";
-      bottomSubmitBtn.style.boxShadow = "0 0 24px rgba(16, 185, 129, 0.6)";
+    // 3. Update capacity indicator text
+    const capText = document.getElementById("capacityStatusText");
+    if (capText) {
+      capText.textContent = "8% compute capacity allocated • 92% free slots available";
     }
 
-    // Play triumphant celestial success chord!
-    soundFX.playSuccess();
+    // 4. Brief pass reveal, then return to the unobstructed page.
+    showPassCelebration(record, btnEl);
 
-    // 4. Show celebratory confirmation message
-    const successHtml = `<div style="font-weight: 600; margin-bottom: 4px; display: flex; align-items: center; justify-content: center; gap: 8px;"><i class="fa-solid fa-circle-check" style="color: #10b981;"></i> Free Early Access Confirmed! Pass <strong>#${record.ticketId}</strong></div><div style="font-size: 13px; opacity: 0.95;">Welcome aboard! <strong>${record.email}</strong> is registered for 100% free compute access. Confirmation pass sent to your inbox! 📬</div>`;
-
-    showFeedbackElement(formFeedback, "success", successHtml);
-    showFeedbackElement(bottomFormFeedback, "success", successHtml);
-
-    // 5. Update capacity indicator text
-    const capacityStatusText = document.getElementById("capacityStatusText");
-    if (capacityStatusText) {
-      capacityStatusText.textContent = "8% compute capacity allocated • 92% free slots available";
-    }
-
-    // 6. Backend email dispatch
+    // 5. Dispatch the email and clear the email-only cache after confirmed delivery.
     fetch("/api/subscribe", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -805,33 +1182,140 @@ document.addEventListener("DOMContentLoaded", () => {
         templateType: "2"
       })
     })
-      .then((res) => res.json())
+      .then((res) => {
+        if (!res.ok) throw new Error(`Email dispatch failed (${res.status})`);
+        return res.json();
+      })
       .then((data) => {
         console.log("[AI JobSnap] Email dispatch status:", data);
+        if (data.emailSent) {
+          if (userEmailInput) userEmailInput.value = "";
+          if (bottomEmailInput) bottomEmailInput.value = "";
+          localStorage.removeItem("jobsnap_user_email");
+        }
       })
       .catch((err) => {
         console.warn("[AI JobSnap] Email dispatch notice:", err);
       });
   }
 
-  // Hero form listener
-  if (heroEmailForm) {
-    heroEmailForm.addEventListener("submit", (e) => {
+  // Unified non-reloading button click handler
+  const onPassButtonClick = (e, source, inputEl, feedbackEl, btnEl) => {
+    if (e) {
       e.preventDefault();
-      const email = userEmailInput ? userEmailInput.value.trim() : "";
-      handleSignup(email, "Landing Page Hero", formFeedback, submitBtn, userEmailInput);
+      e.stopPropagation();
+    }
+
+    // If already registered: directly open the ultra-professional VIP Pass modal!
+    if (earlyAccessState.latestSignup) {
+      soundFX.playClick(1.1);
+      openSpotReservedModal(earlyAccessState.latestSignup);
+      return;
+    }
+
+    // Otherwise, process the registration
+    const email = inputEl ? inputEl.value.trim() : "";
+    handleSignup(email, source, feedbackEl, btnEl, inputEl);
+  };
+
+  if (submitBtn) {
+    submitBtn.addEventListener("click", (e) => {
+      onPassButtonClick(e, "Landing Page Hero", userEmailInput, formFeedback, submitBtn);
     });
   }
 
-  // Bottom form listener
-  const bottomEmailForm = document.getElementById("bottomEmailForm");
-  if (bottomEmailForm) {
-    bottomEmailForm.addEventListener("submit", (e) => {
-      e.preventDefault();
-      const email = bottomEmailInput ? bottomEmailInput.value.trim() : "";
-      handleSignup(email, "Final Callout Banner", bottomFormFeedback, bottomSubmitBtn, bottomEmailInput);
+  if (bottomSubmitBtn) {
+    bottomSubmitBtn.addEventListener("click", (e) => {
+      onPassButtonClick(e, "Final Callout Banner", bottomEmailInput, bottomFormFeedback, bottomSubmitBtn);
     });
   }
+
+  if (heroEmailForm) {
+    heroEmailForm.addEventListener("submit", (e) => {
+      onPassButtonClick(e, "Landing Page Hero", userEmailInput, formFeedback, submitBtn);
+    });
+  }
+
+  if (bottomEmailForm) {
+    bottomEmailForm.addEventListener("submit", (e) => {
+      onPassButtonClick(e, "Final Callout Banner", bottomEmailInput, bottomFormFeedback, bottomSubmitBtn);
+    });
+  }
+
+  if (userEmailInput) {
+    userEmailInput.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        onPassButtonClick(e, "Landing Page Hero", userEmailInput, formFeedback, submitBtn);
+      }
+    });
+  }
+
+  if (bottomEmailInput) {
+    bottomEmailInput.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        onPassButtonClick(e, "Final Callout Banner", bottomEmailInput, bottomFormFeedback, bottomSubmitBtn);
+      }
+    });
+  }
+
+  // Header & Mobile Action buttons
+  if (headerAccessBtn) {
+    headerAccessBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      closeMenu();
+      if (earlyAccessState.latestSignup) {
+        soundFX.playClick(1.1);
+        openSpotReservedModal(earlyAccessState.latestSignup);
+      } else if (userEmailInput && heroEmailForm) {
+        heroEmailForm.scrollIntoView({ behavior: "smooth", block: "center" });
+        userEmailInput.focus();
+        heroEmailForm.style.borderColor = "rgba(16, 185, 129, 0.9)";
+        heroEmailForm.style.boxShadow = "0 0 32px rgba(16, 185, 129, 0.5)";
+        setTimeout(() => {
+          heroEmailForm.style.borderColor = "";
+          heroEmailForm.style.boxShadow = "";
+        }, 1800);
+      }
+    });
+  }
+
+  if (mobileActionBtn) {
+    mobileActionBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      closeMenu();
+      if (earlyAccessState.latestSignup) {
+        soundFX.playClick(1.1);
+        openSpotReservedModal(earlyAccessState.latestSignup);
+      } else if (userEmailInput && heroEmailForm) {
+        heroEmailForm.scrollIntoView({ behavior: "smooth", block: "center" });
+        userEmailInput.focus();
+      }
+    });
+  }
+
+  // Global capture-phase listener to catch clicks on any pass-active trigger anywhere on the page
+  document.addEventListener(
+    "click",
+    (e) => {
+      const trigger = e.target.closest(".vip-active-btn, .header-vip-badge, .view-pass-trigger-btn");
+      if (trigger) {
+        e.preventDefault();
+        e.stopPropagation();
+        const currentRecord = earlyAccessState.latestSignup || {
+          ticketId: "JS-2645",
+          email: (userEmailInput && userEmailInput.value) || "founder@example.com",
+          role: "Tech / Product"
+        };
+        soundFX.playClick(1.1);
+        openSpotReservedModal(currentRecord);
+      }
+    },
+    true
+  );
 
   // --- Clean 3-Card Features Showcase & Detail Modal Logic ---
   const featureCards = document.querySelectorAll(".feature-card-clean");
@@ -1317,11 +1801,65 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  // Auto-save and Auto-restore Console Inputs
+  const consoleLocation = document.getElementById("consoleLocation");
+  const consoleExp = document.getElementById("consoleExp");
+  const consoleJobType = document.getElementById("consoleJobType");
+  const emailRecipientsInput = document.getElementById("emailRecipientsInput");
+
+  // Restore saved inputs
+  try {
+    const savedConsole = JSON.parse(localStorage.getItem("jobsnap_landing_console") || "{}");
+    if (consoleKeywordInput && savedConsole.keywords) consoleKeywordInput.value = savedConsole.keywords;
+    if (consoleLocation && savedConsole.location) consoleLocation.value = savedConsole.location;
+    if (consoleExp && savedConsole.exp) consoleExp.value = savedConsole.exp;
+    if (consoleJobType && savedConsole.jobType) consoleJobType.value = savedConsole.jobType;
+    if (emailRecipientsInput && savedConsole.email) emailRecipientsInput.value = savedConsole.email;
+
+    const savedEmail = localStorage.getItem("jobsnap_user_email");
+    if (savedEmail) {
+      if (userEmailInput && !userEmailInput.value) userEmailInput.value = savedEmail;
+      if (bottomEmailInput && !bottomEmailInput.value) bottomEmailInput.value = savedEmail;
+    }
+  } catch (e) {}
+
+  function persistLandingConsole() {
+    try {
+      const data = {
+        keywords: consoleKeywordInput ? consoleKeywordInput.value : "",
+        location: consoleLocation ? consoleLocation.value : "",
+        exp: consoleExp ? consoleExp.value : "",
+        jobType: consoleJobType ? consoleJobType.value : "",
+        email: emailRecipientsInput ? emailRecipientsInput.value : ""
+      };
+      localStorage.setItem("jobsnap_landing_console", JSON.stringify(data));
+    } catch (e) {}
+  }
+
+  [consoleKeywordInput, consoleLocation, consoleExp, consoleJobType, emailRecipientsInput].forEach(el => {
+    if (el) {
+      el.addEventListener("input", persistLandingConsole);
+      el.addEventListener("change", persistLandingConsole);
+    }
+  });
+
+  if (userEmailInput) {
+    userEmailInput.addEventListener("input", () => {
+      localStorage.setItem("jobsnap_user_email", userEmailInput.value);
+    });
+  }
+  if (bottomEmailInput) {
+    bottomEmailInput.addEventListener("input", () => {
+      localStorage.setItem("jobsnap_user_email", bottomEmailInput.value);
+    });
+  }
+
   // Save Profile Button
   const saveProfileBtn = document.getElementById("saveProfileBtn");
   if (saveProfileBtn) {
     saveProfileBtn.addEventListener("click", () => {
       soundFX.playClick(1.15);
+      persistLandingConsole();
       const originalText = saveProfileBtn.innerHTML;
       saveProfileBtn.innerHTML = `<i class="fa-solid fa-circle-check" style="color: #34d399;"></i> Profile Saved!`;
       setTimeout(() => {
@@ -1360,7 +1898,7 @@ document.addEventListener("DOMContentLoaded", () => {
         soundFX.playClick(1.25);
         syncCalendarBtn.innerHTML = `<i class="fa-solid fa-circle-check" style="color: #34d399;"></i> 3 Events Synced`;
         if (calEventDisplay) {
-          calEventDisplay.innerHTML = `<span>📅 Oct 26, 11:00 AM — Maersk Tech Panel (Synced)</span><button type="button" id="refreshEventsBtn" title="Refresh Events" style="background: none; border: none; color: #94a3b8; cursor: pointer; font-size: 11px;"><i class="fa-solid fa-arrow-rotate-right"></i></button>`;
+          calEventDisplay.innerHTML = `<span style="display: inline-flex; align-items: center; gap: 5px;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg> Oct 26, 11:00 AM — Maersk Tech Panel (Synced)</span><button type="button" id="refreshEventsBtn" title="Refresh Events" style="background: none; border: none; color: #94a3b8; cursor: pointer; font-size: 11px;"><i class="fa-solid fa-arrow-rotate-right"></i></button>`;
         }
         setTimeout(() => {
           syncCalendarBtn.innerHTML = `<i class="fa-solid fa-rotate"></i> Sync Jobs`;
@@ -1383,7 +1921,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Send Excel Report Test
   const sendExcelTestBtn = document.getElementById("sendExcelTestBtn");
-  const emailRecipientsInput = document.getElementById("emailRecipientsInput");
   if (sendExcelTestBtn) {
     sendExcelTestBtn.addEventListener("click", () => {
       soundFX.playClick(1.15);

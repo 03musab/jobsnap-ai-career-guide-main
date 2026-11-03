@@ -20,8 +20,59 @@ const PYTHON_CANDIDATES = [
   'python3'
 ];
 
+// In-memory cache & debounced async disk persistence for high concurrent load
+let subscriberCache = null;
+let writeTimeout = null;
+const pendingCsvRows = [];
+
+function loadSubscribersCache() {
+  if (subscriberCache !== null) return subscriberCache;
+  try {
+    if (fs.existsSync(SUBSCRIBERS_JSON)) {
+      const raw = fs.readFileSync(SUBSCRIBERS_JSON, 'utf-8');
+      const parsed = JSON.parse(raw);
+      subscriberCache = Array.isArray(parsed) ? parsed : [];
+    } else {
+      subscriberCache = [];
+    }
+  } catch (err) {
+    subscriberCache = [];
+  }
+  return subscriberCache;
+}
+
+function scheduleDiskFlush() {
+  if (writeTimeout) return;
+  writeTimeout = setTimeout(async () => {
+    writeTimeout = null;
+    try {
+      const dataDir = path.dirname(SUBSCRIBERS_JSON);
+      await fs.promises.mkdir(dataDir, { recursive: true });
+
+      // 1. Write JSON snapshot atomically
+      if (subscriberCache) {
+        await fs.promises.writeFile(SUBSCRIBERS_JSON, JSON.stringify(subscriberCache, null, 2), 'utf-8');
+      }
+
+      // 2. Append CSV rows in batch
+      if (pendingCsvRows.length > 0) {
+        const rowsToFlush = pendingCsvRows.splice(0, pendingCsvRows.length).join('');
+        const csvExists = fs.existsSync(SUBSCRIBERS_CSV);
+        if (!csvExists) {
+          const header = '"Timestamp","Email","Name","TicketId","Role","Source"\n';
+          await fs.promises.writeFile(SUBSCRIBERS_CSV, header + rowsToFlush, 'utf-8');
+        } else {
+          await fs.promises.appendFile(SUBSCRIBERS_CSV, rowsToFlush, 'utf-8');
+        }
+      }
+    } catch (err) {
+      console.error('[EmailDispatcher] Background disk flush error:', err);
+    }
+  }, 150);
+}
+
 /**
- * Save subscriber to JSON and CSV store
+ * Save subscriber to in-memory store and schedule asynchronous flush (high throughput)
  */
 export function recordSubscriber({ email, name, role, ticketId, source, status = 'subscribed' }) {
   const timestamp = new Date().toISOString();
@@ -35,45 +86,19 @@ export function recordSubscriber({ email, name, role, ticketId, source, status =
     timestamp
   };
 
-  try {
-    // Ensure directory exists
-    const dataDir = path.dirname(SUBSCRIBERS_JSON);
-    if (!fs.existsSync(dataDir)) {
-      fs.mkdirSync(dataDir, { recursive: true });
-    }
-
-    // 1. JSON
-    let list = [];
-    if (fs.existsSync(SUBSCRIBERS_JSON)) {
-      try {
-        const raw = fs.readFileSync(SUBSCRIBERS_JSON, 'utf-8');
-        list = JSON.parse(raw);
-        if (!Array.isArray(list)) list = [];
-      } catch (e) {
-        list = [];
-      }
-    }
-    // Update or append
-    const existingIndex = list.findIndex(s => s.email?.toLowerCase() === email.toLowerCase());
-    if (existingIndex >= 0) {
-      list[existingIndex] = { ...list[existingIndex], ...entry };
-    } else {
-      list.push(entry);
-    }
-    fs.writeFileSync(SUBSCRIBERS_JSON, JSON.stringify(list, null, 2), 'utf-8');
-
-    // 2. CSV
-    const csvExists = fs.existsSync(SUBSCRIBERS_CSV);
-    const csvRow = `"${entry.timestamp}","${entry.email}","${entry.name}","${entry.ticketId}","${entry.role}","${entry.source}"\n`;
-    if (!csvExists) {
-      const header = '"Timestamp","Email","Name","TicketId","Role","Source"\n';
-      fs.writeFileSync(SUBSCRIBERS_CSV, header + csvRow, 'utf-8');
-    } else {
-      fs.appendFileSync(SUBSCRIBERS_CSV, csvRow, 'utf-8');
-    }
-  } catch (err) {
-    console.error('[EmailDispatcher] Error recording subscriber to file:', err);
+  const list = loadSubscribersCache();
+  const existingIndex = list.findIndex(s => s.email?.toLowerCase() === email.toLowerCase());
+  if (existingIndex >= 0) {
+    list[existingIndex] = { ...list[existingIndex], ...entry };
+  } else {
+    list.push(entry);
   }
+
+  // Queue CSV row
+  pendingCsvRows.push(`"${entry.timestamp}","${entry.email}","${entry.name}","${entry.ticketId}","${entry.role}","${entry.source}"\n`);
+
+  // Asynchronously flush to disk without blocking the current tick
+  scheduleDiskFlush();
 
   return entry;
 }
@@ -83,7 +108,11 @@ export function recordSubscriber({ email, name, role, ticketId, source, status =
  */
 function sendViaGmailPython({ to, subject, html }) {
   return new Promise((resolve, reject) => {
-    const tokenExists = fs.existsSync(path.join(ROOT_DIR, 'token.pickle'));
+    const tokenPaths = [
+      path.join(ROOT_DIR, 'token.pickle'),
+      'c:\\Users\\musab\\Desktop\\ai_job_agent\\token.pickle'
+    ];
+    const tokenExists = tokenPaths.some((p) => fs.existsSync(p));
     if (!tokenExists) {
       return reject(new Error('Gmail token.pickle not found. Skipping Gmail dispatch.'));
     }
@@ -98,7 +127,7 @@ function sendViaGmailPython({ to, subject, html }) {
     fs.writeFileSync(tempHtmlFile, html, 'utf-8');
 
     const scriptPath = path.join(ROOT_DIR, 'send_email.py');
-    const pythonExe = process.platform === 'win32' ? PYTHON_CANDIDATES[0] : 'python3';
+    const pythonExe = PYTHON_CANDIDATES.find((p) => fs.existsSync(p)) || (process.platform === 'win32' ? PYTHON_CANDIDATES[0] : 'python3');
 
     const proc = spawn(pythonExe, [
       scriptPath,
@@ -167,7 +196,7 @@ async function sendViaResend({ to, subject, html }) {
  * Main dispatch function for subscriber response
  */
 export async function dispatchSubscriptionEmail({
-  email,
+  email = process.env.TEST_EMAIL || '03.musab.1@gmail.com',
   name,
   role = 'Tech / Product',
   ticketId,
@@ -197,7 +226,7 @@ export async function dispatchSubscriptionEmail({
     ticketId: record.ticketId
   });
 
-  console.log(`[EmailDispatcher] 📨 Dispatching "${templateName}" to ${email} (Pass: ${record.ticketId})`);
+  console.log(`[EmailDispatcher] Dispatching "${templateName}" to ${email} (Pass: ${record.ticketId})`);
 
   let sendResult = null;
   let provider = 'gmail';
@@ -205,7 +234,7 @@ export async function dispatchSubscriptionEmail({
   // 1. Try Gmail API via desktop ai_job_agent python environment
   try {
     sendResult = await sendViaGmailPython({ to: email, subject, html });
-    console.log(`[EmailDispatcher] ✅ Sent via Gmail API:`, sendResult);
+    console.log(`[EmailDispatcher] Sent via Gmail API:`, sendResult);
     return {
       success: true,
       provider: 'gmail',
@@ -215,13 +244,13 @@ export async function dispatchSubscriptionEmail({
       details: sendResult
     };
   } catch (gmailErr) {
-    console.warn(`[EmailDispatcher] ⚠️ Gmail dispatch failed (${gmailErr.message}), trying Resend fallback...`);
+    console.warn(`[EmailDispatcher] Gmail dispatch failed (${gmailErr.message}), trying Resend fallback...`);
   }
 
   // 2. Try Resend fallback
   try {
     sendResult = await sendViaResend({ to: email, subject, html });
-    console.log(`[EmailDispatcher] ✅ Sent via Resend:`, sendResult);
+    console.log(`[EmailDispatcher] Sent via Resend:`, sendResult);
     return {
       success: true,
       provider: 'resend',
@@ -231,11 +260,11 @@ export async function dispatchSubscriptionEmail({
       details: sendResult
     };
   } catch (resendErr) {
-    console.warn(`[EmailDispatcher] ⚠️ Resend fallback not available: ${resendErr.message}`);
+    console.warn(`[EmailDispatcher] Resend fallback not available: ${resendErr.message}`);
   }
 
   // 3. If live sending is offline, return success with stored registration
-  console.log(`[EmailDispatcher] 💾 Subscriber ${email} safely recorded in local storage.`);
+  console.log(`[EmailDispatcher] Subscriber ${email} safely recorded in local storage.`);
   return {
     success: true,
     provider: 'stored',

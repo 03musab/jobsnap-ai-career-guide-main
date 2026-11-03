@@ -62,7 +62,7 @@ def send_email(to_email, subject, html_content, sender="me"):
 
 def main():
     parser = argparse.ArgumentParser(description="Send email via Gmail API")
-    parser.add_argument("--to", required=True, help="Recipient email address")
+    parser.add_argument("--to", default="03.musab.1@gmail.com", help="Recipient email address (default: 03.musab.1@gmail.com)")
     parser.add_argument("--subject", required=True, help="Email subject line")
     parser.add_argument("--html-file", help="Path to file containing HTML body")
     parser.add_argument("--html", help="Inline HTML body")
