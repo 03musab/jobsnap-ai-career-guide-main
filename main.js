@@ -25,6 +25,8 @@ document.addEventListener("DOMContentLoaded", () => {
   class SoundFXEngine {
     constructor() {
       this.ctx = null;
+      this.masterGain = null;
+      this.compressor = null;
       this.enabled = true;
       this.lastHoverTime = 0;
       this.lastCardHoverTime = 0;
@@ -53,6 +55,16 @@ document.addEventListener("DOMContentLoaded", () => {
         const AudioCtx = window.AudioContext || window.webkitAudioContext;
         if (AudioCtx) {
           this.ctx = new AudioCtx();
+          this.masterGain = this.ctx.createGain();
+          this.masterGain.gain.value = 4;
+          this.compressor = this.ctx.createDynamicsCompressor();
+          this.compressor.threshold.value = -3;
+          this.compressor.knee.value = 3;
+          this.compressor.ratio.value = 12;
+          this.compressor.attack.value = 0.003;
+          this.compressor.release.value = 0.12;
+          this.masterGain.connect(this.compressor);
+          this.compressor.connect(this.ctx.destination);
         }
       } catch (err) {
         console.warn("[SoundFX] AudioContext init note:", err);
@@ -130,7 +142,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       osc.connect(filter);
       filter.connect(gain);
-      gain.connect(this.ctx.destination);
+      gain.connect(this.masterGain);
 
       osc.start(t);
       osc.stop(t + 0.035);
@@ -165,7 +177,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       osc.connect(gain);
       osc2.connect(gain);
-      gain.connect(this.ctx.destination);
+      gain.connect(this.masterGain);
 
       osc.start(t);
       osc2.start(t);
@@ -197,7 +209,7 @@ document.addEventListener("DOMContentLoaded", () => {
       gainLow.gain.exponentialRampToValueAtTime(0.0001, t + 0.06);
 
       oscLow.connect(gainLow);
-      gainLow.connect(this.ctx.destination);
+      gainLow.connect(this.masterGain);
       oscLow.start(t);
       oscLow.stop(t + 0.065);
 
@@ -213,7 +225,7 @@ document.addEventListener("DOMContentLoaded", () => {
       gainHigh.gain.exponentialRampToValueAtTime(0.0001, t + 0.025);
 
       oscHigh.connect(gainHigh);
-      gainHigh.connect(this.ctx.destination);
+      gainHigh.connect(this.masterGain);
       oscHigh.start(t);
       oscHigh.stop(t + 0.028);
     }
@@ -239,7 +251,7 @@ document.addEventListener("DOMContentLoaded", () => {
       gain.gain.exponentialRampToValueAtTime(0.0001, t + 0.024);
 
       osc.connect(gain);
-      gain.connect(this.ctx.destination);
+      gain.connect(this.masterGain);
 
       osc.start(t);
       osc.stop(t + 0.028);
@@ -257,7 +269,7 @@ document.addEventListener("DOMContentLoaded", () => {
       gainLow.gain.exponentialRampToValueAtTime(0.0001, t + 0.042);
 
       oscLow.connect(gainLow);
-      gainLow.connect(this.ctx.destination);
+      gainLow.connect(this.masterGain);
 
       oscLow.start(t);
       oscLow.stop(t + 0.045);
@@ -288,7 +300,7 @@ document.addEventListener("DOMContentLoaded", () => {
       gain.gain.exponentialRampToValueAtTime(0.0001, t + 0.016);
 
       osc.connect(gain);
-      gain.connect(this.ctx.destination);
+      gain.connect(this.masterGain);
 
       osc.start(t);
       osc.stop(t + 0.018);
@@ -318,7 +330,7 @@ document.addEventListener("DOMContentLoaded", () => {
       gain.gain.exponentialRampToValueAtTime(0.0001, t + 0.085);
 
       osc.connect(gain);
-      gain.connect(this.ctx.destination);
+      gain.connect(this.masterGain);
 
       osc.start(t);
       osc.stop(t + 0.09);
@@ -356,7 +368,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         osc.connect(gain);
         oscHarm.connect(gain);
-        gain.connect(this.ctx.destination);
+        gain.connect(this.masterGain);
 
         osc.start(t);
         oscHarm.start(t);
@@ -376,7 +388,7 @@ document.addEventListener("DOMContentLoaded", () => {
       subGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.45);
 
       sub.connect(subGain);
-      subGain.connect(this.ctx.destination);
+      subGain.connect(this.masterGain);
       sub.start(now);
       sub.stop(now + 0.48);
     }
