@@ -1340,6 +1340,74 @@ document.addEventListener("DOMContentLoaded", () => {
   const modalBody = document.getElementById("modalBody");
   const modalClaimBtn = document.getElementById("modalClaimBtn");
 
+  const featureGrid = document.querySelector(".features-clean-grid");
+  const featureDeckCards = featureGrid ? Array.from(featureGrid.querySelectorAll(".feature-card-clean")) : [];
+  const featureDeckMedia = window.matchMedia("(min-width: 861px) and (prefers-reduced-motion: no-preference)");
+  let featureDeckFrame = 0;
+
+  function updateFeatureDeck() {
+    featureDeckFrame = 0;
+    if (!featureGrid || featureDeckCards.length < 2) return;
+
+    if (!featureDeckMedia.matches) {
+      featureDeckCards.forEach((card) => {
+        card.style.transform = "";
+        card.style.zIndex = "";
+        card.style.pointerEvents = "";
+        card.style.transition = "";
+        card.style.willChange = "";
+        card.style.borderColor = "";
+      });
+      return;
+    }
+
+    const gridRect = featureGrid.getBoundingClientRect();
+    const viewportHeight = window.innerHeight;
+    const startY = viewportHeight * 0.62;
+    const endY = viewportHeight * 0.24;
+    const rawProgress = Math.max(0, Math.min(1, (startY - gridRect.top) / (startY - endY)));
+    const progress = rawProgress * rawProgress * (3 - 2 * rawProgress);
+    const gridCenter = featureGrid.clientWidth / 2;
+
+    featureDeckCards.forEach((card, index) => {
+      if (progress >= 0.999) {
+        card.style.transform = "";
+        card.style.zIndex = "";
+        card.style.pointerEvents = "";
+        card.style.transition = "";
+        card.style.willChange = "";
+        card.style.borderColor = "";
+        return;
+      }
+
+      const cardCenter = card.offsetLeft - featureGrid.offsetLeft + card.offsetWidth / 2;
+      const fanOffset = index - (featureDeckCards.length - 1) / 2;
+      const translateX = gridCenter - cardCenter + fanOffset * 52;
+      const translateY = (index === 1 ? -7 : 5) * (1 - progress);
+      const rotation = fanOffset * 12 * (1 - progress);
+      const startScale = index === 1 ? 0.955 : 0.93;
+      const scale = startScale + (1 - startScale) * progress;
+
+      card.style.transform = `translate3d(${translateX * (1 - progress)}px, ${translateY}px, 0) rotate(${rotation}deg) scale(${scale})`;
+      card.style.zIndex = String(index === 1 ? featureDeckCards.length + 1 : featureDeckCards.length - Math.abs(fanOffset));
+      card.style.pointerEvents = progress < 0.72 && index !== 1 ? "none" : "";
+      card.style.transition = "transform 80ms linear, border-color 0.28s ease, box-shadow 0.28s ease, background 0.28s ease";
+      card.style.willChange = "transform";
+      card.style.borderColor = `rgba(255, 255, 255, ${0.26 - progress * 0.17})`;
+    });
+  }
+
+  function scheduleFeatureDeckUpdate() {
+    if (featureDeckFrame) return;
+    featureDeckFrame = window.requestAnimationFrame(updateFeatureDeck);
+  }
+
+  if (featureDeckCards.length > 1) {
+    window.addEventListener("scroll", scheduleFeatureDeckUpdate, { passive: true });
+    window.addEventListener("resize", scheduleFeatureDeckUpdate, { passive: true });
+    featureDeckMedia.addEventListener("change", scheduleFeatureDeckUpdate);
+    scheduleFeatureDeckUpdate();
+  }
 
 
   const featureModalData = {
