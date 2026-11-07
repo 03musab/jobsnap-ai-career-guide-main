@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JobSnap for HR & Recruiters — AI Talent Intelligence & Pipeline Operating System</title>
+  <meta name="description"
+    content="Accelerate your hiring pipeline with JobSnap for HR: 0–100% AI candidate fit scoring, 6-stage hiring funnel, 14-day velocity trajectory, and instant requisition management. Free in beta." />
+  <meta property="og:title" content="JobSnap for HR & Recruiters — AI Talent Intelligence" />
+  <meta property="og:description"
+    content="Streamline your hiring: 0–100% AI fit scoring, live pipeline funnels, velocity analytics, and 1-click candidate decisions. Free in beta." />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="theme-color" content="#0b0d12" />
+
+  <!-- Google Fonts: Inter & Manrope -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&family=Manrope:wght@500;600;700;800&display=swap"
+    rel="stylesheet" />
+
+  <!-- Preconnect to CDNs for fastest video and icon asset delivery -->
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin />
+  <link rel="preconnect" href="https://d8j0ntlcm91z4.cloudfront.net" crossorigin />
+
+  <!-- Font Awesome 6.5.2 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="/styles.css" />
+  <link rel="stylesheet" href="/recruiter-dashboard.css" />
+
+  <!-- Prevent browser scroll restoration and ensure page starts at absolute top -->
+  <script>
+    if ("scrollRestoration" in history) {
+      history.scrollRestoration = "manual";
+    }
+    window.scrollTo(0, 0);
+    document.documentElement.scrollTop = 0;
+    if (document.body) document.body.scrollTop = 0;
+  </script>
+</head>
+
+<body class="recruiter-landing-page">
+  <!-- Full-viewport fixed background video matching job seekers landing page -->
+  <div class="bg">
+    <video class="bg-video" autoplay muted loop playsinline>
+      <source
+        src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260809_012548_ef22562c-c0ae-4816-ad9d-f8922af4e6a7.mp4"
+        type="video/mp4" />
+    </video>
+  </div>
+
+  <!-- Layout Container - Full single page with smooth scroll -->
+  <div class="page">
+    <!-- 1) Header - Segmented Navigation Pill & Quick Actions -->
+    <header class="site-header">
+      <nav class="nav-pill" aria-label="Recruiter Navigation">
+        <div class="nav-indicator" id="navIndicator" aria-hidden="true"></div>
+        <a href="#home" class="nav-link active">Home</a>
+        <a href="#workspace" class="nav-link">Workspace</a>
+        <a href="#features" class="nav-link">Features</a>
+        <a href="#pipeline" class="nav-link">Funnel</a>
+        <a href="#workflow" class="nav-link">Workflow</a>
+        <a href="#security" class="nav-link">Security</a>
+        <a href="#faq" class="nav-link">FAQ</a>
+      </nav>
+
+      <button id="soundToggleBtn" class="sound-toggle-btn" aria-label="Toggle UI Sound Effects"
+        title="Sound Effects: ON (Click to mute)">
+        <i class="fa-solid fa-volume-high sound-icon"></i>
+      </button>
+
+      <a href="/" class="header-jobseeker-pill" title="Switch to Job Seekers Landing Page">
+        <i class="fa-solid fa-user-graduate"></i>
+        <span>Job Seekers</span>
+      </a>
+
+      <a href="#early-access" id="recruiterHeaderAccessBtn" class="sign-in-btn">Claim Free HR Spot</a>
+
+      <button id="burgerBtn" class="burger-btn" aria-label="Toggle navigation menu" aria-expanded="false">
+        <span class="burger-bar"></span>
+        <span class="burger-bar"></span>
+        <span class="burger-bar"></span>
+      </button>
+    </header>
+
+    <!-- Very Right Hand Side Quick Auth -->
+    <div class="fixed-corner-auth" id="fixedCornerAuth" aria-label="Account Access">
+      <a href="http://127.0.0.1:5000/register" class="corner-auth-btn corner-signup-btn" id="cornerSignupBtn"
+        title="Sign up for JobSnap Recruiter Workspace">
+        <i class="fa-solid fa-user-plus"></i>
+        <span>Sign Up</span>
+      </a>
+      <a href="http://127.0.0.1:5000/login" class="corner-auth-btn corner-login-btn" id="cornerLoginBtn"
+        title="Log into recruiter console">
+        <i class="fa-solid fa-arrow-right-to-bracket"></i>
+        <span>Log In</span>
+      </a>
+      <a href="/" class="corner-auth-btn corner-jobseeker-btn" title="Back to Job Seekers Page">
+        <i class="fa-solid fa-user-graduate"></i>
+        <span>Job Seekers</span>
+      </a>
+    </div>
+
+    <!-- Mobile Overlay & Sheet Menu -->
+    <div id="mobileOverlay" class="mobile-overlay" hidden></div>
+    <div id="mobileMenu" class="mobile-menu" hidden>
+      <a href="#home" class="mobile-nav-link active">Home</a>
+      <a href="#workspace" class="mobile-nav-link">Live Recruiter Workspace</a>
+      <a href="#features" class="mobile-nav-link">Talent Features</a>
+      <a href="#pipeline" class="mobile-nav-link">Hiring Funnel</a>
+      <a href="#workflow" class="mobile-nav-link">Recruiter Workflow</a>
+      <a href="#security" class="mobile-nav-link">Security & Privacy</a>
+      <a href="#faq" class="mobile-nav-link">Recruiter FAQ</a>
+
+      <a href="/" class="mobile-hr-banner-btn" style="border-color: rgba(52, 211, 153, 0.4);">
+        <span class="mobile-hr-tag" style="background: rgba(16, 185, 129, 0.2); color: #6ee7b7;"><i
+            class="fa-solid fa-user-graduate"></i> Switch</span>
+        <span>Back to Job Seekers</span>
+        <i class="fa-solid fa-arrow-right mobile-arrow"></i>
+      </a>
+
+      <button id="mobileSoundBtn" class="mobile-sound-toggle" aria-label="Toggle UI sound effects">
+        <i class="fa-solid fa-volume-high"></i>
+        <span id="mobileSoundText">Sound Effects: Active</span>
+      </button>
+
+      <a href="#early-access" id="recruiterMobileActionBtn" class="mobile-sign-in">Claim Free HR Spot</a>
+
+      <div class="mobile-auth-corner-group">
+        <a href="http://127.0.0.1:5000/register" class="mobile-corner-btn mobile-corner-signup">
+          <i class="fa-solid fa-user-plus"></i>
+          <span>Sign Up</span>
+        </a>
+        <a href="http://127.0.0.1:5000/login" class="mobile-corner-btn mobile-corner-login">
+          <i class="fa-solid fa-arrow-right-to-bracket"></i>
+          <span>Log In</span>
+        </a>
+        <a href="/" class="mobile-corner-btn">
+          <i class="fa-solid fa-user-graduate"></i>
+          <span>Job Seekers</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- 2) Hero Section -->
+    <main id="home" class="hero">
+      <!-- Trust row with enterprise logos -->
+      <div class="trust-row anim" style="--d: 0.05s;">
+        <div class="trust-avatar" title="Microsoft">
+          <div class="trust-inner-circle"><i class="fa-brands fa-microsoft"></i></div>
+        </div>
+        <div class="trust-avatar" title="Amazon">
+          <div class="trust-inner-circle"><i class="fa-brands fa-amazon"></i></div>
+        </div>
+        <div class="trust-avatar" title="Google">
+          <div class="trust-inner-circle"><i class="fa-brands fa-google"></i></div>
+        </div>
+        <div class="trust-pill" style="border-color: rgba(129, 140, 248, 0.45); background: rgba(30, 37, 58, 0.75);">
+          <span class="trust-text">
+            <strong style="color: #a5b4fc;">Recruiter Workspace</strong> • 100% Free Beta
+          </span>
+        </div>
+      </div>
+
+      <!-- Retro dot-matrix style animated headline -->
+      <h1 class="headline anim">
+        <span class="headline-line">JobSnap for HR</span>
+        <span class="headline-line" style="background: linear-gradient(135deg, #a5b4fc 0%, #818cf8 50%, #34d399 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Automate Talent Screening</span>
+      </h1>
+
+      <!-- Subhead -->
+      <p class="subhead anim" style="--d: 0.28s;">
+        Your autonomous AI recruiting console: 0–100% resume match scoring, visual 6-stage candidate progression, 14-day application velocity tracking, and 1-click candidate decisioning.
+      </p>
+
+      <!-- Recruiter Early Access / Instant Demo Form -->
+      <div class="early-access-container anim" style="--d: 0.38s;">
+        <form id="recruiterHeroForm" class="early-access-form" novalidate>
+          <div class="input-wrap">
+            <i class="fa-regular fa-envelope input-icon"></i>
+            <input type="email" id="recruiterHeroEmail" class="early-access-input"
+              placeholder="Work email for instant recruiter access" autocomplete="email" required />
+          </div>
+          <button type="submit" id="recruiterHeroSubmit" class="cta-btn early-access-submit" style="background: linear-gradient(135deg, #6366f1, #4f46e5); border-color: #818cf8;">
+            <span class="btn-text">Claim Recruiter Spot</span>
+            <i class="fa-solid fa-arrow-right btn-arrow"></i>
+          </button>
+        </form>
+
+        <div id="recruiterFormFeedback" class="form-feedback" hidden></div>
+
+        <div class="hero-actions-row">
+          <a href="#workspace" class="features-trigger-btn" style="border-color: rgba(129, 140, 248, 0.4);">
+            <span class="free-pill-tag" style="background: rgba(99, 102, 241, 0.25); color: #c7d2fe;">Live Demo</span>
+            <span>Explore Interactive Dashboard</span>
+            <i class="fa-solid fa-arrow-down" style="font-size: 11px;"></i>
+          </a>
+          <span class="capacity-note">
+            <span class="capacity-pulse-dot" style="background: #818cf8; box-shadow: 0 0 10px #818cf8;"></span>
+            <span>Recruiter Beta Open • Instant Session Access</span>
+          </span>
+        </div>
+
+      </div>
+
+      <!-- Recruiter Performance Stats Row -->
+      <div class="stats-footer">
+        <div class="stat-item anim" style="--d: 0.5s;">
+          <div class="stat-header">
+            <svg class="stat-icon" style="color: #818cf8;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="13" r="8"></circle><path d="M12 9v4l2.5 1.5M9 2h6M12 2v3"></path></svg>
+            <span class="stat-value-group">
+              <span class="stat-value" data-stat-target="60" data-stat-decimals="0">60</span>s
+            </span>
+          </div>
+          <span class="stat-label">Requisition Launch Time</span>
+        </div>
+
+        <div class="stat-item anim" style="--d: 0.58s;">
+          <div class="stat-header">
+            <svg class="stat-icon" style="color: #34d399;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><circle cx="12" cy="12" r="5"></circle><circle cx="12" cy="12" r="1"></circle></svg>
+            <span class="stat-value-group">
+              <span class="stat-value" data-stat-target="94.8" data-stat-decimals="1">94.8</span>%
+            </span>
+          </div>
+          <span class="stat-label">AI Fit Match Precision</span>
+        </div>
+
+        <div class="stat-item anim" style="--d: 0.66s;">
+          <div class="stat-header">
+            <svg class="stat-icon" style="color: #f59e0b;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2 4.5 13h6l-.5 9L19.5 11h-6z"></path></svg>
+            <span class="stat-value-group">
+              <span class="stat-value" data-stat-target="3.8" data-stat-decimals="1">3.8</span>x
+            </span>
+          </div>
+          <span class="stat-label">Faster Time-to-Interview</span>
+        </div>
+
+        <div class="stat-item anim" style="--d: 0.74s;">
+          <div class="stat-header">
+            <svg class="stat-icon" style="color: #a78bfa;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-11V5l-8-3-8 3v6c0 7 8 11 8 11z"></path><rect x="9" y="10" width="6" height="5" rx="1"></rect><path d="M10 10V8a2 2 0 0 1 4 0v2"></path></svg>
+            <span class="stat-value-group">
+              <span class="stat-value" data-stat-target="100" data-stat-decimals="0">100</span>%
+            </span>
+          </div>
+          <span class="stat-label">Encrypted Candidate Privacy</span>
+        </div>
+      </div>
+    </main>
+
+    <!-- 3) INTERACTIVE LIVE RECRUITER DASHBOARD SHOWCASE -->
+    <section id="workspace" class="content-section" style="padding-top: 40px; padding-bottom: 60px;">
+      <div class="section-header workspace-intro anim" style="text-align: center; max-width: 800px; margin: 0 auto 36px;">
+        <span class="section-tag" style="background: rgba(99, 102, 241, 0.18); border-color: rgba(129, 140, 248, 0.35); color: #c7d2fe;">
+          <i class="fa-solid fa-chart-line"></i> Interactive Live Workspace
+        </span>
+        <h2 class="section-title">The JobSnap Recruiter Console</h2>
+        <p class="section-desc">
+          Test drive the live recruiter dashboard below: review real-time applicant cards, move candidates through the 6-stage funnel, inspect application velocity, and manage requisitions.
+        </p>
+      </div>
+
+      <!-- Embedded Live Workspace Container -->
+      <div class="dashboard-embed-wrapper">
+        <div class="dashboard-embed-topbar">
+          <div class="window-controls">
+            <span class="dot close"></span>
+            <span class="dot minimize"></span>
+            <span class="dot maximize"></span>
+          </div>
+          <div class="window-title">
+            <i class="fa-solid fa-lock"></i>
+            <span>jobsnap.ai/recruiter-console (Interactive Demo Mode)</span>
+          </div>
+          <div class="window-actions">
+            <span class="status-indicator"><span class="pulse-circle"></span> Live Sync</span>
+          </div>
+        </div>
+
+        <div class="dashboard-inner-container">
+          <!-- 1. Overview & Key Stats (Top Cards) -->
+          <section class="stats-grid" id="stats-grid" aria-label="Hiring overview statistics">
+            <button class="stat-card" type="button" data-scroll="requisitions" title="Click to jump to your open roles">
+              <span class="stat-top">
+                <span class="stat-icon mint"><i class="fa-solid fa-briefcase"></i></span>
+                <span class="stat-trend positive"><i class="fa-solid fa-arrow-up"></i> Live</span>
+              </span>
+              <span class="stat-label">Active jobs</span>
+              <strong class="stat-value" id="stat-active-jobs">3</strong>
+              <span class="stat-note">Open requisitions · Jump &darr;</span>
+            </button>
+
+            <button class="stat-card" type="button" data-scroll="applicants" title="Click to view all applicants">
+              <span class="stat-top">
+                <span class="stat-icon blue"><i class="fa-solid fa-user-group"></i></span>
+                <span class="stat-trend positive"><i class="fa-solid fa-arrow-up"></i> Total</span>
+              </span>
+              <span class="stat-label">Total applications</span>
+              <strong class="stat-value" id="stat-applications">10</strong>
+              <span class="stat-note">Across all your roles</span>
+            </button>
+
+            <button class="stat-card" type="button" data-stage-shortcut="Interview" title="Click to filter by interview stage">
+              <span class="stat-top">
+                <span class="stat-icon purple"><i class="fa-regular fa-calendar-check"></i></span>
+                <span class="stat-trend neutral">In progress</span>
+              </span>
+              <span class="stat-label">Interviews scheduled</span>
+              <strong class="stat-value" id="stat-interviews">2</strong>
+              <span class="stat-note">Candidates in interview</span>
+            </button>
+
+            <button class="stat-card" type="button" data-stage-shortcut="Hired" title="Click to filter by hired candidates">
+              <span class="stat-top">
+                <span class="stat-icon amber"><i class="fa-solid fa-award"></i></span>
+                <span class="stat-trend positive"><i class="fa-solid fa-arrow-up"></i> This month</span>
+              </span>
+              <span class="stat-label">Hires this month</span>
+              <strong class="stat-value" id="stat-hires">1</strong>
+              <span class="stat-note">Calendar month to date</span>
+            </button>
+
+            <div class="stat-card health-card" title="Overall optimization score of active job listings">
+              <span class="stat-top">
+                <span class="stat-icon coral"><i class="fa-solid fa-wand-magic-sparkles"></i></span>
+                <span class="health-status"><span></span> Optimal</span>
+              </span>
+              <span class="stat-label">AI health</span>
+              <strong class="stat-value"><span id="stat-ai-health">93</span><small>/ 100</small></strong>
+              <span class="health-track"><span id="ai-health-track" style="width: 93%;"></span></span>
+              <span class="stat-note">Listing optimization score</span>
+            </div>
+          </section>
+
+          <!-- 2. Hiring Pipeline Funnel & 3. Application Velocity (Analytics Grid) -->
+          <section class="analytics-grid" id="pipeline" aria-label="Hiring analytics">
+            <!-- 2. Hiring Pipeline Funnel -->
+            <article class="panel pipeline-panel">
+              <div class="panel-heading">
+                <div>
+                  <div class="section-kicker">CANDIDATE JOURNEY</div>
+                  <h2>Hiring pipeline funnel</h2>
+                </div>
+                <span class="panel-menu-label"><span class="live-dot"></span> Live progression</span>
+              </div>
+              <p class="panel-description">Candidates moving through: Applied → Reviewed → Shortlisted → Interview → Offer → Hired.</p>
+              <div class="funnel-list" id="pipeline-funnel"></div>
+              <div class="funnel-legend">
+                <span><i></i> Candidates who reached each stage</span>
+                <span>Click any stage to filter table below</span>
+              </div>
+            </article>
+
+            <!-- 3. Application Velocity (14-Day Trajectory) -->
+            <article class="panel velocity-panel">
+              <div class="panel-heading">
+                <div>
+                  <div class="section-kicker">14-DAY TRAJECTORY</div>
+                  <h2>Application velocity</h2>
+                </div>
+                <span class="chart-period"><i class="fa-regular fa-calendar"></i> Past 14 days</span>
+              </div>
+              <p class="panel-description">Daily applications received across all active job postings.</p>
+              <div class="chart-summary">
+                <strong id="velocity-total">10</strong>
+                <span>applications received</span>
+                <span class="chart-summary-divider"></span>
+                <span id="velocity-daily-average">0.7 avg. / day</span>
+              </div>
+              <div class="chart-wrap">
+                <div class="chart-y-labels" id="chart-y-labels" aria-hidden="true"></div>
+                <div class="chart-canvas">
+                  <svg id="velocity-chart" viewBox="0 0 700 190" role="img" aria-label="Applications per day over the last 14 days"></svg>
+                  <div class="chart-tooltip" id="chart-tooltip" hidden></div>
+                  <div class="chart-x-labels" id="chart-x-labels" aria-hidden="true"></div>
+                </div>
+              </div>
+              <div class="chart-footnote">
+                <span><i class="fa-solid fa-circle"></i> Hover over points for candidate breakdown</span>
+                <span>Source: Real-time candidate telemetry</span>
+              </div>
+            </article>
+          </section>
+
+          <!-- 4. Recent Applicants (Talent Intelligence) -->
+          <section class="panel applicants-panel" id="applicants">
+            <div class="panel-heading applicants-heading">
+              <div>
+                <div class="section-kicker">TALENT INTELLIGENCE</div>
+                <h2>Recent applicants</h2>
+                <p class="panel-description">Review candidate AI fit scores, filter by position, and take 1-click stage actions.</p>
+              </div>
+              <button class="button button-secondary export-button" type="button" id="export-csv">
+                <i class="fa-solid fa-file-excel"></i> Export to Excel (.csv)
+              </button>
+            </div>
+
+            <!-- Quick Stats Strip -->
+            <div class="talent-stats" aria-label="Applicant insights">
+              <div class="talent-stat">
+                <span class="talent-stat-icon fit-icon"><i class="fa-solid fa-bullseye"></i></span>
+                <div><span>Average fit</span><strong id="avg-fit">78%</strong></div>
+              </div>
+              <div class="talent-stat">
+                <span class="talent-stat-icon qualified-icon"><i class="fa-solid fa-circle-check"></i></span>
+                <div><span>Qualified <small>≥60%</small></span><strong id="qualified-rate">90%</strong></div>
+              </div>
+              <div class="talent-stat">
+                <span class="talent-stat-icon pipeline-icon"><i class="fa-solid fa-arrow-trend-up"></i></span>
+                <div><span>In pipeline</span><strong id="in-pipeline-count">4</strong></div>
+              </div>
+              <div class="talent-stat top-match-stat">
+                <span class="talent-stat-icon top-match-icon"><i class="fa-solid fa-star"></i></span>
+                <div><span>Top match</span><strong id="top-match-name">Ava Patel (94%)</strong></div>
+              </div>
+            </div>
+
+            <!-- Filter & Search Toolbar -->
+            <div class="toolbar" aria-label="Filter applicants">
+              <label class="search-field">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input id="applicant-search" type="search" placeholder="Search candidate name, email, or role..." autocomplete="off" />
+              </label>
+              <label class="select-field">
+                <span class="sr-only">Filter by stage</span>
+                <i class="fa-solid fa-filter"></i>
+                <select id="stage-filter">
+                  <option value="All">All stages</option>
+                  <option value="Applied">Applied</option>
+                  <option value="Reviewed">Reviewed</option>
+                  <option value="Shortlisted">Shortlisted</option>
+                  <option value="Interview">Interview</option>
+                  <option value="Offer">Offer</option>
+                  <option value="Hired">Hired</option>
+                  <option value="Rejected">Rejected</option>
+                </select>
+              </label>
+              <label class="select-field position-select">
+                <span class="sr-only">Filter by position</span>
+                <i class="fa-solid fa-briefcase"></i>
+                <select id="position-filter">
+                  <option value="All">All positions</option>
+                </select>
+              </label>
+              <label class="select-field sort-select">
+                <span class="sr-only">Sort applicants</span>
+                <i class="fa-solid fa-arrow-down-wide-short"></i>
+                <select id="sort-filter">
+                  <option value="match">Highest match</option>
+                  <option value="newest">Newest first</option>
+                  <option value="name">Name A–Z</option>
+                </select>
+              </label>
+            </div>
+
+            <!-- Applicants Table -->
+            <div class="table-wrap">
+              <table class="applicant-table">
+                <thead>
+                  <tr>
+                    <th>Candidate</th>
+                    <th>Position</th>
+                    <th>Stage</th>
+                    <th>AI fit</th>
+                    <th>Applied</th>
+                    <th><span class="sr-only">Actions</span></th>
+                  </tr>
+                </thead>
+                <tbody id="applicant-rows"></tbody>
+              </table>
+              <div class="empty-state" id="applicant-empty" hidden>
+                <span><i class="fa-solid fa-magnifying-glass"></i></span>
+                <strong>No applicants found</strong>
+                <p>Try adjusting your search criteria or filters.</p>
+              </div>
+            </div>
+            <div class="table-footer">
+              <span id="applicant-result-count">Showing 10 of 10 candidates</span>
+              <span><span class="demo-dot"></span> Click any candidate name or Profile to open deep AI dossier</span>
+            </div>
+          </section>
+
+          <!-- 6. Active Requisitions (Open Jobs) -->
+          <section class="panel requisitions-panel" id="requisitions">
+            <div class="panel-heading requisitions-heading">
+              <div>
+                <div class="section-kicker">YOUR LIVE ROLES</div>
+                <h2>Active requisitions</h2>
+                <p class="panel-description">Manage live job listings, monitor applicant counts, or close listings.</p>
+              </div>
+              <button class="button button-primary" type="button" id="open-post-job">
+                <i class="fa-solid fa-plus"></i> Post requisition
+              </button>
+            </div>
+            <div class="table-wrap">
+              <table class="requisition-table">
+                <thead>
+                  <tr>
+                    <th>Role</th>
+                    <th>Location</th>
+                    <th>Applicants</th>
+                    <th>AI health</th>
+                    <th>Posted</th>
+                    <th><span class="sr-only">Actions</span></th>
+                  </tr>
+                </thead>
+                <tbody id="requisition-rows"></tbody>
+              </table>
+              <div class="empty-state" id="requisition-empty" hidden>
+                <span><i class="fa-solid fa-briefcase"></i></span>
+                <strong>No active requisitions</strong>
+                <p>Post a role to start automatically sifting candidates.</p>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4) Six Core Recruiter Features (Clean Card Deck matching index.html) -->
+    <section id="features" class="content-section features-oasis-section">
+      <div class="features-oasis-inner">
+        <div class="features-oasis-header">
+          <span class="features-oasis-kicker">TALENT SUITE</span>
+          <h2 class="features-oasis-title">Everything Modern Talent Teams Need.</h2>
+          <p class="features-oasis-desc">
+            Replace fragmented spreadsheets and disconnected hiring tools with a single unified talent intelligence command center.
+          </p>
+        </div>
+
+        <div class="recruiter-features-grid">
+          <!-- Feature 1 -->
+          <div class="feature-card-clean">
+            <div class="feature-card-illus">
+              <div class="recruiter-feature-icon-circle mint">
+                <i class="fa-solid fa-bullseye"></i>
+              </div>
+            </div>
+            <span class="oasis-card-badge">AI MATCH ENGINE</span>
+            <h3 class="feature-card-title">0–100% Resume Match</h3>
+            <p class="feature-card-desc">
+              Proprietary AI parses and verifies candidates' technical skillsets against your exact job requisitions, giving you an instant objective fit percentage.
+            </p>
+          </div>
+
+          <!-- Feature 2 -->
+          <div class="feature-card-clean">
+            <div class="feature-card-illus">
+              <div class="recruiter-feature-icon-circle indigo">
+                <i class="fa-solid fa-filter"></i>
+              </div>
+            </div>
+            <span class="oasis-card-badge">CONVERSION FUNNEL</span>
+            <h3 class="feature-card-title">6-Stage Visual Funnel</h3>
+            <p class="feature-card-desc">
+              Track candidates moving seamlessly through Applied, Reviewed, Shortlisted, Interview, Offer, and Hired with step-by-step conversion analytics.
+            </p>
+          </div>
+
+          <!-- Feature 3 -->
+          <div class="feature-card-clean">
+            <div class="feature-card-illus">
+              <div class="recruiter-feature-icon-circle purple">
+                <i class="fa-solid fa-arrow-trend-up"></i>
+              </div>
+            </div>
+            <span class="oasis-card-badge">DAILY VELOCITY</span>
+            <h3 class="feature-card-title">14-Day Trajectory</h3>
+            <p class="feature-card-desc">
+              Monitor incoming application volume trajectory day-by-day to measure sourcing effectiveness and channel performance at a single glance.
+            </p>
+          </div>
+
+          <!-- Feature 4 -->
+          <div class="feature-card-clean">
+            <div class="feature-card-illus">
+              <div class="recruiter-feature-icon-circle amber">
+                <i class="fa-solid fa-file-excel"></i>
+              </div>
+            </div>
+            <span class="oasis-card-badge">ONE-CLICK EXPORT</span>
+            <h3 class="feature-card-title">Excel (.csv) Export</h3>
+            <p class="feature-card-desc">
+              Instantly export candidate cohorts, match scores, contact emails, and full AI summaries directly into Microsoft Excel or your existing ATS.
+            </p>
+          </div>
+
+          <!-- Feature 5 -->
+          <div class="feature-card-clean">
+            <div class="feature-card-illus">
+              <div class="recruiter-feature-icon-circle blue">
+                <i class="fa-solid fa-id-card"></i>
+              </div>
+            </div>
+            <span class="oasis-card-badge">AI DOSSIER</span>
+            <h3 class="feature-card-title">Compact Profiles</h3>
+            <p class="feature-card-desc">
+              Inspect top 8 AI-verified skills, executive summaries, verified work history, and trigger 1-click Shortlist, Interview, or Reject decisions.
+            </p>
+          </div>
+
+          <!-- Feature 6 -->
+          <div class="feature-card-clean">
+            <div class="feature-card-illus">
+              <div class="recruiter-feature-icon-circle rose">
+                <i class="fa-solid fa-briefcase"></i>
+              </div>
+            </div>
+            <span class="oasis-card-badge">ROLE LIFECYCLE</span>
+            <h3 class="feature-card-title">Dynamic Requisitions</h3>
+            <p class="feature-card-desc">
+              Publish new roles in 60 seconds with instant AI health optimization scoring, track live applicant flow, and archive listings in 1 click when filled.
+            </p>
+          </div>
+        </div>
+
+        <div class="features-oasis-footnote">
+          100% Free Public Beta · Zero Candidate Brokering · Enterprise Encryption Built In
+        </div>
+      </div>
+    </section>
+
+    <!-- 5) Recruiter Workflow (Step 01 - 04) -->
+    <section id="workflow" class="content-section">
+      <div class="section-header anim" style="text-align: center; max-width: 800px; margin: 0 auto 36px;">
+        <span class="section-tag"><i class="fa-solid fa-route"></i> Recruiter Operating Procedure</span>
+        <h2 class="section-title">How JobSnap Powers Modern Hiring</h2>
+        <p class="section-desc">
+          From encrypted requisition publishing to AI skill verification and 1-click scheduling.
+        </p>
+      </div>
+
+      <div class="workflow-grid anim" style="--d: 0.2s;">
+        <div class="workflow-card">
+          <span class="workflow-step-num">01</span>
+          <h3 class="workflow-title">Publish Requisition</h3>
+          <p class="workflow-text">
+            Specify job title, department, location, and requirements. JobSnap generates an AI health score to maximize candidate relevance.
+          </p>
+        </div>
+
+        <div class="workflow-card">
+          <span class="workflow-step-num">02</span>
+          <h3 class="workflow-title">Automated AI Fit Sifting</h3>
+          <p class="workflow-text">
+            Incoming resumes are parsed in real time. Candidates are indexed with match scores, experience levels, and verified skill badges.
+          </p>
+        </div>
+
+        <div class="workflow-card">
+          <span class="workflow-step-num">03</span>
+          <h3 class="workflow-title">Velocity & Funnel Tracking</h3>
+          <p class="workflow-text">
+            Track daily trajectory over a 14-day window. Visualize bottleneck stages and conversion percentages from initial review to final offer.
+          </p>
+        </div>
+
+        <div class="workflow-card">
+          <span class="workflow-step-num">04</span>
+          <h3 class="workflow-title">1-Click Pipeline Decisions</h3>
+          <p class="workflow-text">
+            Open candidate dossiers to review executive summaries, portfolio links, and 1-click advance candidates directly to Interview or Shortlist.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6) Enterprise Security & Candidate Privacy -->
+    <section id="security" class="content-section">
+      <div class="section-header anim" style="text-align: center; max-width: 800px; margin: 0 auto 36px;">
+        <span class="section-tag"><i class="fa-solid fa-shield-halved"></i> Enterprise Security</span>
+        <h2 class="section-title">Built for Enterprise Compliance & Candidate Privacy</h2>
+        <p class="section-desc">
+          Strict data protection protocols ensure sensitive candidate information remains secure and uncompromised.
+        </p>
+      </div>
+
+      <div class="security-grid anim" style="--d: 0.25s;">
+        <div class="security-card">
+          <div class="security-card-header">
+            <div class="security-icon-box"><i class="fa-solid fa-lock"></i></div>
+            <h3 class="security-card-title">AES-256 Resume Encryption</h3>
+          </div>
+          <p class="security-card-text">
+            All candidate resumes, work credentials, and profile histories are encrypted at rest and in transit.
+          </p>
+        </div>
+
+        <div class="security-card">
+          <div class="security-card-header">
+            <div class="security-icon-box"><i class="fa-solid fa-user-shield"></i></div>
+            <h3 class="security-card-title">Privacy Protected Dossiers</h3>
+          </div>
+          <p class="security-card-text">
+            Private account credentials, passwords, and sensitive internal identification are never revealed on recruiter consoles.
+          </p>
+        </div>
+
+        <div class="security-card">
+          <div class="security-card-header">
+            <div class="security-icon-box"><i class="fa-solid fa-ban"></i></div>
+            <h3 class="security-card-title">Zero Broker Spam Policy</h3>
+          </div>
+          <p class="security-card-text">
+            Candidate information is never sold to third-party headhunters or scraping networks. Direct hiring only.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7) Recruiter FAQ (Accordion) -->
+    <section id="faq" class="content-section">
+      <div class="section-header anim" style="text-align: center; max-width: 800px; margin: 0 auto 36px;">
+        <span class="section-tag"><i class="fa-solid fa-circle-question"></i> Common Questions</span>
+        <h2 class="section-title">Recruiter & HR Frequently Asked Questions</h2>
+        <p class="section-desc">
+          Everything you need to know about setting up JobSnap for your hiring team.
+        </p>
+      </div>
+
+      <div class="faq-grid anim" style="--d: 0.3s;">
+        <div class="faq-card">
+          <h3 class="faq-question">
+            <i class="fa-solid fa-circle-chevron-right faq-icon"></i>
+            <span>How does JobSnap calculate the AI match score?</span>
+          </h3>
+          <p class="faq-answer">
+            JobSnap compares verified technical skills, domain experience, and past accomplishments directly against your requisition requirements to compute a 0–100% objective fit score.
+          </p>
+        </div>
+
+        <div class="faq-card">
+          <h3 class="faq-question">
+            <i class="fa-solid fa-circle-chevron-right faq-icon"></i>
+            <span>Can I export candidate data directly to Excel?</span>
+          </h3>
+          <p class="faq-answer">
+            Yes. With 1 click on the "Export to Excel (.csv)" button, your active or filtered candidate list downloads in formatted UTF-8 BOM CSV, ready for Excel or your ATS.
+          </p>
+        </div>
+
+        <div class="faq-card">
+          <h3 class="faq-question">
+            <i class="fa-solid fa-circle-chevron-right faq-icon"></i>
+            <span>How does the 6-stage hiring pipeline work?</span>
+          </h3>
+          <p class="faq-answer">
+            The funnel visually tracks candidates moving from Applied → Reviewed → Shortlisted → Interview → Offer → Hired. Clicking any stage filters your applicants list instantly.
+          </p>
+        </div>
+
+        <div class="faq-card">
+          <h3 class="faq-question">
+            <i class="fa-solid fa-circle-chevron-right faq-icon"></i>
+            <span>Is JobSnap free for recruiters during the beta?</span>
+          </h3>
+          <p class="faq-answer">
+            Yes! During the early access beta, talent teams and recruiters can publish requisitions, screen candidates, and utilize the full dashboard without subscription fees.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8) Final CTA Card -->
+    <section id="early-access" class="final-cta-card anim" style="--d: 0.35s; border-color: rgba(129, 140, 248, 0.45); background: linear-gradient(145deg, rgba(23, 28, 45, 0.88), rgba(13, 17, 26, 0.95));">
+      <span class="section-tag" style="background: rgba(99, 102, 241, 0.2); border-color: rgba(129, 140, 248, 0.4); color: #c7d2fe;">
+        <i class="fa-solid fa-bolt"></i> Instant Recruiter Access
+      </span>
+      <h2 class="section-title" style="margin-top: 10px;">Upgrade Your Talent Acquisition Stack Today</h2>
+      <p class="section-desc" style="margin-bottom: 24px;">
+        Join high-growth engineering, product, and AI teams hiring top talent faster with JobSnap.
+      </p>
+
+      <form id="recruiterBottomForm" class="early-access-form" novalidate style="max-width: 500px; margin: 0 auto;">
+        <div class="input-wrap">
+          <i class="fa-regular fa-envelope input-icon"></i>
+          <input type="email" id="recruiterBottomEmail" class="early-access-input"
+            placeholder="Enter your work email address..." autocomplete="email" required />
+        </div>
+        <button type="submit" id="recruiterBottomSubmit" class="cta-btn early-access-submit" style="background: linear-gradient(135deg, #6366f1, #4f46e5); border-color: #818cf8;">
+          <span class="btn-text">Claim Free Recruiter Spot</span>
+          <i class="fa-solid fa-arrow-right btn-arrow"></i>
+        </button>
+      </form>
+      <div id="recruiterBottomFeedback" class="form-feedback" hidden></div>
+    </section>
+
+    <!-- 9) Footer -->
+    <footer class="site-footer">
+      <div class="footer-copy">
+        <strong>JobSnap for HR</strong> — Autonomous AI Talent Intelligence & Pipeline Operating System. All rights reserved.
+      </div>
+      <div class="footer-links">
+        <a href="#home" class="footer-link">Home</a>
+        <a href="#workspace" class="footer-link">Live Workspace</a>
+        <a href="#features" class="footer-link">Features</a>
+        <a href="#pipeline" class="footer-link">Pipeline</a>
+        <a href="#workflow" class="footer-link">Workflow</a>
+        <a href="#security" class="footer-link">Security</a>
+        <a href="#faq" class="footer-link">HR FAQ</a>
+        <a href="/" class="footer-link" style="color: #34d399; font-weight: 600;"><i class="fa-solid fa-user-graduate" style="margin-right: 4px;"></i>Job Seekers Portal</a>
+      </div>
+    </footer>
+  </div>
+
+  <!-- 5. Candidate Profile Modal -->
+  <dialog class="profile-dialog" id="candidate-dialog" aria-labelledby="profile-name">
+    <div class="dialog-shell" id="candidate-profile"></div>
+  </dialog>
+
+  <!-- 6. Post Requisition Dialog Modal -->
+  <dialog class="post-dialog" id="post-job-dialog" aria-labelledby="post-job-title">
+    <form class="post-form" id="post-job-form">
+      <div class="dialog-heading">
+        <div class="dialog-icon"><i class="fa-solid fa-briefcase"></i></div>
+        <button class="dialog-close" type="button" data-close-dialog="post-job-dialog" aria-label="Close dialog"><i class="fa-solid fa-xmark"></i></button>
+        <div class="section-kicker">GROW YOUR TEAM</div>
+        <h2 id="post-job-title">Post a requisition</h2>
+        <p>Set up an active role and begin automated candidate sifting.</p>
+      </div>
+      <label class="form-field">Job title<input name="title" required maxlength="100" placeholder="e.g. Senior Platform Engineer" /></label>
+      <div class="form-row">
+        <label class="form-field">Department<input name="department" required maxlength="80" placeholder="e.g. Engineering" /></label>
+        <label class="form-field">Location<input name="location" required maxlength="100" placeholder="e.g. Remote · US" /></label>
+      </div>
+      <label class="form-field">Employment type
+        <select name="employmentType">
+          <option>Full-time</option>
+          <option>Contract</option>
+          <option>Part-time</option>
+          <option>Internship</option>
+        </select>
+      </label>
+      <div class="demo-notice"><i class="fa-solid fa-circle-info"></i> Requisition will be published instantly to your live dashboard.</div>
+      <div class="dialog-actions">
+        <button class="button button-secondary" type="button" data-close-dialog="post-job-dialog">Cancel</button>
+        <button class="button button-primary" type="submit"><i class="fa-solid fa-plus"></i> Publish role</button>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- Floating Toast Notifications -->
+  <div class="toast-region" id="toast-region" role="status" aria-live="polite"></div>
+
+  <!-- Dedicated Recruiter Client-side Script -->
+  <script type="module" src="/recruiter-dashboard.js"></script>
+</body>
+
+</html>

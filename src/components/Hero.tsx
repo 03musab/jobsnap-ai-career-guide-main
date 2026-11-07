@@ -1,137 +1,87 @@
-import { Button } from "@/components/ui/button";
-import { ArrowRight, ArrowDown, Bot, Zap, Sparkles } from "lucide-react";
-import { useAnimatedCounter } from "../../useAnimatedCounter";
-import { useOnScreen } from "../../useOnScreen";
-import { useRef, useState, useEffect } from "react";
-import { motion } from "framer-motion";
-import BlurText from "./BlurText";
-import ComingSoon from "./ComingSoonLink";
-import TextType from "./TextType";
-import TrueFocus from "./TrueFocus";
-import { EarlyAccessModal } from "../../EarlyAccessModal";
+import { ArrowRight, BriefcaseBusiness, Mail, Sparkles } from "lucide-react";
 
 const Hero = () => {
-  const [highlightEarlyAccess, setHighlightEarlyAccess] = useState(false);
-
-  useEffect(() => {
-    const handleHighlight = () => {
-      setHighlightEarlyAccess(true);
-      setTimeout(() => setHighlightEarlyAccess(false), 3000); // Highlight for 3 seconds
-    };
-
-    window.addEventListener('highlightEarlyAccess', handleHighlight);
-    return () => window.removeEventListener('highlightEarlyAccess', handleHighlight);
-  }, []);
-
   return (
-    <section id="home" className="relative min-h-[calc(100vh-4rem)] flex flex-col items-center justify-center overflow-hidden pt-24 pb-12">
-      <div className="absolute top-20 left-10 w-72 h-72 bg-gradient-electric rounded-full blur-3xl opacity-20"></div>
-      <div className="absolute bottom-20 right-10 w-96 h-96 bg-primary-glow rounded-full blur-3xl opacity-15"></div>
-      <div className="absolute top-1/2 left-1/4 w-32 h-32 bg-accent rounded-full blur-2xl opacity-10"></div>
+    <section className="recruiter-hero-shell" id="home">
+      <div className="recruiter-hero-bg" aria-hidden="true" />
 
-      <div className="container mx-auto px-6 relative z-10">
-        <div className="flex flex-col items-center text-center max-w-4xl mx-auto">
-          {/* Content */}
-          <div className="space-y-8 opacity-100">
-            <div className="inline-flex items-center justify-center rounded-full bg-gradient-neural px-4 py-1.5 text-sm font-semibold text-white shadow-neural mb-4">
-              <Sparkles className="h-4 w-4 mr-2 text-white" />
-              <span>Now Accepting Early Access Users</span>
-            </div>
+      <header className="recruiter-topbar">
+        <nav className="recruiter-nav-pill" aria-label="Main Navigation">
+          <a href="#home" className="recruiter-nav-link active">Home</a>
+          <a href="#workspace" className="recruiter-nav-link">Workspace</a>
+          <a href="#features" className="recruiter-nav-link">Features</a>
+          <a href="#funnel" className="recruiter-nav-link">Funnel</a>
+          <a href="#workflow" className="recruiter-nav-link">Workflow</a>
+          <a href="#security" className="recruiter-nav-link">Security</a>
+          <a href="#faq" className="recruiter-nav-link">FAQ</a>
+        </nav>
 
-            <div className="space-y-2">
-              <div className="inline-flex items-center justify-center gap-3">
-                <Bot className="h-8 w-8 text-white" />
-                <TrueFocus
-                  sentence="Powered by AI Intelligence"
-                  className="text-2xl"
-                  blurAmount={2}
-                  borderColor="hsl(var(--accent))"
-                  glowColor="hsla(var(--accent) / 0.5)"
-                  animationDuration={0.8}
-                  pauseBetweenAnimations={0.5}
-                />
-              </div>
+        <button type="button" className="recruiter-jobseeker-pill" aria-label="Job Seekers portal">
+          <BriefcaseBusiness size={16} />
+          <span>Job Seekers</span>
+        </button>
+      </header>
 
-              <BlurText
-                text="JobSnap AI Job Hunter"
-                className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight text-transparent bg-gradient-neural bg-clip-text"
-                delay={100}
-                animateBy="words"
-              />
+      <div className="recruiter-badge">
+        <div className="recruiter-badge-logos" aria-hidden="true">
+          <span className="recruiter-badge-icon recruiter-badge-icon--dark">a</span>
+          <span className="recruiter-badge-icon recruiter-badge-icon--dark">G</span>
+          <span className="recruiter-badge-icon recruiter-badge-icon--dark">g</span>
+        </div>
+        <span>
+          <strong>Recruiter Workspace</strong> • 100% Free Beta
+        </span>
+      </div>
 
-              <TextType
-                as="p"
-                text={[
-                  "Automate your job search with intelligent AI.",
-                  "Discover, score, and track opportunities across multiple platforms.",
-                  "Join our early access to shape the future of job hunting.",
-                ]}
-                className="text-2xl md:text-3xl text-muted-foreground max-w-3xl mx-auto"
-                typingSpeed={40}
-                pauseDuration={1500}
-              />
-            </div>
+      <h1 className="recruiter-headline" aria-label="JobSnap for HR">
+        <span className="recruiter-headline-line recruiter-headline-line--light">JobSnap for HR</span>
+        <span className="recruiter-headline-line recruiter-headline-line--gradient">Automate Talent Screening</span>
+      </h1>
 
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <div className="relative">
-                {highlightEarlyAccess && (
-                  <motion.div
-                    initial={{ x: -300, opacity: 0 }}
-                    animate={{ x: -80, opacity: 1 }}
-                    transition={{ duration: 1 }}
-                    className="absolute left-2 top-0/1 -translate-y-1/1 z-20"
-                  >
-                    <ArrowRight className="text-white h-12 w-32 drop-shadow-lg" />
-                  </motion.div>
-                )}
-                <EarlyAccessModal />
-              </div>
-              <ComingSoon asChild isComingSoon>
-                <Button variant="glass" size="xl" className="transition-spring">
-                  <Zap className="h-5 w-5" />
-                  Watch Demo
-                </Button>
-              </ComingSoon>
-            </div>
+      <p className="recruiter-subhead">
+        Your autonomous AI recruiting console: 0–100% resume match scoring, visual 6-stage candidate progression,
+        14-day application velocity tracking, and 1-click candidate decisioning.
+      </p>
 
-            <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-2 text-sm text-muted-foreground">
-              <div className="flex items-center gap-2">
-                <div className="w-2 h-2 bg-accent rounded-full"></div>
-                <span>Be the first to try</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <div className="w-2 h-2 bg-accent rounded-full"></div>
-                <span>No credit card required</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <div className="w-2 h-2 bg-accent rounded-full"></div>
-                <span>Setup in 2 minutes</span>
-              </div>
-            </div>
+      <div className="recruiter-cta-wrap">
+        <div className="recruiter-email-row">
+          <div className="recruiter-email-field">
+            <Mail size={18} className="recruiter-email-icon" />
+            <input type="email" placeholder="Enter your work email for instant recruit" aria-label="Work email" />
           </div>
+          <button type="button" className="recruiter-cta-button">
+            <span>Claim Recruiter Spot</span>
+            <ArrowRight size={18} />
+          </button>
         </div>
-        <div className="flex justify-center gap-8 mt-16">
-          <StatCard value={25} suffix="K+" label="Jobs Discovered" />
-          <StatCard value={94} suffix="%" label="Match Accuracy" />
+
+        <div className="recruiter-demo-row">
+          <span className="recruiter-live-tag">
+            <Sparkles size={12} />
+            <span>LIVE DEMO</span>
+          </span>
+          <span className="recruiter-demo-link">Explore Interactive Dashboard</span>
+          <ArrowRight size={14} className="recruiter-demo-arrow" />
         </div>
+
+        <div className="recruiter-capability-row">
+          <span className="recruiter-capability-dot" aria-hidden="true" />
+          <span>Recruiter Beta Open • Instant Session Access</span>
+        </div>
+      </div>
+
+      <div className="recruiter-lower-banner">
+        <div className="recruiter-lower-banner-left">
+          <span className="recruiter-lower-badge">Job Seeker</span>
+          <span className="recruiter-lower-text">Looking for your dream job? Visit the JobSnap Job Seeker Portal with automated 60s fast scans and free access passes.</span>
+        </div>
+        <button type="button" className="recruiter-lower-button">
+          <span>Job Seeker Page</span>
+          <ArrowRight size={18} />
+        </button>
       </div>
     </section>
   );
 };
-
-const StatCard = ({ className, value, suffix, label }: { className?: string, value: number, suffix: string, label: string }) => {
-  const ref = useRef<HTMLDivElement>(null);
-  const isVisible = useOnScreen(ref);
-  const animatedValue = useAnimatedCounter(value, 2000, isVisible);
-
-  return (
-    <div ref={ref} className={`bg-gradient-glass backdrop-blur-sm border border-white/20 rounded-2xl p-4 shadow-glass ${className}`}>
-      <div className="text-2xl font-bold text-white">
-        {animatedValue}{suffix}
-      </div>
-      <div className="text-sm text-muted-foreground">{label}</div>
-    </div>
-  );
-}
 
 export default Hero;

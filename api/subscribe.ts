@@ -91,6 +91,48 @@ const EMAIL_TEMPLATES = {
     </table>
 </body>
 </html>`
+  },
+  "3": {
+    name: "Recruiter Console Beta Pass",
+    subject: "Your JobSnap Recruiter Console beta access is confirmed, {name}",
+    getBodyHtml: (name: string, role: string, ticketId: string) => `\
+<!DOCTYPE html>
+<html>
+<body style="margin: 0; padding: 24px 12px; background-color: #f8fafc; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; color: #0f172a; line-height: 1.55;">
+    <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 520px; background-color: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.04);">
+        <tr>
+            <td style="padding: 28px 32px 20px 32px; border-bottom: 1px solid #f1f5f9;">
+                <div style="font-size: 18px; font-weight: 700; letter-spacing: -0.02em; color: #0f172a;">
+                    JobSnap <span style="font-size: 11px; font-weight: 600; color: #4338ca; background: #e0e7ff; padding: 3px 8px; border-radius: 12px; margin-left: 6px; letter-spacing: 0;">RECRUITER ACCESS</span>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td style="padding: 28px 32px 32px 32px;">
+                <p style="margin: 0 0 16px 0; font-size: 15px;">Hey <strong>${name}</strong>,</p>
+                <p style="margin: 0 0 16px 0; font-size: 14px; color: #334155;">Welcome to <strong>JobSnap for HR</strong>. Your recruiter workspace access is officially reserved:</p>
+                <div style="background-color: #f8fafc; border: 1px solid #e2e8f0; padding: 14px 16px; margin: 0 0 20px 0; border-radius: 8px;">
+                    <p style="margin: 0 0 6px 0; font-size: 13px; color: #64748b;">Workspace Tier: <strong style="color: #0f172a;">Recruiter Console Beta (100% Free)</strong></p>
+                    <p style="margin: 0 0 6px 0; font-size: 13px; color: #64748b;">Account Type: <strong style="color: #4338ca;">Talent Acquisition &amp; HR</strong></p>
+                    <p style="margin: 0; font-size: 13px; color: #64748b;">Recruiter Pass Code: <strong style="color: #4f46e5; font-family: monospace; font-size: 14px;">${ticketId}</strong></p>
+                </div>
+                <p style="margin: 0 0 10px 0; font-size: 14px; font-weight: 600; color: #0f172a;">What your workspace includes:</p>
+                <ol style="margin: 0 0 20px 0; padding-left: 20px; font-size: 13.5px; color: #475569; line-height: 1.6;">
+                    <li style="margin-bottom: 6px;"><strong>0–100% AI Fit Match Scoring:</strong> Automatically score and index incoming applicant skillsets.</li>
+                    <li style="margin-bottom: 6px;"><strong>6-Stage Hiring Funnel:</strong> Real-time conversion tracking across Applied, Reviewed, Shortlist, Interview, Offer, and Hired.</li>
+                    <li style="margin-bottom: 6px;"><strong>14-Day Velocity Tracking:</strong> Visualize daily applicant flow across all your live roles.</li>
+                    <li><strong>1-Click Excel CSV Export:</strong> Instantly download candidate rosters directly into Excel or your ATS.</li>
+                </ol>
+                <p style="margin: 0 0 16px 0; font-size: 13.5px; color: #475569;">Have specific requisition needs or ATS integrations you'd like to test? Simply reply to this email.</p>
+                <p style="margin: 24px 0 0 0; font-size: 13.5px; color: #64748b;">
+                    Warm regards,<br>
+                    <strong style="color: #0f172a;">Musab</strong><br>Founder, JobSnap
+                </p>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>`
   }
 };
 
@@ -99,14 +141,19 @@ export default async function handler(req: Request, res: Response) {
     return res.status(405).json({ error: 'Method Not Allowed' });
   }
 
-  const { email, name, role = 'Tech / Product', ticketId, templateType = '2' } = req.body;
+  const { email, name, role = 'Tech / Product', ticketId, templateType } = req.body;
   if (!email || typeof email !== 'string' || !/^\S+@\S+\.\S+$/.test(email)) {
     return res.status(400).json({ error: 'A valid email is required.' });
   }
 
-  const passId = ticketId || `JS-${Math.floor(1000 + Math.random() * 9000)}`;
+  const passId = ticketId || (String(role).includes('Recruiter') || String(role).includes('HR')
+    ? `HR-${Math.floor(1000 + Math.random() * 9000)}`
+    : `JS-${Math.floor(1000 + Math.random() * 9000)}`);
   const displayName = name || email.split('@')[0].replace(/[._-]/g, ' ').replace(/\b\w/g, (c: string) => c.toUpperCase());
-  const selectedType = templateType === '1' ? '1' : '2';
+  let selectedType = templateType as keyof typeof EMAIL_TEMPLATES;
+  if (!selectedType || !EMAIL_TEMPLATES[selectedType]) {
+    selectedType = (String(role).includes('Recruiter') || String(role).includes('HR')) ? '3' : '2';
+  }
   const tmpl = EMAIL_TEMPLATES[selectedType];
   const subject = tmpl.subject.replace('{name}', displayName);
   const html = tmpl.getBodyHtml(displayName, role, passId);

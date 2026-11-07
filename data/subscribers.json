@@ -160,5 +160,14 @@
     "source": "Final Callout Banner",
     "status": "subscribed",
     "timestamp": "2026-10-26T17:48:03.191Z"
+  },
+  {
+    "email": "test.recruiter@example.com",
+    "name": "Test Recruiter",
+    "role": "Recruiter / HR",
+    "ticketId": "JS-9511",
+    "source": "Landing Page Form",
+    "status": "subscribed",
+    "timestamp": "2026-11-07T14:21:37.717Z"
   }
 ]

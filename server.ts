@@ -210,6 +210,29 @@ app.get('/api/subscribers', async (_req: Request, res: Response) => {
   }
 });
 
+let viteDevServer: any = null;
+
+// Recruiter Dashboard route aliases: /recruiter, /recruiter-dashboard, /for-hr
+app.get(['/recruiter-dashboard', '/recruiter', '/for-hr', '/recruiter-dashboard.html'], async (req: Request, res: Response, next) => {
+  const isProduction = process.env.NODE_ENV === 'production';
+  const filePath = isProduction && fs.existsSync(path.resolve(ROOT_DIR, 'dist', 'recruiter-dashboard.html'))
+    ? path.resolve(ROOT_DIR, 'dist', 'recruiter-dashboard.html')
+    : path.resolve(ROOT_DIR, 'recruiter-dashboard.html');
+  if (fs.existsSync(filePath)) {
+    if (isProduction || !viteDevServer) {
+      return res.sendFile(filePath);
+    }
+    try {
+      const raw = await fs.promises.readFile(filePath, 'utf-8');
+      const transformed = await viteDevServer.transformIndexHtml(req.originalUrl, raw);
+      return res.status(200).set({ 'Content-Type': 'text/html' }).end(transformed);
+    } catch (e) {
+      return res.sendFile(filePath);
+    }
+  }
+  next();
+});
+
 async function startServer() {
   const isProduction = process.env.NODE_ENV === 'production';
   const PORT = 3000;
@@ -221,11 +244,11 @@ async function startServer() {
     });
   } else {
     // Mount Vite dev server middleware in development
-    const vite = await createViteServer({
+    viteDevServer = await createViteServer({
       server: { middlewareMode: true, host: '0.0.0.0' },
       appType: 'spa',
     });
-    app.use(vite.middlewares);
+    app.use(viteDevServer.middlewares);
   }
 
   app.listen(PORT, '0.0.0.0', () => {
