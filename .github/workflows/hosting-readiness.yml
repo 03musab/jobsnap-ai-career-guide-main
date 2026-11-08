@@ -1,0 +1,38 @@
+name: Vercel hosting readiness
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  schedule:
+    - cron: "0 9 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  report:
+    name: Generate hosting readiness checklist
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Generate Vercel readiness report
+        run: node .github/scripts/generate-hosting-report.mjs HOSTING_READINESS.md
+
+      - name: Upload hosting readiness report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: hosting-readiness-${{ github.run_id }}
+          path: HOSTING_READINESS.md
+          if-no-files-found: error
+          retention-days: 30

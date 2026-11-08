@@ -862,16 +862,19 @@ function applyRecruiterPassToUI(pass) {
 
   const stylePassBtn = (btn) => {
     if (!btn) return;
-    btn.innerHTML = `<span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:#818cf8;box-shadow:0 0 10px #818cf8;margin-right:6px;vertical-align:middle;"></span> Pass Active · #${pass.ticketId || 'HR-PASS'} &rarr;`;
-    btn.style.background = "linear-gradient(135deg, #4f46e5, #4338ca)";
-    btn.style.boxShadow = "0 0 20px rgba(99, 102, 241, 0.4)";
+    btn.innerHTML = `<span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:#e5e7eb;box-shadow:0 0 10px rgba(255,255,255,.45);margin-right:6px;vertical-align:middle;"></span> Pass Active · #${pass.ticketId || 'HR-PASS'} &rarr;`;
+    btn.style.background = "linear-gradient(145deg, rgba(255,255,255,.16), rgba(255,255,255,.06))";
+    btn.style.borderColor = "rgba(255,255,255,.28)";
+    btn.style.color = "#f8fafc";
+    btn.style.backdropFilter = "blur(18px) saturate(150%)";
+    btn.style.boxShadow = "0 8px 24px rgba(0,0,0,.24), inset 0 1px 0 rgba(255,255,255,.2)";
   };
 
   stylePassBtn(document.getElementById("recruiterHeroSubmit"));
   stylePassBtn(document.getElementById("recruiterBottomSubmit"));
   const headerBtn = document.getElementById("recruiterHeaderAccessBtn");
   if (headerBtn) {
-    headerBtn.innerHTML = `<span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:#818cf8;box-shadow:0 0 10px #818cf8;margin-right:6px;vertical-align:middle;"></span> Recruiter Pass Active`;
+    headerBtn.innerHTML = `<span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:#e5e7eb;box-shadow:0 0 10px rgba(255,255,255,.45);margin-right:6px;vertical-align:middle;"></span> Recruiter Pass Active`;
   }
 }
 

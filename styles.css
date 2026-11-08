@@ -2365,6 +2365,23 @@ body.menu-open .burger-bar:nth-child(3) {
               0 0 28px rgba(16, 185, 129, 0.3);
 }
 
+.final-cta-card .early-access-form {
+  gap: 12px;
+  padding-right: 12px;
+}
+
+.final-cta-card .input-wrap {
+  padding-right: 8px;
+}
+
+.final-cta-card .early-access-input {
+  padding: 8px 12px 8px 0;
+}
+
+.final-cta-card .early-access-input::placeholder {
+  opacity: 1;
+}
+
 /* Footer */
 .site-footer {
   width: 100%;
