@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AI Job Search &amp; Resume Matching | JobSnap</title>
   <meta name="description"
-    content="Find relevant jobs faster with JobSnap's AI-powered job discovery, resume matching, application tracking, and career roadmaps. Start free during beta." />
+    content="Find relevant jobs faster with JobSnap's AI-powered job discovery, resume matching, application tracking, and career roadmaps. Early access closed; prior applicants receive 3 months free." />
   <meta name="robots" content="index, follow, max-image-preview:large" />
   <meta name="theme-color" content="#07111c" />
   <link rel="canonical" href="https://jobsnap.me/" />
@@ -15,7 +15,7 @@
   <meta property="og:url" content="https://jobsnap.me/" />
   <meta property="og:title" content="AI Job Search &amp; Resume Matching | JobSnap" />
   <meta property="og:description"
-    content="Find relevant jobs faster with JobSnap's AI-powered job discovery, resume matching, application tracking, and career roadmaps. Start free during beta." />
+    content="Find relevant jobs faster with JobSnap's AI-powered job discovery, resume matching, application tracking, and career roadmaps. Early access closed; prior applicants receive 3 months free." />
   <meta property="og:type" content="website" />
   <meta property="og:image" content="https://jobsnap.me/social-card.jpg" />
   <meta property="og:image:secure_url" content="https://jobsnap.me/social-card.jpg" />
@@ -26,7 +26,7 @@
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="AI Job Search &amp; Resume Matching | JobSnap" />
   <meta name="twitter:description"
-    content="Find relevant jobs faster with JobSnap's AI-powered job discovery, resume matching, application tracking, and career roadmaps. Start free during beta." />
+    content="Find relevant jobs faster with JobSnap's AI-powered job discovery, resume matching, application tracking, and career roadmaps. Early access closed; prior applicants receive 3 months free." />
   <meta name="twitter:image" content="https://jobsnap.me/social-card.jpg" />
   <meta name="twitter:image:alt" content="JobSnap AI job search and resume matching" />
   <script type="application/ld+json">
@@ -116,7 +116,7 @@
       <nav class="nav-pill" aria-label="Main Navigation">
         <div class="nav-indicator" id="navIndicator" aria-hidden="true"></div>
         <a href="#home" class="nav-link active">Home</a>
-        <a href="#capacity" class="nav-link">Capacity</a>
+        <a href="#capacity" class="nav-link">Access</a>
         <a href="#features" class="nav-link">Features</a>
         <a href="#workflow" class="nav-link">Workflow</a>
         <a href="#security" class="nav-link">Security & Privacy</a>
@@ -133,7 +133,7 @@
         <span id="headerOperatorLabel">Sign In</span>
       </button>
 
-      <a href="#early-access" id="headerAccessBtn" class="sign-in-btn">Claim Free Spot</a>
+      <a href="https://app.jobsnap.me/register" id="headerAccessBtn" class="sign-in-btn">Get Started</a>
 
       <a href="/recruiter-dashboard.html" class="header-for-hr-btn" id="headerForHrBtn" title="JobSnap Recruiter Dashboard — For HR's & Talent Leads">
         <i class="fa-solid fa-briefcase"></i>
@@ -171,8 +171,8 @@
     <div id="mobileOverlay" class="mobile-overlay" hidden></div>
     <div id="mobileMenu" class="mobile-menu" hidden>
       <a href="#home" class="mobile-nav-link active">Home</a>
-      <a href="#capacity" class="mobile-nav-link">Compute Capacity (8%)</a>
-      <a href="#features" class="mobile-nav-link">Free Features</a>
+      <a href="#capacity" class="mobile-nav-link">Early Access Status</a>
+      <a href="#features" class="mobile-nav-link">Features</a>
       <a href="#workflow" class="mobile-nav-link">Workflow & Steps</a>
       <a href="#security" class="mobile-nav-link">Security & Privacy</a>
       <a href="#faq" class="mobile-nav-link">Candidate FAQ</a>
@@ -190,7 +190,7 @@
         <i class="fa-solid fa-volume-high"></i>
         <span id="mobileSoundText">Sound Effects: Active</span>
       </button>
-      <a href="#early-access" id="mobileActionBtn" class="mobile-sign-in">Claim Free Spot</a>
+      <a href="https://app.jobsnap.me/register" id="mobileActionBtn" class="mobile-sign-in">Get Started</a>
 
       <!-- Mobile Signup & Login -->
       <div class="mobile-auth-corner-group">
@@ -229,8 +229,7 @@
           </div>
         </div>
         <div class="trust-pill">
-          <span class="trust-text"><strong style="color: #34d399;">100% Free Beta</strong> • 8% Capacity
-            Allocated</span>
+          <span class="trust-text"><strong style="color: #34d399;">Early Access Closed</strong> • 3 Months Free for Prior Applicants</span>
         </div>
       </div>
 
@@ -246,32 +245,30 @@
         Calendar syncing, and direct HR outreach.
       </p>
 
-      <!-- Early Access Email Form -->
+      <!-- Closed Early Access Actions -->
       <div class="early-access-container anim" style="--d: 0.38s;">
-        <form id="heroEmailForm" class="early-access-form" novalidate>
-          <div class="input-wrap">
-            <i class="fa-regular fa-envelope input-icon"></i>
-            <input type="email" id="userEmailInput" class="early-access-input"
-              placeholder="Enter your email for instant early access..." autocomplete="email" required />
-          </div>
-          <button type="button" id="submitBtn" class="cta-btn early-access-submit">
-            <span class="btn-text">Claim Free Access</span>
+        <div class="hero-closed-cta-row">
+          <a href="https://app.jobsnap.me/register" class="cta-btn">
+            <span class="btn-text">Sign Up</span>
             <i class="fa-solid fa-arrow-right btn-arrow"></i>
-          </button>
-        </form>
+          </a>
+          <a href="https://app.jobsnap.me/login" class="secondary-glass-cta">
+            <i class="fa-solid fa-arrow-right-to-bracket"></i>
+            <span>Log In</span>
+          </a>
+        </div>
 
-        <div id="formFeedback" class="form-feedback" hidden></div>
+        <div class="early-access-closed-note">
+          <i class="fa-solid fa-circle-info"></i>
+          <span>Early access is closed — users who already applied with their email receive <strong>3 months free</strong>.</span>
+        </div>
 
         <div class="hero-actions-row">
           <a href="#features" class="features-trigger-btn">
-            <span class="free-pill-tag">Free in Beta</span>
+            <span class="free-pill-tag">3M Prior List</span>
             <span>Explore All 11 Features</span>
             <i class="fa-solid fa-arrow-down" style="font-size: 11px;"></i>
           </a>
-          <span class="capacity-note">
-            <span class="capacity-pulse-dot"></span>
-            <span id="capacityStatusText">8% compute capacity allocated • 92% free slots available</span>
-          </span>
         </div>
 
         <!-- Dedicated For HR's Portal Banner -->
@@ -291,12 +288,12 @@
       <div class="stats-footer">
         <div class="stat-item anim" style="--d: 0.5s;">
           <div class="stat-header">
-            <span class="stat-icon">&lt;</span>
+            <span class="stat-icon">+</span>
             <span class="stat-value-group">
-              <span class="stat-value" data-stat-target="100" data-stat-decimals="0">0</span>%
+              <span class="stat-value" data-stat-target="3" data-stat-decimals="0">0</span> mo
             </span>
           </div>
-          <span class="stat-label">Free While In Beta</span>
+          <span class="stat-label">Free for Prior Applicants</span>
         </div>
 
         <div class="stat-item anim" style="--d: 0.58s;">
@@ -331,52 +328,52 @@
       </div>
     </main>
 
-    <!-- Section: Compute Capacity Tracker (8% Allocated) -->
+    <!-- Section: Early Access Status -->
     <section id="capacity" class="content-section">
       <div class="section-header">
-        <span class="section-tag"><i class="fa-solid fa-bolt"></i> Live Capacity Tracker</span>
-        <h2 class="section-title">Free Until Compute Limit Reached</h2>
+        <span class="section-tag"><i class="fa-solid fa-lock"></i> Access Status</span>
+        <h2 class="section-title">Early Access Subscriptions Closed</h2>
         <p class="section-desc">
-          100% free during early access. Reserve your spot before worker node capacity reaches 100%.
+          Early access registration has closed. Only users who already applied and have their email on file receive 3 months of free access.
         </p>
       </div>
 
       <div class="capacity-card">
         <div class="capacity-hero-row">
           <div class="capacity-metric">
-            <div class="capacity-value-lg">8%</div>
-            <div class="capacity-label-lg">Total Compute Capacity Allocated</div>
+            <div class="capacity-value-lg">3 Months</div>
+            <div class="capacity-label-lg">Free Access for Verified Early Applicants</div>
           </div>
           <div class="capacity-slots-badge">
-            <i class="fa-solid fa-circle-check" style="color: #34d399;"></i>
-            <span>92% Free Early Access Spots Remaining</span>
+            <i class="fa-solid fa-lock" style="color: #34d399;"></i>
+            <span>Early Access Closed · Applied Emails Only</span>
           </div>
         </div>
 
-        <!-- 8% Progress Bar -->
-        <div class="capacity-meter-track" role="progressbar" aria-valuenow="8" aria-valuemin="0" aria-valuemax="100">
-          <div class="capacity-meter-fill" style="width: 8%;"></div>
+        <!-- Closed Progress Bar -->
+        <div class="capacity-meter-track" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
+          <div class="capacity-meter-fill" style="width: 100%;"></div>
         </div>
 
         <div class="capacity-breakdown-grid">
           <div class="capacity-node-card">
-            <span class="capacity-node-name">Scraping Worker Nodes</span>
-            <div class="capacity-node-val"><span>8% active</span> <i class="fa-solid fa-server"
+            <span class="capacity-node-name">Early Access Signups</span>
+            <div class="capacity-node-val"><span>Closed</span> <i class="fa-solid fa-lock"
                 style="color: #10b981; font-size: 14px;"></i></div>
           </div>
           <div class="capacity-node-card">
-            <span class="capacity-node-name">AI Relevance Scoring Engine</span>
-            <div class="capacity-node-val"><span>8% load</span> <i class="fa-solid fa-brain"
+            <span class="capacity-node-name">Eligible Applicants</span>
+            <div class="capacity-node-val"><span>Applied Emails Only</span> <i class="fa-solid fa-envelope-circle-check"
                 style="color: #10b981; font-size: 14px;"></i></div>
           </div>
           <div class="capacity-node-card">
-            <span class="capacity-node-name">Background Task Queue</span>
-            <div class="capacity-node-val"><span>6% utilization</span> <i class="fa-solid fa-layer-group"
+            <span class="capacity-node-name">Complimentary Period</span>
+            <div class="capacity-node-val"><span>3 Months Free</span> <i class="fa-solid fa-calendar-check"
                 style="color: #10b981; font-size: 14px;"></i></div>
           </div>
           <div class="capacity-node-card">
-            <span class="capacity-node-name">Email & Report Dispatcher</span>
-            <div class="capacity-node-val"><span>11% capacity</span> <i class="fa-solid fa-envelope"
+            <span class="capacity-node-name">Account Onboarding</span>
+            <div class="capacity-node-val"><span>Sign Up Open</span> <i class="fa-solid fa-arrow-right-to-bracket"
                 style="color: #10b981; font-size: 14px;"></i></div>
           </div>
         </div>
@@ -758,7 +755,7 @@
         </div>
 
         <div class="features-oasis-footnote">
-          100% Free Public Beta · No Credit Card Required · Built for Job Seekers
+          Early Access Closed · 3 Months Free for Applied Emails · Built for Job Seekers
         </div>
       </div>
     </section>
@@ -779,10 +776,10 @@
         </div>
 
         <div class="oasis-modal-actions">
-          <button type="button" class="oasis-modal-action-btn" id="modalClaimBtn">
-            <span>Claim Free Pass</span>
+          <a href="https://app.jobsnap.me/register" class="oasis-modal-action-btn" id="modalClaimBtn">
+            <span>Get Started</span>
             <i class="fa-solid fa-arrow-right"></i>
-          </button>
+          </a>
         </div>
       </div>
     </div>
@@ -1301,97 +1298,126 @@
 
     <!-- Section: Security & Candidate Privacy Guarantee -->
     <section id="security" class="content-section">
-      <div class="section-header">
+      <div class="section-header section-header-compact">
         <span class="section-tag"><i class="fa-solid fa-shield-halved"></i> Privacy First</span>
-        <h2 class="section-title">Candidate Privacy & Security Guarantee</h2>
+        <h2 class="section-title">Privacy &amp; Security</h2>
         <p class="section-desc">
-          Confidential job searching with isolated cloud sessions, AES-256 encryption, and zero spam.
+          Isolated sessions, AES-256 encryption, and zero spam — click any item for details.
         </p>
       </div>
 
       <div class="security-grid">
         <div class="security-card">
-          <div class="security-card-header">
+          <button type="button" class="accordion-trigger security-card-header" aria-expanded="false">
             <div class="security-icon-box"><i class="fa-solid fa-user-secret"></i></div>
-            <h3 class="security-card-title">100% Incognito Job Search</h3>
-          </div>
-          <p class="security-card-text">
-            Current employers and third parties cannot view your activity. All searches run in isolated cloud
-            containers.
-          </p>
-          <div class="security-badge-row">
-            <span class="security-badge"><i class="fa-solid fa-check"></i> Zero public profile leaks</span>
-            <span class="security-badge"><i class="fa-solid fa-check"></i> Stealth candidate mode</span>
+            <h3 class="security-card-title">100% Incognito Search</h3>
+            <i class="fa-solid fa-chevron-down accordion-chevron" aria-hidden="true"></i>
+          </button>
+          <div class="collapsible-body">
+            <div class="collapsible-body-inner">
+              <p class="security-card-text">
+                Isolated cloud containers hide your search activity from employers and third parties.
+              </p>
+              <div class="security-badge-row">
+                <span class="security-badge"><i class="fa-solid fa-check"></i> Zero leaks</span>
+                <span class="security-badge"><i class="fa-solid fa-check"></i> Stealth mode</span>
+              </div>
+            </div>
           </div>
         </div>
 
         <div class="security-card">
-          <div class="security-card-header">
+          <button type="button" class="accordion-trigger security-card-header" aria-expanded="false">
             <div class="security-icon-box"><i class="fa-solid fa-lock"></i></div>
-            <h3 class="security-card-title">Encrypted Resume & Notes Vault</h3>
-          </div>
-          <p class="security-card-text">
-            Resumes, salary targets, and notes are encrypted with AES-256. Only you hold decryption keys.
-          </p>
-          <div class="security-badge-row">
-            <span class="security-badge"><i class="fa-solid fa-check"></i> AES-256 encryption</span>
-            <span class="security-badge"><i class="fa-solid fa-check"></i> Isolated document storage</span>
+            <h3 class="security-card-title">Encrypted Resume Vault</h3>
+            <i class="fa-solid fa-chevron-down accordion-chevron" aria-hidden="true"></i>
+          </button>
+          <div class="collapsible-body">
+            <div class="collapsible-body-inner">
+              <p class="security-card-text">
+                Resumes, salary targets, and notes use AES-256 encryption with user-held keys.
+              </p>
+              <div class="security-badge-row">
+                <span class="security-badge"><i class="fa-solid fa-check"></i> AES-256</span>
+                <span class="security-badge"><i class="fa-solid fa-check"></i> Isolated storage</span>
+              </div>
+            </div>
           </div>
         </div>
 
         <div class="security-card">
-          <div class="security-card-header">
+          <button type="button" class="accordion-trigger security-card-header" aria-expanded="false">
             <div class="security-icon-box"><i class="fa-brands fa-google"></i></div>
-            <h3 class="security-card-title">Verified Google OAuth Security</h3>
-          </div>
-          <p class="security-card-text">
-            Calendar and email sync use official Google OAuth client-side. We never view or store passwords.
-          </p>
-          <div class="security-badge-row">
-            <span class="security-badge"><i class="fa-solid fa-check"></i> Official Google OAuth</span>
-            <span class="security-badge"><i class="fa-solid fa-check"></i> Sandboxed scope permissions</span>
+            <h3 class="security-card-title">Verified Google OAuth</h3>
+            <i class="fa-solid fa-chevron-down accordion-chevron" aria-hidden="true"></i>
+          </button>
+          <div class="collapsible-body">
+            <div class="collapsible-body-inner">
+              <p class="security-card-text">
+                Calendar and email sync use official client-side Google OAuth — we never see passwords.
+              </p>
+              <div class="security-badge-row">
+                <span class="security-badge"><i class="fa-solid fa-check"></i> Official OAuth</span>
+                <span class="security-badge"><i class="fa-solid fa-check"></i> Sandboxed</span>
+              </div>
+            </div>
           </div>
         </div>
 
         <div class="security-card">
-          <div class="security-card-header">
+          <button type="button" class="accordion-trigger security-card-header" aria-expanded="false">
             <div class="security-icon-box"><i class="fa-solid fa-ban"></i></div>
-            <h3 class="security-card-title">Zero Recruiter Spam Policy</h3>
-          </div>
-          <p class="security-card-text">
-            We never sell candidate data to recruitment agencies or brokers. Zero cold spam.
-          </p>
-          <div class="security-badge-row">
-            <span class="security-badge"><i class="fa-solid fa-check"></i> No lead broker partnerships</span>
-            <span class="security-badge"><i class="fa-solid fa-check"></i> Zero unsolicited spam</span>
+            <h3 class="security-card-title">Zero Recruiter Spam</h3>
+            <i class="fa-solid fa-chevron-down accordion-chevron" aria-hidden="true"></i>
+          </button>
+          <div class="collapsible-body">
+            <div class="collapsible-body-inner">
+              <p class="security-card-text">
+                Candidate data is never sold to agencies or lead brokers. Zero unsolicited spam.
+              </p>
+              <div class="security-badge-row">
+                <span class="security-badge"><i class="fa-solid fa-check"></i> No brokers</span>
+                <span class="security-badge"><i class="fa-solid fa-check"></i> Zero cold spam</span>
+              </div>
+            </div>
           </div>
         </div>
 
         <div class="security-card">
-          <div class="security-card-header">
+          <button type="button" class="accordion-trigger security-card-header" aria-expanded="false">
             <div class="security-icon-box"><i class="fa-solid fa-user-gear"></i></div>
-            <h3 class="security-card-title">Anti-Detection Account Safety</h3>
-          </div>
-          <p class="security-card-text">
-            Human-velocity pacing and randomized jitter keep your job portal accounts safe and unflagged.
-          </p>
-          <div class="security-badge-row">
-            <span class="security-badge"><i class="fa-solid fa-check"></i> Rate-limit mitigation</span>
-            <span class="security-badge"><i class="fa-solid fa-check"></i> Safe portal sessions</span>
+            <h3 class="security-card-title">Account Rate Safety</h3>
+            <i class="fa-solid fa-chevron-down accordion-chevron" aria-hidden="true"></i>
+          </button>
+          <div class="collapsible-body">
+            <div class="collapsible-body-inner">
+              <p class="security-card-text">
+                Human-velocity pacing and jitter keep your job portal sessions safe and unflagged.
+              </p>
+              <div class="security-badge-row">
+                <span class="security-badge"><i class="fa-solid fa-check"></i> Rate-limit safe</span>
+                <span class="security-badge"><i class="fa-solid fa-check"></i> Natural pacing</span>
+              </div>
+            </div>
           </div>
         </div>
 
         <div class="security-card">
-          <div class="security-card-header">
+          <button type="button" class="accordion-trigger security-card-header" aria-expanded="false">
             <div class="security-icon-box"><i class="fa-solid fa-database"></i></div>
-            <h3 class="security-card-title">Total Candidate Data Ownership</h3>
-          </div>
-          <p class="security-card-text">
-            Export your entire application log to Excel/CSV anytime, or permanently delete your data in one click.
-          </p>
-          <div class="security-badge-row">
-            <span class="security-badge"><i class="fa-solid fa-check"></i> Instant 1-click export</span>
-            <span class="security-badge"><i class="fa-solid fa-check"></i> Permanent data purge</span>
+            <h3 class="security-card-title">Full Data Ownership</h3>
+            <i class="fa-solid fa-chevron-down accordion-chevron" aria-hidden="true"></i>
+          </button>
+          <div class="collapsible-body">
+            <div class="collapsible-body-inner">
+              <p class="security-card-text">
+                Export logs to Excel/CSV anytime or purge your account data permanently in one click.
+              </p>
+              <div class="security-badge-row">
+                <span class="security-badge"><i class="fa-solid fa-check"></i> 1-click export</span>
+                <span class="security-badge"><i class="fa-solid fa-check"></i> Full purge</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -1399,127 +1425,156 @@
 
     <!-- Section: Candidate FAQ -->
     <section id="faq" class="content-section">
-      <div class="section-header">
-        <span class="section-tag"><i class="fa-solid fa-circle-question"></i> Questions & Answers</span>
+      <div class="section-header section-header-compact">
+        <span class="section-tag"><i class="fa-solid fa-circle-question"></i> Q&amp;A</span>
         <h2 class="section-title">Frequently Asked Questions</h2>
         <p class="section-desc">
-          Everything you need to know about AI JobSnap early access, security, and career automation.
+          Quick answers on roles, scanning, Google sync, and tools — tap to expand.
         </p>
       </div>
 
       <div class="faq-grid">
         <div class="faq-card">
-          <h3 class="faq-question">
+          <button type="button" class="accordion-trigger faq-question" aria-expanded="false">
             <i class="fa-solid fa-users"></i>
-            <span>What are the two account roles in JobSnap?</span>
-          </h3>
-          <p class="faq-answer">
-            Choose <strong>Job Seeker</strong> for job matching and roadmaps, or <strong>Recruiter & Enterprise</strong>
-            for sourcing. Both access encrypted, role-specific consoles.
-          </p>
+            <span>What are the two account roles?</span>
+            <i class="fa-solid fa-chevron-down accordion-chevron" aria-hidden="true"></i>
+          </button>
+          <div class="collapsible-body">
+            <div class="collapsible-body-inner">
+              <p class="faq-answer">
+                <strong>Job Seeker</strong> for matching and roadmaps, or <strong>Recruiter &amp; Enterprise</strong> for sourcing in separate encrypted consoles.
+              </p>
+            </div>
+          </div>
         </div>
 
         <div class="faq-card">
-          <h3 class="faq-question">
+          <button type="button" class="accordion-trigger faq-question" aria-expanded="false">
             <i class="fa-solid fa-gauge-high"></i>
-            <span>How do Fast Mode (~60s) and Deep Mode (~3m) scans differ?</span>
-          </h3>
-          <p class="faq-answer">
-            <strong>Fast Mode</strong> completes in ~60 seconds across primary boards. <strong>Deep Mode</strong> scans
-            for ~3 minutes across niche and maritime portals.
-          </p>
+            <span>Fast (~60s) vs Deep (~3m) scans?</span>
+            <i class="fa-solid fa-chevron-down accordion-chevron" aria-hidden="true"></i>
+          </button>
+          <div class="collapsible-body">
+            <div class="collapsible-body-inner">
+              <p class="faq-answer">
+                <strong>Fast Mode</strong> (~60s) checks major boards; <strong>Deep Mode</strong> (~3m) crawls niche and maritime portals.
+              </p>
+            </div>
+          </div>
         </div>
 
         <div class="faq-card">
-          <h3 class="faq-question">
+          <button type="button" class="accordion-trigger faq-question" aria-expanded="false">
             <i class="fa-solid fa-sliders"></i>
-            <span>Can I search specific domains like Python, Electrical, or Merchant Navy?</span>
-          </h3>
-          <p class="faq-answer">
-            Yes. Enter any keyword—such as Python, Electrical, or Merchant Navy—filter by location and job type, and
-            save your profile for 1-click re-runs.
-          </p>
+            <span>Search Python, Electrical, Navy?</span>
+            <i class="fa-solid fa-chevron-down accordion-chevron" aria-hidden="true"></i>
+          </button>
+          <div class="collapsible-body">
+            <div class="collapsible-body-inner">
+              <p class="faq-answer">
+                Yes — enter any keyword (Python, Electrical, Merchant Navy), filter by location/type, and save for 1-click re-runs.
+              </p>
+            </div>
+          </div>
         </div>
 
         <div class="faq-card">
-          <h3 class="faq-question">
+          <button type="button" class="accordion-trigger faq-question" aria-expanded="false">
             <i class="fa-solid fa-bullseye"></i>
-            <span>How does the AI Relevance Score calculate if a job is 'Perfect For You'?</span>
-          </h3>
-          <p class="faq-answer">
-            JobSnap compares your parsed skills and experience with job requirements, outputting a 0–100% score and
-            highlighting top fits as "Perfect For You".
-          </p>
+            <span>How does AI Relevance Score work?</span>
+            <i class="fa-solid fa-chevron-down accordion-chevron" aria-hidden="true"></i>
+          </button>
+          <div class="collapsible-body">
+            <div class="collapsible-body-inner">
+              <p class="faq-answer">
+                Matches your skills and experience against job specs from 0–100%, flagging top roles as "Perfect For You".
+              </p>
+            </div>
+          </div>
         </div>
 
         <div class="faq-card">
-          <h3 class="faq-question">
+          <button type="button" class="accordion-trigger faq-question" aria-expanded="false">
             <i class="fa-brands fa-google"></i>
-            <span>Can I connect a separate Google account for Calendar syncing?</span>
-          </h3>
-          <p class="faq-answer">
-            Yes. You can connect any Google account to sync application deadlines and refresh calendar events directly
-            on page.
-          </p>
+            <span>Connect separate Google Calendar?</span>
+            <i class="fa-solid fa-chevron-down accordion-chevron" aria-hidden="true"></i>
+          </button>
+          <div class="collapsible-body">
+            <div class="collapsible-body-inner">
+              <p class="faq-answer">
+                Yes — link any Google account to sync deadlines and refresh calendar events directly on page.
+              </p>
+            </div>
+          </div>
         </div>
 
         <div class="faq-card">
-          <h3 class="faq-question">
+          <button type="button" class="accordion-trigger faq-question" aria-expanded="false">
             <i class="fa-solid fa-file-excel"></i>
-            <span>How does Email Reporting and Excel dispatch work?</span>
-          </h3>
-          <p class="faq-answer">
-            Add recipient emails in console settings to automatically receive a formatted Excel sheet of all discovered
-            jobs and match scores after each scan.
-          </p>
+            <span>How does Email &amp; Excel sync work?</span>
+            <i class="fa-solid fa-chevron-down accordion-chevron" aria-hidden="true"></i>
+          </button>
+          <div class="collapsible-body">
+            <div class="collapsible-body-inner">
+              <p class="faq-answer">
+                Add recipient emails in settings to automatically receive formatted Excel sheets of matched jobs after each scan.
+              </p>
+            </div>
+          </div>
         </div>
 
         <div class="faq-card">
-          <h3 class="faq-question">
+          <button type="button" class="accordion-trigger faq-question" aria-expanded="false">
             <i class="fa-solid fa-paper-plane"></i>
             <span>What is the Outreach Studio?</span>
-          </h3>
-          <p class="faq-answer">
-            It's your friendly shortcut to real hiring teams! Instead of waiting weeks on crowded job boards, you can quickly find verified recruiters and managers, choose a warm, polite message template, and reach out directly with one click.
-          </p>
+            <i class="fa-solid fa-chevron-down accordion-chevron" aria-hidden="true"></i>
+          </button>
+          <div class="collapsible-body">
+            <div class="collapsible-body-inner">
+              <p class="faq-answer">
+                Find verified hiring managers and send warm, tailored direct outreach messages in one click.
+              </p>
+            </div>
+          </div>
         </div>
 
         <div class="faq-card">
-          <h3 class="faq-question">
+          <button type="button" class="accordion-trigger faq-question" aria-expanded="false">
             <i class="fa-solid fa-road"></i>
-            <span>How does the Skill Gap & Roadmap section accelerate my career?</span>
-          </h3>
-          <p class="faq-answer">
-            It diagnoses missing skills against industry benchmarks and creates step-by-step project tasks with in-page
-            AI answers and PDF export.
-          </p>
+            <span>How does Skill Gap Roadmap work?</span>
+            <i class="fa-solid fa-chevron-down accordion-chevron" aria-hidden="true"></i>
+          </button>
+          <div class="collapsible-body">
+            <div class="collapsible-body-inner">
+              <p class="faq-answer">
+                Identifies missing skills against benchmarks and builds step-by-step project tasks with AI answers and PDF export.
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- Section: Final Early Access Reservation Card -->
+    <!-- Section: Final CTA Card (Early Access Closed) -->
     <section id="early-access" class="final-cta-card">
-      <span class="section-tag" style="background: rgba(16, 185, 129, 0.2);"><i class="fa-solid fa-ticket"></i> Early
-        Access</span>
-      <h2 class="section-title" style="margin-top: 10px;">Lock In Your 100% Free Pass</h2>
+      <span class="section-tag" style="background: rgba(16, 185, 129, 0.2);"><i class="fa-solid fa-lock"></i> Early Access Closed</span>
+      <h2 class="section-title" style="margin-top: 10px;">Start Automating Your Job Search Today</h2>
       <p class="section-desc" style="margin-bottom: 24px;">
-        8% compute capacity allocated. Claim your free beta pass before slots fill up.
+        Early access subscriptions are now closed. Only users who already applied and have their email on file receive 3 months of free access.
       </p>
 
       <div class="early-access-container" style="margin: 0 auto;">
-        <form id="bottomEmailForm" class="early-access-form" novalidate>
-          <div class="input-wrap">
-            <i class="fa-regular fa-envelope input-icon"></i>
-            <input type="email" id="bottomEmailInput" class="early-access-input"
-              placeholder="Enter your email to claim your free pass..." autocomplete="email" required />
-          </div>
-          <button type="button" id="bottomSubmitBtn" class="cta-btn early-access-submit">
-            <span class="btn-text">Claim Free Pass</span>
+        <div class="hero-closed-cta-row">
+          <a href="https://app.jobsnap.me/register" class="cta-btn">
+            <span class="btn-text">Sign Up</span>
             <i class="fa-solid fa-arrow-right btn-arrow"></i>
-          </button>
-        </form>
-
-        <div id="bottomFormFeedback" class="form-feedback" hidden></div>
+          </a>
+          <a href="https://app.jobsnap.me/login" class="secondary-glass-cta">
+            <i class="fa-solid fa-arrow-right-to-bracket"></i>
+            <span>Log In</span>
+          </a>
+        </div>
       </div>
     </section>
 
@@ -1530,139 +1585,16 @@
       </div>
       <div class="footer-links">
         <a href="#home" class="footer-link">Home</a>
-        <a href="#capacity" class="footer-link">Capacity</a>
+        <a href="#capacity" class="footer-link">Access Status</a>
         <a href="#features" class="footer-link">Features</a>
         <a href="#workflow" class="footer-link">Workflow</a>
         <a href="#security" class="footer-link">Security</a>
         <a href="#faq" class="footer-link">FAQ</a>
         <a href="/recruiter-dashboard.html" class="footer-link" style="color: #a5b4fc; font-weight: 600;"><i class="fa-solid fa-briefcase" style="margin-right: 5px;"></i>For HR's (Recruiter Dashboard)</a>
-        <a href="#early-access" class="footer-link" style="color: #34d399; font-weight: 500;">Claim Free Spot</a>
+        <a href="https://app.jobsnap.me/register" class="footer-link" style="color: #34d399; font-weight: 500;">Sign Up</a>
       </div>
     </footer>
   </div>
-
-  <!-- Circular Green Tick Micro-Pop (Non-cheap, Apple/Stripe-Style Indicator) -->
-  <div id="greenTickPop" class="green-tick-pop-overlay" aria-hidden="true" hidden>
-    <div class="green-tick-circle-wrap">
-      <svg class="green-tick-svg" viewBox="0 0 52 52">
-        <circle class="green-tick-circle" cx="26" cy="26" r="23" fill="none" />
-        <path class="green-tick-check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
-      </svg>
-    </div>
-  </div>
-
-  <!-- Ultra-Professional Spot Reserved / Founding VIP Pass Modal -->
-    <div id="spotReservedModal" class="vip-pass-modal-overlay" hidden aria-hidden="true" role="dialog" aria-modal="true">
-      <div class="vip-pass-modal-backdrop" id="vipModalBackdrop"></div>
-      
-      <!-- Ambient Glow Orbs -->
-      <div class="vip-modal-ambient-glow glow-emerald"></div>
-      <div class="vip-modal-ambient-glow glow-cyan"></div>
-      
-      <div class="vip-pass-card-container">
-        <!-- Canvas for micro particle explosion on reveal -->
-        <canvas id="vipConfettiCanvas" class="vip-confetti-canvas"></canvas>
-
-        <div class="vip-pass-card">
-          <!-- Iridescent laser border sweep -->
-          <div class="vip-laser-sweep"></div>
-
-          <!-- Card Header -->
-          <div class="vip-card-header">
-            <div class="vip-brand-col">
-              <div class="vip-brand-title">
-                <span>JobSnap</span>
-                <span class="vip-pass-badge">
-                  <span class="vip-pulse-dot"></span>
-                  VIP USER · SPOT RESERVED
-                </span>
-              </div>
-              <div class="vip-brand-sub">Private Founding Member Pass</div>
-            </div>
-            <button type="button" class="vip-modal-close" id="vipModalCloseBtn" aria-label="Close pass modal">&times;</button>
-          </div>
-
-          <!-- Holographic Pass Code Vault -->
-          <div class="vip-pass-vault">
-            <div class="vip-vault-label">
-              <span>INVITE PASS CODE</span>
-              <span class="vip-vault-tier">100% FREE LIFETIME TIER</span>
-            </div>
-            <div class="vip-code-row">
-              <span id="vipModalPassCode" class="vip-code-text">JS-2645</span>
-              <button type="button" id="vipCopyCodeBtn" class="vip-copy-btn" title="Copy Pass Code">
-                <i class="fa-regular fa-copy"></i>
-                <span class="copy-text">Copy Code</span>
-              </button>
-            </div>
-          </div>
-
-          <!-- Member Details Matrix -->
-          <div class="vip-details-matrix">
-            <div class="vip-matrix-item">
-              <span class="matrix-label"><i class="fa-regular fa-envelope"></i> REGISTERED EMAIL</span>
-              <strong id="vipModalEmail" class="matrix-value">musab@example.com</strong>
-            </div>
-            <div class="vip-matrix-item">
-              <span class="matrix-label"><i class="fa-solid fa-briefcase"></i> ROLE FOCUS</span>
-              <strong id="vipModalRole" class="matrix-value">Tech / Product</strong>
-            </div>
-            <div class="vip-matrix-item">
-              <span class="matrix-label"><i class="fa-solid fa-server"></i> COMPUTE ALLOCATION</span>
-              <strong class="matrix-value" style="color: #34d399;">8% Priority Cluster (Locked)</strong>
-            </div>
-            <div class="vip-matrix-item">
-              <span class="matrix-label"><i class="fa-solid fa-shield-halved"></i> ACCESS STATUS</span>
-              <strong class="matrix-value" style="color: #38bdf8;">Pre-Launch VIP Confirmed</strong>
-            </div>
-          </div>
-
-          <!-- Progress Roadmap ("What Happens Next") -->
-          <div class="vip-timeline-box">
-            <div class="vip-timeline-title">
-              <i class="fa-solid fa-route"></i> WHAT HAPPENS NEXT
-            </div>
-            <div class="vip-timeline-steps">
-              <div class="timeline-step step-complete">
-                <div class="step-marker"><i class="fa-solid fa-check"></i></div>
-                <div class="step-info">
-                  <strong>VIP Spot Reserved</strong>
-                  <span>Free lifetime founding pass locked in under your email.</span>
-                </div>
-              </div>
-              <div class="timeline-step step-active">
-                <div class="step-marker"><span class="step-pulse"></span></div>
-                <div class="step-info">
-                  <strong>Private Beta Rollout</strong>
-                  <span>Platform in final polish. Rolling out in small, prioritized batches.</span>
-                </div>
-              </div>
-              <div class="timeline-step step-pending">
-                <div class="step-marker"><i class="fa-regular fa-paper-plane"></i></div>
-                <div class="step-info">
-                  <strong>Direct Access Link via Email</strong>
-                  <span>You'll get your private portal link the moment your batch opens.</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Note & Actions -->
-          <div class="vip-card-footer">
-            <p class="vip-founder-note">
-              <i class="fa-regular fa-comment-dots"></i>
-              Have feature requests or target roles? Musab reads every reply personally.
-            </p>
-            <div class="vip-actions-row">
-              <button type="button" id="vipModalDoneBtn" class="vip-primary-btn">
-                <span>Keep Pass Active & Continue</span>
-                <i class="fa-solid fa-arrow-right"></i>
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
 
     <!-- Interactive Operator Login Modal -->
     <div id="loginModal" class="auth-modal-overlay" hidden aria-hidden="true" role="dialog" aria-modal="true">

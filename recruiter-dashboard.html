@@ -6,10 +6,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>JobSnap for HR & Recruiters — AI Talent Intelligence & Pipeline Operating System</title>
   <meta name="description"
-    content="Accelerate your hiring pipeline with JobSnap for HR: 0–100% AI candidate fit scoring, 6-stage hiring funnel, 14-day velocity trajectory, and instant requisition management. Free in beta." />
+    content="Accelerate your hiring pipeline with JobSnap for HR: 0–100% AI candidate fit scoring, 6-stage hiring funnel, 14-day velocity trajectory, and instant requisition management. Early access closed; prior applicants receive 3 months free." />
   <meta property="og:title" content="JobSnap for HR & Recruiters — AI Talent Intelligence" />
   <meta property="og:description"
-    content="Streamline your hiring: 0–100% AI fit scoring, live pipeline funnels, velocity analytics, and 1-click candidate decisions. Free in beta." />
+    content="Streamline your hiring: 0–100% AI fit scoring, live pipeline funnels, velocity analytics, and 1-click candidate decisions. Early access closed; prior applicants receive 3 months free." />
   <meta property="og:type" content="website" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="theme-color" content="#0b0d12" />
@@ -75,7 +75,7 @@
         <i class="fa-solid fa-volume-high sound-icon"></i>
       </button>
 
-      <a href="#early-access" id="recruiterHeaderAccessBtn" class="sign-in-btn">Claim Free HR Spot</a>
+      <a href="https://app.jobsnap.me/register" id="recruiterHeaderAccessBtn" class="sign-in-btn">Get Started</a>
 
       <button id="burgerBtn" class="burger-btn" aria-label="Toggle navigation menu" aria-expanded="false">
         <span class="burger-bar"></span>
@@ -125,7 +125,7 @@
         <span id="mobileSoundText">Sound Effects: Active</span>
       </button>
 
-      <a href="#early-access" id="recruiterMobileActionBtn" class="mobile-sign-in">Claim Free HR Spot</a>
+      <a href="https://app.jobsnap.me/register" id="recruiterMobileActionBtn" class="mobile-sign-in">Get Started</a>
 
       <div class="mobile-auth-corner-group">
         <a href="https://app.jobsnap.me/register" class="mobile-corner-btn mobile-corner-signup">
@@ -158,7 +158,7 @@
         </div>
         <div class="trust-pill" style="border-color: rgba(255, 255, 255, 0.22); background: rgba(255, 255, 255, 0.06);">
           <span class="trust-text">
-            <strong style="color: #e5e7eb;">Recruiter Workspace</strong> • 100% Free Beta
+            <strong style="color: #e5e7eb;">Recruiter Workspace</strong> • Early Access Closed
           </span>
         </div>
       </div>
@@ -174,21 +174,23 @@
         Your autonomous AI recruiting console: 0–100% resume match scoring, visual 6-stage candidate progression, 14-day application velocity tracking, and 1-click candidate decisioning.
       </p>
 
-      <!-- Recruiter Early Access / Instant Demo Form -->
+      <!-- Closed Early Access Actions -->
       <div class="early-access-container anim" style="--d: 0.38s;">
-        <form id="recruiterHeroForm" class="early-access-form" novalidate>
-          <div class="input-wrap">
-            <i class="fa-regular fa-envelope input-icon"></i>
-            <input type="email" id="recruiterHeroEmail" class="early-access-input"
-              placeholder="Work email for instant recruiter access" autocomplete="email" required />
-          </div>
-          <button type="submit" id="recruiterHeroSubmit" class="cta-btn early-access-submit" style="background: linear-gradient(135deg, #34d399, #10b981); border-color: #6ee7b7;">
-            <span class="btn-text">Claim Recruiter Spot</span>
+        <div class="hero-closed-cta-row">
+          <a href="https://app.jobsnap.me/register" class="cta-btn" style="background: linear-gradient(135deg, #34d399, #10b981); border-color: #6ee7b7;">
+            <span class="btn-text">Sign Up</span>
             <i class="fa-solid fa-arrow-right btn-arrow"></i>
-          </button>
-        </form>
+          </a>
+          <a href="https://app.jobsnap.me/login" class="secondary-glass-cta">
+            <i class="fa-solid fa-arrow-right-to-bracket"></i>
+            <span>Log In</span>
+          </a>
+        </div>
 
-        <div id="recruiterFormFeedback" class="form-feedback" hidden></div>
+        <div class="early-access-closed-note">
+          <i class="fa-solid fa-circle-info"></i>
+          <span>Early access is closed — users who already applied with their email receive <strong>3 months free</strong>.</span>
+        </div>
 
         <div class="hero-actions-row">
           <a href="#workspace" class="features-trigger-btn" style="border-color: rgba(255, 255, 255, 0.22);">
@@ -196,10 +198,6 @@
             <span>Explore Interactive Dashboard</span>
             <i class="fa-solid fa-arrow-down" style="font-size: 11px;"></i>
           </a>
-          <span class="capacity-note">
-            <span class="capacity-pulse-dot" style="background: #d1d5db; box-shadow: 0 0 10px rgba(255, 255, 255, 0.45);"></span>
-            <span>Recruiter Beta Open • Instant Session Access</span>
-          </span>
         </div>
 
       </div>
@@ -667,96 +665,131 @@
 
     <!-- 6) Enterprise Security & Candidate Privacy -->
     <section id="security" class="content-section">
-      <div class="section-header anim" style="text-align: center; max-width: 800px; margin: 0 auto 36px;">
+      <div class="section-header section-header-compact anim" style="text-align: center; max-width: 800px; margin: 0 auto 22px;">
         <span class="section-tag"><i class="fa-solid fa-shield-halved"></i> Enterprise Security</span>
-        <h2 class="section-title">Built for Enterprise Compliance & Candidate Privacy</h2>
+        <h2 class="section-title">Privacy &amp; Compliance</h2>
         <p class="section-desc">
-          Strict data protection protocols ensure sensitive candidate information remains secure and uncompromised.
+          Encrypted candidate data with zero brokering — click any item for details.
         </p>
       </div>
 
       <div class="security-grid anim" style="--d: 0.25s;">
         <div class="security-card">
-          <div class="security-card-header">
+          <button type="button" class="accordion-trigger security-card-header" aria-expanded="false">
             <div class="security-icon-box"><i class="fa-solid fa-lock"></i></div>
-            <h3 class="security-card-title">AES-256 Resume Encryption</h3>
+            <h3 class="security-card-title">AES-256 Encryption</h3>
+            <i class="fa-solid fa-chevron-down accordion-chevron" aria-hidden="true"></i>
+          </button>
+          <div class="collapsible-body">
+            <div class="collapsible-body-inner">
+              <p class="security-card-text">
+                Candidate resumes, work credentials, and profile histories stay encrypted at rest and in transit.
+              </p>
+            </div>
           </div>
-          <p class="security-card-text">
-            All candidate resumes, work credentials, and profile histories are encrypted at rest and in transit.
-          </p>
         </div>
 
         <div class="security-card">
-          <div class="security-card-header">
+          <button type="button" class="accordion-trigger security-card-header" aria-expanded="false">
             <div class="security-icon-box"><i class="fa-solid fa-user-shield"></i></div>
-            <h3 class="security-card-title">Privacy Protected Dossiers</h3>
+            <h3 class="security-card-title">Privacy-Safe Dossiers</h3>
+            <i class="fa-solid fa-chevron-down accordion-chevron" aria-hidden="true"></i>
+          </button>
+          <div class="collapsible-body">
+            <div class="collapsible-body-inner">
+              <p class="security-card-text">
+                Private account credentials, passwords, and sensitive internal details are never revealed on recruiter consoles.
+              </p>
+            </div>
           </div>
-          <p class="security-card-text">
-            Private account credentials, passwords, and sensitive internal identification are never revealed on recruiter consoles.
-          </p>
         </div>
 
         <div class="security-card">
-          <div class="security-card-header">
+          <button type="button" class="accordion-trigger security-card-header" aria-expanded="false">
             <div class="security-icon-box"><i class="fa-solid fa-ban"></i></div>
-            <h3 class="security-card-title">Zero Broker Spam Policy</h3>
+            <h3 class="security-card-title">Zero Broker Spam</h3>
+            <i class="fa-solid fa-chevron-down accordion-chevron" aria-hidden="true"></i>
+          </button>
+          <div class="collapsible-body">
+            <div class="collapsible-body-inner">
+              <p class="security-card-text">
+                Candidate info is never sold to third-party headhunters or scraping networks. Direct hiring only.
+              </p>
+            </div>
           </div>
-          <p class="security-card-text">
-            Candidate information is never sold to third-party headhunters or scraping networks. Direct hiring only.
-          </p>
         </div>
       </div>
     </section>
 
     <!-- 7) Recruiter FAQ (Accordion) -->
     <section id="faq" class="content-section">
-      <div class="section-header anim" style="text-align: center; max-width: 800px; margin: 0 auto 36px;">
-        <span class="section-tag"><i class="fa-solid fa-circle-question"></i> Common Questions</span>
-        <h2 class="section-title">Recruiter & HR Frequently Asked Questions</h2>
+      <div class="section-header section-header-compact anim" style="text-align: center; max-width: 800px; margin: 0 auto 22px;">
+        <span class="section-tag"><i class="fa-solid fa-circle-question"></i> Q&amp;A</span>
+        <h2 class="section-title">Recruiter &amp; HR FAQ</h2>
         <p class="section-desc">
-          Everything you need to know about setting up JobSnap for your hiring team.
+          Quick answers for hiring teams — click any question to expand.
         </p>
       </div>
 
       <div class="faq-grid anim" style="--d: 0.3s;">
         <div class="faq-card">
-          <h3 class="faq-question">
-            <i class="fa-solid fa-circle-chevron-right faq-icon"></i>
-            <span>How does JobSnap calculate the AI match score?</span>
-          </h3>
-          <p class="faq-answer">
-            JobSnap compares verified technical skills, domain experience, and past accomplishments directly against your requisition requirements to compute a 0–100% objective fit score.
-          </p>
+          <button type="button" class="accordion-trigger faq-question" aria-expanded="false">
+            <i class="fa-solid fa-bullseye"></i>
+            <span>How does AI match score work?</span>
+            <i class="fa-solid fa-chevron-down accordion-chevron" aria-hidden="true"></i>
+          </button>
+          <div class="collapsible-body">
+            <div class="collapsible-body-inner">
+              <p class="faq-answer">
+                Compares verified skills, experience, and past accomplishments against your requisition requirements from 0–100%.
+              </p>
+            </div>
+          </div>
         </div>
 
         <div class="faq-card">
-          <h3 class="faq-question">
-            <i class="fa-solid fa-circle-chevron-right faq-icon"></i>
-            <span>Can I export candidate data directly to Excel?</span>
-          </h3>
-          <p class="faq-answer">
-            Yes. With 1 click on the "Export to Excel (.csv)" button, your active or filtered candidate list downloads in formatted UTF-8 BOM CSV, ready for Excel or your ATS.
-          </p>
+          <button type="button" class="accordion-trigger faq-question" aria-expanded="false">
+            <i class="fa-solid fa-file-excel"></i>
+            <span>Can I export to Excel (.csv)?</span>
+            <i class="fa-solid fa-chevron-down accordion-chevron" aria-hidden="true"></i>
+          </button>
+          <div class="collapsible-body">
+            <div class="collapsible-body-inner">
+              <p class="faq-answer">
+                Yes — 1 click on "Export to Excel (.csv)" downloads your active or filtered list ready for Excel or your ATS.
+              </p>
+            </div>
+          </div>
         </div>
 
         <div class="faq-card">
-          <h3 class="faq-question">
-            <i class="fa-solid fa-circle-chevron-right faq-icon"></i>
-            <span>How does the 6-stage hiring pipeline work?</span>
-          </h3>
-          <p class="faq-answer">
-            The funnel visually tracks candidates moving from Applied → Reviewed → Shortlisted → Interview → Offer → Hired. Clicking any stage filters your applicants list instantly.
-          </p>
+          <button type="button" class="accordion-trigger faq-question" aria-expanded="false">
+            <i class="fa-solid fa-filter"></i>
+            <span>How does the 6-stage funnel work?</span>
+            <i class="fa-solid fa-chevron-down accordion-chevron" aria-hidden="true"></i>
+          </button>
+          <div class="collapsible-body">
+            <div class="collapsible-body-inner">
+              <p class="faq-answer">
+                Tracks candidates from Applied → Reviewed → Shortlisted → Interview → Offer → Hired; clicking any stage filters the table.
+              </p>
+            </div>
+          </div>
         </div>
 
         <div class="faq-card">
-          <h3 class="faq-question">
-            <i class="fa-solid fa-circle-chevron-right faq-icon"></i>
-            <span>Is JobSnap free for recruiters during the beta?</span>
-          </h3>
-          <p class="faq-answer">
-            Yes! During the early access beta, talent teams and recruiters can publish requisitions, screen candidates, and utilize the full dashboard without subscription fees.
-          </p>
+          <button type="button" class="accordion-trigger faq-question" aria-expanded="false">
+            <i class="fa-solid fa-lock"></i>
+            <span>Is early access still open?</span>
+            <i class="fa-solid fa-chevron-down accordion-chevron" aria-hidden="true"></i>
+          </button>
+          <div class="collapsible-body">
+            <div class="collapsible-body-inner">
+              <p class="faq-answer">
+                Early access subscriptions are closed. Only applied emails on file receive 3 months free; new teams can start via Sign Up.
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -764,25 +797,25 @@
     <!-- 8) Final CTA Card -->
     <section id="early-access" class="final-cta-card anim" style="--d: 0.35s; border-color: rgba(255, 255, 255, 0.2); background: linear-gradient(145deg, rgba(255, 255, 255, 0.07), rgba(13, 17, 26, 0.5));">
       <span class="section-tag" style="background: rgba(255, 255, 255, 0.06); border-color: rgba(255, 255, 255, 0.2); color: #e5e7eb;">
-        <i class="fa-solid fa-bolt"></i> Instant Recruiter Access
+        <i class="fa-solid fa-lock"></i> Early Access Closed
       </span>
       <h2 class="section-title" style="margin-top: 10px;">Upgrade Your Talent Acquisition Stack Today</h2>
       <p class="section-desc" style="margin-bottom: 24px;">
-        Join high-growth engineering, product, and AI teams hiring top talent faster with JobSnap.
+        Early access subscriptions are now closed. Only users who already applied and have their email on file receive 3 months free.
       </p>
 
-      <form id="recruiterBottomForm" class="early-access-form" novalidate style="width: min(100%, 640px); max-width: 640px; margin: 0 auto;">
-        <div class="input-wrap">
-          <i class="fa-regular fa-envelope input-icon"></i>
-          <input type="email" id="recruiterBottomEmail" class="early-access-input"
-            placeholder="Enter your work email address..." autocomplete="email" required />
+      <div class="early-access-container" style="margin: 0 auto;">
+        <div class="hero-closed-cta-row">
+          <a href="https://app.jobsnap.me/register" class="cta-btn" style="background: linear-gradient(135deg, #34d399, #10b981); border-color: #6ee7b7;">
+            <span class="btn-text">Sign Up</span>
+            <i class="fa-solid fa-arrow-right btn-arrow"></i>
+          </a>
+          <a href="https://app.jobsnap.me/login" class="secondary-glass-cta">
+            <i class="fa-solid fa-arrow-right-to-bracket"></i>
+            <span>Log In</span>
+          </a>
         </div>
-        <button type="submit" id="recruiterBottomSubmit" class="cta-btn early-access-submit" style="background: linear-gradient(135deg, #34d399, #10b981); border-color: #6ee7b7;">
-          <span class="btn-text">Claim Free Recruiter Spot</span>
-          <i class="fa-solid fa-arrow-right btn-arrow"></i>
-        </button>
-      </form>
-      <div id="recruiterBottomFeedback" class="form-feedback" hidden></div>
+      </div>
     </section>
 
     <!-- 9) Footer -->

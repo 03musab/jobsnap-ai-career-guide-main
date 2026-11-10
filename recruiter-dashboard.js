@@ -852,117 +852,18 @@ burgerBtn?.addEventListener("click", () => {
 
 mobileOverlay?.addEventListener("click", closeMobileMenu);
 
-// --- Recruiter Early Access Form Submission ---
-function applyRecruiterPassToUI(pass) {
-  if (!pass || !pass.email) return;
-  const heroEmail = document.getElementById("recruiterHeroEmail");
-  const bottomEmail = document.getElementById("recruiterBottomEmail");
-  if (heroEmail) heroEmail.value = pass.email;
-  if (bottomEmail) bottomEmail.value = pass.email;
+// --- Clear stale recruiter early access cache (early access is closed) ---
+try {
+  localStorage.removeItem("jobsnap_recruiter_pass");
+} catch (e) {}
 
-  const stylePassBtn = (btn) => {
-    if (!btn) return;
-    btn.innerHTML = `<span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:#e5e7eb;box-shadow:0 0 10px rgba(255,255,255,.45);margin-right:6px;vertical-align:middle;"></span> Pass Active · #${pass.ticketId || 'HR-PASS'} &rarr;`;
-    btn.style.background = "linear-gradient(145deg, rgba(255,255,255,.16), rgba(255,255,255,.06))";
-    btn.style.borderColor = "rgba(255,255,255,.28)";
-    btn.style.color = "#f8fafc";
-    btn.style.backdropFilter = "blur(18px) saturate(150%)";
-    btn.style.boxShadow = "0 8px 24px rgba(0,0,0,.24), inset 0 1px 0 rgba(255,255,255,.2)";
-  };
-
-  stylePassBtn(document.getElementById("recruiterHeroSubmit"));
-  stylePassBtn(document.getElementById("recruiterBottomSubmit"));
-  const headerBtn = document.getElementById("recruiterHeaderAccessBtn");
-  if (headerBtn) {
-    headerBtn.innerHTML = `<span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:#e5e7eb;box-shadow:0 0 10px rgba(255,255,255,.45);margin-right:6px;vertical-align:middle;"></span> Recruiter Pass Active`;
-  }
-}
-
-function initRecruiterPassState() {
-  try {
-    const raw = localStorage.getItem("jobsnap_recruiter_pass");
-    if (raw) {
-      const pass = JSON.parse(raw);
-      applyRecruiterPassToUI(pass);
-    }
-  } catch (e) {}
-}
-
-function setupRecruiterForm(formId, emailId, feedbackId) {
-  const form = document.getElementById(formId);
-  const emailInput = document.getElementById(emailId);
-  const feedback = document.getElementById(feedbackId);
-  if (!form || !emailInput) return;
-
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    const email = emailInput.value.trim();
-    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      if (feedback) {
-        feedback.hidden = false;
-        feedback.className = "form-feedback error";
-        feedback.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i> Please enter a valid work email address.';
-      }
-      return;
-    }
-
-    const submitBtn = form.querySelector('button[type="submit"]');
-    const originalText = submitBtn?.innerHTML;
-    if (submitBtn) {
-      submitBtn.disabled = true;
-      submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Reserving...';
-    }
-
-    try {
-      const res = await fetch("/api/subscribe", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, role: "Recruiter / HR", templateType: "3" }),
-      });
-      const data = await res.json().catch(() => ({}));
-      recruiterSound.playSuccess();
-      const ticketId = data.ticketId || data.data?.ticketId || `HR-${Math.floor(1000 + Math.random() * 9000)}`;
-      const passRecord = { email, ticketId, role: "Recruiter / HR", timestamp: new Date().toISOString() };
-      try {
-        localStorage.setItem("jobsnap_recruiter_pass", JSON.stringify(passRecord));
-      } catch (err) {}
-      applyRecruiterPassToUI(passRecord);
-
-      if (feedback) {
-        feedback.hidden = false;
-        feedback.className = "form-feedback success";
-        feedback.innerHTML = `<i class="fa-solid fa-circle-check" style="color: #34d399;"></i> <strong>Recruiter Spot Reserved!</strong> Check your inbox for pass <strong>#${ticketId}</strong> and console credentials.`;
-      }
-      toast("Recruiter workspace pass activated!");
-    } catch (err) {
-      const fallbackTicket = `HR-${Math.floor(1000 + Math.random() * 9000)}`;
-      const passRecord = { email, ticketId: fallbackTicket, role: "Recruiter / HR", timestamp: new Date().toISOString() };
-      try {
-        localStorage.setItem("jobsnap_recruiter_pass", JSON.stringify(passRecord));
-      } catch (e) {}
-      applyRecruiterPassToUI(passRecord);
-      if (feedback) {
-        feedback.hidden = false;
-        feedback.className = "form-feedback success";
-        feedback.innerHTML = `<i class="fa-solid fa-circle-check" style="color: #34d399;"></i> <strong>Recruiter Spot Reserved!</strong> Session access activated under pass <strong>#${fallbackTicket}</strong>.`;
-      }
-    } finally {
-      if (submitBtn) {
-        submitBtn.disabled = false;
-      }
-    }
-  });
-}
-
-setupRecruiterForm("recruiterHeroForm", "recruiterHeroEmail", "recruiterFormFeedback");
-setupRecruiterForm("recruiterBottomForm", "recruiterBottomEmail", "recruiterBottomFeedback");
-initRecruiterPassState();
-
-// --- FAQ Accordion ---
-document.querySelectorAll(".faq-card").forEach((card) => {
-  card.style.cursor = "pointer";
-  card.addEventListener("click", () => {
-    card.classList.toggle("open");
+// --- Security & FAQ Accordions ---
+document.querySelectorAll(".security-card .accordion-trigger, .faq-card .accordion-trigger").forEach((trigger) => {
+  trigger.addEventListener("click", () => {
+    const card = trigger.closest(".security-card, .faq-card");
+    if (!card) return;
+    const isOpen = card.classList.toggle("is-open");
+    trigger.setAttribute("aria-expanded", String(isOpen));
     recruiterSound.playClick();
   });
 });
